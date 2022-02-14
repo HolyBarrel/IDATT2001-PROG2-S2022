@@ -3,7 +3,7 @@
  * throughout 'Wargames'
  * The Unit superclass is inherited by the subclasses:
  * InfantryUnit
- * CavalryUnit
+ * CavalryUnit --> which in turn is inherited by CommanderUnit
  * RangedUnit
  *
  * @author Magnus Lutro Allison
@@ -11,25 +11,25 @@
  * @since 12.02.2022
  */
 public abstract class Unit {
-    private String name;
+    private final String NAME;
     private int health;
-    private int attack;
-    private int armor;
+    private final int ATTACK;
+    private final int ARMOR;
 
 
     /**
      * Constructor for the superclass Unit
-     * @param name, is a String, cannot be left blank
+     * @param NAME, is a String, cannot be left blank
      * @param health, is an int, cannot drop to less than 0
-     * @param attack, is an int, above -1
-     * @param armor, is an int, above -1
+     * @param ATTACK, is an int, above -1
+     * @param ARMOR, is an int, above -1
      */
-    public Unit(String name, int health, int attack, int armor) { //throws...
+    public Unit(String NAME, int health, int ATTACK, int ARMOR) { //throws...
         //add exception handling here
-        this.name = name; // cannot be blank
+        this.NAME = NAME; // cannot be blank
         this.health = health; // include !< 0 eventually here || use set-method
-        this.attack = attack;
-        this.armor = armor;
+        this.ATTACK = ATTACK;
+        this.ARMOR = ARMOR;
     }
 
     /**
@@ -46,16 +46,16 @@ public abstract class Unit {
      */
     public void attack(Unit opponent){
         opponent.setHealth(opponent.getHealth()
-                - (this.attack + this.getAttackBonus())
+                - (this.ATTACK + this.getAttackBonus())
                 + (opponent.getArmor() + opponent.getResistBonus()));
     }
 
     /**
      * Accessor method that returns the name of this Unit
-     * @return String name
+     * @return String NAME
      */
-    public String getName() {
-        return name;
+    public String getNAME() {
+        return NAME;
     }
 
     /**
@@ -68,18 +68,18 @@ public abstract class Unit {
 
     /**
      * Accessor method that returns the attack-quantity of this Unit
-     * @return int attack
+     * @return int ATTACK
      */
-    public int getAttack() {
-        return attack;
+    public int getATTACK() {
+        return ATTACK;
     }
 
     /**
      * Accessor method that returns the armor-quantity of this Unit
-     * @return int armor
+     * @return int ARMOR
      */
     public int getArmor() {
-        return armor;
+        return ARMOR;
     }
 
     /**
@@ -95,10 +95,10 @@ public abstract class Unit {
     public String toString() {
         //revise later
         return "\nUNIT: \n" +
-                "Name = "   + name + "\n" +
+                "Name = "   + NAME + "\n" +
                 "Health = " + health + "\n" +
-                "Attack = " + attack + "\n" +
-                "Armor = "  + armor;
+                "Attack = " + ATTACK + "\n" +
+                "Armor = "  + ARMOR;
     }
 
     /**
