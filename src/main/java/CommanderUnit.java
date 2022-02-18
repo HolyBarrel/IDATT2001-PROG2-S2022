@@ -20,7 +20,7 @@ public class CommanderUnit extends CavalryUnit{
         super(NAME, health, ATTACK, ARMOR);
     }
     /**
-     * Constructor 2 for the class InfantryUnit with default stats
+     * Constructor 2 for the class InfantryUnit with some default stats
      * Creates an object with the following parameters:
      * @param NAME, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
