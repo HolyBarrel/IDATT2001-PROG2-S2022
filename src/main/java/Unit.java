@@ -8,7 +8,7 @@
  * This class is currently set to be tested by its subclasses
  *
  * @author Magnus Lutro Allison
- * @version 0.1
+ * @version 0.2
  * @since 12.02.2022
  */
 public abstract class Unit {
@@ -24,8 +24,8 @@ public abstract class Unit {
      * @param health, is an int, cannot be less than 0
      * @param ATTACK, is an int, above -1
      * @param ARMOR, is an int, above -1
-     * @exception IllegalArgumentException, is an exception thrown when the arguments are outside their
-     * logical input-range, or may be blank
+     * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
+     *          logical input-range, or is blank
      */
     public Unit(String NAME, int health, int ATTACK, int ARMOR) throws IllegalArgumentException {
         if(NAME.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
@@ -97,7 +97,7 @@ public abstract class Unit {
     /**
      * Mutator method that alters the current health attribute of this Unit
      * @param health, is a positive integer
-     * @exception IllegalArgumentException if the integer input is less than zero
+     * @throws IllegalArgumentException if the integer input is less than zero
      */
     public void setHealth(int health) throws IllegalArgumentException{
         if(health < 0) throw new IllegalArgumentException("A unit's health must be a positive integer," +
