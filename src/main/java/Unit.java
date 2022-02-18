@@ -5,6 +5,7 @@
  * InfantryUnit
  * CavalryUnit --> which in turn is inherited by CommanderUnit
  * RangedUnit
+ * This class is currently set to be tested by its subclasses
  *
  * @author Magnus Lutro Allison
  * @version 0.1
@@ -23,6 +24,8 @@ public abstract class Unit {
      * @param health, is an int, cannot be less than 0
      * @param ATTACK, is an int, above -1
      * @param ARMOR, is an int, above -1
+     * @exception IllegalArgumentException, is an exception thrown when the arguments are outside their
+     * logical input-range, or may be blank
      */
     public Unit(String NAME, int health, int ATTACK, int ARMOR) throws IllegalArgumentException {
         if(NAME.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
@@ -56,7 +59,7 @@ public abstract class Unit {
         // --> delete / kill -> (Unit opponent){...}
         opponent.setHealth(opponent.getHealth()
                 - (this.ATTACK + this.getAttackBonus())
-                + (opponent.getArmor() + opponent.getResistBonus()));
+                + (opponent.getARMOR() + opponent.getResistBonus()));
     }
 
     /**
@@ -87,7 +90,7 @@ public abstract class Unit {
      * Accessor method that returns the armor-quantity of this Unit
      * @return int ARMOR
      */
-    public int getArmor() {
+    public int getARMOR() {
         return ARMOR;
     }
 
@@ -105,11 +108,11 @@ public abstract class Unit {
     @Override
     public String toString() {
         //TODO: revise later
-        return "\nUNIT: \n" +
-                "Name = "   + NAME + "\n" +
-                "Health = " + health + "\n" +
-                "Attack = " + ATTACK + "\n" +
-                "Armor = "  + ARMOR;
+        return "\nUNIT:" +
+                "\nName = "   + NAME +
+                "\nHealth = " + health +
+                "\nAttack = " + ATTACK +
+                "\nArmor = "  + ARMOR;
     }
 
     /**
