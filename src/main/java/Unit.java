@@ -8,7 +8,7 @@
  * This class is currently set to be tested by its subclasses
  *
  * @author Magnus Lutro Allison
- * @version 0.2
+ * @version 0.3
  * @since 12.02.2022
  */
 public abstract class Unit {
@@ -16,7 +16,6 @@ public abstract class Unit {
     private int health;
     private final int ATTACK;
     private final int ARMOR;
-
 
     /**
      * Constructor for the superclass Unit
@@ -57,6 +56,7 @@ public abstract class Unit {
         //TODO: later ADD if(this.ATTACK + this.getAttackBonus() >=
         // opponent.getHealth() + (opponent.getArmor() + opponent.getResistBonus())){
         // --> delete / kill -> (Unit opponent){...}
+        //IF::attackFAIL
         opponent.setHealth(opponent.getHealth()
                 - (this.ATTACK + this.getAttackBonus())
                 + (opponent.getARMOR() + opponent.getResistBonus()));
@@ -93,7 +93,6 @@ public abstract class Unit {
     public int getARMOR() {
         return ARMOR;
     }
-
     /**
      * Mutator method that alters the current health attribute of this Unit
      * @param health, is a positive integer
