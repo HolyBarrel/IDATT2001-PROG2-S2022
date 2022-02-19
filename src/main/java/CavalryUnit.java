@@ -50,9 +50,10 @@ public class CavalryUnit extends Unit{
     }
     /**
      * Method that returns an attack bonus for charge attack and melee combat
-     * Also increments the number of successful attacks done
      * @return1 integer value 6, is returned if charging
      * @return2 integer value 2, is returned if not charging
+     * Also calls the method attackSuccess, because getAttackBonus only is called
+     * when this unit successfully attacks another unit
      */
     @Override
     public int getAttackBonus() {
@@ -61,11 +62,8 @@ public class CavalryUnit extends Unit{
         //The cavalry unit will get a further charge-bonus in its first attack
         boolean charge = this.getSuccessfulAttacks() == 0;
         attackSuccess();
-        if(charge){
-            return defaultAtkBonus + chargeAtkBonus;
-        }else{
-            return defaultAtkBonus;
-        }
+        if(charge) return defaultAtkBonus + chargeAtkBonus;
+        return defaultAtkBonus;
     }
 
     /**

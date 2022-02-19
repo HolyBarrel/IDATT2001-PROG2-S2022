@@ -44,7 +44,7 @@ public class RangedUnit extends Unit{
 
     /**
      * Method that returns an attack bonus for ranged attacks
-     * @return integer value 2
+     * @return integer value 3
      */
     @Override
     public int getAttackBonus() {
@@ -68,20 +68,22 @@ public class RangedUnit extends Unit{
      * -represents middle ranged combat
      * @return3 integer value 1 when the RangedUnit has been hit 2 or more times
      * -represents close combat
-     * Also increments the integer hitsReceived, since this method is used only when
+     * Also calls the enemyHitsThisUnit, since this method is used only when
      * this unit is attacked
      */
     @Override
     public int getResistBonus() {
         int farRangeBonus = 5;
         int middleRangeBonus = 3;
-        int defaultBonus = 1;
-        enemyHitsThisUnit();
+        int defaultBonus = 2;
         if(this.getHitsReceived() == 0){
+            enemyHitsThisUnit();
             return farRangeBonus + defaultBonus;
         }else if(this.getHitsReceived() == 1){
+            enemyHitsThisUnit();
             return middleRangeBonus + defaultBonus;
         }else{
+            enemyHitsThisUnit();
             return defaultBonus;
         }
     }

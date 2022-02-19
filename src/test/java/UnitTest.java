@@ -3,7 +3,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 /**
- * TODO: COMMENT
+ * Tests the constructor, set-method and toString-method of the class
+ * 'Unit' to avoid test code duplication for each subclass of the
+ * mentioned test-cases
  */
 public class UnitTest {
     private static class UnitTesterClass extends Unit{
@@ -45,6 +47,7 @@ public class UnitTest {
     @DisplayName("Positive tests for the abstract class 'Unit'")
     class InputIsAcceptedTests {
         //TODO: REVISE NAMING
+        //TODO: add a test for the ATTACK-method
         @Test
         @DisplayName("Subclass of 'Unit' used to test the constructor, correct input")
         public void usingSubclassToTestCorrectInputOfUnitConstructor() {
