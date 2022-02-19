@@ -1,10 +1,6 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 import static org.junit.jupiter.api.Assertions.*;
 /**
  * TODO: COMMENT
@@ -14,6 +10,7 @@ public class UnitTest {
 
         /**
          * Constructor for the superclass Unit, in test class
+         * Below parameters described in superclass
          * @param NAME
          * @param health
          * @param ATTACK
@@ -27,9 +24,7 @@ public class UnitTest {
 
         /**
          * Is ignored for test purposes
-         * @return 0
-         * Is tested by non-tester subclasses
-         * for example: RangedUnit
+         * Is tested by non-tester subclasses of 'Unit'-class
          */
         @Override
         public int getAttackBonus() {
@@ -38,9 +33,7 @@ public class UnitTest {
 
         /**
          * Is ignored for test purposes
-         * @return 0
-         * Is tested by non-tester subclasses
-         * for example: RangedUnit
+         * Is tested by non-tester subclasses of 'Unit'-class
          */
         @Override
         public int getResistBonus() {
@@ -50,7 +43,8 @@ public class UnitTest {
 
     @Nested
     @DisplayName("Positive tests for the abstract class 'Unit'")
-    class PositiveTests{
+    class InputIsAcceptedTests {
+        //TODO: REVISE NAMING
         @Test
         @DisplayName("Subclass of 'Unit' used to test the constructor, correct input")
         public void usingSubclassToTestCorrectInputOfUnitConstructor() {
@@ -63,8 +57,9 @@ public class UnitTest {
         @Test
         @DisplayName("Subclass of 'Unit' used to test Unit's toString, correct input")
         public void usingSubclassToTestCorrectInputOfUnitsToString() {
-            assertEquals("\nUNIT:\nName = Archer\nHealth = 20\nAttack = 3\nArmor = 2",
-                    new UnitTesterClass("Archer", 20,3,2).toString());
+            String expectedToString = "\nUNIT:\nName = Archer\nHealth = 20\nAttack = 3\nArmor = 2";
+            Unit testUnit = new UnitTesterClass("Archer", 20,3,2);
+            assertEquals(expectedToString, testUnit.toString());
         }
 
         @Test
@@ -75,8 +70,59 @@ public class UnitTest {
             testUnit.setHealth(10);
             assertEquals(10, testUnit.getHealth());
         }
+    }
+    @Nested
+    @DisplayName("Negative tests for the abstract class 'Unit'")
+    class InputIsNotAcceptedTests {
 
+        @Test
+        @DisplayName("Name is inputted as a blank string")
+        public void blankNameInputTest() {
+            try{
+                new UnitTesterClass("", 30, 5, 1);
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                assertThrows(IllegalArgumentException.class,
+                        () -> new UnitTesterClass("", 30, 5, 1));
+            }
+        }
 
+        @Test
+        @DisplayName("Attack is inputted as a negative integer")
+        public void attackStatIsInputtedAsNegativeInteger() {
+            try{
+                new UnitTesterClass("Berserker", 30, -1, 6);
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                assertThrows(IllegalArgumentException.class,
+                        () -> new UnitTesterClass("Berserker", 30, -1, 6));
+            }
+        }
 
+        @Test
+        @DisplayName("Armor is inputted as a negative integer")
+        public void armorInputtedAsNegativeInteger() {
+            try{
+                new UnitTesterClass("Druid", 40, 5, -1);
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                assertThrows(IllegalArgumentException.class,
+                        () -> new UnitTesterClass("Druid", 40, 5, -1));
+            }
+        }
+
+        @Test
+        @DisplayName("Health is set to an integer below 0 with set-health-method")
+        public void healthIsSetToIntegerLessThanZeroUsingSetMethod() {
+            Unit testUnit = new UnitTesterClass("Druid", 40, 5, 2);
+            try{
+                testUnit.setHealth(-1);
+            }catch (IllegalArgumentException e){
+                //System.out.println(e.getMessage());
+                assertThrows(IllegalArgumentException.class,
+                        () -> testUnit.setHealth(-1));
+            }
+        }
     }
 }
+
