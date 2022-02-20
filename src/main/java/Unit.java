@@ -106,7 +106,7 @@ public abstract class Unit {
 
     @Override
     public String toString() {
-        //TODO: revise later
+        //TODO: revise to stringbuilder
         return "\nUNIT:" +
                 "\nName = "   + NAME +
                 "\nHealth = " + health +
