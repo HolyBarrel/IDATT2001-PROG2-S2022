@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Class describing an army containing various types of UNITS
@@ -123,15 +120,29 @@ public class Army {
         return UNITS.get(indexInArmySize);
     }
 
-    //TODO: add stringbuilder
     @Override
     public String toString() {
-        return "Army{" +
-                "NAME='" + NAME + '\'' +
-                ", UNITS=" + UNITS +
-                '}';
+        String underLine = "\n|_______________________________________________________________\n";
+        StringBuilder sb = new StringBuilder(underLine).append("| Units of the army: '").append(getNAME()).append("'");
+        for(Unit unit: getAllUnits()){
+            sb.append(underLine);
+            sb.append(unit.toString());
+        }
+        sb.append(underLine);
+        sb.append("'").append(getNAME()).append("' is an army with ").append(getArmySize()).append(" total units");
+        return String.valueOf(sb);
     }
 
-    //TODO: add equals
-    //TODO: add hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Army army = (Army) o;
+        return Objects.equals(NAME, army.NAME) && Objects.equals(UNITS, army.UNITS);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(NAME, UNITS);
+    }
 }

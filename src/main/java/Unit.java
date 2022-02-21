@@ -106,12 +106,9 @@ public abstract class Unit {
 
     @Override
     public String toString() {
-        //TODO: revise to stringbuilder
-        return "\nUNIT:" +
-                "\nName = "   + NAME +
-                "\nHealth = " + health +
-                "\nAttack = " + ATTACK +
-                "\nArmor = "  + ARMOR;
+        String format = "| %1$-20s %2$-12s %3$-12s %4$-12s";
+        return String.format(
+                format, "Name: '"   + NAME + "'", "Health: " + health, "Attack: " + ATTACK, "Armor: "  + ARMOR);
     }
 
     /**
