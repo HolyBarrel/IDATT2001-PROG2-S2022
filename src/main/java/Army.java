@@ -56,7 +56,7 @@ public class Army {
     }
 
     /**
-     * Add-method to add a multiple UNITS to the list with UNITS in this
+     * Add-method to add multiple UNITS to the list with UNITS in this
      * army
      * @param units, is a list with UNITS
      * @throws IllegalArgumentException, if the list-type is not
@@ -74,13 +74,11 @@ public class Army {
      * Remove-method that removes the inputted unit from the current
      * army list
      * @param unit, must be in the army, otherwise exception is thrown
-     * @throws UnsupportedOperationException if the unit tried for removal is not in the army
+     * @throws IllegalArgumentException if the unit tried for removal is not in the army
      */
-    public void remove(Unit unit) throws Exception{
-        if(!this.UNITS.contains(unit)) throw new Exception("The given unit is not in the army and " +
+    public void remove(Unit unit) throws IllegalArgumentException{
+        if(!this.UNITS.contains(unit)) throw new IllegalArgumentException("The given unit is not in the army and " +
                 "therefore cannot be removed, please try again.");
-        if(!hasUnits()) throw new Exception("The getRandom method cannot return a random unit " +
-                "from an empty army list, please try again.");
         this.UNITS.remove(unit);
     }
 
@@ -109,15 +107,24 @@ public class Army {
     }
 
     /**
+     * Method to generate a random index integer within the range:
+     * 0 to [army size-1]
+     * @return a random integer of the list
+     */
+    //TODO: REVISE later
+    public int getRandomListIndex(){
+        return new Random().nextInt(getArmySize());
+    }
+
+    /**
      * Accessor-method that returns a random unit from the army list
      * @return Unit (at random index in the army list)
-     * @throws Exception if the army list is empty
+     * @throws NullPointerException if the army list is empty
      */
-    public Unit getRandom() throws Exception{
-        if(!hasUnits()) throw new Exception("The getRandom method cannot return a random unit " +
+    public Unit getRandom() throws NullPointerException{
+        if(!hasUnits()) throw new NullPointerException("The getRandom method cannot return a random unit " +
                 "from an empty army list, please try again.");
-        int indexInArmySize = new Random().nextInt(getArmySize());
-        return UNITS.get(indexInArmySize);
+        return UNITS.get(getRandomListIndex());
     }
 
     @Override

@@ -59,7 +59,7 @@ public class UnitTest {
         }
         @Test
         @DisplayName("Subclass of 'Unit' used to test Unit's toString, correct input")
-        public void usingSubclassToTestCorrectInputOfUnitsToString() {
+        public void usingSubclassToTestCorrectInputOfUnitsToString() { //TODO: must be revised
             String expectedToString = "\nUNIT:\nName = Archer\nHealth = 20\nAttack = 3\nArmor = 2";
             Unit testUnit = new UnitTesterClass("Archer", 20,3,2);
             assertEquals(expectedToString, testUnit.toString());
@@ -82,11 +82,16 @@ public class UnitTest {
         @DisplayName("Name is inputted as a blank string")
         public void blankNameInputTest() {
             try{
-                new UnitTesterClass("", 30, 5, 1);
-            }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
+                //TEST
                 assertThrows(IllegalArgumentException.class,
                         () -> new UnitTesterClass("", 30, 5, 1));
+                //EXCEPTION THROWER
+                new UnitTesterClass("", 30, 5, 1);
+                //FAIL
+                fail("Should have thrown an exception");
+            }catch (IllegalArgumentException e){
+                assertEquals("A unit's name cannot be inputted as an empty string,  please try again.",
+                        e.getMessage());
             }
         }
 
@@ -94,11 +99,15 @@ public class UnitTest {
         @DisplayName("Attack is inputted as a negative integer")
         public void attackStatIsInputtedAsNegativeInteger() {
             try{
-                new UnitTesterClass("Berserker", 30, -1, 6);
-            }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
+                //TEST
                 assertThrows(IllegalArgumentException.class,
                         () -> new UnitTesterClass("Berserker", 30, -1, 6));
+                //EXCEPTION THROWER
+                new UnitTesterClass("Berserker", 30, -1, 6);
+                //FAIL
+                fail("Should have thrown an exception");
+            }catch (IllegalArgumentException e){
+                assertEquals("A unit's attack must be a positive integer, please try again.", e.getMessage());
             }
         }
 
@@ -106,24 +115,32 @@ public class UnitTest {
         @DisplayName("Armor is inputted as a negative integer")
         public void armorInputtedAsNegativeInteger() {
             try{
-                new UnitTesterClass("Druid", 40, 5, -1);
-            }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
+                //TEST
                 assertThrows(IllegalArgumentException.class,
                         () -> new UnitTesterClass("Druid", 40, 5, -1));
+                //EXCEPTION THROWER
+                new UnitTesterClass("Druid", 40, 5, -1);
+                //FAIL
+                fail("Should have thrown an exception");
+            }catch (IllegalArgumentException e){
+                assertEquals("A unit's armor must be a positive integer, please try again.", e.getMessage());
             }
         }
 
         @Test
         @DisplayName("Health is set to an integer below 0 with set-health-method")
         public void healthIsSetToIntegerLessThanZeroUsingSetMethod() {
-            Unit testUnit = new UnitTesterClass("Druid", 40, 5, 2);
             try{
-                testUnit.setHealth(-1);
-            }catch (IllegalArgumentException e){
-                //System.out.println(e.getMessage());
+                Unit testUnit = new UnitTesterClass("Druid", 40, 5, 2);
                 assertThrows(IllegalArgumentException.class,
                         () -> testUnit.setHealth(-1));
+                testUnit.setHealth(-1);
+                fail("Should have thrown an exception");
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                assertEquals("A unit's health must be a positive integer, please try again.",
+                        e.getMessage());
+
             }
         }
     }
