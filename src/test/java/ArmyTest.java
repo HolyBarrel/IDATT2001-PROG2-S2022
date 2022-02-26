@@ -39,16 +39,16 @@ public class ArmyTest {
         public void testAddToArmyMethod() {
             Army testArmy = new Army("Alliance");
             assertNotNull(testArmy.getAllUnits());
-            assertEquals(0, testArmy.getAllUnits().size());
+            assertEquals(0, testArmy.getArmySize());
             testArmy.add(new CavalryUnit("GrandLancer", 75, 12, 10));
-            assertEquals(1, testArmy.getAllUnits().size());
+            assertEquals(1, testArmy.getArmySize());
         }
         @Test
         @DisplayName("Testing addAll()-method to add multiple units to army")
         public void testAddAllUnitsOfAListMethod() {
             Army testArmy = new Army("Alliance");
             assertNotNull(testArmy.getAllUnits());
-            assertEquals(0, testArmy.getAllUnits().size());
+            assertEquals(0, testArmy.getArmySize());
             //tests adding some random units
             CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
             CavalryUnit cavalryUnit2 = new CavalryUnit("GrandLancer", 65, 10, 10);
@@ -58,19 +58,19 @@ public class ArmyTest {
             unitsTestArray.add(cavalryUnit2);
             unitsTestArray.add(rangedUnit1);
             testArmy.addAll(unitsTestArray);
-            assertEquals(3, testArmy.getAllUnits().size());
+            assertEquals(3, testArmy.getArmySize());
         }
         @Test
         @DisplayName("Testing if the remove()-method functions correctly")
         public void testRemoveFromArmyMethod() {
             Army testArmy = new Army("Alliance");
             assertNotNull(testArmy.getAllUnits());
-            assertEquals(0, testArmy.getAllUnits().size());
+            assertEquals(0, testArmy.getArmySize());
             CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
             testArmy.add(testCavalryUnit);
-            assertEquals(1, testArmy.getAllUnits().size());
+            assertEquals(1, testArmy.getArmySize());
             testArmy.remove(testCavalryUnit);
-            assertEquals(0, testArmy.getAllUnits().size());
+            assertEquals(0, testArmy.getArmySize());
         }
         @Test
         @DisplayName("Testing if the hasUnits method functions correctly")

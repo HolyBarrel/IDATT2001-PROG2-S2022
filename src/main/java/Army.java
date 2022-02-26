@@ -83,10 +83,10 @@ public class Army {
     }
 
     /**
-     * Private help-method that returns the size of this army
+     * Returns the size of this army
      * @return integer value UNITS.size()
      */
-    private int getArmySize(){
+    public int getArmySize(){
         return this.UNITS.size();
     }
     /**

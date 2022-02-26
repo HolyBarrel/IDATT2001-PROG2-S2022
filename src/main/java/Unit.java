@@ -60,6 +60,9 @@ public abstract class Unit {
         opponent.setHealth(opponent.getHealth()
                 - (this.ATTACK + this.getAttackBonus())
                 + (opponent.getARMOR() + opponent.getResistBonus()));
+        if(opponent.getHealth() < 0) opponent.setHealth(0);
+        //TODO: in battle-class - check if the unit has health == 0
+        //if(health == 0) army.remove(opponent)
     }
 
     /**
