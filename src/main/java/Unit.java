@@ -5,39 +5,35 @@
  * InfantryUnit
  * CavalryUnit --> which in turn is inherited by CommanderUnit
  * RangedUnit
- * This class is currently set to be tested by its subclasses
- *
  * @author Magnus Lutro Allison
- * @version 0.3
- * @since 12.02.2022
+ * @version 0.4
  */
 public abstract class Unit {
-    private final String NAME;
+    private final String name;
     private int health;
-    private final int ATTACK;
-    private final int ARMOR;
+    private final int attack;
+    private final int armor;
 
     /**
      * Constructor for the superclass Unit
-     * @param NAME, is a String, cannot be left blank
+     * @param name, is a String, cannot be left blank
      * @param health, is an int, cannot be less than 0
-     * @param ATTACK, is an int, above -1
-     * @param ARMOR, is an int, above -1
+     * @param attack, is an int, above -1
+     * @param armor, is an int, above -1
      * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
      *          logical input-range, or is blank
      */
-    public Unit(String NAME, int health, int ATTACK, int ARMOR) throws IllegalArgumentException {
-        if(NAME.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
+    public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException {
+        if(name.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
                 " please try again.");
-        //Health is checked in set-method
-        if(ATTACK < 0) throw new IllegalArgumentException("A unit's attack must be a positive integer," +
+        if(attack < 0) throw new IllegalArgumentException("A unit's attack must be a positive integer," +
                 " please try again.");
-        if(ARMOR < 0) throw new IllegalArgumentException("A unit's armor must be a positive integer," +
+        if(armor < 0) throw new IllegalArgumentException("A unit's armor must be a positive integer," +
                 " please try again.");
-        this.NAME = NAME.trim();
+        this.name = name.trim();
         this.setHealth(health);
-        this.ATTACK = ATTACK;
-        this.ARMOR = ARMOR;
+        this.attack = attack;
+        this.armor = armor;
     }
 
     /**
@@ -53,24 +49,17 @@ public abstract class Unit {
      *                  of the @param opponent
      */
     public void attack(Unit opponent){
-        //TODO: later ADD if(this.ATTACK + this.getAttackBonus() >=
-        // opponent.getHealth() + (opponent.getArmor() + opponent.getResistBonus())){
-        // --> delete / kill -> (Unit opponent){...}
-        //IF::attackFAIL
         opponent.setHealth(opponent.getHealth()
-                - (this.ATTACK + this.getAttackBonus())
-                + (opponent.getARMOR() + opponent.getResistBonus()));
-        if(opponent.getHealth() < 0) opponent.setHealth(0);
-        //TODO: in battle-class - check if the unit has health == 0
-        //if(health == 0) army.remove(opponent)
+                - (this.attack + this.getAttackBonus())
+                + (opponent.getArmor() + opponent.getResistBonus()));
     }
 
     /**
      * Accessor method that returns the name of this Unit
-     * @return String NAME
+     * @return String name
      */
-    public String getNAME() {
-        return NAME;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -83,35 +72,36 @@ public abstract class Unit {
 
     /**
      * Accessor method that returns the attack-quantity of this Unit
-     * @return int ATTACK
+     * @return int attack
      */
-    public int getATTACK() {
-        return ATTACK;
+    public int getAttack() {
+        return attack;
     }
 
     /**
      * Accessor method that returns the armor-quantity of this Unit
-     * @return int ARMOR
+     * @return int armor
      */
-    public int getARMOR() {
-        return ARMOR;
+    public int getArmor() {
+        return armor;
     }
     /**
      * Mutator method that alters the current health attribute of this Unit
-     * @param health, is a positive integer
-     * @throws IllegalArgumentException if the integer input is less than zero
+     * @param health, is an integer, if the inputted integer is negative
+     *                this represents an attack doing more damage than the defender has
+     *                hit points. Then the health of this unit is set to zero
+     *
      */
-    public void setHealth(int health) throws IllegalArgumentException{
-        if(health < 0) throw new IllegalArgumentException("A unit's health must be a positive integer," +
-                " please try again.");
+    public void setHealth(int health){
         this.health = health;
+        if(this.getHealth() < 0) this.health = 0;
     }
 
     @Override
     public String toString() {
         String format = "| %1$-20s %2$-12s %3$-12s %4$-12s";
         return String.format(
-                format, "Name: '"   + NAME + "'", "Health: " + health, "Attack: " + ATTACK, "Armor: "  + ARMOR);
+                format, "Name: '"   + name + "'", "Health: " + health, "Attack: " + attack, "Armor: "  + armor);
     }
 
     /**
@@ -119,13 +109,13 @@ public abstract class Unit {
      * the subclasses of Unit
      * @return int attackBonus
      */
-    public abstract int getAttackBonus();
+    public abstract int getAttackBonus(); //TODO: maybe change to protected
 
     /**
      * Abstract method shell to force a unique resist-bonus method for each of
      * the subclasses of Unit
      * @return int resistBonus
      */
-    public abstract int getResistBonus();
+    public abstract int getResistBonus(); //TODO: maybe change to protected
 
 }

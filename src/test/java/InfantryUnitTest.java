@@ -21,20 +21,4 @@ public class InfantryUnitTest {
             assertEquals(1, testInfantryUnit.getResistBonus());
         }
     }
-    @Nested
-    @DisplayName("Negative tests for the subclass 'InfantryUnit'")
-    class getMethodsReturnsWrongOutput {
-        @Test
-        @DisplayName("Checking getAttackBonus against wrong integer")
-        public void checkGetAttackBonusReturn() {
-            InfantryUnit testInfantryUnit = new InfantryUnit("Axeman", 60, 20,5);
-            assertNotEquals(1, testInfantryUnit.getAttackBonus());
-        }
-        @Test
-        @DisplayName("Checking getResistBonus against wrong integer")
-        public void checkGetResistBonusReturn() {
-            InfantryUnit testInfantryUnit = new InfantryUnit("Axeman", 60, 20,5);
-            assertNotEquals(2, testInfantryUnit.getResistBonus());
-        }
-    }
 }

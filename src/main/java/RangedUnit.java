@@ -1,3 +1,11 @@
+/**
+ * Class for a ranged unit which is a subclass of the abstract superclass 'Unit'
+ * attackBonus = 3, is specific for this subclass
+ * resistBonus is either 7, 5 or 2, depending on how many times this unit-object of
+ * class has been hit, this is a way to represent how far away the enemy is
+ * @author Magnus Lutro Allison
+ * @version 0.4
+ */
 public class RangedUnit extends Unit{
     //Represents proximity of the enemy
     //TODO: remember to reflect over this use, instead of including hitsReceived/hitsGiven in UNIT-CLASS
@@ -5,28 +13,28 @@ public class RangedUnit extends Unit{
     /**
      * Constructor 1 for the class RangedUnit
      * Creates an object with the following parameters:
-     * @param NAME, String value, cannot be inputted as blank
+     * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
-     * @param ATTACK, integer value, cannot be inputted as less than zero
-     * @param ARMOR, integer value, cannot be inputted as less than zero
+     * @param attack, integer value, cannot be inputted as less than zero
+     * @param armor, integer value, cannot be inputted as less than zero
      * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
      *         logical input-range, or is blank
      *         Is thrown from the constructor of the superclass, 'Unit'
      */
-    public RangedUnit(String NAME, int health, int ATTACK, int ARMOR) throws IllegalArgumentException {
-        super(NAME, health, ATTACK, ARMOR);
+    public RangedUnit(String name, int health, int attack, int armor) throws IllegalArgumentException {
+        super(name, health, attack, armor);
     }
     /**
      * Constructor 2 for the class RangedUnit with some default stats
      * Creates an object with the following parameters:
-     * @param NAME, String value, cannot be inputted as blank
+     * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
      * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
      *         logical input-range, or is blank
      *         Is thrown from the constructor of the superclass, 'Unit'
      */
-    public RangedUnit(String NAME, int health) throws IllegalArgumentException {
-        super(NAME, health, 15, 8);
+    public RangedUnit(String name, int health) throws IllegalArgumentException {
+        super(name, health, 15, 8);
     }
 
     /**
@@ -66,7 +74,7 @@ public class RangedUnit extends Unit{
      * -represents far-ranged combat
      * @return2 integer value 4 when the RangedUnit has been hit 1 time
      * -represents middle ranged combat
-     * @return3 integer value 1 when the RangedUnit has been hit 2 or more times
+     * @return3 integer value 2 when the RangedUnit has been hit 2 or more times
      * -represents close combat
      * Also calls the enemyHitsThisUnit, since this method is used only when
      * this unit is attacked

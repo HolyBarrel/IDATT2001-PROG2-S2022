@@ -8,7 +8,6 @@ public class RangedUnitTest {
     @Nested
     @DisplayName("Positive tests for the subclass 'RangedUnit'")
     class getMethodsReturnsAsExpected {
-        //TODO: test attack()?, or do it in the UNITTEST
         @Test
         @DisplayName("Checking that getHitsReceived returns expected output")
         public void checkGetHitsReceivedReturn() {
@@ -17,7 +16,6 @@ public class RangedUnitTest {
             testRangedUnit.getResistBonus();
             assertEquals(1, testRangedUnit.getHitsReceived());
         }
-
         @Test
         @DisplayName("Checking that getResistBonus returns expected output, at different ranges")
         public void checkGetResistBonusReturn() {
@@ -34,22 +32,6 @@ public class RangedUnitTest {
         public void checkGetAttackBonusReturn() {
             RangedUnit testRangedUnit = new RangedUnit("CrossbowMan", 40, 20,2);
             assertEquals(3, testRangedUnit.getAttackBonus());
-        }
-    }
-    @Nested
-    @DisplayName("Negative tests for the subclass 'RangedUnit'")
-    class getMethodsReturnsWrongOutput {
-        @Test
-        @DisplayName("Checking getAttackBonus against wrong integer")
-        public void checkGetAttackBonusReturn() {
-            RangedUnit testRangedUnit = new RangedUnit("CrossbowMan", 40, 20,2);
-            assertNotEquals(1, testRangedUnit.getAttackBonus());
-        }
-        @Test
-        @DisplayName("Checking getResistBonus against wrong integer")
-        public void checkGetResistBonusReturn() {
-            RangedUnit testRangedUnit = new RangedUnit("CrossbowMan", 40, 20,2);
-            assertNotEquals(1, testRangedUnit.getResistBonus());
         }
     }
 }

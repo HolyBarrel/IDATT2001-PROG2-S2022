@@ -14,64 +14,60 @@ public class ArmyTest {
         @Test
         @DisplayName("Checking that the constructor accepts just NAME")
         public void checkConstructorWithNameString() {
-            Army testArmy = new Army("Alliance");
-            assertEquals("Alliance", testArmy.getNAME());
+            try{
+                Army testArmy = new Army("Alliance");
+                assertEquals("Alliance", testArmy.getName());
+            }catch (Exception e){
+                fail("'checkConstructorWithNameString' failed");
+            }
+
         }
         @Test
         @DisplayName("Checking that the constructor accepts NAME and list")
         public void checkConstructorWithNameStringAndList() {
-            //tests with some random units
-            CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
-            CavalryUnit cavalryUnit2 = new CavalryUnit("GrandLancer", 65, 10, 10);
-            RangedUnit rangedUnit1 = new RangedUnit("CrossbowMan", 40, 20,2);
-            ArrayList<Unit> unitsTestArray = new ArrayList<>();
-            unitsTestArray.add(cavalryUnit1);
-            unitsTestArray.add(cavalryUnit2);
-            unitsTestArray.add(rangedUnit1);
-            Army testArmy = new Army("Alliance", unitsTestArray);
-            assertEquals(
-                    "[| Name: 'GrandLancer'  Health: 75   Attack: 12   Armor: 10   , | Name: 'GrandLancer'  " +
-                            "Health: 65   Attack: 10   Armor: 10   , | Name: 'CrossbowMan'  Health: 40   Attack: 20   " +
-                            "Armor: 2    ]", testArmy.getAllUnits().toString());
+            try{
+                ArrayList<Unit> unitsTestArray = new ArrayList<>();
+                unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
+                unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
+                unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20,2));
+                new Army("Alliance", unitsTestArray);
+            }catch (Exception e){
+                fail("'checkConstructorWithNameStringAndList' failed");
+            }
         }
         @Test
         @DisplayName("Testing if the add()-method functions correctly")
         public void testAddToArmyMethod() {
             Army testArmy = new Army("Alliance");
-            assertNotNull(testArmy.getAllUnits());
-            assertEquals(0, testArmy.getArmySize());
             testArmy.add(new CavalryUnit("GrandLancer", 75, 12, 10));
             assertEquals(1, testArmy.getArmySize());
         }
         @Test
         @DisplayName("Testing addAll()-method to add multiple units to army")
         public void testAddAllUnitsOfAListMethod() {
-            Army testArmy = new Army("Alliance");
-            assertNotNull(testArmy.getAllUnits());
-            assertEquals(0, testArmy.getArmySize());
-            //tests adding some random units
-            CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
-            CavalryUnit cavalryUnit2 = new CavalryUnit("GrandLancer", 65, 10, 10);
-            RangedUnit rangedUnit1 = new RangedUnit("CrossbowMan", 40, 20,2);
-            ArrayList<Unit> unitsTestArray = new ArrayList<>();
-            unitsTestArray.add(cavalryUnit1);
-            unitsTestArray.add(cavalryUnit2);
-            unitsTestArray.add(rangedUnit1);
-            testArmy.addAll(unitsTestArray);
-            assertEquals(3, testArmy.getArmySize());
+            try{
+                Army testArmy = new Army("Alliance");
+                ArrayList<Unit> unitsTestArray = new ArrayList<>();
+                unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
+                unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
+                unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20,2));
+                testArmy.addAll(unitsTestArray);
+                assertEquals(3, testArmy.getArmySize());
+            }catch (Exception e){
+                fail("'testAddAllUnitsOfAListMethod' failed");
+            }
         }
         @Test
         @DisplayName("Testing if the remove()-method functions correctly")
         public void testRemoveFromArmyMethod() {
             Army testArmy = new Army("Alliance");
-            assertNotNull(testArmy.getAllUnits());
-            assertEquals(0, testArmy.getArmySize());
             CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
             testArmy.add(testCavalryUnit);
-            assertEquals(1, testArmy.getArmySize());
+            //TODO: add more/remove more
             testArmy.remove(testCavalryUnit);
             assertEquals(0, testArmy.getArmySize());
         }
+        //TODO: test more variable instances
         @Test
         @DisplayName("Testing if the hasUnits method functions correctly")
         public void testHasUnitsMethod() {
@@ -80,27 +76,6 @@ public class ArmyTest {
             CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
             testArmy.add(testCavalryUnit);
             assertTrue(testArmy.hasUnits());
-        }
-        @Test
-        @DisplayName("Testing getRandomListIndex-method")
-        public void testGetRandomListIndexMethod() {
-            CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
-            CavalryUnit cavalryUnit2 = new CavalryUnit("GrandLancer", 65, 10, 10);
-            RangedUnit rangedUnit1 = new RangedUnit("CrossbowMan", 40, 20,2);
-            ArrayList<Unit> unitsTestArray = new ArrayList<>();
-            unitsTestArray.add(cavalryUnit1);
-            unitsTestArray.add(cavalryUnit2);
-            unitsTestArray.add(rangedUnit1);
-            Army testArmy = new Army("Alliance", unitsTestArray);
-            //using a while-loop to confirm that the random integer picker actually is within the
-            //targeted range
-            int num = 0;
-            while (num < 10*testArmy.getAllUnits().size()){
-                int chosenRandomIndex = testArmy.getRandomListIndex();
-                assertTrue(chosenRandomIndex >= 0 &&
-                        chosenRandomIndex < testArmy.getAllUnits().size());
-                num++;
-            }
         }
         @Test
         @DisplayName("Testing getRandom unit method")
@@ -135,6 +110,7 @@ public class ArmyTest {
                     "'Alliance' is an army with 3 total units";
             assertEquals(testStr, testArmy.toString());
         }
+        //TODO: test without elms
         //TODO: test EQUALS AND HASH?
 
     }
@@ -145,12 +121,9 @@ public class ArmyTest {
         @DisplayName("Testing constructor 1 of 'Army' class with empty string-parameter")
         public void constructor1TestWithStringAsParameter() {
             try{
-                //TEST
-                assertThrows(IllegalArgumentException.class,
-                        () -> new Army(""));
                 //EXCEPTION THROWER
                 new Army("");
-                fail("Should have thrown an exception");
+                fail("'constructor1TestWithStringAsParameter' should have thrown an exception");
             }catch (IllegalArgumentException e){
                 assertEquals("The name for an army cannot be inputted as an" +
                         " empty string, please try again.", e.getMessage());
@@ -163,12 +136,9 @@ public class ArmyTest {
                 CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
                 ArrayList<Unit> unitsTestArray = new ArrayList<>();
                 unitsTestArray.add(cavalryUnit1);
-                //TEST
-                assertThrows(IllegalArgumentException.class,
-                        () -> new Army("", unitsTestArray));
                 //EXCEPTION THROWER
                 new Army("", unitsTestArray);
-                fail("Should have thrown an exception");
+                fail("'constructor2TestWithStringAsParameter' should have thrown an exception");
             }catch (IllegalArgumentException e){
                 assertEquals("The name for an army cannot be inputted as an" +
                         " empty string, please try again.", e.getMessage());
@@ -181,12 +151,9 @@ public class ArmyTest {
                 CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
                 ArrayList<Unit> unitsTestArray = new ArrayList<>();
                 unitsTestArray.add(cavalryUnit1);
-                //TEST
-                assertThrows(IllegalArgumentException.class,
-                        () -> new Army("", unitsTestArray));
                 //EXCEPTION THROWER
                 new Army("", unitsTestArray);
-                fail("Should have thrown an exception");
+                fail("'constructor2TestWithUnwantedListParameter' should have thrown an exception");
             }catch (IllegalArgumentException e){
                 assertEquals("The name for an army cannot be inputted as an" +
                         " empty string, please try again.", e.getMessage());
@@ -199,50 +166,14 @@ public class ArmyTest {
                 CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
                 Vector<Unit> unitsTestArray = new Vector<>();
                 unitsTestArray.add(cavalryUnit1);
-                //TEST
-                assertThrows(IllegalArgumentException.class,
-                        () -> new Army("Alliance", unitsTestArray));
                 //EXCEPTION THROWER
                 new Army("Alliance", unitsTestArray);
-                fail("Should have thrown an exception");
+                fail("'testingAddAllMethodWithWrongListTypeAsParameter' should have thrown an exception");
             }catch (IllegalArgumentException e){
                 assertEquals("The inputted list-type must be either an arraylist, " +
                         "or a linked list, please try again.", e.getMessage());
             }
         }
-        @Test
-        @DisplayName("Testing remove unit method on an empty army")
-        public void testingRemoveUnitMethodWithEmptyArmy() {
-            try{
-                Army testArmy = new Army("Alliance");
-                CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
-                //TEST
-                assertThrows(IllegalArgumentException.class,
-                        () -> testArmy.remove(cavalryUnit1));
-                //EXCEPTION THROWER
-                testArmy.remove(cavalryUnit1);
-                fail("Should have thrown an exception");
-            }catch (IllegalArgumentException e){
-                assertEquals("The given unit is not in the army and therefore cannot be removed," +
-                        " please try again.", e.getMessage());
-            }
-        }
-        @Test
-        @DisplayName("Testing getRandom unit method on an empty army")
-        public void testingGetRandomUnitMethodWithEmptyArmy() {
-            try{
-                Army testArmy = new Army("Alliance");
-                //TEST
-                assertThrows(NullPointerException.class,
-                        testArmy::getRandom);
-                //EXCEPTION THROWER
-                testArmy.getRandom();
-                fail("Should have thrown an exception");
-            }catch (NullPointerException n){
-                assertEquals("The getRandom method cannot return a random unit from an" +
-                        " empty army list, please try again.", n.getMessage());
-            }
-        }
-        //TODO: add equals????
+        //TODO: test equals og hashcode
     }
 }

@@ -1,38 +1,40 @@
 /**
  * Class for a CavalryUnit with specification of the abstract methods of its
  * superclass 'Unit'
- * TODO: more info here
+ * attackBonus is either 6 or 2 depending on whether the object of this class is charging
+ *  = attackBonus: 6, or not = attackBonus: 2
+ *  A cavalryUnit is set to charge on the first attack it makes
+ *  resistBonus = 1, specific for objects of this subclass
  * @author Magnus Lutro Allison
- * @version 0.3
- * @since 12.02.2022
+ * @version 0.4
  */
 public class CavalryUnit extends Unit{
     private int successfulAttacks = 0;
     /**
      * Constructor 1 for the class CavalryUnit
      * Creates an object with the following parameters:
-     * @param NAME, String value, cannot be inputted as blank
+     * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
-     * @param ATTACK, integer value, cannot be inputted as less than zero
-     * @param ARMOR, integer value, cannot be inputted as less than zero
+     * @param attack, integer value, cannot be inputted as less than zero
+     * @param armor, integer value, cannot be inputted as less than zero
      * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
      *         logical input-range, or is blank
      *         Is thrown from the constructor of the superclass, 'Unit'
      */
-    public CavalryUnit(String NAME, int health, int ATTACK, int ARMOR) throws IllegalArgumentException {
-        super(NAME, health, ATTACK, ARMOR);
+    public CavalryUnit(String name, int health, int attack, int armor) throws IllegalArgumentException {
+        super(name, health, attack, armor);
     }
     /**
      * Constructor 2 for the class InfantryUnit with some default stats
      * Creates an object with the following parameters:
-     * @param NAME, String value, cannot be inputted as blank
+     * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
      * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
      *         logical input-range, or is blank
      *         Is thrown from the constructor of the superclass, 'Unit'
      */
-    public CavalryUnit(String NAME, int health) throws IllegalArgumentException {
-        super(NAME, health, 20, 12);
+    public CavalryUnit(String name, int health) throws IllegalArgumentException {
+        super(name, health, 20, 12);
     }
     /**
      * Accessor method that returns the number of attacks this CavalryUnit has done
@@ -58,11 +60,10 @@ public class CavalryUnit extends Unit{
     @Override
     public int getAttackBonus() {
         int defaultAtkBonus = 2;
-        int chargeAtkBonus = 4;
         //The cavalry unit will get a further charge-bonus in its first attack
         boolean charge = this.getSuccessfulAttacks() == 0;
         attackSuccess();
-        if(charge) return defaultAtkBonus + chargeAtkBonus;
+        if(charge) return defaultAtkBonus + 4; //additional 4 attackBonus when in charge
         return defaultAtkBonus;
     }
 

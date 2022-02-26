@@ -1,13 +1,13 @@
 import java.util.Random;
 
 /**
- * Battle class that stores two armies
- * and is able to simulate a battle between these two
- * //TODO: MORE INFO HERE
+ * Battle class to simulate a battle between to armies
+ * @author Magnus Lutro Allison
+ * @version 0.4
  */
 public class Battle {
-    private Army armyOne; //TODO: FINAL?
-    private Army armyTwo;
+    private final Army armyOne;
+    private final Army armyTwo;
 
     /**
      * Constructor for the class Battle
@@ -110,8 +110,6 @@ public class Battle {
         if(armyOne.hasUnits()) return armyOne;
         return armyTwo;
     }
-
-    //TODO: must be revised
     @Override
     public String toString() {
         return "Battle{" +
