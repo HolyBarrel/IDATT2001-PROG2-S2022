@@ -47,11 +47,14 @@ public abstract class Unit {
      *                  additions the opponents armor and resistBonus,
      *                  and then sets the result as the new health
      *                  of the @param opponent
+     *                  if the opponent is a ranged unit, the ranged unit's hitsReceived is incremented
+     *                  via it's method called 'enemyHitsThisUnit'
      */
     public void attack(Unit opponent){
         opponent.setHealth(opponent.getHealth()
                 - (this.attack + this.getAttackBonus())
                 + (opponent.getArmor() + opponent.getResistBonus()));
+        if (opponent instanceof RangedUnit) ((RangedUnit) opponent).enemyHitsThisUnit();
     }
 
     /**
