@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+//TODO: RESTRUCTURE nested structure to one class w neg and pos tests per method
 public class ArmyTest {
     @Nested
     @DisplayName("Positive tests for the class 'Army'")
@@ -80,13 +80,10 @@ public class ArmyTest {
         @Test
         @DisplayName("Testing getRandom unit method")
         public void testGetRandomMethod() {
-            CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
-            CavalryUnit cavalryUnit2 = new CavalryUnit("GrandLancer", 65, 10, 10);
-            RangedUnit rangedUnit1 = new RangedUnit("CrossbowMan", 40, 20, 2);
             ArrayList<Unit> unitsTestArray = new ArrayList<>();
-            unitsTestArray.add(cavalryUnit1);
-            unitsTestArray.add(cavalryUnit2);
-            unitsTestArray.add(rangedUnit1);
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
+            unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20, 2));
             Army testArmy = new Army("Alliance", unitsTestArray);
             Unit randomPickedUnit = testArmy.getRandom();
             assertTrue(testArmy.getAllUnits().contains(randomPickedUnit));
@@ -94,13 +91,10 @@ public class ArmyTest {
         @Test
         @DisplayName("Testing toString method for an army")
         public void testToStringMethod() {
-            CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
-            CavalryUnit cavalryUnit2 = new CavalryUnit("GrandLancer", 65, 10, 10);
-            RangedUnit rangedUnit1 = new RangedUnit("CrossbowMan", 40, 20, 2);
             ArrayList<Unit> unitsTestArray = new ArrayList<>();
-            unitsTestArray.add(cavalryUnit1);
-            unitsTestArray.add(cavalryUnit2);
-            unitsTestArray.add(rangedUnit1);
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
+            unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20, 2));
             Army testArmy = new Army("Alliance", unitsTestArray);
             String underLine = "\n|_______________________________________________________________\n";
             String testStr = underLine + "| Units of the army: 'Alliance'" + underLine +
@@ -110,8 +104,64 @@ public class ArmyTest {
                     "'Alliance' is an army with 3 total units";
             assertEquals(testStr, testArmy.toString());
         }
-        //TODO: test without elms
-        //TODO: test EQUALS AND HASH?
+        @Test
+        @DisplayName("Testing equals method for an army")
+        public void testEqualsMethod() {
+            ArrayList<Unit> unitsTestArray = new ArrayList<>();
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
+            unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20, 2));
+            Army testArmy = new Army("Alliance", unitsTestArray);
+            Army testArmy2 = new Army("Alliance", unitsTestArray);
+            assertEquals(testArmy, testArmy2);
+        }
+        @Test
+        @DisplayName("Testing hashcode method for an army")
+        public void testHashCodeMethod() {
+            CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
+            CavalryUnit cavalryUnit2 = new CavalryUnit("GrandLancer", 65, 10, 10);
+            RangedUnit rangedUnit1 = new RangedUnit("CrossbowMan", 40, 20, 2);
+            ArrayList<Unit> unitsTestArray = new ArrayList<>();
+            unitsTestArray.add(cavalryUnit1);
+            unitsTestArray.add(cavalryUnit2);
+            unitsTestArray.add(rangedUnit1);
+            Army testArmy = new Army("Alliance", unitsTestArray);
+            Army testArmy2 = new Army("Alliance", unitsTestArray);
+            assertEquals(testArmy.hashCode(), testArmy2.hashCode());
+        }
+        @Test
+        @DisplayName("Testing equals method for an army, on different armies")
+        public void testEqualsMethod2() {
+            ArrayList<Unit> unitsTestArray = new ArrayList<>();
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
+            unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20, 2));
+            ArrayList<Unit> unitsTestArray2 = new ArrayList<>();
+            unitsTestArray2.add(new CavalryUnit("GrandWhipper", 75, 12, 10));
+            unitsTestArray2.add(new CavalryUnit("GrandLancer", 85, 10, 10));
+            unitsTestArray2.add(new RangedUnit("CrossbowMan", 40, 20, 5));
+            unitsTestArray2.add(new RangedUnit("CrossbowWoman", 47, 20, 5));
+            Army testArmy = new Army("Alliance", unitsTestArray);
+            Army testArmy2 = new Army("Britforce", unitsTestArray2);
+            assertNotEquals(testArmy, testArmy2);
+        }
+        //TODO: more diverse tests
+        @Test
+        @DisplayName("Testing hashcode method for an army, two different armies")
+        public void testHashCodeMethod2() {
+            ArrayList<Unit> unitsTestArray = new ArrayList<>();
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
+            unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
+            unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20, 2));
+            ArrayList<Unit> unitsTestArray2 = new ArrayList<>();
+            unitsTestArray2.add(new CavalryUnit("GrandWhipper", 75, 12, 10));
+            unitsTestArray2.add(new CavalryUnit("GrandLancer", 85, 10, 10));
+            unitsTestArray2.add(new RangedUnit("CrossbowMan", 40, 20, 5));
+            unitsTestArray2.add(new RangedUnit("CrossbowWoman", 47, 20, 5));
+            Army testArmy = new Army("Alliance", unitsTestArray);
+            Army testArmy2 = new Army("Britforce", unitsTestArray2);
+            assertNotEquals(testArmy.hashCode(), testArmy2.hashCode());
+        }
 
     }
     @Nested
@@ -174,6 +224,5 @@ public class ArmyTest {
                         "or a linked list, please try again.", e.getMessage());
             }
         }
-        //TODO: test equals og hashcode
     }
 }

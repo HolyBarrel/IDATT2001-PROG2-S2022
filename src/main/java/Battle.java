@@ -61,7 +61,6 @@ public class Battle {
      *
      */
     private void unitFromArmyOneAttacks(){
-        //1: Unit from the first striking army attacks a unit from the second
         Unit attackerUnit = armyOne.getRandom();
         Unit defenderUnit = armyTwo.getRandom();
         attackerUnit.attack(defenderUnit);
@@ -81,7 +80,6 @@ public class Battle {
      *
      */
     private void unitFromArmyTwoAttacks(){
-        //1: Unit from the first striking army attacks a unit from the second
         Unit attackerUnit = armyTwo.getRandom();
         Unit defenderUnit = armyOne.getRandom();
         attackerUnit.attack(defenderUnit);
@@ -101,15 +99,16 @@ public class Battle {
         while (armyOne.hasUnits() && armyTwo.hasUnits()){
             if(isArmyOneCommencingBattle){
                 unitFromArmyOneAttacks();
-                unitFromArmyTwoAttacks();
+                if(armyOne.hasUnits() && armyTwo.hasUnits()) unitFromArmyTwoAttacks();
             }else{
                 unitFromArmyTwoAttacks();
-                unitFromArmyOneAttacks();
+                if(armyOne.hasUnits() && armyTwo.hasUnits()) unitFromArmyOneAttacks();
             }
         }
         if(armyOne.hasUnits()) return armyOne;
         return armyTwo;
     }
+    //TODO: REVISE
     @Override
     public String toString() {
         return "Battle{" +

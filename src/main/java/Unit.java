@@ -51,10 +51,13 @@ public abstract class Unit {
      *                  via it's method called 'enemyHitsThisUnit'
      */
     public void attack(Unit opponent){
-        opponent.setHealth(opponent.getHealth()
-                - (this.attack + this.getAttackBonus())
-                + (opponent.getArmor() + opponent.getResistBonus()));
-        if (opponent instanceof RangedUnit) ((RangedUnit) opponent).enemyHitsThisUnit();
+        int damage = (this.attack + this.getAttackBonus());
+        int protection = (opponent.getArmor() + opponent.getResistBonus());
+        if(protection > damage) damage = protection = 0; //if this unit deals less damage than the opponent has
+        // protection stats, this unit will not deal any damage //TODO: TEST FOR THIS
+        opponent.setHealth(opponent.getHealth() - damage + protection);
+        //System.out.println(this.getName() + " ATTACKED: " + opponent.getName());
+        //System.out.println("ATK: " + damage + ",DEF: " + protection + " nH: " +opponent.getHealth());
     }
 
     /**
@@ -112,13 +115,12 @@ public abstract class Unit {
      * the subclasses of Unit
      * @return int attackBonus
      */
-    public abstract int getAttackBonus(); //TODO: maybe change to protected
+    protected abstract int getAttackBonus();
 
     /**
      * Abstract method shell to force a unique resist-bonus method for each of
      * the subclasses of Unit
      * @return int resistBonus
      */
-    public abstract int getResistBonus(); //TODO: maybe change to protected
-
+    protected abstract int getResistBonus();
 }

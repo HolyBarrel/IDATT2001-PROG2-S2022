@@ -2,7 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+//TODO: RESTRUCTURE nested structure to one class w neg and pos tests per method
 public class UnitTest {
     private final Unit testUnit = new Unit("Archer", 20, 3, 2){
         @Override
@@ -86,7 +86,7 @@ public class UnitTest {
                     }
                 };
                 //FAIL
-                fail("Should have thrown an exception");
+                fail("'blankNameInputTest' should have thrown an exception");
             }catch (IllegalArgumentException e){
                 assertEquals("A unit's name cannot be inputted as an empty string,  please try again.",
                         e.getMessage());
@@ -108,7 +108,7 @@ public class UnitTest {
                     }
                 };
                 //FAIL
-                fail("Should have thrown an exception");
+                fail("'attackStatIsInputtedAsNegativeInteger' should have thrown an exception");
             }catch (IllegalArgumentException e){
                 assertEquals("A unit's attack must be a positive integer, please try again.", e.getMessage());
             }
@@ -129,7 +129,7 @@ public class UnitTest {
                     }
                 };
                 //FAIL
-                fail("Should have thrown an exception");
+                fail("'armorInputtedAsNegativeInteger' should have thrown an exception");
             }catch (IllegalArgumentException e){
                 assertEquals("A unit's armor must be a positive integer, please try again.", e.getMessage());
             }

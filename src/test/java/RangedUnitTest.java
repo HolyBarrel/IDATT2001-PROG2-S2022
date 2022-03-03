@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+//TODO: RESTRUCTURE nested structure to one class w neg and pos tests per method
 public class RangedUnitTest {
     @Nested
     @DisplayName("Positive tests for the subclass 'RangedUnit'")
