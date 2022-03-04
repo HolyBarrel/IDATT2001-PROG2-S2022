@@ -111,9 +111,10 @@ public class Battle {
     //TODO: REVISE
     @Override
     public String toString() {
-        return "Battle{" +
-                "armyOne=" + armyOne +
-                ", armyTwo=" + armyTwo +
-                '}';
+        return "The Great Battle of '" +
+                armyOne.getName() + "' and '" +
+                armyTwo.getName() + "'\n" +
+                armyOne +
+                armyTwo;
     }
 }

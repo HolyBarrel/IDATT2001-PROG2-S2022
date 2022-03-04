@@ -135,7 +135,6 @@ public class Army {
         sb.append("'").append(getName()).append("' is an army with ").append(getArmySize()).append(" total units");
         return String.valueOf(sb);
     }
-    //TODO: TEST THESE
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

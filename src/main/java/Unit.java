@@ -26,6 +26,8 @@ public abstract class Unit {
     public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException {
         if(name.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
                 " please try again.");
+        if(health < 0) throw new IllegalArgumentException("A unit's health must be a positive integer," +
+                " please try again.");
         if(attack < 0) throw new IllegalArgumentException("A unit's attack must be a positive integer," +
                 " please try again.");
         if(armor < 0) throw new IllegalArgumentException("A unit's armor must be a positive integer," +
@@ -54,10 +56,8 @@ public abstract class Unit {
         int damage = (this.attack + this.getAttackBonus());
         int protection = (opponent.getArmor() + opponent.getResistBonus());
         if(protection > damage) damage = protection = 0; //if this unit deals less damage than the opponent has
-        // protection stats, this unit will not deal any damage //TODO: TEST FOR THIS
+        // protection, this unit will not deal any damage //TODO: TEST FOR THIS
         opponent.setHealth(opponent.getHealth() - damage + protection);
-        //System.out.println(this.getName() + " ATTACKED: " + opponent.getName());
-        //System.out.println("ATK: " + damage + ",DEF: " + protection + " nH: " +opponent.getHealth());
     }
 
     /**
@@ -100,7 +100,7 @@ public abstract class Unit {
      */
     public void setHealth(int health){
         this.health = health;
-        if(this.getHealth() < 0) this.health = 0;
+        if(this.getHealth() < 0) this.health = 0; //health cannot wind up negative
     }
 
     @Override

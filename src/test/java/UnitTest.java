@@ -93,6 +93,27 @@ public class UnitTest {
             }
         }
         @Test
+        @DisplayName("Health is set to negative integer")
+        public void healthSetToNegativeInteger() {
+            try{
+                //EXCEPTION THROWER
+                new Unit("Archer", -20, 3, 2){
+                    @Override
+                    public int getAttackBonus() {
+                        return 0;
+                    }
+                    @Override
+                    public int getResistBonus() {
+                        return 0;
+                    }
+                };
+                //FAIL
+                fail("'armorInputtedAsNegativeInteger' should have thrown an exception");
+            }catch (IllegalArgumentException e){
+                assertEquals("A unit's health must be a positive integer, please try again.", e.getMessage());
+            }
+        }
+        @Test
         @DisplayName("Attack is inputted as a negative integer")
         public void attackStatIsInputtedAsNegativeInteger() {
             try{
@@ -114,8 +135,8 @@ public class UnitTest {
             }
         }
         @Test
-        @DisplayName("Armor is inputted as a negative integer")
-        public void armorInputtedAsNegativeInteger() {
+        @DisplayName("Armor is set to negative integer")
+        public void armorSetToNegativeInteger() {
             try{
                 //EXCEPTION THROWER
                 new Unit("Archer", 20, 3, -1){
