@@ -49,14 +49,12 @@ public abstract class Unit {
      *                  additions the opponents armor and resistBonus,
      *                  and then sets the result as the new health
      *                  of the @param opponent
-     *                  if the opponent is a ranged unit, the ranged unit's hitsReceived is incremented
-     *                  via it's method called 'enemyHitsThisUnit'
      */
     public void attack(Unit opponent){
         int damage = (this.attack + this.getAttackBonus());
         int protection = (opponent.getArmor() + opponent.getResistBonus());
         if(protection > damage) damage = protection = 0; //if this unit deals less damage than the opponent has
-        // protection, this unit will not deal any damage //TODO: TEST FOR THIS
+        // protection, this unit will not deal any damage
         opponent.setHealth(opponent.getHealth() - damage + protection);
     }
 
@@ -99,8 +97,8 @@ public abstract class Unit {
      *
      */
     public void setHealth(int health){
+        if(health < 0) health = 0; //health cannot wind up negative
         this.health = health;
-        if(this.getHealth() < 0) this.health = 0; //health cannot wind up negative
     }
 
     @Override

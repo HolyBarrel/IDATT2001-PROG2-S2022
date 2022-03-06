@@ -9,7 +9,7 @@
  * @version 0.4
  */
 public class CavalryUnit extends Unit{
-    private int successfulAttacks = 0;
+    private boolean charge = true;
     /**
      * Constructor 1 for the class CavalryUnit
      * Creates an object with the following parameters:
@@ -37,37 +37,41 @@ public class CavalryUnit extends Unit{
         super(name, health, 20, 12);
     }
     /**
-     * Accessor method that returns the number of attacks this CavalryUnit has done
-     * @return int successfulAttacks
+     * Accessor method that returns a boolean true if this unit is charging, and false otherwise
      */
-    public int getSuccessfulAttacks() {
-        return successfulAttacks;
+    public boolean isCharging() {
+        return charge;
     }
+
     /**
-     * Help-method to increase this unit's current number of successful attacks
-     * -helper for method beneath V
+     * Mutator method to stop this unit from charging
      */
-    private void attackSuccess(){
-        this.successfulAttacks++;
+    private void stopCharging(){
+        this.charge = false;
+    }
+
+    /**
+     * Attack method containing the formula given how the logic behind a cavalry unit's attack
+     * is in the game
+     *
+     * @param opponent, the unit that is attacked by this unit
+     */
+    @Override
+    public void attack(Unit opponent) {
+        super.attack(opponent);
+        if(isCharging()) stopCharging(); //the unit will stop charging after the first successful attack
     }
 
     /**
      * Method that returns an attack bonus for charge attack and melee combat
      * @return1 integer value 6, is returned if charging
      * @return2 integer value 2, is returned if not charging
-     * Also increments the total of successful attacks of this unit
-     * which indirectly determines if this unit is performing a charge attack or no
      */
-
-
     @Override
     public int getAttackBonus() {
-        int defaultAtkBonus = 2;
         //The cavalry unit will get a further charge-bonus to its first attack
-        boolean charge = this.getSuccessfulAttacks() == 0;
-        attackSuccess();
-        if(charge) return defaultAtkBonus + 4; //additional 4 attackBonus when in charge
-        return defaultAtkBonus;
+        if(isCharging()) return 6; //additional 4 attackBonus when in charge
+        return 2; //the default attackBonus is integer value 2
     }
 
     /**

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
-//TODO: RESTRUCTURE nested structure to one class w neg and pos tests per method
+//TODO: RESTRUCTURE nested structure to classes for neg and pos tests per method
 public class ArmyTest {
     @Nested
     @DisplayName("Positive tests for the class 'Army'")
@@ -20,7 +20,6 @@ public class ArmyTest {
             }catch (Exception e){
                 fail("'checkConstructorWithNameString' failed");
             }
-
         }
         @Test
         @DisplayName("Checking that the constructor accepts NAME and list")
@@ -63,11 +62,23 @@ public class ArmyTest {
             Army testArmy = new Army("Alliance");
             CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
             testArmy.add(testCavalryUnit);
-            //TODO: add more/remove more
+            InfantryUnit testInfantryUnit = new InfantryUnit("Paladin", 100, 20, 18);
+            testArmy.add(testInfantryUnit);
+            RangedUnit testRangedUnit = new RangedUnit("Fire Mage", 20, 80, 10);
+            testArmy.add(testRangedUnit);
+            CommanderUnit testCommanderUnit =
+                    new CommanderUnit("Silas the Widowmaker", 160, 30, 50);
+            testArmy.add(testCommanderUnit);
+            assertEquals(4, testArmy.getArmySize());
             testArmy.remove(testCavalryUnit);
+            assertEquals(3, testArmy.getArmySize());
+            testArmy.remove(testInfantryUnit);
+            assertEquals(2, testArmy.getArmySize());
+            testArmy.remove(testRangedUnit);
+            assertEquals(1, testArmy.getArmySize());
+            testArmy.remove(testCommanderUnit);
             assertEquals(0, testArmy.getArmySize());
         }
-        //TODO: test more variable instances
         @Test
         @DisplayName("Testing if the hasUnits method functions correctly")
         public void testHasUnitsMethod() {
@@ -145,7 +156,6 @@ public class ArmyTest {
             Army testArmy2 = new Army("Britforce", unitsTestArray2);
             assertNotEquals(testArmy, testArmy2);
         }
-        //TODO: more diverse tests
         @Test
         @DisplayName("Testing hashcode method for an army, two different armies")
         public void testHashCodeMethod2() {

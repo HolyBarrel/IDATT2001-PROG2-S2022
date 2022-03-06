@@ -7,8 +7,9 @@
  * @version 0.4
  */
 public class RangedUnit extends Unit{
-    //Represents proximity of the enemy
+    //Represents proximity of the enemy army
     //TODO: remember to reflect over this use, instead of including hitsReceived/hitsGiven in UNIT-CLASS
+    //and reflect over the use of the specified methods which increments this attribute for this unit
     private int hitsReceived = 0;
     /**
      * Constructor 1 for the class RangedUnit
@@ -36,7 +37,6 @@ public class RangedUnit extends Unit{
     public RangedUnit(String name, int health) throws IllegalArgumentException {
         super(name, health, 15, 8);
     }
-
     /**
      * Accessor method that returns the number of attacks this RangedUnit
      * has received
@@ -49,13 +49,6 @@ public class RangedUnit extends Unit{
     public int getHitsReceived() {
         return hitsReceived;
     }
-
-    /**
-     * Attack method containing the formula given how the logic behind a unit's attack
-     * is in the game
-     *
-     * @param opponent
-     */
     /**
      * Method that returns an attack bonus for ranged attacks
      * @return integer value 3
@@ -64,20 +57,37 @@ public class RangedUnit extends Unit{
     public int getAttackBonus() {
         return 3;
     }
-
     /**
      * Increment method to increase this unit's current number of received hits/attacks
      */
     public void enemyHitsThisUnit(){
         this.hitsReceived++;
     }
-
     /**
-     * Method that returns an integer defense bonus based on the amounts of attacks this
-     * RangedUnit has received
-     * @return1 integer value 6 when the RangedUnit has been hit 0 times
+     * Help method to assess the resist bonus this RangedUnit should be buffed with
+     * @return1 integer value 7 when the RangedUnit has not been hit
      * -represents far-ranged combat
-     * @return2 integer value 4 when the RangedUnit has been hit 1 time
+     * @return2 integer value 5 when the RangedUnit has been hit 1 time
+     * -represents middle ranged combat
+     * @return3 integer value 2 when the RangedUnit has been hit 2 or more times
+     * -represents close combat
+     * This help method is utilized in the getResistBonus-method beneath
+     */
+    private int resistBonusBasedOnDistanceFromOpposingArmy(){
+        if(this.getHitsReceived() == 0){
+            return 7;
+        }else if(this.getHitsReceived() == 1){
+            return 5;
+        }else{
+            return 2;
+        }
+    }
+    /**
+     * Method that returns an integer resist bonus based on the amount of attacks this
+     * RangedUnit has received
+     * @return1 integer value 7 when the RangedUnit has not been hit
+     * -represents far-ranged combat
+     * @return2 integer value 5 when the RangedUnit has been hit 1 time
      * -represents middle ranged combat
      * @return3 integer value 2 when the RangedUnit has been hit 2 or more times
      * -represents close combat
@@ -86,18 +96,8 @@ public class RangedUnit extends Unit{
      */
     @Override
     public int getResistBonus() {
-        int farRangeBonus = 5;
-        int middleRangeBonus = 3;
-        int defaultBonus = 2;
-        if(this.getHitsReceived() == 0){
-            enemyHitsThisUnit();
-            return farRangeBonus + defaultBonus;
-        }else if(this.getHitsReceived() == 1){
-            enemyHitsThisUnit();
-            return middleRangeBonus + defaultBonus;
-        }else{
-            enemyHitsThisUnit();
-            return defaultBonus;
-        }
+        int resistBonus = resistBonusBasedOnDistanceFromOpposingArmy();
+        enemyHitsThisUnit();
+        return resistBonus;
     }
 }

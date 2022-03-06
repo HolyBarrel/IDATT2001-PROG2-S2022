@@ -77,7 +77,7 @@ public class Army {
      * army list
      * @param unit, must be in the army, otherwise exception is thrown
      */
-    public void remove(Unit unit){ //could implement illegalArgumentEx
+    public void remove(Unit unit){ //could implement illegalArgumentEx, but this is handled in the simulation
         this.units.remove(unit);
     }
 

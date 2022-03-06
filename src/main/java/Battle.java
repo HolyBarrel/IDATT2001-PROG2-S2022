@@ -108,7 +108,6 @@ public class Battle {
         if(armyOne.hasUnits()) return armyOne;
         return armyTwo;
     }
-    //TODO: REVISE
     @Override
     public String toString() {
         return "The Great Battle of '" +

@@ -24,6 +24,17 @@ public class UnitTest {
             return 0;
         }
     };
+    private final Unit testUnit3 = new Unit("WeakMan", 10, 2, 2){
+        @Override
+        public int getAttackBonus() {
+            return 0;
+        }
+        @Override
+        public int getResistBonus() {
+            return 0;
+        }
+    };
+
 
     @Nested
     @DisplayName("Positive tests for the abstract class 'Unit'")
@@ -56,6 +67,13 @@ public class UnitTest {
             assertEquals(0, testUnit.getHealth());
             testUnit2.attack(testUnit);
             assertEquals(0, testUnit.getHealth());
+        }
+        @Test
+        @DisplayName("Testing attack-method")
+        public void testingAttackMethod() {
+            assertEquals(20, testUnit.getHealth());
+            testUnit3.attack(testUnit); //testing that the attack does not harm when protection is more than the damage
+            assertEquals(20, testUnit.getHealth());
         }
         @Test
         @DisplayName("Subclass of 'Unit' used to test the setHealth-method, correct input")
