@@ -32,6 +32,12 @@ public class RangedUnitTest {
         public void checkGetAttackBonusReturn() {
             RangedUnit testRangedUnit = new RangedUnit("CrossbowMan", 40, 20,2);
             assertEquals(3, testRangedUnit.getAttackBonus());
+            testRangedUnit.getResistBonus();
+            assertEquals(3, testRangedUnit.getAttackBonus());
+            testRangedUnit.getResistBonus();
+            assertEquals(0, testRangedUnit.getAttackBonus());
+            testRangedUnit.getResistBonus();
+            assertEquals(0, testRangedUnit.getAttackBonus());
         }
     }
 }

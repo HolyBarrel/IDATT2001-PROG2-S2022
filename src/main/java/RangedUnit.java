@@ -52,11 +52,16 @@ public class RangedUnit extends Unit{
     }
     /**
      * Method that returns an attack bonus for ranged attacks
-     * @return integer value 3
+     * @return integer value 3 if the attack is done when this unit has received 0 or 1 hits,
+     * which represents the RangedUnit attacking from range, else return 0
      */
     @Override
     public int getAttackBonus() {
-        return 3;
+        if(this.getHitsReceived() <= 1){
+            return 3;
+        }else{
+            return 0;
+        }
     }
     /**
      * Increment method to increase this unit's current number of received hits/attacks
