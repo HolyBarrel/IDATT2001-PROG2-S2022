@@ -1,14 +1,13 @@
 import java.util.Random;
-
 /**
  * Battle class to simulate a battle between to armies
  * @author Magnus Lutro Allison
- * @version 0.4
+ * @version 0.5
+ * @since 0.5
  */
 public class Battle {
     private final Army armyOne;
     private final Army armyTwo;
-
     /**
      * Constructor for the class Battle
      * @param armyOne, the first army of this battle, cannot be an empty army
@@ -23,28 +22,23 @@ public class Battle {
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
     }
-
     /**
-     * Help-method that returns a random boolean which in turn is used to decide
-     * the first-striking army of the battle
-     * @return boolean 'random', either:
-     * true --- means that armyOne strikes first each round, or
-     * false -- means that armyTwo strikes first each round
+     * Help method utilized to check if both armies in the battle still have units to fight
+     * @return true if both armies have units || false if one of the armies is eradicated
      */
-    private boolean isArmyOneStrikingFirst(){
-        return new Random().nextBoolean();
+    private boolean battleIsActive(){
+        return armyOne.hasUnits() && armyTwo.hasUnits();
     }
-
     /**
-     * Help-method used by the two help-methods presented beneath this method
+     * Help-method used by the two other help-methods presented beneath
      * Checks if the unit which has taken a blow (defenderUnit) is dead
      * @param defenderUnit, is the unit which is checked to see if is dead after being
      *                      attacked
      * @return boolean
-     * true --- if the defenderUnit has died
+     * true --- if the defenderUnit has died (has health == 0)
      * false -- if the defenderUnit still has remaining health
      */
-    private boolean isDefenderDead(Unit defenderUnit){
+    private boolean defenderIsDead(Unit defenderUnit){
         return defenderUnit.getHealth() == 0;
     }
     /**
@@ -52,57 +46,59 @@ public class Battle {
      * Chooses the attacker and defender randomly from named armies, via .getRandom-method
      * of objects from the Army-class
      * Then the method exercises the attack, with the .attack-method that objects
-     * of subclasses of abstract superclass 'Unit' has inherited from 'Unit'-class
+     * of subclasses of abstract superclass 'Unit' has inherited from 'Unit'-class or polymorphed
      * Finally checks whether the defenderUnit, which has been attacked is dead or not
      * If the defenderUnit is dead, then it is removed from its army
      * using the .remove()-method for objects of the Army-class
-     * The isDefenderDead(Unit defenderUnit) is a private help-method to check if the
+     * The defenderIsDead(Unit defenderUnit) is a private help-method to check if the
      * defenderUnit has health == 0, and hence is dead
-     *
      */
     private void unitFromArmyOneAttacks(){
-        Unit attackerUnit = armyOne.getRandom();
-        Unit defenderUnit = armyTwo.getRandom();
-        attackerUnit.attack(defenderUnit);
-        if (isDefenderDead(defenderUnit)) armyTwo.remove(defenderUnit);
+        if(battleIsActive()) {
+            Unit attackerUnit = armyOne.getRandom();
+            Unit defenderUnit = armyTwo.getRandom();
+            attackerUnit.attack(defenderUnit);
+            if (defenderIsDead(defenderUnit)) armyTwo.remove(defenderUnit);
+        }
     }
     /**
      * A help-method that simulates that a unit from armyTwo attacks a unit from armyOne
      * Chooses the attacker and defender randomly from named armies, via .getRandom-method
      * of objects from the Army-class
      * Then the method exercises the attack, with the .attack-method that objects
-     * of subclasses of abstract superclass 'Unit' has inherited from 'Unit'-class
+     * of subclasses of abstract superclass 'Unit' has inherited from 'Unit'-class or polymorphed
      * Finally checks whether the defenderUnit, which has been attacked, is dead or not
      * If the defenderUnit is dead, then it is removed from its army
      * using the .remove()-method for objects of the Army-class
-     * The isDefenderDead(Unit defenderUnit) is a private help-method to check if the
+     * The defenderIsDead(Unit defenderUnit) is a private help-method to check if the
      * defenderUnit has health == 0, and hence is dead
-     *
      */
     private void unitFromArmyTwoAttacks(){
-        Unit attackerUnit = armyTwo.getRandom();
-        Unit defenderUnit = armyOne.getRandom();
-        attackerUnit.attack(defenderUnit);
-        if (isDefenderDead(defenderUnit)) armyOne.remove(defenderUnit);
+        if(battleIsActive()) {
+            Unit attackerUnit = armyTwo.getRandom();
+            Unit defenderUnit = armyOne.getRandom();
+            attackerUnit.attack(defenderUnit);
+            if (defenderIsDead(defenderUnit)) armyOne.remove(defenderUnit);
+        }
     }
-
     /**
      * Simulate-method that simulates a battle between armyOne and armyTwo
      * Utilizes a series of help-methods described above:
-     * isArmyOneStrikingFirst
-     * unitFromArmyOneAttacks, which, in turn uses help-method: isDefenderDead
-     * unitFromArmyTwoAttacks, which, in turn uses help-method: isDefenderDead
+     * battleIsActive
+     * unitFromArmyOneAttacks, which, in turn uses help-methods: defenderIsDead, battleIsActive
+     * unitFromArmyTwoAttacks, which, in turn uses help-methods: defenderIsDead, battleIsActive
      * @return victorious army --> the army that has remaining units
      */
     public Army simulate(){
-        boolean isArmyOneCommencingBattle = isArmyOneStrikingFirst();
-        while (armyOne.hasUnits() && armyTwo.hasUnits()){
-            if(isArmyOneCommencingBattle){
+        boolean armyOneIsCommencingBattle = new Random().nextBoolean(); //if true --> armyOne attacks
+        // first, if false armyTwo attacks first
+        while (battleIsActive()){
+            if(armyOneIsCommencingBattle){
                 unitFromArmyOneAttacks();
-                if(armyOne.hasUnits() && armyTwo.hasUnits()) unitFromArmyTwoAttacks();
+                unitFromArmyTwoAttacks();
             }else{
                 unitFromArmyTwoAttacks();
-                if(armyOne.hasUnits() && armyTwo.hasUnits()) unitFromArmyOneAttacks();
+                unitFromArmyOneAttacks();
             }
         }
         if(armyOne.hasUnits()) return armyOne;

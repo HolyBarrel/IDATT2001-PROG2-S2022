@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
-//TODO: RESTRUCTURE nested structure to classes for neg and pos tests per method
+//TODO: RESTRUCTURE nested structure to classes w neg and pos tests per method
 public class ArmyTest {
     @Nested
     @DisplayName("Positive tests for the class 'Army'")

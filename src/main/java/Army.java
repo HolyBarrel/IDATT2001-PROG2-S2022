@@ -5,7 +5,8 @@ import java.util.*;
  * The army has a String value for its name, and a list of all
  * Unit-subclass units in this army
  * @author Magnus Lutro Allison
- * @version 0.4
+ * @version 0.5
+ * @since 0.4
  */
 public class Army {
     private final String name;
@@ -34,6 +35,7 @@ public class Army {
     public Army(String name, List<Unit> units) throws IllegalArgumentException{
         if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
                 " empty string, please try again.");
+        //checks that the inputted list is either an ArrayList or LinkedList. A Vector for example would throw
         if(!(units instanceof ArrayList || units instanceof LinkedList)) throw new IllegalArgumentException(
                 "The inputted list-type must be either an arraylist, or a linked list, please try again.");
         this.name = name.trim();
@@ -65,6 +67,7 @@ public class Army {
      * suitable
      */
     public void addAll(List<Unit> units) throws IllegalArgumentException{
+        //checks that the inputted list is either an ArrayList or LinkedList. A Vector for example would throw
         if(!(units instanceof ArrayList || units instanceof LinkedList)) throw new IllegalArgumentException(
                 "The inputted list-type must be either an arraylist, or a linked list, please try again.");
         for (Unit unit: units) {
@@ -74,7 +77,8 @@ public class Army {
 
     /**
      * Remove-method that removes the inputted unit from the current
-     * army list
+     * army list, is only used when the army contains this unit, and does not need a
+     * check
      * @param unit, must be in the army, otherwise exception is thrown
      */
     public void remove(Unit unit){ //could implement illegalArgumentEx, but this is handled in the simulation
@@ -117,7 +121,7 @@ public class Army {
     /**
      * Accessor-method that returns a random unit from the army list
      * @return Unit (at random index in the army list)
-     * @throws NullPointerException if the army list is empty
+     * Is only run on armies that has units, and does therefore not need a check
      */
     public Unit getRandom(){
         return units.get(getRandomListIndex());

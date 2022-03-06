@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-//TODO: RESTRUCTURE nested structure to classes for neg and pos tests per method
+//TODO: RESTRUCTURE nested structure to classes w neg and pos tests per method
 public class CavalryUnitTest {
     @Nested
     @DisplayName("Positive tests for the subclass 'CavalryUnit'")

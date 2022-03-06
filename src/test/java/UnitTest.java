@@ -2,7 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-//TODO: RESTRUCTURE nested structure to one class w neg and pos tests per method
+//TODO: RESTRUCTURE nested structure to classes w neg and pos tests per method
 public class UnitTest {
     private final Unit testUnit = new Unit("Archer", 20, 3, 2){
         @Override

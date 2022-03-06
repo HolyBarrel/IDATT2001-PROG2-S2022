@@ -6,7 +6,8 @@
  * CavalryUnit --> which in turn is inherited by CommanderUnit
  * RangedUnit
  * @author Magnus Lutro Allison
- * @version 0.4
+ * @version 0.5
+ * @since 0.2
  */
 public abstract class Unit {
     private final String name;

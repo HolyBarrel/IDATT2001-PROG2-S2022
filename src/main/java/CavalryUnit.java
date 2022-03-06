@@ -6,7 +6,8 @@
  *  A cavalryUnit is set to charge on the first attack it makes
  *  resistBonus = 1, specific for objects of this subclass
  * @author Magnus Lutro Allison
- * @version 0.4
+ * @version 0.5
+ * @since 0.3
  */
 public class CavalryUnit extends Unit{
     private boolean charge = true;
