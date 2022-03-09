@@ -1,3 +1,4 @@
+package edu.ntnu.idatt2001.magnulal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -67,26 +68,6 @@ public class BattleTest {
                 } catch (IllegalArgumentException e) {
                     assertEquals("The second army inputted did not have any units, please try again with " +
                             "two armies containing units.", e.getMessage());
-                }
-            }
-
-            @Test
-            @DisplayName("Checking that the constructor of Battle class works with wrong inputs")
-            public void checkConstructorOfBattleClassNeg() {
-                try {
-                    ArrayList<Unit> unitsTestArray = new ArrayList<>();
-                    unitsTestArray.add(new CavalryUnit("GrandLancer", -1, 12, 10));
-                    unitsTestArray.add(new CavalryUnit("ApexAxeRider", 65, 15, 10));
-                    unitsTestArray.add(new RangedUnit("CrossbowMan", 30, 10, 2));
-                    ArrayList<Unit> unitsTestArray2 = new ArrayList<>();
-                    unitsTestArray2.add(new CavalryUnit("GrandWhipper", 75, 16, 10));
-                    unitsTestArray2.add(new CavalryUnit("FastLancer", 85, 10, 10));
-                    unitsTestArray2.add(new InfantryUnit("Footman", 40, 10, 5));
-                    Army testArmy = new Army("Alliance", unitsTestArray);
-                    Army testArmy2 = new Army("Britforce", unitsTestArray2);
-                    assertDoesNotThrow(() -> new Battle(testArmy, testArmy2));
-                } catch (IllegalArgumentException e) {
-                    assertEquals("A unit's health must be a positive integer, please try again.", e.getMessage());
                 }
             }
         }

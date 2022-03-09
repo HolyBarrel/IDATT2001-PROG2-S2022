@@ -1,3 +1,4 @@
+package edu.ntnu.idatt2001.magnulal;
 /**
  * Class for a CommanderUnit which inherits all methods from the superclass
  * 'CavalryUnit' which in turn is a subclass of the abstract superclass 'Unit'

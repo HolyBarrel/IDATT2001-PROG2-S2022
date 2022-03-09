@@ -1,3 +1,4 @@
+package edu.ntnu.idatt2001.magnulal;
 public class MainClass { //not task 6
     public static void main(String[] args) {
         Army humanArmy = new Army("Alliance");

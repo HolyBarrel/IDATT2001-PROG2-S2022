@@ -1,3 +1,4 @@
+package edu.ntnu.idatt2001.magnulal;
 import java.util.*;
 
 /**
