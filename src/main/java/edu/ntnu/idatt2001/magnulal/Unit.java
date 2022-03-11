@@ -27,7 +27,7 @@ public abstract class Unit {
      */
     public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException {
         if(name.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
-                " please try again.");
+                " please try again."); //TODO: UPDATE TO ACCOUNT FOR NAME BEING 'null'
         if(health < 0) throw new IllegalArgumentException("A unit's health must be a positive integer," +
                 " please try again.");
         if(attack < 0) throw new IllegalArgumentException("A unit's attack must be a positive integer," +
