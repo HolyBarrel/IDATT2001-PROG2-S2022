@@ -7,7 +7,7 @@ package edu.ntnu.idatt2001.magnulal;
  *  A cavalryUnit is set to charge on the first attack it makes
  *  resistBonus = 1, specific for objects of this subclass
  * @author Magnus Lutro Allison
- * @version 0.5
+ * @version 0.6
  * @since 0.3
  */
 public class CavalryUnit extends Unit{

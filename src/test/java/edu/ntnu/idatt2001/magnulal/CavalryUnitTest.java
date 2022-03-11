@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-//TODO: RESTRUCTURE nested structure to classes w neg and pos tests per method
+
 public class CavalryUnitTest {
     private CavalryUnit testCavalryUnit;
     private CavalryUnit testCavalryUnit2;
@@ -16,7 +16,7 @@ public class CavalryUnitTest {
     }
     @Nested
     @DisplayName("Positive tests for the subclass 'CavalryUnit'")
-    class getMethodsReturnsAsExpected {
+    class MethodsReturnsAsExpected {
         @Test
         @DisplayName("Checking that isCharging returns expected output")
         public void checkIsChargingAttacksReturn() {

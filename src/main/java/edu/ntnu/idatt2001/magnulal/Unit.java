@@ -7,7 +7,7 @@ package edu.ntnu.idatt2001.magnulal;
  * CavalryUnit --> which in turn is inherited by CommanderUnit
  * RangedUnit
  * @author Magnus Lutro Allison
- * @version 0.5
+ * @version 0.6
  * @since 0.2
  */
 public abstract class Unit {
@@ -26,8 +26,10 @@ public abstract class Unit {
      *          logical input-range, or is blank
      */
     public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException {
+        if(name == null) throw new IllegalArgumentException("A unit's name cannot be inputted as 'null'," +
+                " please try again.");
         if(name.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
-                " please try again."); //TODO: UPDATE TO ACCOUNT FOR NAME BEING 'null'
+                " please try again.");
         if(health < 0) throw new IllegalArgumentException("A unit's health must be a positive integer," +
                 " please try again.");
         if(attack < 0) throw new IllegalArgumentException("A unit's attack must be a positive integer," +
@@ -56,7 +58,7 @@ public abstract class Unit {
         int damage = (this.attack + this.getAttackBonus());
         int protection = (opponent.getArmor() + opponent.getResistBonus());
         if(protection > damage) damage = protection = 0; //if this unit deals less damage than the opponent has
-        // protection, this unit will not deal any damage
+        // protection-stats, this unit tries to hit, but will not deal any damage
         opponent.setHealth(opponent.getHealth() - damage + protection);
     }
 

@@ -5,7 +5,7 @@ package edu.ntnu.idatt2001.magnulal;
  * attackBonus = 2, specific value for objects of this subclass
  * resistBonus = 1, specific value for objects of this subclass
  * @author Magnus Lutro Allison
- * @version 0.5
+ * @version 0.6
  * @since 0.3
  */
 public class InfantryUnit extends Unit{

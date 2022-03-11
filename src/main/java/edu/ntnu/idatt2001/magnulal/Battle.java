@@ -3,7 +3,7 @@ import java.util.Random;
 /**
  * Battle class to simulate a battle between to armies
  * @author Magnus Lutro Allison
- * @version 0.5
+ * @version 0.6
  * @since 0.5
  */
 public class Battle {
@@ -22,41 +22,45 @@ public class Battle {
     public Battle(Army armyOne, Army armyTwo) throws IllegalArgumentException{
         if(!armyOne.hasUnits()) throw new IllegalArgumentException("The first army inputted did not have any units, " +
                 "please try again with two armies containing units.");
-        if(!armyTwo.hasUnits()) throw new IllegalArgumentException("The second army inputted did not have any units, " +
+        if(!armyTwo.hasUnits()) throw new IllegalArgumentException("The second army inputted did not have any units, "+
                 "please try again with two armies containing units.");
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
         this.armyOneIsCommencingBattle = new Random().nextBoolean();
     }
     /**
-     * Help method utilized to check if both armies in the battle still have units to fight
-     * @return true if both armies have units || false if one of the armies is eradicated
+     * Help method utilized to check if both armies in the battle have units
+     * @return true if both armies have units || false if one of the armies are
+     *
      */
     private boolean battleIsActive(){
         return armyOne.hasUnits() && armyTwo.hasUnits();
     }
     /**
-     * Help-method used by the two other help-methods presented beneath
+     * Help-method used by the 'unitAttacks' method presented beneath
      * Checks if the unit which has taken a blow (defenderUnit) is dead
-     * @param defenderUnit, is the unit which is checked to see if is dead after being
-     *                      attacked
-     * true --- if the defenderUnit has died (has health == 0)
-     * false -- if the defenderUnit still has remaining health //TODO: update
+     * @param defenderUnit, is the unit which is checked to see if is dead after
+     *                      being attacked
+     *                      if this unit has health == 0 after the attack, it is
+     *                      removed from its respective army
      */
     private void removeDefenderIfDead(Unit defenderUnit, Army defendingArmy){
         if(defenderUnit.getHealth() == 0) defendingArmy.remove(defenderUnit);
     }
     /**
-     * A help-method that simulates that a unit from armyTwo attacks a unit from armyOne
-     * Chooses the attacker and defender randomly from named armies, via .getRandom-method
-     * of objects from the Army-class
-     * Then the method exercises the attack, with the .attack-method that objects
+     A help-method that simulates that a unit from attackingArmy attacks a unit from defendingArmy
+     * Chooses the attacker and defender randomly from named armies,
+     * via .getRandom-method of objects from the Army-class
+     * Then the method exercises .attack-method of the attackerUnit on the defenderUnit
      * of subclasses of abstract superclass 'Unit' has inherited from 'Unit'-class or polymorphed
      * Finally checks whether the defenderUnit, which has been attacked, is dead or not
      * If the defenderUnit is dead, then it is removed from its army
      * using the .remove()-method for objects of the Army-class
-     * The defenderIsDead(Unit defenderUnit) is a private help-method to check if the
-     * defenderUnit has health == 0, and hence is dead //TODO: update
+     * This sequence will occur as long as the help-method 'battleIsActive' is true
+     * @param attackingArmy, parameter of class Army. From this army an attacking unit called
+     *                       'attackerUnit' is chosen if the battle is active
+     * @param defendingArmy, parameter of class Army. From this army a defending unit called
+     *                       'defenderUnit' is chosen if the battle is active
      */
     private void unitAttacks(Army attackingArmy, Army defendingArmy){
         if(battleIsActive()){
@@ -66,27 +70,23 @@ public class Battle {
             removeDefenderIfDead(defenderUnit, defendingArmy);
         }
     }
-    //TODO: remove or keep?
-    private void executeAttacksOfOneTurn(){
-        if(this.armyOneIsCommencingBattle){
-            unitAttacks(armyOne,armyTwo);
-            unitAttacks(armyTwo,armyOne);
-        }else{
-            unitAttacks(armyTwo,armyOne);
-            unitAttacks(armyOne,armyTwo);
-        }
-    }
     /**
      * Simulate-method that simulates a battle between armyOne and armyTwo
      * Utilizes a series of help-methods described above:
      * battleIsActive
-     * unitFromArmyOneAttacks, which, in turn uses help-methods: defenderIsDead, battleIsActive
-     * unitFromArmyTwoAttacks, which, in turn uses help-methods: defenderIsDead, battleIsActive
-     * @return victorious army --> the army that has remaining units
+     * unitAttacks which, in turn uses help-methods: battleIsActive, removeDefenderIfDead
+     * @return victorious army is the army that has remaining units after a finite amount
+     * of attacks
      */
     public Army simulate(){
         while (battleIsActive()){
-            executeAttacksOfOneTurn();
+            if(this.armyOneIsCommencingBattle){
+                unitAttacks(armyOne,armyTwo);
+                unitAttacks(armyTwo,armyOne);
+            }else{
+                unitAttacks(armyTwo,armyOne);
+                unitAttacks(armyOne,armyTwo);
+            }
         }
         if(armyOne.hasUnits()) return armyOne;
         return armyTwo;
