@@ -1,47 +1,52 @@
 package edu.ntnu.idatt2001.magnulal;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 //TODO: RESTRUCTURE nested structure to classes w neg and pos tests per method
 public class UnitTest {
-    private final Unit testUnit = new Unit("Archer", 20, 3, 2){
-        @Override
-        public int getAttackBonus() {
-            return 0;
-        }
-        @Override
-        public int getResistBonus() {
-            return 0;
-        }
-    };
-    private final Unit testUnit2 = new Unit("SpearGoblin", 30, 7, 2){
-        @Override
-        public int getAttackBonus() {
-            return 0;
-        }
-        @Override
-        public int getResistBonus() {
-            return 0;
-        }
-    };
-    private final Unit testUnit3 = new Unit("WeakMan", 10, 2, 2){
-        @Override
-        public int getAttackBonus() {
-            return 0;
-        }
-        @Override
-        public int getResistBonus() {
-            return 0;
-        }
-    };
+    private Unit testUnit;
+    private Unit testUnit2;
+    private Unit testUnit3;
 
-
+    @BeforeEach
+    public void initiateTestUnits(){
+        this.testUnit = new Unit("Archer", 20, 3, 2){
+            @Override
+            public int getAttackBonus() {
+                return 0;
+            }
+            @Override
+            public int getResistBonus() {
+                return 0;
+            }};
+        this.testUnit2 = new Unit("SpearGoblin", 30, 7, 2){
+            @Override
+            public int getAttackBonus() {
+                return 0;
+            }
+            @Override
+            public int getResistBonus() {
+                return 0;
+            }
+        };
+        this.testUnit3 = new Unit("WeakMan", 10, 2, 2){
+            @Override
+            public int getAttackBonus() {
+                return 0;
+            }
+            @Override
+            public int getResistBonus() {
+                return 0;
+            }
+        };
+    }
     @Nested
     @DisplayName("Positive tests for the abstract class 'Unit'")
     class TestingSupportedInputData {
         @Test
-        @DisplayName("Subclass of 'Unit' used to test the constructor, correct input")
+        @DisplayName("Subclass of 'Unit' used to test the constructor, correct input") //TODO: divide
         public void usingSubclassToTestCorrectInputOfUnitConstructor() {
             assertEquals("Archer", testUnit.getName());
             assertEquals(20, testUnit.getHealth());
@@ -77,7 +82,7 @@ public class UnitTest {
             assertEquals(20, testUnit.getHealth());
         }
         @Test
-        @DisplayName("Subclass of 'Unit' used to test the setHealth-method, correct input")
+        @DisplayName("Subclass of 'Unit' used to test the setHealth-method, correct input") //TODO: divide
         public void usingSubclassToTestCorrectInputOfUnitSetHealth() {
             assertEquals(20,testUnit.getHealth());
             testUnit.setHealth(10);
