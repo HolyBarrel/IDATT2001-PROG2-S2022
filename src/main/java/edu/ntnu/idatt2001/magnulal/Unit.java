@@ -55,11 +55,15 @@ public abstract class Unit {
      *                  of the @param opponent
      */
     public void attack(Unit opponent){
-        int damage = (this.attack + this.getAttackBonus());
-        int protection = (opponent.getArmor() + opponent.getResistBonus());
-        if(protection > damage) damage = protection = 0; //if this unit deals less damage than the opponent has
-        // protection-stats, this unit tries to hit, but will not deal any damage
-        opponent.setHealth(opponent.getHealth() - damage + protection);
+        //An integer value for total damage is initialized
+        //Represents the damage-action
+        int damage = this.attack + this.getAttackBonus();
+        //An integer value for total opponent protection is initialized
+        //Represents the defence-action
+        int protection = opponent.getArmor() + opponent.getResistBonus();
+        //The health of the opponent only needs to be updated if the attack does damage
+        //Represents the outcome of the damage- and defence-actions
+        if(protection < damage) opponent.setHealth(opponent.getHealth() - damage + protection);
     }
 
     /**

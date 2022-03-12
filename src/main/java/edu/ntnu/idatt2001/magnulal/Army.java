@@ -20,6 +20,7 @@ public class Army {
      * @throws IllegalArgumentException, if the name-input is a blank string
      */
     public Army(String name) throws IllegalArgumentException{
+        //TODO: Check for null
         if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
                 " empty string, please try again.");
         this.name = name.trim();
@@ -37,6 +38,7 @@ public class Army {
         if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
                 " empty string, please try again.");
         //checks that the inputted list is either an ArrayList or LinkedList. A Vector for example would throw
+        //TODO: check legal input in list
         if(!(units instanceof ArrayList || units instanceof LinkedList)) throw new IllegalArgumentException(
                 "The inputted list-type must be either an arraylist, or a linked list, please try again.");
         this.name = name.trim();
