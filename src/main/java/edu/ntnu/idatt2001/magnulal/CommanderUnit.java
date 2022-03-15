@@ -33,6 +33,6 @@ public class CommanderUnit extends CavalryUnit{
      *         Is thrown from the constructor of the second grade superclass, called 'Unit'
      */
     public CommanderUnit(String name, int health) throws IllegalArgumentException {
-        super(name, health, 25,12);
+        super(name, health, 25,15);
     }
 }
