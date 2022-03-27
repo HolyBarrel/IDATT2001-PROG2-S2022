@@ -1,4 +1,7 @@
-package edu.ntnu.idatt2001.magnulal;
+package edu.ntnu.idatt2001.magnulal.unitclasses;
+
+import edu.ntnu.idatt2001.magnulal.unitclasses.Unit;
+
 /**
  * Class for an InfantryUnit with specification of the abstract methods of its
  * superclass 'Unit'
@@ -8,7 +11,7 @@ package edu.ntnu.idatt2001.magnulal;
  * @version 0.6
  * @since 0.3
  */
-public class InfantryUnit extends Unit{
+public class InfantryUnit extends Unit {
     /**
      * Constructor 1 for the class InfantryUnit
      * Creates an object with the following parameters:

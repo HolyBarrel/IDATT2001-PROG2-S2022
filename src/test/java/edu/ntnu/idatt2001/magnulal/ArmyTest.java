@@ -1,4 +1,6 @@
 package edu.ntnu.idatt2001.magnulal;
+import edu.ntnu.idatt2001.magnulal.simulatorclasses.Army;
+import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -195,8 +197,9 @@ public class ArmyTest {
             unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
             unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
             unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20, 2));
-            Army testArmy = new Army("Alliance", unitsTestArray);
-            for (int i = 0; i < testArmy.getAllUnits().size(); i++) { //test checks as many times as elements is the army
+            Army testArmy = new Army("Alliance", unitsTestArray); //TODO: FLOAT
+            for (int i = 0; i < testArmy.getAllUnits().size(); i++) { //test checks as many times as elements
+                // is the army
                 Unit randomPickedUnit = testArmy.getRandom();
                 assertTrue(testArmy.getAllUnits().contains(randomPickedUnit));
             }

@@ -1,4 +1,6 @@
-package edu.ntnu.idatt2001.magnulal;
+package edu.ntnu.idatt2001.magnulal.simulatorclasses;
+import edu.ntnu.idatt2001.magnulal.unitclasses.Unit;
+
 import java.util.Random;
 /**
  * Battle class to simulate a battle between to armies

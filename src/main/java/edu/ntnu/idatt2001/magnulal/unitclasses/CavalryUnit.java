@@ -1,4 +1,7 @@
-package edu.ntnu.idatt2001.magnulal;
+package edu.ntnu.idatt2001.magnulal.unitclasses;
+
+import edu.ntnu.idatt2001.magnulal.unitclasses.Unit;
+
 /**
  * Class for a CavalryUnit with specification of the abstract methods of its
  * superclass 'Unit'
@@ -10,7 +13,7 @@ package edu.ntnu.idatt2001.magnulal;
  * @version 0.6
  * @since 0.3
  */
-public class CavalryUnit extends Unit{
+public class CavalryUnit extends Unit {
     private boolean charge = true;
     /**
      * Constructor 1 for the class CavalryUnit

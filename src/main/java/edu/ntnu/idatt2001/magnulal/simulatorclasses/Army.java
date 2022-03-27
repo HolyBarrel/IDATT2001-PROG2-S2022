@@ -1,4 +1,6 @@
-package edu.ntnu.idatt2001.magnulal;
+package edu.ntnu.idatt2001.magnulal.simulatorclasses;
+import edu.ntnu.idatt2001.magnulal.unitclasses.Unit;
+
 import java.util.*;
 
 /**
@@ -36,8 +38,8 @@ public class Army {
      */
     public Army(String name, List<Unit> units) throws IllegalArgumentException{
         if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
-                " empty string, please try again.");
-        //checks that the inputted list is either an ArrayList or LinkedList. A Vector for example would throw
+                " empty string, please try again."); //TODO: TEST This
+        // checks that the inputted list is either an ArrayList or LinkedList. A Vector for example would throw
         //TODO: check legal input in list
         if(!(units instanceof ArrayList || units instanceof LinkedList)) throw new IllegalArgumentException(
                 "The inputted list-type must be either an arraylist, or a linked list, please try again.");

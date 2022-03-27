@@ -1,4 +1,12 @@
 package edu.ntnu.idatt2001.magnulal;
+
+import edu.ntnu.idatt2001.magnulal.simulatorclasses.Army;
+import edu.ntnu.idatt2001.magnulal.simulatorclasses.Battle;
+import edu.ntnu.idatt2001.magnulal.unitclasses.CavalryUnit;
+import edu.ntnu.idatt2001.magnulal.unitclasses.CommanderUnit;
+import edu.ntnu.idatt2001.magnulal.unitclasses.InfantryUnit;
+import edu.ntnu.idatt2001.magnulal.unitclasses.RangedUnit;
+
 public class MainClass { //not task 6
     public static void main(String[] args) {
         Army humanArmy = new Army("Alliance");
