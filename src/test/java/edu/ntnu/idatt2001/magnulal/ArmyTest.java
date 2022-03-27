@@ -9,6 +9,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 //TODO: update all test names
+//TODO: implement @foreach
 public class ArmyTest {
     @Nested
     @DisplayName("Tests for the Army Constructor")
@@ -285,6 +286,158 @@ public class ArmyTest {
             Army testArmy = new Army("Alliance", unitsTestArray);
             Army testArmy2 = new Army("Britforce", unitsTestArray2);
             assertNotEquals(testArmy.hashCode(), testArmy2.hashCode());
+        }
+    } //TODO. double check logic of tests under
+    @Nested
+    @DisplayName("Tests for getInfantryUnits method of Army")
+    class TestsForGetInfantryUnitsMethod {
+        @Test
+        @DisplayName("Validating correctness of getInfantryUnits method's output")
+        public void validatingGetInfantryUnitsWithArmyContainingInfantry() {
+            Army testArmy = new Army("Alliance");
+            CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
+            testArmy.add(testCavalryUnit);
+            InfantryUnit testInfantryUnit = new InfantryUnit("Paladin", 100, 20, 18);
+            testArmy.add(testInfantryUnit);
+            RangedUnit testRangedUnit = new RangedUnit("Fire Mage", 20, 80, 10);
+            testArmy.add(testRangedUnit);
+            CavalryUnit testCavalryUnit2 = new CavalryUnit("GrandRider", 75, 12, 10);
+            testArmy.add(testCavalryUnit2);
+            InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
+            testArmy.add(testInfantryUnit2);
+            RangedUnit testRangedUnit2 = new RangedUnit("Ice Mage", 20, 85, 10);
+            testArmy.add(testRangedUnit2);
+            assertTrue(testArmy.getInfantryUnits().stream().allMatch(u -> u instanceof InfantryUnit));
+        }
+
+        @Test
+        @DisplayName("Validating correctness of getInfantryUnits method's output when the " +
+                "army does not have an infantry unit")
+        public void validatingGetInfantryUnitsWithArmyNotContainingInfantry() {
+            Army testArmy = new Army("Alliance");
+            RangedUnit testRangedUnit = new RangedUnit("Fire Mage", 20, 80, 10);
+            testArmy.add(testRangedUnit);
+            CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
+            testArmy.add(testCavalryUnit);
+            assertEquals(0, testArmy.getInfantryUnits().stream()
+                    .filter(u -> u instanceof InfantryUnit).toList().size());
+        }
+    }
+    @Nested
+    @DisplayName("Tests for getCavalryUnits method of Army")
+    class TestsForGetCavalryUnitsMethod {
+        @Test
+        @DisplayName("Validating correctness of getCavalryUnit method's output")
+        public void validatingGetCavalryUnitsWithArmyContainingCavalry() {
+            Army testArmy = new Army("Alliance");
+            CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
+            testArmy.add(testCavalryUnit);
+            InfantryUnit testInfantryUnit = new InfantryUnit("Paladin", 100, 20, 18);
+            testArmy.add(testInfantryUnit);
+            RangedUnit testRangedUnit = new RangedUnit("Fire Mage", 20, 80, 10);
+            testArmy.add(testRangedUnit);
+            CavalryUnit testCavalryUnit2 = new CavalryUnit("GrandRider", 75, 12, 10);
+            testArmy.add(testCavalryUnit2);
+            InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
+            testArmy.add(testInfantryUnit2);
+            RangedUnit testRangedUnit2 = new RangedUnit("Ice Mage", 20, 85, 10);
+            testArmy.add(testRangedUnit2);
+            assertTrue(testArmy.getCavalryUnits().stream()
+                    .allMatch(u -> u instanceof CavalryUnit && !(u instanceof CommanderUnit)));
+        }
+        @Test
+        @DisplayName("Validating correctness of getCavalryUnit method's output when the " +
+                "army does not have a cavalry unit")
+        public void validatingGetCavalryUnitsWithArmyNotContainingCavalry() {
+            Army testArmy = new Army("Alliance");
+            InfantryUnit testInfantryUnit = new InfantryUnit("Paladin", 100, 20, 18);
+            testArmy.add(testInfantryUnit);
+            InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
+            testArmy.add(testInfantryUnit2);
+            assertEquals(0, testArmy.getCavalryUnits().stream()
+                    .filter(u -> u instanceof CavalryUnit).toList().size());
+        }
+    }
+    @Nested
+    @DisplayName("Tests for getRangedUnits method of Army")
+    class TestsForGetRangedUnitsMethod {
+        @Test
+        @DisplayName("Validating correctness of getRangedUnit method's output")
+        public void validatingGetRangedUnitsWithArmyContainingRanged() {
+            Army testArmy = new Army("Alliance");
+            CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
+            testArmy.add(testCavalryUnit);
+            InfantryUnit testInfantryUnit = new InfantryUnit("Paladin", 100, 20, 18);
+            testArmy.add(testInfantryUnit);
+            RangedUnit testRangedUnit = new RangedUnit("Fire Mage", 20, 80, 10);
+            testArmy.add(testRangedUnit);
+            CavalryUnit testCavalryUnit2 = new CavalryUnit("GrandRider", 75, 12, 10);
+            testArmy.add(testCavalryUnit2);
+            InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
+            testArmy.add(testInfantryUnit2);
+            RangedUnit testRangedUnit2 = new RangedUnit("Ice Mage", 20, 85, 10);
+            testArmy.add(testRangedUnit2);
+            assertTrue(testArmy.getRangedUnits().stream()
+                    .allMatch(u -> u instanceof RangedUnit));
+        }
+        @Test
+        @DisplayName("Validating correctness of getRangedUnit method's output when the " +
+                "army does not have a ranger")
+        public void validatingGetRangedUnitsWithArmyNotContainingRanger() {
+            Army testArmy = new Army("Alliance");
+            CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
+            testArmy.add(testCavalryUnit);
+            InfantryUnit testInfantryUnit = new InfantryUnit("Paladin", 100, 20, 18);
+            testArmy.add(testInfantryUnit);
+            CavalryUnit testCavalryUnit2 = new CavalryUnit("GrandRider", 75, 12, 10);
+            testArmy.add(testCavalryUnit2);
+            InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
+            testArmy.add(testInfantryUnit2);
+            assertEquals(0, testArmy.getRangedUnits().stream()
+                    .filter(u -> u instanceof RangedUnit).toList().size());
+        }
+    }
+    @Nested
+    @DisplayName("Tests for getCommanderUnits method of Army")
+    class TestsForGetCommanderUnitsMethod {
+        @Test
+        @DisplayName("Validating correctness of getCommanderUnit method's output")
+        public void validatingGetCommanderUnitsWithArmyContainingCommander() {
+            Army testArmy = new Army("Alliance");
+            CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
+            testArmy.add(testCavalryUnit);
+            InfantryUnit testInfantryUnit = new InfantryUnit("Paladin", 100, 20, 18);
+            testArmy.add(testInfantryUnit);
+            RangedUnit testRangedUnit = new RangedUnit("Fire Mage", 20, 80, 10);
+            testArmy.add(testRangedUnit);
+            CavalryUnit testCavalryUnit2 = new CavalryUnit("GrandRider", 75, 12, 10);
+            testArmy.add(testCavalryUnit2);
+            InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
+            testArmy.add(testInfantryUnit2);
+            CommanderUnit testCommanderUnit = new CommanderUnit(
+                    "Commander Fink", 120,  95, 100);
+            testArmy.add(testCommanderUnit);
+            assertTrue(testArmy.getCommanderUnits().stream()
+                    .allMatch(u -> u instanceof CommanderUnit));
+        }
+
+        @Test
+        @DisplayName("Validating correctness of getCommanderUnit method's output when the " +
+                "army does not have a commander")
+        public void validatingGetCommanderUnitsWithArmyNotContainingCommander() {
+            Army testArmy = new Army("Alliance");
+            CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
+            testArmy.add(testCavalryUnit);
+            InfantryUnit testInfantryUnit = new InfantryUnit("Paladin", 100, 20, 18);
+            testArmy.add(testInfantryUnit);
+            RangedUnit testRangedUnit = new RangedUnit("Fire Mage", 20, 80, 10);
+            testArmy.add(testRangedUnit);
+            CavalryUnit testCavalryUnit2 = new CavalryUnit("GrandRider", 75, 12, 10);
+            testArmy.add(testCavalryUnit2);
+            InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
+            testArmy.add(testInfantryUnit2);
+            assertEquals(0, testArmy.getCommanderUnits().stream()
+                    .filter(u -> u instanceof CommanderUnit).toList().size());
         }
     }
 }
