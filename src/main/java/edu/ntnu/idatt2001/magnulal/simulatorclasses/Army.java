@@ -136,22 +136,19 @@ public class Army {
 
     /**
      * Help-method to specify a given List as an ArrayList.
-     * This method is only used by the accessor methods below, meaning the conversion
-     * will not generate unexpected exceptions
-     * This method is to ensure compatibility with eventual instantiations of the return
-     * values of the accessor-methods when using the Army-constructor,
-     * where the list asked for is either instance of ArrayList or
-     * LinkedList
-     * @param convertList, is the input list that is transfigured as an
-     *                     ArrayList
-     * @return ArrayList with elements of the list
+     * Is used by the accessor methods below, with the intent of not resulting in exceptions if
+     * the result-list is used to instantiate a new Army with the Army constructor.
+     * The Army constructor requires for the list to either be an instance of ArrayList or LinkedList.
+     * @param convertList, is the input list that is transfigured as an ArrayList.
+     * @return ArrayList with elements of the list 'convertList'.
+     * The method is only used
      */
     private ArrayList<Unit> toArrayList(List<Unit> convertList){
         return new ArrayList<>(convertList);
     }
 
     /**
-     * Accessor-method to get a list of all InfantryUnits of this Army
+     * Accessor-method to get a list of all InfantryUnits in this Army
      * The returned List is of type ArrayList
      * @return List of Units - implicating InfantryUnits
      */
@@ -162,7 +159,7 @@ public class Army {
     }
 
     /**
-     * Accessor method to get a list of all exclusive CavalryUnits of this Army,
+     * Accessor method to get a list of all exclusive CavalryUnits in this Army,
      * meaning objects being only instance of CavalryUnit, and not of CommanderUnit
      * The returned List is of type ArrayList
      * @return List of Units - implicating exclusive CavalryUnits
@@ -174,7 +171,7 @@ public class Army {
     }
 
     /**
-     * Accessor method to get a list of all RangedUnits of this Army
+     * Accessor method to get a list of all RangedUnits in this Army
      * The returned List is of type ArrayList
      * @return List of Units - implicating RangedUnits
      */
@@ -185,7 +182,7 @@ public class Army {
     }
 
     /**
-     * Accessor method to get a list of all CommanderUnits of this Army
+     * Accessor method to get a list of all CommanderUnits in this Army
      * The returned List is of type ArrayList
      * @return List of Units - implicating CommanderUnits
      */

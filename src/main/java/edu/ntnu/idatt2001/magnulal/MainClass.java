@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.magnulal;
 
+import edu.ntnu.idatt2001.magnulal.filehandling.FileHandler;
 import edu.ntnu.idatt2001.magnulal.simulatorclasses.Army;
 import edu.ntnu.idatt2001.magnulal.simulatorclasses.Battle;
 import edu.ntnu.idatt2001.magnulal.unitclasses.CavalryUnit;
@@ -7,6 +8,7 @@ import edu.ntnu.idatt2001.magnulal.unitclasses.CommanderUnit;
 import edu.ntnu.idatt2001.magnulal.unitclasses.InfantryUnit;
 import edu.ntnu.idatt2001.magnulal.unitclasses.RangedUnit;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainClass { //not task 6
@@ -31,6 +33,7 @@ public class MainClass { //not task 6
         System.out.println(new Army("Human cavalry units", humanArmy.getCavalryUnits()));
         // the battle will go on forever
         orcArmy.add(new CommanderUnit("Gul'dan", 180, 45, 15));
+        FileHandler.writeAnArmyToFile("src/main/resources/human-army.csv",humanArmy);
         Battle battleOfAzeroth = new Battle(humanArmy, orcArmy);
         //System.out.println(battleOfAzeroth.simulate());
     }
