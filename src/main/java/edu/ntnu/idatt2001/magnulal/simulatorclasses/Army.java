@@ -1,4 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.simulatorclasses;
+import edu.ntnu.idatt2001.magnulal.filehandling.FileManager;
 import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 
 import java.util.*;
@@ -190,6 +191,23 @@ public class Army {
         return toArrayList(units.stream()
                 .filter(u -> u instanceof CommanderUnit)
                 .toList());
+    }
+
+    public void saveThisArmyToFile(String filePath){ //TODO: javadoc and test
+        //TODO: implement try-catch
+        FileManager.writeArmyToFile(filePath, this);
+    }
+
+    public StringBuilder printThisArmy(String filePath){
+        StringBuilder sb = new StringBuilder();
+        try {
+            StringBuilder readFile = FileManager.readArmyFromFile(filePath);
+            sb.append(readFile);
+        }catch (Exception e){ //TODO: update
+            sb.append("Could not locate this army's file using the file path, " +
+                    "please make sure that the file exists.");
+        }
+        return sb;
     }
 
     @Override
