@@ -2,8 +2,11 @@ package edu.ntnu.idatt2001.magnulal.simulatorclasses;
 import edu.ntnu.idatt2001.magnulal.filehandling.FileManager;
 import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 //TODO: Rewrite javadoc w .
+//TODO: implement serializable
 /**
  * Class describing an army containing various types of units
  * The army has a String value for its name, and a list of all
@@ -22,7 +25,7 @@ public class Army {
      * The constructor also creates an empty arraylist to hold units
      * @throws IllegalArgumentException, if the name-input is a blank string
      */
-    public Army(String name) throws IllegalArgumentException{
+    public Army(String name) throws IllegalArgumentException, NullPointerException{
         //TODO: Check for null
         if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
                 " empty string, please try again.");
@@ -193,21 +196,27 @@ public class Army {
                 .toList());
     }
 
-    public void saveThisArmyToFile(String filePath){ //TODO: javadoc and test
+    /**
+     * Method to save the information of this army to a file at the given file path constructed
+     * from the String parameter fileName, the file is created if none of that name already exists
+     * in the resources root of this project. If the file already exists, the information it
+     * contained previously is overwritten
+     * @param fileName is a String for the name of the file
+     */
+    public void saveThisArmyToFile(String fileName){ //TODO: test
         //TODO: implement try-catch
-        FileManager.writeArmyToFile(filePath, this);
+        FileManager.writeArmyToFileWPath(fileName, this);
     }
 
-    public StringBuilder printThisArmy(String filePath){
-        StringBuilder sb = new StringBuilder();
-        try {
-            StringBuilder readFile = FileManager.readArmyFromFile(filePath);
-            sb.append(readFile);
-        }catch (Exception e){ //TODO: update
-            sb.append("Could not locate this army's file using the file path, " +
-                    "please make sure that the file exists.");
-        }
-        return sb;
+    /**
+     * Method to save the information of this army to an already created file.
+     * If the file already has defined content, the previously saved information
+     * is overwritten
+     * @param file is an already created file
+     */
+    public void saveThisArmyToFile(File file){ //TODO: test
+        //TODO: implement try-catch
+        FileManager.writeArmyToFileWFile(file, this);
     }
 
     @Override

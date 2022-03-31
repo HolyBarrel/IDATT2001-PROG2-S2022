@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.magnulal;
 
+import edu.ntnu.idatt2001.magnulal.filehandling.FileManager;
 import edu.ntnu.idatt2001.magnulal.simulatorclasses.Army;
 import edu.ntnu.idatt2001.magnulal.simulatorclasses.Battle;
 import edu.ntnu.idatt2001.magnulal.unitclasses.CavalryUnit;
@@ -7,9 +8,7 @@ import edu.ntnu.idatt2001.magnulal.unitclasses.CommanderUnit;
 import edu.ntnu.idatt2001.magnulal.unitclasses.InfantryUnit;
 import edu.ntnu.idatt2001.magnulal.unitclasses.RangedUnit;
 
-import java.io.File;
-
-public class MainClass { //not task 6
+public class MainClass { //not task 6 from oblig 2
     public static void main(String[] args) {
         Army humanArmy = new Army("Alliance");
         Army orcArmy = new Army("Horde");
@@ -27,13 +26,12 @@ public class MainClass { //not task 6
         }
         //Commanders
         humanArmy.add(new CommanderUnit("MountainKing", 180, 40, 25)); //if armor is too high,
-        //System.out.println(new Army("Human infantry units", new ArrayList<>(humanArmy.getInfantryUnits())));
-        //System.out.println(new Army("Human cavalry units", humanArmy.getCavalryUnits()));
-        // the battle will go on forever
+        // the battle will go on forever //TODO: exception handle this
         orcArmy.add(new CommanderUnit("Gul'dan", 180, 45, 15));
-        humanArmy.saveThisArmyToFile("src/main/resources/human-army.csv");
-        System.out.println((humanArmy.printThisArmy("src/main/resources/human-army.csv")));
+        humanArmy.saveThisArmyToFile("human-army");
+        //System.out.println((humanArmy.printThisArmy("src/main/resources/human-army.csv")));
         Battle battleOfAzeroth = new Battle(humanArmy, orcArmy);
         //System.out.println(battleOfAzeroth.simulate());
+
     }
 }
