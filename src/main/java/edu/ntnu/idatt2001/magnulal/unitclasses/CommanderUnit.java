@@ -5,8 +5,8 @@ package edu.ntnu.idatt2001.magnulal.unitclasses;
  * A CommanderUnit is a more capable version of the CavalryUnit, and does therefore
  * have a buffed attack and armor compared to its superclass
  * @author Magnus Lutro Allison
- * @version 0.6
- * @since 0.3
+ * @version 0.2
+ * @since 0.1
  */
 public class CommanderUnit extends CavalryUnit{
     /**

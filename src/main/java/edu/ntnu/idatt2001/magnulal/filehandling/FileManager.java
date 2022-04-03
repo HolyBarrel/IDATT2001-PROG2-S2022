@@ -5,7 +5,6 @@ import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 
 import java.io.*;
 import java.nio.file.*;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -16,6 +15,7 @@ import java.util.Scanner;
  * The constructor is private to ensure that other classes cannot instantiate objects of
  * the FileManager
  * This is because this class is only used for its static methods
+ * //TODO: update version ...
  */
 public class FileManager {
 

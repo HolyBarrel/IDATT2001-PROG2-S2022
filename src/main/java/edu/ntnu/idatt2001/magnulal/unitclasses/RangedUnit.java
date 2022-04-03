@@ -5,8 +5,8 @@ package edu.ntnu.idatt2001.magnulal.unitclasses;
  * resistBonus is either 7, 5 or 2, depending on how many times this unit-object of
  * class has been hit, this is a way to represent how far away the enemy is
  * @author Magnus Lutro Allison
- * @version 0.6
- * @since 0.3
+ * @version 0.2
+ * @since 0.1
  */
 public class RangedUnit extends Unit{
     //Represents proximity of the enemy army

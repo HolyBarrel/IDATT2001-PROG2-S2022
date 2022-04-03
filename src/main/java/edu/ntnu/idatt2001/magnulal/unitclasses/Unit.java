@@ -7,8 +7,8 @@ package edu.ntnu.idatt2001.magnulal.unitclasses;
  * CavalryUnit --> which in turn is inherited by CommanderUnit
  * RangedUnit
  * @author Magnus Lutro Allison
- * @version 0.6 //TODO: ENDRE TIL PRIVATE STATIC VAR
- * @since 0.2
+ * @version 0.2
+ * @since 0.1
  */
 public abstract class Unit {
     private final String name;

@@ -4,6 +4,9 @@ package edu.ntnu.idatt2001.magnulal.unitclasses;
  * Enum to represent all the types of units in this project
  * the enum has attached string values corresponding to each unit subclass'
  * simpleName written as a string
+ * @author Magnus Lutro Allison
+ * @version 0.2
+ * @since 0.2
  */
 public enum UnitTypes {
     //Enums

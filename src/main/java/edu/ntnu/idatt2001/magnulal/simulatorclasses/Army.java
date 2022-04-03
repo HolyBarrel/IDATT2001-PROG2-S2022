@@ -9,8 +9,8 @@ import java.util.*;
  * The army has a String value for its name, and a list of all
  * Unit-subclass units in this army
  * @author Magnus Lutro Allison
- * @version 0.6
- * @since 0.4
+ * @version 0.2
+ * @since 0.1
  */
 public class Army {
     private final String name;

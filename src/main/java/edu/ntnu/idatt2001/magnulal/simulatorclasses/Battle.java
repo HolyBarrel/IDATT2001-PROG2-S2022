@@ -5,8 +5,8 @@ import java.util.Random;
 /**
  * Battle class to simulate a battle between to armies
  * @author Magnus Lutro Allison
- * @version 0.6
- * @since 0.5
+ * @version 0.2
+ * @since 0.1
  */
 public class Battle {
     private final Army armyOne;
