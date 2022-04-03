@@ -5,6 +5,7 @@ import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 
 import java.io.*;
 import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -125,11 +126,20 @@ public class FileManager {
                 "had forbidden characters, and the application could not utilize it. Please try again.");
         if(!checkIfFileExists(fileName)) throw new NullPointerException(constructFilePath(fileName) + " Was the " +
                 "path. Could not find a file with a corresponding file path, please try again.");
-        String filePath = constructFilePath(fileName);
+        return readArmyFromExistingFile(new File(constructFilePath(fileName)));
+    }
+
+    /**
+     * TODO: comment
+     * TODO: test
+     * @param file
+     * @return
+     */
+    public static Army readArmyFromExistingFile(File file){
         Army readArmy = null;
-        try (Scanner scanner = new Scanner(new File(filePath))){
+        try (Scanner scanner = new Scanner(file)){
             String line = scanner.nextLine();
-            readArmy = new Army(line);
+            readArmy = new Army(line.trim());
             while((scanner.hasNext())) {
                 String[] lineValues = scanner.nextLine().split(",");
                 switch (Objects.requireNonNull(UnitTypes.getValueMatching(lineValues[0].trim()))) {
@@ -163,7 +173,7 @@ public class FileManager {
     public static void deleteAFile(String fileName) throws InvalidPathException{
         if(!isPathValid(fileName)) throw new InvalidPathException(constructFilePath(fileName),
                 "The given file path contained forbidden " +
-                "characters. The application could not utilize it, please try again.");
+                        "characters. The application could not utilize it, please try again.");
         String filePath = constructFilePath(fileName);
         try{
             Files.deleteIfExists(Path.of(filePath));
@@ -171,4 +181,18 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
+    /** TODO: maybe implement charset check
+    public static boolean confirmCharset(File file){
+        try(FileReader fileReader = new FileReader(file)){
+            int c;
+            ArrayList<Byte> b = new ArrayList<>();
+            while((c = fileReader.read()) != -1){
+                b.add((byte) c);
+            }
+            return b.stream().allMatch(bt -> ))
+        } catch (IOException e) {
+            return false;
+        }
+    }*/
 }

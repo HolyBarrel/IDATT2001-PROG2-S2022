@@ -2,7 +2,7 @@ package edu.ntnu.idatt2001.magnulal.unitclasses;
 
 /**
  * Enum to represent all the types of units in this project
- * the enum has attached string values corresponding to each unit type's
+ * the enum has attached string values corresponding to each unit subclass'
  * simpleName written as a string
  */
 public enum UnitTypes {
@@ -22,7 +22,7 @@ public enum UnitTypes {
     /**
      * Static method to make enum easily usable with enhanced switch
      * see FileManager 'readArmyFromFile'
-     * @param searchString is a string value which if matched with any of the enum's string-attached
+     * @param searchString is a string value which matched with any of the enum's string-attached
      *                     string returns the enum value
      * @return enum value corresponding with searchString if found, and 'null' otherwise
      */

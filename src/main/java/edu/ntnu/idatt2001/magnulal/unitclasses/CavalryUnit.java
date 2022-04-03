@@ -1,7 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.unitclasses;
 
-import edu.ntnu.idatt2001.magnulal.unitclasses.Unit;
-
 /**
  * Class for a CavalryUnit with specification of the abstract methods of its
  * superclass 'Unit'

@@ -118,6 +118,8 @@ public class FileManagerTest {
     }
     @Nested
     @DisplayName("Tests for the FileManager 'readArmyFromFile' method")
+            //These tests also tests if the 'readArmyFromExistingFile' method works, since 'readArmyFromFile'
+            // uses that method
     class TestReadArmyFromFileMethod{
         @Nested
         @DisplayName("Positive tests for the 'readArmyFromFile' method")
@@ -144,7 +146,7 @@ public class FileManagerTest {
             @DisplayName("readArmyFromFile method throws 'NullPointerException' on nonexistent filename")
             public void readArmyFromFileFileNameDoesNotExist(){
                 try{
-                    Army testArmy = FileManager.readArmyFromFile("hummy.csv");
+                    FileManager.readArmyFromFile("hummy.csv");
                 }catch (NullPointerException n){
                     assertEquals("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/hummy.csv " +
                                     "Was the path. Could not find a file with a corresponding file path, " +
@@ -202,6 +204,4 @@ public class FileManagerTest {
             }
         }
     }
-
-    //TODO: balsamiq wireframes
 }

@@ -4,8 +4,6 @@ import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 
 import java.io.File;
 import java.util.*;
-//TODO: Rewrite javadoc w .
-//TODO: implement serializable
 /**
  * Class describing an army containing various types of units
  * The army has a String value for its name, and a list of all
