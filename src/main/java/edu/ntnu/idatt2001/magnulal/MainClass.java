@@ -28,7 +28,7 @@ public class MainClass { //not task 6 from oblig 2
         humanArmy.add(new CommanderUnit("MountainKing", 180, 40, 25)); //if armor is too high,
         // the battle will go on forever //TODO: exception handle this
         orcArmy.add(new CommanderUnit("Gul'dan", 180, 45, 15));
-        humanArmy.saveThisArmyToFile("human-army");
+        //humanArmy.saveThisArmyToFile("human-army2");
         //System.out.println((humanArmy.printThisArmy("src/main/resources/human-army.csv")));
         Battle battleOfAzeroth = new Battle(humanArmy, orcArmy);
         //System.out.println(battleOfAzeroth.simulate());

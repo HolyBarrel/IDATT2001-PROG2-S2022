@@ -1,12 +1,16 @@
 package edu.ntnu.idatt2001.magnulal.filehandling;
 
 import edu.ntnu.idatt2001.magnulal.simulatorclasses.Army;
+import edu.ntnu.idatt2001.magnulal.unitclasses.*;
+
 import java.io.*;
 import java.nio.file.*;
+import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * FileManager class to deal with all file handling in the project 'Wargames'
- * Has various methods to write or read an army to/from a .csv (comma separated values)
+ * Has various methods to write or read an army to or from a .csv (comma separated values)
  * file
  * The constructor is private to ensure that other classes cannot instantiate objects of
  * the FileManager
@@ -26,10 +30,15 @@ public class FileManager {
      * @param fileName, is the file name specified
      * @return formatted string with 'src/main/resources' added to the start of the inputted
      * file name, and '.csv' to the end of it. This creates a viable filepath to the resources
-     * root
+     * root's directory called 'csvdocuments'. By using this method throughout the FileManager class
+     * this directory is the only accessible directory for the FileManager in this project
      */
     private static String constructFilePath(String fileName){
-        return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/%s.csv", fileName);
+        if(fileName.endsWith(".csv")){
+            return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/%s", fileName);
+        }else{
+            return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/%s.csv", fileName);
+        }
     }
 
     /**
@@ -39,26 +48,28 @@ public class FileManager {
      * @return true if the file already exists in the resources root, and false if it
      * does not exist
      */
-    private static boolean checkIfFileExists(String fileName){
-        return new File(constructFilePath(fileName)).isFile();
+    private static boolean checkIfFileExists(String fileName) throws IllegalArgumentException{
+        return new File(constructFilePath(fileName)).exists();
     }
 
     /**
      * Help method to check if the path that is created from the inputted
-     * String fileName parameter is invalid. This can happen if there are forbidden
-     * characters in the file path. For example if characters like '?' are entered into the
+     * String fileName parameter is valid. The path is invalid if there are forbidden
+     * characters in the file path. For example if characters such as '?' are entered into the
      * fileName string as : 'file?Name'
      * @param fileName, is a string to a given file name
-     * @return true if the path is invalid according to 'InvalidPathException' and false if the
-     * path is valid
+     * @return false if the path is invalid according to 'InvalidPathException' and the if-check,
+     * and true if the path is valid
      */
-    private static boolean isPathInvalid(String fileName){
+    private static boolean isPathValid(String fileName){
+        if(fileName.contains("\\") || fileName.contains("/") ||
+                fileName.contains(".") && !(fileName.endsWith(".csv"))) return false;
         try{
             Paths.get(constructFilePath(fileName));
         }catch(InvalidPathException e){
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -68,14 +79,14 @@ public class FileManager {
      * @param fileName, is a String given as a file name
      * @param army, is an army
      * @throws InvalidPathException if the constructed file path is invalid. Is caused by special characters
-     * like '?' in the fileName //TODO: test
+     * like '?' in the fileName
      */
-    public static void writeArmyToFileWPath(String fileName, Army army) throws InvalidPathException{
+    public static void writeArmyToFileWFileName(String fileName, Army army) throws InvalidPathException{
         String filePath = constructFilePath(fileName);
-        if(isPathInvalid(filePath)) throw new InvalidPathException(filePath, "The given file path " +
+        if(!isPathValid(fileName)) throw new InvalidPathException(filePath, "The given file path " +
                 "contained forbidden characters. The application could not utilize it, please try again.");
         File file = new File(filePath);
-        writeArmyToFile(file, army);
+        writeArmyToFileWFile(file, army);
     }
 
     /**
@@ -85,53 +96,79 @@ public class FileManager {
      * @param army, is an army
      */
     public static void writeArmyToFileWFile(File file, Army army) {
-        writeArmyToFile(file, army);
-    }
-
-    /**
-     * Help method to write the given army parameter to the file parameter using a
-     * PrintWriter. Uses a .forEach iterable to print each Unit in the army list
-     * to the specified file
-     * @param file is created file
-     * @param army is an army
-     */
-    private static void writeArmyToFile(File file, Army army) {
-        try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(file)))) { //TODO: update to fileWriter
+        try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
             printWriter.println(army.getName());
             army.getAllUnits()
-                    .forEach(u -> printWriter.
-                            println(u.getClass().getSimpleName() + "," + u.getName() + "," + u.getHealth()));
+                    .stream()
+                    .map(u -> u.getClass().getSimpleName() + "," + u.getName() + "," + u.getHealth())
+                    .forEach(printWriter::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Method to read an army from an already existing file. The method uses a StringBuilder to
-     * append each line read from the file to the StringBuilder. It also checks the validity of the
+     * Method to read an army from an already existing file. The method uses a Scanner to
+     * interpret each line in the target .csv document. It also checks the validity of the
      * path constructed from the String fileName parameter and makes sure that the target file for reading
      * actually exists
-     * @param fileName is a String
+     * @param fileName is a string for the targeted file name in the directory at the root:
+                      'src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments' of this project
      * @return a StringBuilder containing information about the army
-     * @throws IllegalArgumentException if the constructed file path is invalid or if no file with the
-     * path does exist
+     * @throws IllegalArgumentException (invalidPathException) if the constructed file path is invalid or if no
+     * file with the path does exist
+     * @throws NullPointerException if the file at the target file path does not exist
      * The method catches IOException and prints the stack trace of it, if this occurs during reading
      */
-    public static StringBuilder readArmyFromFile(String fileName) throws IllegalArgumentException {
+    public static Army readArmyFromFile(String fileName) throws InvalidPathException, NullPointerException {
+        if(!isPathValid(fileName)) throw new InvalidPathException(constructFilePath(fileName), "The given file path " +
+                "had forbidden characters, and the application could not utilize it. Please try again.");
+        if(!checkIfFileExists(fileName)) throw new NullPointerException(constructFilePath(fileName) + " Was the " +
+                "path. Could not find a file with a corresponding file path, please try again.");
         String filePath = constructFilePath(fileName);
-        if(isPathInvalid(filePath)) throw new InvalidPathException(filePath, "The given file path had forbidden " +
-                "characters, and the application could not utilize it. Please try again.");
-        if(!checkIfFileExists(filePath)) throw new IllegalArgumentException("Could not find a file with a " +
-                "corresponding filePath, please try again.");
-        StringBuilder sb = new StringBuilder();
-        try (BufferedReader bufferedReader = Files.newBufferedReader(Path.of(filePath))){
-            String line;
-            while((line = bufferedReader.readLine()) != null){
-                sb.append(line).append("\n");
+        Army readArmy = null;
+        try (Scanner scanner = new Scanner(new File(filePath))){
+            String line = scanner.nextLine();
+            readArmy = new Army(line);
+            while((scanner.hasNext())) {
+                String[] lineValues = scanner.nextLine().split(",");
+                switch (Objects.requireNonNull(UnitTypes.getValueMatching(lineValues[0].trim()))) {
+                    case INFANTRY -> {
+                        readArmy.add(new InfantryUnit(lineValues[1].trim(), Integer.parseInt(lineValues[2])));
+                    }
+                    case RANGED -> {
+                        readArmy.add(new RangedUnit(lineValues[1].trim(), Integer.parseInt(lineValues[2])));
+                    }
+                    case CAVALRY -> {
+                        readArmy.add(new CavalryUnit(lineValues[1].trim(), Integer.parseInt(lineValues[2])));
+                    }
+                    case COMMANDER -> {
+                        readArmy.add(new CommanderUnit(lineValues[1].trim(), Integer.parseInt(lineValues[2])));
+                    }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return sb;
+        return readArmy;
+    }
+    /**
+     * Method to delete a given file at the file path constructed from the
+     * specified file name
+     * @param fileName is a String of a file name that specifies which file in the
+     *                 resource's directory called 'csvdocuments'. This way the delete-method
+     *                 can only delete from that directory
+     * @throws InvalidPathException if the constructed path contains forbidden characters
+     */
+    public static void deleteAFile(String fileName) throws InvalidPathException{
+        if(!isPathValid(fileName)) throw new InvalidPathException(constructFilePath(fileName),
+                "The given file path contained forbidden " +
+                "characters. The application could not utilize it, please try again.");
+        String filePath = constructFilePath(fileName);
+        try{
+            Files.deleteIfExists(Path.of(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

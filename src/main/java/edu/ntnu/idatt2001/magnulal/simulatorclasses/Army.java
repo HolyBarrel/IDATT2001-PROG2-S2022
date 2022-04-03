@@ -3,7 +3,6 @@ import edu.ntnu.idatt2001.magnulal.filehandling.FileManager;
 import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 //TODO: Rewrite javadoc w .
 //TODO: implement serializable
@@ -203,9 +202,8 @@ public class Army {
      * contained previously is overwritten
      * @param fileName is a String for the name of the file
      */
-    public void saveThisArmyToFile(String fileName){ //TODO: test
-        //TODO: implement try-catch
-        FileManager.writeArmyToFileWPath(fileName, this);
+    public void saveThisArmyToFile(String fileName){
+        FileManager.writeArmyToFileWFileName(fileName, this);
     }
 
     /**
@@ -214,8 +212,7 @@ public class Army {
      * is overwritten
      * @param file is an already created file
      */
-    public void saveThisArmyToFile(File file){ //TODO: test
-        //TODO: implement try-catch
+    public void saveThisArmyToFile(File file){
         FileManager.writeArmyToFileWFile(file, this);
     }
 
