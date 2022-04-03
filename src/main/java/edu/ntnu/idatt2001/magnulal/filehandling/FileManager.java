@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.magnulal.filehandling;
 
-import edu.ntnu.idatt2001.magnulal.simulatorclasses.Army;
+import edu.ntnu.idatt2001.magnulal.model.simulatorclasses.Army;
 import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 
 import java.io.*;
@@ -15,7 +15,9 @@ import java.util.Scanner;
  * The constructor is private to ensure that other classes cannot instantiate objects of
  * the FileManager
  * This is because this class is only used for its static methods
- * //TODO: update version ...
+ * @author Magnus Lutro Allison
+ * @version 0.2
+ * @since 0.2
  */
 public class FileManager {
 
@@ -110,13 +112,13 @@ public class FileManager {
 
     /**
      * Method to read an army from an already existing file. The method uses a Scanner to
-     * interpret each line in the target .csv document. It also checks the validity of the
-     * path constructed from the String fileName parameter and makes sure that the target file for reading
-     * actually exists
+     * interpret each line in the target .csv document by using the 'readArmyFromExistingFile' method.
+     * It also checks the validity of the path constructed from the String fileName parameter and makes
+     * sure that the target file for reading actually exists
      * @param fileName is a string for the targeted file name in the directory at the root:
                       'src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments' of this project
-     * @return a StringBuilder containing information about the army
-     * @throws IllegalArgumentException (invalidPathException) if the constructed file path is invalid or if no
+     * @return an army from the information in the target file
+     * @throws InvalidPathException if the constructed file path is invalid or if no
      * file with the path does exist
      * @throws NullPointerException if the file at the target file path does not exist
      * The method catches IOException and prints the stack trace of it, if this occurs during reading
@@ -130,10 +132,10 @@ public class FileManager {
     }
 
     /**
-     * TODO: comment
-     * TODO: test
-     * @param file
-     * @return
+     * Method to read an army from an already existing file.  The method uses a Scanner to
+     * interpret each line in the parameter file .csv document.
+     * @param file is an existing
+     * @return an army created from the information in the file
      */
     public static Army readArmyFromExistingFile(File file){
         Army readArmy = null;
@@ -181,18 +183,4 @@ public class FileManager {
             e.printStackTrace();
         }
     }
-
-    /** TODO: maybe implement charset check
-    public static boolean confirmCharset(File file){
-        try(FileReader fileReader = new FileReader(file)){
-            int c;
-            ArrayList<Byte> b = new ArrayList<>();
-            while((c = fileReader.read()) != -1){
-                b.add((byte) c);
-            }
-            return b.stream().allMatch(bt -> ))
-        } catch (IOException e) {
-            return false;
-        }
-    }*/
 }

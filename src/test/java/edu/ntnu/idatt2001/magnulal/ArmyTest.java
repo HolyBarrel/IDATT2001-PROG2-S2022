@@ -1,5 +1,5 @@
 package edu.ntnu.idatt2001.magnulal;
-import edu.ntnu.idatt2001.magnulal.simulatorclasses.Army;
+import edu.ntnu.idatt2001.magnulal.model.simulatorclasses.Army;
 import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -9,7 +9,6 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 //TODO: update all test names
-//TODO: implement @foreach
 public class ArmyTest {
     @Nested
     @DisplayName("Tests for the Army Constructor")
@@ -57,6 +56,19 @@ public class ArmyTest {
                 }
             }
             @Test
+            @DisplayName("Testing constructor 1 of 'Army' class with  'null' as parameter")
+            public void constructor1TestWithNullAsParameter() {
+                try{
+                    //EXCEPTION THROWER
+                    new Army(null);
+                    fail("'constructor1TestWithNullAsParameter' should have thrown an exception");
+                }catch (NullPointerException n){
+                    assertEquals("The name of the army was given the value 'null' " +
+                                    "as a parameter, please try again.",
+                            n.getMessage());
+                }
+            }
+            @Test
             @DisplayName("Testing constructor 2 of 'Army' class with empty string-parameter")
             public void constructor2TestWithStringAsParameter() {
                 try{
@@ -84,6 +96,22 @@ public class ArmyTest {
                 }catch (IllegalArgumentException e){
                     assertEquals("The name for an army cannot be inputted as an" +
                             " empty string, please try again.", e.getMessage());
+                }
+            }
+            @Test
+            @DisplayName("Testing constructor 2 of 'Army' class with  'null' as parameter")
+            public void constructor2TestWithNullAsParameter() {
+                try{
+                    CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
+                    ArrayList<Unit> unitsTestArray = new ArrayList<>();
+                    unitsTestArray.add(cavalryUnit1);
+                    //EXCEPTION THROWER
+                    new Army(null,unitsTestArray);
+                    fail("'constructor2TestWithNullAsParameter' should have thrown an exception");
+                }catch (NullPointerException n){
+                    assertEquals("The name of the army was given the value 'null' " +
+                                    "as a parameter, please try again.",
+                            n.getMessage());
                 }
             }
         }
@@ -198,7 +226,7 @@ public class ArmyTest {
             unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
             unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
             unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20, 2));
-            Army testArmy = new Army("Alliance", unitsTestArray); //TODO: FLOAT
+            Army testArmy = new Army("Alliance", unitsTestArray);
             for (int i = 0; i < testArmy.getAllUnits().size(); i++) { //test checks as many times as elements
                 // is the army
                 Unit randomPickedUnit = testArmy.getRandom();
@@ -287,7 +315,7 @@ public class ArmyTest {
             Army testArmy2 = new Army("Britforce", unitsTestArray2);
             assertNotEquals(testArmy.hashCode(), testArmy2.hashCode());
         }
-    } //TODO. double check logic of tests under
+    }
     @Nested
     @DisplayName("Tests for getInfantryUnits method of Army")
     class TestsForGetInfantryUnitsMethod {

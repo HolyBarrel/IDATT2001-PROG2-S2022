@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.simulatorclasses;
+package edu.ntnu.idatt2001.magnulal.model.simulatorclasses;
 import edu.ntnu.idatt2001.magnulal.filehandling.FileManager;
 import edu.ntnu.idatt2001.magnulal.unitclasses.*;
 
@@ -23,7 +23,8 @@ public class Army {
      * @throws IllegalArgumentException, if the name-input is a blank string
      */
     public Army(String name) throws IllegalArgumentException, NullPointerException{
-        //TODO: Check for null
+        if(name == null) throw new NullPointerException("The name of the army was given the value 'null' as a " +
+                "parameter, please try again.");
         if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
                 " empty string, please try again.");
         this.name = name.trim();
@@ -38,12 +39,12 @@ public class Army {
      * suitable for storing an army. This check is for simplifying what types of lists the application has to
      * account for
      */
-    public Army(String name, List<Unit> units) throws IllegalArgumentException{
+    public Army(String name, List<Unit> units) throws IllegalArgumentException, NullPointerException{
+        if(name == null) throw new NullPointerException("The name of the army was given the value 'null' as a " +
+                "parameter, please try again.");
         if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
-                " empty string, please try again."); //TODO: TEST This
-        //TODO: test for null-val
+                " empty string, please try again.");
         // checks that the inputted list is either an ArrayList or LinkedList. A Vector for example would throw
-        //TODO: check legal input in list
         if(!(units instanceof ArrayList || units instanceof LinkedList)) throw new IllegalArgumentException(
                 "The inputted list-type must be either an arraylist, or a linked list, please try again.");
         this.name = name.trim();

@@ -25,8 +25,8 @@ public abstract class Unit {
      * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
      *          logical input-range, or is blank
      */
-    public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException {
-        if(name == null) throw new IllegalArgumentException("A unit's name cannot be inputted as 'null'," +
+    public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException, NullPointerException {
+        if(name == null) throw new NullPointerException("A unit's name cannot be inputted as 'null'," +
                 " please try again.");
         if(name.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
                 " please try again.");

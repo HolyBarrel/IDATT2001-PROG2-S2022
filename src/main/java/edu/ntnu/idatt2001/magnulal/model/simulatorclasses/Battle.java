@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.simulatorclasses;
+package edu.ntnu.idatt2001.magnulal.model.simulatorclasses;
 import edu.ntnu.idatt2001.magnulal.unitclasses.Unit;
 
 import java.util.Random;

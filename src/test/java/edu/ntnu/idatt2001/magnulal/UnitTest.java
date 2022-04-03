@@ -101,8 +101,7 @@ public class UnitTest {
             public void nameIsInputtedWithValueNull() {
                 try{
                     //EXCEPTION THROWER
-                    String testNullVal = null;
-                    new Unit(testNullVal, 20, 3, 2){
+                    new Unit(null, 20, 3, 2){
                         @Override
                         public int getAttackBonus() {
                             return 0;
@@ -114,9 +113,9 @@ public class UnitTest {
                     };
                     //FAIL
                     fail("'nameIsInputtedWithValueNull' should have thrown an exception");
-                }catch (IllegalArgumentException e){
-                    assertEquals("A unit's name cannot be inputted as 'null', please try again.",
-                            e.getMessage());
+                }catch (NullPointerException n){
+                    assertEquals("A unit's name cannot be inputted as 'null', " +
+                            "please try again.", n.getMessage());
                 }
             }
             @Test
