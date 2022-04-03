@@ -76,7 +76,7 @@ public class UnitTest {
         class NegativeTestsConstructorOfUnit{
             @Test
             @DisplayName("Name is inputted as a blank string")
-            public void blankNameInputTest() {
+            public void blankNameInput() {
                 try{
                     //EXCEPTION THROWER
                     new Unit("", 20, 3, 2){
@@ -90,7 +90,7 @@ public class UnitTest {
                         }
                     };
                     //FAIL
-                    fail("'blankNameInputTest' should have thrown an exception");
+                    fail("'blankNameInput' should have thrown an exception");
                 }catch (IllegalArgumentException e){
                     assertEquals("A unit's name cannot be inputted as an empty string,  please try again.",
                             e.getMessage());
@@ -198,7 +198,7 @@ public class UnitTest {
     class TestsAttackMethod{
         @Test
         @DisplayName("Testing attack-method for objects of subclasses of unit-class")
-        public void testingAttackMethodForUnits() {
+        public void attackMethodForUnits() {
             assertEquals(20, testUnit.getHealth());
             testUnit2.attack(testUnit);
             assertEquals(15, testUnit.getHealth());
@@ -213,7 +213,7 @@ public class UnitTest {
         }
         @Test
         @DisplayName("Testing attack-method when protection is more than damage")
-        public void testingAttackMethodProtectMoreThanDamage() {
+        public void attackMethodProtectMoreThanDamageResultsInNoDamageDone() {
             assertEquals(20, testUnit.getHealth());
             testUnit3.attack(testUnit); //testing that the attack does not harm when protection is more than the damage
             assertEquals(20, testUnit.getHealth());
@@ -223,15 +223,15 @@ public class UnitTest {
     @DisplayName("Testing the setHealth-method")
     class TestSetHealthMethod{
         @Test
-        @DisplayName("Subclass of 'Unit' used to test the setHealth-method, correct input")
-        public void usingSubclassToTestCorrectInputOfUnitSetHealth() {
+        @DisplayName("SetHealth-method changes the health to the inputted integer value, correct input")
+        public void setHealthSetsHealthToInputtedIntegerValue() {
             assertEquals(20,testUnit.getHealth());
             testUnit.setHealth(10);
             assertEquals(10,testUnit.getHealth());
         }
         @Test
         @DisplayName("Testing that the health is never set to an integer below zero")
-        public void testThatSetHealthOfNegativeIntFloorsTheHealthAtZero() {
+        public void setHealthOfNegativeIntFloorsTheHealthAtZero() {
             testUnit.setHealth(-1);
             assertEquals(0,testUnit.getHealth());
         }

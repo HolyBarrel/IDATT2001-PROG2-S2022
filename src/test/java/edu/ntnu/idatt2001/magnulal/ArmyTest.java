@@ -8,7 +8,6 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//TODO: update all test names
 public class ArmyTest {
     @Nested
     @DisplayName("Tests for the Army Constructor")
@@ -17,8 +16,8 @@ public class ArmyTest {
         @DisplayName("Positive tests for the Army Constructor")
         class positiveTestsForArmyConstructor{
             @Test
-            @DisplayName("Checking that constructor 1 accepts just NAME")
-            public void checkConstructor1WithNameString() {
+            @DisplayName("Checking that constructor accepts just a string")
+            public void checkConstructorWithNameString() {
                 try{
                     Army testArmy = new Army("Alliance");
                     assertEquals("Alliance", testArmy.getName());
@@ -27,8 +26,8 @@ public class ArmyTest {
                 }
             }
             @Test
-            @DisplayName("Checking that constructor 2 accepts NAME and list")
-            public void checkConstructor2WithNameStringAndList() {
+            @DisplayName("Checking that constructor accepts string for name and a list")
+            public void checkConstructorWithNameStringAndList() {
                 try{
                     ArrayList<Unit> unitsTestArray = new ArrayList<>();
                     unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
@@ -44,24 +43,24 @@ public class ArmyTest {
         @DisplayName("Negative tests for the Army Constructor")
         class negativeTestsForArmyConstructor {
             @Test
-            @DisplayName("Testing constructor 1 of 'Army' class with empty string-parameter")
-            public void constructor1TestWithStringAsParameter() {
+            @DisplayName("Testing constructor of 'Army' class with empty string-parameter")
+            public void constructor1WithStringAsParameter() {
                 try{
                     //EXCEPTION THROWER
                     new Army("");
-                    fail("'constructor1TestWithStringAsParameter' should have thrown an exception");
+                    fail("'constructor1WithStringAsParameter' should have thrown an exception");
                 }catch (IllegalArgumentException e){
                     assertEquals("The name for an army cannot be inputted as an" +
                             " empty string, please try again.", e.getMessage());
                 }
             }
             @Test
-            @DisplayName("Testing constructor 1 of 'Army' class with  'null' as parameter")
-            public void constructor1TestWithNullAsParameter() {
+            @DisplayName("Testing constructor of 'Army' class with  'null' as parameter")
+            public void constructor1WithNullAsParameter() {
                 try{
                     //EXCEPTION THROWER
                     new Army(null);
-                    fail("'constructor1TestWithNullAsParameter' should have thrown an exception");
+                    fail("'constructor1WithNullAsParameter' should have thrown an exception");
                 }catch (NullPointerException n){
                     assertEquals("The name of the army was given the value 'null' " +
                                     "as a parameter, please try again.",
@@ -70,14 +69,14 @@ public class ArmyTest {
             }
             @Test
             @DisplayName("Testing constructor 2 of 'Army' class with empty string-parameter")
-            public void constructor2TestWithStringAsParameter() {
+            public void constructor2WithStringAsParameter() {
                 try{
                     CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
                     ArrayList<Unit> unitsTestArray = new ArrayList<>();
                     unitsTestArray.add(cavalryUnit1);
                     //EXCEPTION THROWER
                     new Army("", unitsTestArray);
-                    fail("'constructor2TestWithStringAsParameter' should have thrown an exception");
+                    fail("'constructor2WithStringAsParameter' should have thrown an exception");
                 }catch (IllegalArgumentException e){
                     assertEquals("The name for an army cannot be inputted as an" +
                             " empty string, please try again.", e.getMessage());
@@ -85,14 +84,14 @@ public class ArmyTest {
             }
             @Test
             @DisplayName("Testing constructor 2 of 'Army' class with unwanted list-parameter")
-            public void constructor2TestWithUnwantedListParameter() {
+            public void constructor2WithUnwantedListParameter() {
                 try{
                     CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
                     ArrayList<Unit> unitsTestArray = new ArrayList<>();
                     unitsTestArray.add(cavalryUnit1);
                     //EXCEPTION THROWER
                     new Army("", unitsTestArray);
-                    fail("'constructor2TestWithUnwantedListParameter' should have thrown an exception");
+                    fail("'constructor2WithUnwantedListParameter' should have thrown an exception");
                 }catch (IllegalArgumentException e){
                     assertEquals("The name for an army cannot be inputted as an" +
                             " empty string, please try again.", e.getMessage());
@@ -100,14 +99,14 @@ public class ArmyTest {
             }
             @Test
             @DisplayName("Testing constructor 2 of 'Army' class with  'null' as parameter")
-            public void constructor2TestWithNullAsParameter() {
+            public void constructor2WithNullAsParameter() {
                 try{
                     CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
                     ArrayList<Unit> unitsTestArray = new ArrayList<>();
                     unitsTestArray.add(cavalryUnit1);
                     //EXCEPTION THROWER
                     new Army(null,unitsTestArray);
-                    fail("'constructor2TestWithNullAsParameter' should have thrown an exception");
+                    fail("'constructor2WithNullAsParameter' should have thrown an exception");
                 }catch (NullPointerException n){
                     assertEquals("The name of the army was given the value 'null' " +
                                     "as a parameter, please try again.",
@@ -121,8 +120,8 @@ public class ArmyTest {
     @DisplayName("Tests for add-method of Army")
     class TestAddToArmy{
         @Test
-        @DisplayName("Testing if the add()-method functions correctly")
-        public void testAddToArmyMethod() {
+        @DisplayName("Testing if the add()-method adds a unit to the army")
+        public void addToArmyMethod() {
             Army testArmy = new Army("Alliance");
             testArmy.add(new CavalryUnit("GrandLancer", 75, 12, 10));
             assertEquals(1, testArmy.getArmySize());
@@ -136,7 +135,7 @@ public class ArmyTest {
         class positiveTestsAddAllToArmy{
             @Test
             @DisplayName("Testing addAll()-method to add multiple units to army")
-            public void testAddAllUnitsOfAListMethod() {
+            public void addAllUnitsOfAListMethod() {
                 try{
                     Army testArmy = new Army("Alliance");
                     ArrayList<Unit> unitsTestArray = new ArrayList<>();
@@ -146,7 +145,7 @@ public class ArmyTest {
                     testArmy.addAll(unitsTestArray);
                     assertEquals(3, testArmy.getArmySize());
                 }catch (Exception e){
-                    fail("'testAddAllUnitsOfAListMethod' failed");
+                    fail("'addAllUnitsOfAListMethod' failed");
                 }
             }
         }
@@ -155,14 +154,14 @@ public class ArmyTest {
         class negativeTestsAddAllToArmy{
             @Test
             @DisplayName("Testing addAll method with wrong list-parameter")
-            public void testingAddAllMethodWithWrongListTypeAsParameter() {
+            public void addAllMethodWithWrongListTypeAsParameter() {
                 try{
                     CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
                     Vector<Unit> unitsTestArray = new Vector<>();
                     unitsTestArray.add(cavalryUnit1);
                     //EXCEPTION THROWER
                     new Army("Alliance", unitsTestArray);
-                    fail("'testingAddAllMethodWithWrongListTypeAsParameter' should have thrown an exception");
+                    fail("'addAllMethodWithWrongListTypeAsParameter' should have thrown an exception");
                 }catch (IllegalArgumentException e){
                     assertEquals("The inputted list-type must be either an arraylist, " +
                             "or a linked list, please try again.", e.getMessage());
@@ -175,8 +174,8 @@ public class ArmyTest {
     @DisplayName("Tests for remove-method of Army")
     class TestsRemoveMethodOfArmyClass{
         @Test
-        @DisplayName("Testing if the remove()-method functions correctly")
-        public void testRemoveFromArmyMethod() {
+        @DisplayName("Testing if the remove()-method removes a units from the army")
+        public void removeFromArmyMethod() {
             Army testArmy = new Army("Alliance");
             CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
             testArmy.add(testCavalryUnit);
@@ -206,8 +205,8 @@ public class ArmyTest {
     @DisplayName("Tests for hasUnits method of Army")
     class TestsHasUnitsMethod {
         @Test
-        @DisplayName("Testing if the hasUnits method functions correctly")
-        public void testHasUnitsMethod() {
+        @DisplayName("Testing if the hasUnits method detects if the army has units")
+        public void hasUnitsMethod() {
             Army testArmy = new Army("Alliance");
             assertFalse(testArmy.hasUnits());
             CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
@@ -220,8 +219,8 @@ public class ArmyTest {
     @DisplayName("Tests for getRandom method of Army")
     class TestsGetRandomMethod{
         @Test
-        @DisplayName("Testing getRandom unit method")
-        public void testGetRandomMethod() {
+        @DisplayName("Testing that getRandom unit method gets a unit from the army")
+        public void getRandomMethod() {
             ArrayList<Unit> unitsTestArray = new ArrayList<>();
             unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
             unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
@@ -240,7 +239,7 @@ public class ArmyTest {
     class TestsToString{
         @Test
         @DisplayName("Testing toString method for an army")
-        public void testToStringMethod() {
+        public void toStringMethod() {
             ArrayList<Unit> unitsTestArray = new ArrayList<>();
             unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
             unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
@@ -259,8 +258,8 @@ public class ArmyTest {
     @DisplayName("Tests for equals and hashCode methods of Army")
     class TestsHashCodeAndEquals{
         @Test
-        @DisplayName("Testing equals method for an army")
-        public void testEqualsMethod() {
+        @DisplayName("Testing equals method for armies that are considered equal")
+        public void equalsMethodOnEqualArmies() {
             ArrayList<Unit> unitsTestArray = new ArrayList<>();
             unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
             unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
@@ -270,8 +269,8 @@ public class ArmyTest {
             assertEquals(testArmy, testArmy2);
         }
         @Test
-        @DisplayName("Testing hashcode method for an army")
-        public void testHashCodeMethod() {
+        @DisplayName("Testing hashcode method for an army on equal armies")
+        public void testHashCodeMethodOnEqualArmies() {
             CavalryUnit cavalryUnit1 = new CavalryUnit("GrandLancer", 75, 12, 10);
             CavalryUnit cavalryUnit2 = new CavalryUnit("GrandLancer", 65, 10, 10);
             RangedUnit rangedUnit1 = new RangedUnit("CrossbowMan", 40, 20, 2);
@@ -285,7 +284,7 @@ public class ArmyTest {
         }
         @Test
         @DisplayName("Testing equals method for an army, on different armies")
-        public void testEqualsMethod2() {
+        public void testEqualsMethodOnDifferentArmies() {
             ArrayList<Unit> unitsTestArray = new ArrayList<>();
             unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
             unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
@@ -301,7 +300,7 @@ public class ArmyTest {
         }
         @Test
         @DisplayName("Testing hashcode method for an army, two different armies")
-        public void testHashCodeMethod2() {
+        public void testHashCodeMethodOnDifferentArmiesAlternative() {
             ArrayList<Unit> unitsTestArray = new ArrayList<>();
             unitsTestArray.add(new CavalryUnit("GrandLancer", 75, 12, 10));
             unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
