@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001.magnulal.filehandling;
 
 import edu.ntnu.idatt2001.magnulal.model.simulatorclasses.Army;
-import edu.ntnu.idatt2001.magnulal.unitclasses.*;
+import edu.ntnu.idatt2001.magnulal.model.unitclasses.*;
 
 import java.io.*;
 import java.nio.file.*;

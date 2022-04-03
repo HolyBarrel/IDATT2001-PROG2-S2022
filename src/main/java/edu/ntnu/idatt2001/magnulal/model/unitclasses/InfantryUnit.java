@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.unitclasses;
+package edu.ntnu.idatt2001.magnulal.model.unitclasses;
 
 /**
  * Class for an InfantryUnit with specification of the abstract methods of its

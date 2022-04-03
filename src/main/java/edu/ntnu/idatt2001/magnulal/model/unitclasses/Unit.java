@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.unitclasses;
+package edu.ntnu.idatt2001.magnulal.model.unitclasses;
 /**
  * Abstract superclass Unit describing commonalities for all unit-types
  * throughout 'Wargames'

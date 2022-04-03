@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.unitclasses;
+package edu.ntnu.idatt2001.magnulal.model.unitclasses;
 /**
  * Class for a ranged unit which is a subclass of the abstract superclass 'Unit'
  * attackBonus = 3, is specific for this subclass

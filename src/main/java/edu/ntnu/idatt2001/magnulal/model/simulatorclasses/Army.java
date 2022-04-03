@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.magnulal.model.simulatorclasses;
 import edu.ntnu.idatt2001.magnulal.filehandling.FileManager;
-import edu.ntnu.idatt2001.magnulal.unitclasses.*;
+import edu.ntnu.idatt2001.magnulal.model.unitclasses.*;
 
 import java.io.File;
 import java.util.*;

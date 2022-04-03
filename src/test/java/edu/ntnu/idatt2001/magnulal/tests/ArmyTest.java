@@ -1,6 +1,6 @@
-package edu.ntnu.idatt2001.magnulal;
+package edu.ntnu.idatt2001.magnulal.tests;
 import edu.ntnu.idatt2001.magnulal.model.simulatorclasses.Army;
-import edu.ntnu.idatt2001.magnulal.unitclasses.*;
+import edu.ntnu.idatt2001.magnulal.model.unitclasses.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
