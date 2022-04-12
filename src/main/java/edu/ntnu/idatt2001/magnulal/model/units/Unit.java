@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.model.unitclasses;
+package edu.ntnu.idatt2001.magnulal.model.units;
 /**
  * Abstract superclass Unit describing commonalities for all unit-types
  * throughout 'Wargames'
@@ -7,7 +7,7 @@ package edu.ntnu.idatt2001.magnulal.model.unitclasses;
  * CavalryUnit --> which in turn is inherited by CommanderUnit
  * RangedUnit
  * @author Magnus Lutro Allison
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  */
 public abstract class Unit {
@@ -26,22 +26,44 @@ public abstract class Unit {
      *          logical input-range, or is blank
      */
     public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException, NullPointerException {
-        if(name == null) throw new NullPointerException("A unit's name cannot be inputted as 'null'," +
-                " please try again.");
-        if(name.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
-                " please try again.");
-        if(health < 0) throw new IllegalArgumentException("A unit's health must be a positive integer," +
-                " please try again.");
-        if(attack < 0) throw new IllegalArgumentException("A unit's attack must be a positive integer," +
-                " please try again.");
-        if(armor < 0) throw new IllegalArgumentException("A unit's armor must be a positive integer," +
-                " please try again.");
+        checkLegalityOfNameString(name);
+        checkLegalityOfIntegers(health, attack, armor);
+        //TODO: implement global exception handler class?
         this.name = name.trim();
         this.setHealth(health);
         this.attack = attack;
         this.armor = armor;
     }
+//TODO: check if all exceptions are handled
+    //TODo: correct for TDos in sticky notes!
+    //TODO: create own exceptions =)
 
+    /**
+     * TODO: comment
+     * @param health
+     * @param attack
+     * @param armor
+     * @throws IllegalArgumentException
+     */
+    private void checkLegalityOfIntegers(int health, int attack, int armor) throws IllegalArgumentException {
+        if(health < 0) throw new IllegalArgumentException("A unit cannot be instantiated with a negative integer " +
+                "as parameter, please try again.");
+        if(attack < 0) throw new IllegalArgumentException("A unit's attack must be a positive integer," +
+                " please try again.");
+        if(armor < 0) throw new IllegalArgumentException("A unit's armor must be a positive integer," +
+                " please try again.");
+    }
+
+    /**
+     * TODO: comment
+     * @param name
+     */
+    private void checkLegalityOfNameString(String name) throws IllegalArgumentException, NullPointerException {
+        if(name == null) throw new NullPointerException("A unit's name cannot be inputted as 'null'," +
+                " please try again.");
+        if(name.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
+                " please try again.");
+    }
     /**
      * Attack method containing the formula given how the logic behind a unit's attack
      * is in the game

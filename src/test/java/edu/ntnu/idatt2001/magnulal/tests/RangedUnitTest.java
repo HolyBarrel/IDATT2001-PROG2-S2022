@@ -1,5 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.tests;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.RangedUnit;
+import edu.ntnu.idatt2001.magnulal.model.units.RangedUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

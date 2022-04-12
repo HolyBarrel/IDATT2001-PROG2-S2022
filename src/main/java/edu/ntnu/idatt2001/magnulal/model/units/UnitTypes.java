@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.model.unitclasses;
+package edu.ntnu.idatt2001.magnulal.model.units;
 
 /**
  * Enum to represent all the types of units in this project

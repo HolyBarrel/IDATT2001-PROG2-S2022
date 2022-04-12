@@ -1,13 +1,14 @@
 package edu.ntnu.idatt2001.magnulal.tests;
-import edu.ntnu.idatt2001.magnulal.model.simulatorclasses.Army;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.*;
+import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
+import edu.ntnu.idatt2001.magnulal.model.units.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+//TODO: restructure tests to be packaged n the same way as main/java..
+//TODO: rewrite display names in accordance with bb
 public class ArmyTest {
     @Nested
     @DisplayName("Tests for the Army Constructor")

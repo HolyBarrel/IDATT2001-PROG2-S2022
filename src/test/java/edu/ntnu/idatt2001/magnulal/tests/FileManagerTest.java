@@ -1,11 +1,11 @@
 package edu.ntnu.idatt2001.magnulal.tests;
 
-import edu.ntnu.idatt2001.magnulal.filehandling.FileManager;
-import edu.ntnu.idatt2001.magnulal.model.simulatorclasses.Army;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.CavalryUnit;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.CommanderUnit;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.InfantryUnit;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.RangedUnit;
+import edu.ntnu.idatt2001.magnulal.utils.FileManager;
+import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
+import edu.ntnu.idatt2001.magnulal.model.units.CavalryUnit;
+import edu.ntnu.idatt2001.magnulal.model.units.CommanderUnit;
+import edu.ntnu.idatt2001.magnulal.model.units.InfantryUnit;
+import edu.ntnu.idatt2001.magnulal.model.units.RangedUnit;
 import org.junit.jupiter.api.*;
 
 import java.nio.file.Files;

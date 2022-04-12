@@ -1,6 +1,6 @@
-package edu.ntnu.idatt2001.magnulal.model.simulatorclasses;
-import edu.ntnu.idatt2001.magnulal.filehandling.FileManager;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.*;
+package edu.ntnu.idatt2001.magnulal.model.simulator;
+import edu.ntnu.idatt2001.magnulal.utils.FileManager;
+import edu.ntnu.idatt2001.magnulal.model.units.*;
 
 import java.io.File;
 import java.util.*;
@@ -23,10 +23,7 @@ public class Army {
      * @throws IllegalArgumentException, if the name-input is a blank string
      */
     public Army(String name) throws IllegalArgumentException, NullPointerException{
-        if(name == null) throw new NullPointerException("The name of the army was given the value 'null' as a " +
-                "parameter, please try again.");
-        if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
-                " empty string, please try again.");
+        checkLegalityOfNameString(name);
         this.name = name.trim();
         this.units = new ArrayList<>();
     }
@@ -39,16 +36,27 @@ public class Army {
      * suitable for storing an army. This check is for simplifying what types of lists the application has to
      * account for
      */
-    public Army(String name, List<Unit> units) throws IllegalArgumentException, NullPointerException{
+    public Army(String name, List<Unit> units) throws IllegalArgumentException, NullPointerException {
+        checkLegalityOfNameString(name);
+        checkTypeOfList(units);
+        this.name = name.trim();
+        this.units = units;
+    }
+    //TODO: use enum to check which class
+
+    //TODO: comment
+    private void checkLegalityOfNameString(String name) throws IllegalArgumentException, NullPointerException {
         if(name == null) throw new NullPointerException("The name of the army was given the value 'null' as a " +
                 "parameter, please try again.");
         if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
                 " empty string, please try again.");
+    }
+
+    //TODO: comment
+    private void checkTypeOfList(List<Unit> units) throws IllegalArgumentException {
         // checks that the inputted list is either an ArrayList or LinkedList. A Vector for example would throw
         if(!(units instanceof ArrayList || units instanceof LinkedList)) throw new IllegalArgumentException(
                 "The inputted list-type must be either an arraylist, or a linked list, please try again.");
-        this.name = name.trim();
-        this.units = units;
     }
 
     /**
@@ -74,11 +82,10 @@ public class Army {
      * @param units, is a list with units
      * @throws IllegalArgumentException, if the list-type is not
      * suitable
+     * TODO: eval on shallow copy?
      */
     public void addAll(List<Unit> units) throws IllegalArgumentException{
-        //checks that the inputted list is either an ArrayList or LinkedList. A Vector for example would throw
-        if(!(units instanceof ArrayList || units instanceof LinkedList)) throw new IllegalArgumentException(
-                "The inputted list-type must be either an arraylist, or a linked list, please try again.");
+        checkTypeOfList(units);
         for (Unit unit: units) {
             add(unit);
         }
@@ -88,7 +95,7 @@ public class Army {
      * Remove-method that removes the inputted unit from the current
      * army list, is only used when the army contains this unit, and does not need a
      * check
-     * @param unit, must be in the army, otherwise exception is thrown
+     * @param unit, must be in the army, otherwise exception is thrown TODO: this is wrong?
      */
     public void remove(Unit unit){ //could implement illegalArgumentEx, but this is handled in the simulation
         this.units.remove(unit);

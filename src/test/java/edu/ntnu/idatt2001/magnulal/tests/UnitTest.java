@@ -1,5 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.tests;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.Unit;
+import edu.ntnu.idatt2001.magnulal.model.units.Unit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -14,6 +14,9 @@ public class UnitTest {
 
     @BeforeEach
     public void initiateTestUnits(){
+        //Utilizing anonymous test classes to easily test the methods specified i the abstract class 'Unit'
+        //as high up in the hierarchy as possible. This ensures the correct functioning of the methods, while
+        //limiting the need to test these methods through each individual subclass of Unit
         this.testUnit = new Unit("Archer", 20, 3, 2){
             @Override
             public int getAttackBonus() {
@@ -157,7 +160,8 @@ public class UnitTest {
                     //FAIL
                     fail("'armorInputtedAsNegativeInteger' should have thrown an exception");
                 }catch (IllegalArgumentException e){
-                    assertEquals("A unit's health must be a positive integer, please try again.", e.getMessage());
+                    assertEquals("A unit cannot be instantiated with a negative integer as parameter," +
+                            " please try again.", e.getMessage());
                 }
             }
             @Test
@@ -183,6 +187,7 @@ public class UnitTest {
             }
         }
     }
+    //TODO: double check feedback in bb
     @Nested
     @DisplayName("Testing the toString of Unit") //using anonymous classes
     class TestsToStringOfUnit{

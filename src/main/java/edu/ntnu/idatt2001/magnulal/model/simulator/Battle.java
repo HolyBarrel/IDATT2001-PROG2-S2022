@@ -1,5 +1,5 @@
-package edu.ntnu.idatt2001.magnulal.model.simulatorclasses;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.Unit;
+package edu.ntnu.idatt2001.magnulal.model.simulator;
+import edu.ntnu.idatt2001.magnulal.model.units.Unit;
 
 import java.util.Random;
 /**
@@ -22,13 +22,16 @@ public class Battle {
      * decides whether army one is striking first each turn
      */
     public Battle(Army armyOne, Army armyTwo) throws IllegalArgumentException{
+        checkIfArmiesHasUnits(armyOne, armyTwo);
+        this.armyOne = armyOne;
+        this.armyTwo = armyTwo;
+        this.armyOneIsCommencingBattle = new Random().nextBoolean();
+    }
+    private void checkIfArmiesHasUnits(Army armyOne, Army armyTwo) throws IllegalArgumentException{
         if(!armyOne.hasUnits()) throw new IllegalArgumentException("The first army inputted did not have any units, " +
                 "please try again with two armies containing units.");
         if(!armyTwo.hasUnits()) throw new IllegalArgumentException("The second army inputted did not have any units, "+
                 "please try again with two armies containing units.");
-        this.armyOne = armyOne;
-        this.armyTwo = armyTwo;
-        this.armyOneIsCommencingBattle = new Random().nextBoolean();
     }
     /**
      * Help method utilized to check if both armies in the battle have units

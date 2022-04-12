@@ -1,14 +1,15 @@
 package edu.ntnu.idatt2001.magnulal.view;
 
-import edu.ntnu.idatt2001.magnulal.model.simulatorclasses.Army;
-import edu.ntnu.idatt2001.magnulal.model.simulatorclasses.Battle;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.CavalryUnit;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.CommanderUnit;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.InfantryUnit;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.RangedUnit;
+import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
+import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
+import edu.ntnu.idatt2001.magnulal.model.units.CavalryUnit;
+import edu.ntnu.idatt2001.magnulal.model.units.CommanderUnit;
+import edu.ntnu.idatt2001.magnulal.model.units.InfantryUnit;
+import edu.ntnu.idatt2001.magnulal.model.units.RangedUnit;
 
 public class MainClass { //not any task
     public static void main(String[] args) {
+
         Army humanArmy = new Army("Alliance");
         Army orcArmy = new Army("Horde");
         for (int i = 0; i < 20; i++) {

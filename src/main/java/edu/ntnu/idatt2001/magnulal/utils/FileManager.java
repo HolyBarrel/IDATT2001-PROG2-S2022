@@ -1,7 +1,7 @@
-package edu.ntnu.idatt2001.magnulal.filehandling;
+package edu.ntnu.idatt2001.magnulal.utils;
 
-import edu.ntnu.idatt2001.magnulal.model.simulatorclasses.Army;
-import edu.ntnu.idatt2001.magnulal.model.unitclasses.*;
+import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
+import edu.ntnu.idatt2001.magnulal.model.units.*;
 
 import java.io.*;
 import java.nio.file.*;
@@ -19,7 +19,7 @@ import java.util.Scanner;
  * @version 0.2
  * @since 0.2
  */
-public class FileManager {
+public class FileManager { //TODO: check charset also
 
     /**
      * Private empty constructor to specify to the compiler that objects of
@@ -44,15 +44,22 @@ public class FileManager {
         }
     }
 
-    /**
+    /** TODO: test and update
      * Help method that checks if a file of the given fileName String parameter
      * already has been created in the resources root
      * @param fileName, is a string to a given file name
      * @return true if the file already exists in the resources root, and false if it
      * does not exist
      */
-    private static boolean checkIfFileExists(String fileName) throws IllegalArgumentException{
-        return new File(constructFilePath(fileName)).exists();
+    private static void checkIfFileExists(String fileName) throws NullPointerException{
+        if(!new File(constructFilePath(fileName)).exists()) throw new NullPointerException(constructFilePath(fileName)
+                + " Was the path. Could not find a file with a corresponding file path, please try again.");
+    }
+
+    //TODO: comment
+    private static void checkValidityOfPath(String fileName) throws InvalidPathException {
+        if(!isPathValid(fileName)) throw new InvalidPathException(constructFilePath(fileName), "The given file path " +
+                "contained forbidden characters. The application could not utilize it, please try again.");
     }
 
     /**
@@ -85,11 +92,8 @@ public class FileManager {
      * like '?' in the fileName
      */
     public static void writeArmyToFileWFileName(String fileName, Army army) throws InvalidPathException{
-        String filePath = constructFilePath(fileName);
-        if(!isPathValid(fileName)) throw new InvalidPathException(filePath, "The given file path " +
-                "contained forbidden characters. The application could not utilize it, please try again.");
-        File file = new File(filePath);
-        writeArmyToFileWFile(file, army);
+        checkValidityOfPath(fileName);
+        writeArmyToFileWFile(new File(constructFilePath(fileName)), army);
     }
 
     /**
@@ -124,10 +128,8 @@ public class FileManager {
      * The method catches IOException and prints the stack trace of it, if this occurs during reading
      */
     public static Army readArmyFromFile(String fileName) throws InvalidPathException, NullPointerException {
-        if(!isPathValid(fileName)) throw new InvalidPathException(constructFilePath(fileName), "The given file path " +
-                "had forbidden characters, and the application could not utilize it. Please try again.");
-        if(!checkIfFileExists(fileName)) throw new NullPointerException(constructFilePath(fileName) + " Was the " +
-                "path. Could not find a file with a corresponding file path, please try again.");
+        checkValidityOfPath(fileName);
+        checkIfFileExists(fileName);
         return readArmyFromExistingFile(new File(constructFilePath(fileName)));
     }
 
@@ -137,32 +139,42 @@ public class FileManager {
      * @param file is an existing
      * @return an army created from the information in the file
      */
-    public static Army readArmyFromExistingFile(File file){
+    public static Army readArmyFromExistingFile(File file) throws NullPointerException{//TODO: take reading into separate method
+        //TODO. handle exceptions for null return of readline
+        //TODO. test nullPointer
         Army readArmy = null;
         try (Scanner scanner = new Scanner(file)){
             String line = scanner.nextLine();
             readArmy = new Army(line.trim());
             while((scanner.hasNext())) {
                 String[] lineValues = scanner.nextLine().split(",");
-                switch (Objects.requireNonNull(UnitTypes.getValueMatching(lineValues[0].trim()))) {
-                    case INFANTRY -> {
-                        readArmy.add(new InfantryUnit(lineValues[1].trim(), Integer.parseInt(lineValues[2])));
-                    }
-                    case RANGED -> {
-                        readArmy.add(new RangedUnit(lineValues[1].trim(), Integer.parseInt(lineValues[2])));
-                    }
-                    case CAVALRY -> {
-                        readArmy.add(new CavalryUnit(lineValues[1].trim(), Integer.parseInt(lineValues[2])));
-                    }
-                    case COMMANDER -> {
-                        readArmy.add(new CommanderUnit(lineValues[1].trim(), Integer.parseInt(lineValues[2])));
-                    }
-                }
+                readArmy.add(readUnit(lineValues));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return readArmy;
+    }
+
+    private static Unit readUnit(String[] readLineValues) throws NullPointerException{
+        switch (Objects.requireNonNull(UnitTypes.getValueMatching(readLineValues[0].trim()))) {
+            case INFANTRY -> {
+                return new InfantryUnit(readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
+            }
+            case RANGED -> {
+                return new RangedUnit(readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
+            }
+            case CAVALRY -> {
+                return new CavalryUnit(readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
+            }
+            case COMMANDER -> {
+                return new CommanderUnit(readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
+            }
+            default -> {
+                throw new NullPointerException("A line in the CSV document did not " +
+                        "match the required comma separation to create a unit from the line.");
+            }
+        }
     }
     /**
      * Method to delete a given file at the file path constructed from the
@@ -172,13 +184,10 @@ public class FileManager {
      *                 can only delete from that directory
      * @throws InvalidPathException if the constructed path contains forbidden characters
      */
-    public static void deleteAFile(String fileName) throws InvalidPathException{
-        if(!isPathValid(fileName)) throw new InvalidPathException(constructFilePath(fileName),
-                "The given file path contained forbidden " +
-                        "characters. The application could not utilize it, please try again.");
-        String filePath = constructFilePath(fileName);
+    public static void deleteAFile(String fileName) throws InvalidPathException{ //TODO: more exceptions?
+        checkValidityOfPath(fileName);
         try{
-            Files.deleteIfExists(Path.of(filePath));
+            Files.deleteIfExists(Path.of(constructFilePath(fileName)));
         } catch (IOException e) {
             e.printStackTrace();
         }
