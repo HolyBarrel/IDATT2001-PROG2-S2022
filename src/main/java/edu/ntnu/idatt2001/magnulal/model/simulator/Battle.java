@@ -20,6 +20,7 @@ public class Battle {
      * @throws IllegalArgumentException if any of the inputted armies are armies without units
      * Also chooses a boolean value randomly for attribute 'armyOneIsCommencingBattle' which
      * decides whether army one is striking first each turn
+     * TODO: implement exception handling for an infinite battle
      */
     public Battle(Army armyOne, Army armyTwo) throws IllegalArgumentException{
         checkIfArmiesHasUnits(armyOne, armyTwo);
@@ -27,6 +28,7 @@ public class Battle {
         this.armyTwo = armyTwo;
         this.armyOneIsCommencingBattle = new Random().nextBoolean();
     }
+    //TODO: comment
     private void checkIfArmiesHasUnits(Army armyOne, Army armyTwo) throws IllegalArgumentException{
         if(!armyOne.hasUnits()) throw new IllegalArgumentException("The first army inputted did not have any units, " +
                 "please try again with two armies containing units.");

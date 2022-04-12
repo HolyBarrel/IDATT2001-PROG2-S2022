@@ -1,4 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.tests;
+import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
 import org.junit.jupiter.api.DisplayName;
@@ -50,9 +51,9 @@ public class ArmyTest {
                     //EXCEPTION THROWER
                     new Army("");
                     fail("'constructor1WithStringAsParameter' should have thrown an exception");
-                }catch (IllegalArgumentException e){
-                    assertEquals("The name for an army cannot be inputted as an" +
-                            " empty string, please try again.", e.getMessage());
+                }catch (BlankStringException b){
+                    assertEquals("The name for an army cannot be inputted as a" +
+                            " blank string, please try again.", b.getMessage());
                 }
             }
             @Test
@@ -78,9 +79,9 @@ public class ArmyTest {
                     //EXCEPTION THROWER
                     new Army("", unitsTestArray);
                     fail("'constructor2WithStringAsParameter' should have thrown an exception");
-                }catch (IllegalArgumentException e){
-                    assertEquals("The name for an army cannot be inputted as an" +
-                            " empty string, please try again.", e.getMessage());
+                }catch (BlankStringException b){
+                    assertEquals("The name for an army cannot be inputted as a" +
+                            " blank string, please try again.", b.getMessage());
                 }
             }
             @Test
@@ -93,9 +94,9 @@ public class ArmyTest {
                     //EXCEPTION THROWER
                     new Army("", unitsTestArray);
                     fail("'constructor2WithUnwantedListParameter' should have thrown an exception");
-                }catch (IllegalArgumentException e){
-                    assertEquals("The name for an army cannot be inputted as an" +
-                            " empty string, please try again.", e.getMessage());
+                }catch (BlankStringException b){
+                    assertEquals("The name for an army cannot be inputted as a" +
+                            " blank string, please try again.", b.getMessage());
                 }
             }
             @Test

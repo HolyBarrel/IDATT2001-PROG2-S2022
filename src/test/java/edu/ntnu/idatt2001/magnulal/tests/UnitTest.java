@@ -1,4 +1,6 @@
 package edu.ntnu.idatt2001.magnulal.tests;
+import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
+import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
 import edu.ntnu.idatt2001.magnulal.model.units.Unit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -94,9 +96,9 @@ public class UnitTest {
                     };
                     //FAIL
                     fail("'blankNameInput' should have thrown an exception");
-                }catch (IllegalArgumentException e){
-                    assertEquals("A unit's name cannot be inputted as an empty string,  please try again.",
-                            e.getMessage());
+                }catch (BlankStringException b){
+                    assertEquals("A unit's name cannot be inputted as a blank string,  please try again.",
+                            b.getMessage());
                 }
             }
             @Test
@@ -138,8 +140,8 @@ public class UnitTest {
                     };
                     //FAIL
                     fail("'attackStatIsInputtedAsNegativeInteger' should have thrown an exception");
-                }catch (IllegalArgumentException e){
-                    assertEquals("A unit's attack must be a positive integer, please try again.", e.getMessage());
+                }catch (NegativeIntegerException n){
+                    assertEquals("A unit's attack must be a positive integer, please try again.", n.getMessage());
                 }
             }
             @Test
@@ -159,9 +161,9 @@ public class UnitTest {
                     };
                     //FAIL
                     fail("'armorInputtedAsNegativeInteger' should have thrown an exception");
-                }catch (IllegalArgumentException e){
+                }catch (NegativeIntegerException n){
                     assertEquals("A unit cannot be instantiated with a negative integer as parameter," +
-                            " please try again.", e.getMessage());
+                            " please try again.", n.getMessage());
                 }
             }
             @Test
@@ -181,8 +183,8 @@ public class UnitTest {
                     };
                     //FAIL
                     fail("'armorInputtedAsNegativeInteger' should have thrown an exception");
-                }catch (IllegalArgumentException e){
-                    assertEquals("A unit's armor must be a positive integer, please try again.", e.getMessage());
+                }catch (NegativeIntegerException n){
+                    assertEquals("A unit's armor must be a positive integer, please try again.", n.getMessage());
                 }
             }
         }

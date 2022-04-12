@@ -48,11 +48,10 @@ public class FileManager { //TODO: check charset also
      * Help method that checks if a file of the given fileName String parameter
      * already has been created in the resources root
      * @param fileName, is a string to a given file name
-     * @return true if the file already exists in the resources root, and false if it
-     * does not exist
+     * @throws FileNotFoundException if the file at the constructed file path does not exist
      */
-    private static void checkIfFileExists(String fileName) throws NullPointerException{
-        if(!new File(constructFilePath(fileName)).exists()) throw new NullPointerException(constructFilePath(fileName)
+    private static void checkIfFileExists(String fileName) throws FileNotFoundException{
+        if(!new File(constructFilePath(fileName)).exists()) throw new FileNotFoundException(constructFilePath(fileName)
                 + " Was the path. Could not find a file with a corresponding file path, please try again.");
     }
 
@@ -127,7 +126,8 @@ public class FileManager { //TODO: check charset also
      * @throws NullPointerException if the file at the target file path does not exist
      * The method catches IOException and prints the stack trace of it, if this occurs during reading
      */
-    public static Army readArmyFromFile(String fileName) throws InvalidPathException, NullPointerException {
+    public static Army readArmyFromFile(String fileName) throws InvalidPathException, NullPointerException,
+            FileNotFoundException {
         checkValidityOfPath(fileName);
         checkIfFileExists(fileName);
         return readArmyFromExistingFile(new File(constructFilePath(fileName)));
@@ -151,7 +151,7 @@ public class FileManager { //TODO: check charset also
                 readArmy.add(readUnit(lineValues));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //TODO: handle better
         }
         return readArmy;
     }
@@ -189,7 +189,8 @@ public class FileManager { //TODO: check charset also
         try{
             Files.deleteIfExists(Path.of(constructFilePath(fileName)));
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //TODO: handle better
+            //TODO: implement finally?
         }
     }
 }

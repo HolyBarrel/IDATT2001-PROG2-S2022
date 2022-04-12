@@ -1,5 +1,8 @@
 package edu.ntnu.idatt2001.magnulal.model.units;
 
+import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
+import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
+
 /**
  * Class for a CavalryUnit with specification of the abstract methods of its
  * superclass 'Unit'
@@ -20,11 +23,13 @@ public class CavalryUnit extends Unit {
      * @param health, integer value, cannot be inputted as less than zero
      * @param attack, integer value, cannot be inputted as less than zero
      * @param armor, integer value, cannot be inputted as less than zero
-     * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
-     *         logical input-range, or is blank
-     *         Is thrown from the constructor of the superclass, 'Unit'
+     * @throws NullPointerException if the name parameter has the value 'null'
+     * @throws BlankStringException if the name argument is either an empty string or consists of only
+     *          white spaces. Utilizes the .blank() method of the String-class
+     * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
      */
-    public CavalryUnit(String name, int health, int attack, int armor) throws IllegalArgumentException {
+    public CavalryUnit(String name, int health, int attack, int armor) throws NullPointerException,
+            BlankStringException, NegativeIntegerException {
         super(name, health, attack, armor);
     }
     /**
@@ -32,11 +37,13 @@ public class CavalryUnit extends Unit {
      * Creates an object with the following parameters:
      * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
-     * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
-     *         logical input-range, or is blank
-     *         Is thrown from the constructor of the superclass, 'Unit'
+     * @throws NullPointerException if the name parameter has the value 'null'
+     * @throws BlankStringException if the name argument is either an empty string or consists of only
+     *          white spaces. Utilizes the .blank() method of the String-class
+     * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
      */
-    public CavalryUnit(String name, int health) throws IllegalArgumentException {
+    public CavalryUnit(String name, int health) throws NullPointerException, BlankStringException,
+            NegativeIntegerException {
         super(name, health, 20, 12);
     }
     /**

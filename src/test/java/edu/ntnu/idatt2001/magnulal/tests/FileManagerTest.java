@@ -8,6 +8,7 @@ import edu.ntnu.idatt2001.magnulal.model.units.InfantryUnit;
 import edu.ntnu.idatt2001.magnulal.model.units.RangedUnit;
 import org.junit.jupiter.api.*;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
@@ -69,7 +70,14 @@ public class FileManagerTest {
                 assertTrue(Files.exists(Paths.get(
                         "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/"
                                 + fileName + ".csv")));
-                Army testArmy = FileManager.readArmyFromFile(fileName);
+                Army testArmy = null;
+                try {
+                    testArmy = FileManager.readArmyFromFile(fileName);
+                } catch (FileNotFoundException f) {
+                    fail("'writeArmyToFileWFileNameCreatesAFileWithCorrectContent' failed with the message: "
+                            + f.getMessage());
+                }
+                assertNotNull(testArmy);
                 assertEquals(orcArmy.toString(), testArmy.toString());
             }
         }
@@ -127,14 +135,26 @@ public class FileManagerTest {
             @Test
             @DisplayName("readArmyFromFile method creates a correct Army without .csv ending in name")
             public void readArmyFromFile(){
-                Army testArmy = FileManager.readArmyFromFile("human-army");
+                Army testArmy = null;
+                try {
+                    testArmy = FileManager.readArmyFromFile("human-army");
+                } catch (FileNotFoundException f) {
+                    fail("'readArmyFromFile' failed with the message: "
+                            + f.getMessage());
+                }
                 assertNotNull(testArmy);
                 assertEquals(humanArmy.toString(), testArmy.toString());
             }
             @Test
             @DisplayName("readArmyFromFile method creates a correct Army with .csv ending in name")
             public void readArmyFromFileWCSVEnding(){
-                Army testArmy = FileManager.readArmyFromFile("human-army.csv");
+                Army testArmy = null;
+                try {
+                    testArmy = FileManager.readArmyFromFile("human-army.csv");
+                } catch (FileNotFoundException f) {
+                    fail("'readArmyFromFileWCSVEnding' failed with the message: "
+                            + f.getMessage());
+                }
                 assertNotNull(testArmy);
                 assertEquals(humanArmy.toString(), testArmy.toString());
             }
@@ -147,11 +167,10 @@ public class FileManagerTest {
             public void readArmyFromFileFileNameDoesNotExist(){
                 try{
                     FileManager.readArmyFromFile("hummy.csv");
-                }catch (NullPointerException n){
+                }catch (FileNotFoundException f){
                     assertEquals("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/hummy.csv " +
-                                    "Was the path. Could not find a file with a corresponding file path, " +
-                                    "please try again.",
-                            n.getMessage());
+                            "Was the path. Could not find a file with a corresponding file path, please try again.",
+                            f.getMessage());
                 }
             }
         }

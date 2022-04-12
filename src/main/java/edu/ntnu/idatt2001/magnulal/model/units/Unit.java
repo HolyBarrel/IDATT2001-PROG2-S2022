@@ -1,4 +1,8 @@
 package edu.ntnu.idatt2001.magnulal.model.units;
+
+import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
+import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
+
 /**
  * Abstract superclass Unit describing commonalities for all unit-types
  * throughout 'Wargames'
@@ -18,50 +22,60 @@ public abstract class Unit {
 
     /**
      * Constructor for the superclass Unit
-     * @param name, is a String, cannot be left blank
+     * @param name, is a String, cannot be left blank or be 'null'
      * @param health, is an int, cannot be less than 0
-     * @param attack, is an int, above -1
-     * @param armor, is an int, above -1
-     * @throws IllegalArgumentException, is an exception thrown when the arguments are outside the
-     *          logical input-range, or is blank
+     * @param attack, is an int, cannot be less than 0
+     * @param armor, is an int, cannot be less than 0
+     * @throws NullPointerException if the name parameter has the value 'null'
+     * @throws BlankStringException if the name argument is either an empty string or consists of only
+     *          white spaces. Utilizes the .blank() method of the String-class
+     * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
+     * //TODO: should it be possible to instantiate a unit with 0 health
      */
-    public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException, NullPointerException {
+    public Unit(String name, int health, int attack, int armor) throws NullPointerException, BlankStringException,
+            NegativeIntegerException {
         checkLegalityOfNameString(name);
         checkLegalityOfIntegers(health, attack, armor);
-        //TODO: implement global exception handler class?
         this.name = name.trim();
         this.setHealth(health);
         this.attack = attack;
         this.armor = armor;
     }
+
 //TODO: check if all exceptions are handled
     //TODo: correct for TDos in sticky notes!
     //TODO: create own exceptions =)
+
+    /*
+       Exception handling methods
+     */
+    /**
+     * TODO: comment
+     * @param name
+     * @throws NullPointerException if the name parameter has the value 'null'
+     * @throws BlankStringException if the name argument is either an empty string or consists of only
+     *          white spaces. Utilizes the .blank() method of the String-class
+     */
+    private void checkLegalityOfNameString(String name) throws NullPointerException, BlankStringException {
+        if(name == null) throw new NullPointerException("A unit's name cannot be inputted as 'null'," +
+                " please try again.");
+        if(name.isBlank()) throw new BlankStringException("A unit's name cannot be inputted as a blank string, " +
+                " please try again.");
+    }
 
     /**
      * TODO: comment
      * @param health
      * @param attack
      * @param armor
-     * @throws IllegalArgumentException
+     * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
      */
-    private void checkLegalityOfIntegers(int health, int attack, int armor) throws IllegalArgumentException {
-        if(health < 0) throw new IllegalArgumentException("A unit cannot be instantiated with a negative integer " +
+    private void checkLegalityOfIntegers(int health, int attack, int armor) throws NegativeIntegerException {
+        if(health < 0) throw new NegativeIntegerException("A unit cannot be instantiated with a negative integer " +
                 "as parameter, please try again.");
-        if(attack < 0) throw new IllegalArgumentException("A unit's attack must be a positive integer," +
+        if(attack < 0) throw new NegativeIntegerException("A unit's attack must be a positive integer," +
                 " please try again.");
-        if(armor < 0) throw new IllegalArgumentException("A unit's armor must be a positive integer," +
-                " please try again.");
-    }
-
-    /**
-     * TODO: comment
-     * @param name
-     */
-    private void checkLegalityOfNameString(String name) throws IllegalArgumentException, NullPointerException {
-        if(name == null) throw new NullPointerException("A unit's name cannot be inputted as 'null'," +
-                " please try again.");
-        if(name.isBlank()) throw new IllegalArgumentException("A unit's name cannot be inputted as an empty string, " +
+        if(armor < 0) throw new NegativeIntegerException("A unit's armor must be a positive integer," +
                 " please try again.");
     }
     /**

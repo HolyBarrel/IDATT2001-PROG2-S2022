@@ -1,4 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.model.simulator;
+import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
 
@@ -9,7 +10,7 @@ import java.util.*;
  * The army has a String value for its name, and a list of all
  * Unit-subclass units in this army
  * @author Magnus Lutro Allison
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  */
 public class Army {
@@ -18,11 +19,14 @@ public class Army {
 
     /**
      * Constructor 1 for the Army-class
-     * @param name, is a non-blank String value
+     * @param name, is a String value, cannot be blank or of value 'null'
      * The constructor also creates an empty arraylist to hold units
-     * @throws IllegalArgumentException, if the name-input is a blank string
+     * @throws NullPointerException if the name parameter has the value of 'null'
+     * @throws BlankStringException if the name parameter is either an empty string or consists of only
+     *          white spaces. Utilizes the .blank() method of the String-class
+
      */
-    public Army(String name) throws IllegalArgumentException, NullPointerException{
+    public Army(String name) throws NullPointerException, BlankStringException{
         checkLegalityOfNameString(name);
         this.name = name.trim();
         this.units = new ArrayList<>();
@@ -32,24 +36,38 @@ public class Army {
      * @param name, is a non-blank String value
      * @param units, is a list-type with the List interface implemented, for example an
      *               ArrayList
+     * @throws NullPointerException if the name parameter has the value of 'null'
+     * @throws BlankStringException if the name parameter is either an empty string or consists of only
+     *          white spaces. Utilizes the .blank() method of the String-class
      * @throws IllegalArgumentException, if the name-input is a blank string, or if the list-type is not
-     * suitable for storing an army. This check is for simplifying what types of lists the application has to
-     * account for
+     *          suitable for storing an army. This check is for simplifying what types of lists the application has to
+     *          account for
      */
-    public Army(String name, List<Unit> units) throws IllegalArgumentException, NullPointerException {
+    public Army(String name, List<Unit> units) throws NullPointerException, BlankStringException,
+            IllegalArgumentException {
         checkLegalityOfNameString(name);
         checkTypeOfList(units);
         this.name = name.trim();
         this.units = units;
     }
-    //TODO: use enum to check which class
+    /*
+      Exception handling private methods
+    */
 
     //TODO: comment
-    private void checkLegalityOfNameString(String name) throws IllegalArgumentException, NullPointerException {
+
+    /**
+     *
+     * @param name
+     * @throws NullPointerException if the name parameter has the value of 'null'
+     * @throws BlankStringException if the name parameter is either an empty string or consists of only
+     *          white spaces. Utilizes the .blank() method of the String-class
+     */
+    private void checkLegalityOfNameString(String name) throws NullPointerException, BlankStringException {
         if(name == null) throw new NullPointerException("The name of the army was given the value 'null' as a " +
                 "parameter, please try again.");
-        if(name.isBlank()) throw new IllegalArgumentException("The name for an army cannot be inputted as an" +
-                " empty string, please try again.");
+        if(name.isBlank()) throw new BlankStringException("The name for an army cannot be inputted as a" +
+                " blank string, please try again.");
     }
 
     //TODO: comment
@@ -83,8 +101,9 @@ public class Army {
      * @throws IllegalArgumentException, if the list-type is not
      * suitable
      * TODO: eval on shallow copy?
+     * TODO: test on a linked list?
      */
-    public void addAll(List<Unit> units) throws IllegalArgumentException{
+    public void addAll(List<Unit> units) throws IllegalArgumentException {
         checkTypeOfList(units);
         for (Unit unit: units) {
             add(unit);
@@ -207,6 +226,7 @@ public class Army {
      * in the resources root of this project. If the file already exists, the information it
      * contained previously is overwritten
      * @param fileName is a String for the name of the file
+     *                 TODO: arent these throwing too?
      */
     public void saveThisArmyToFile(String fileName){
         FileManager.writeArmyToFileWFileName(fileName, this);
