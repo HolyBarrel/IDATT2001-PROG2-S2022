@@ -17,7 +17,7 @@ import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
 public class CavalryUnit extends Unit {
     private boolean charge = true;
     /**
-     * Constructor 1 for the class CavalryUnit
+     * Constructs a CavalryUnit with four given parameter values.
      * Creates an object with the following parameters:
      * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
@@ -33,8 +33,10 @@ public class CavalryUnit extends Unit {
         super(name, health, attack, armor);
     }
     /**
-     * Constructor 2 for the class InfantryUnit with some default stats
-     * Creates an object with the following parameters:
+     * Constructs a CavalryUnit with two given parameters, and sets the values of
+     * attack to 20, and
+     * armor to 12
+     * Instantiates the object with the following parameters:
      * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
      * @throws NullPointerException if the name parameter has the value 'null'
@@ -47,35 +49,35 @@ public class CavalryUnit extends Unit {
         super(name, health, 20, 12);
     }
     /**
-     * Accessor method that returns a boolean true if this unit is charging, and false otherwise
+     * Returns a boolean value representing whether this unit is in a state of 'charge'
+     * @return true if this unit is charging, and false otherwise
      */
     public boolean isCharging() {
         return charge;
     }
 
     /**
-     * Mutator method to stop this unit from charging
+     * Stops this unit from charging by altering this charge-attribute to false
      */
     private void stopCharging(){
         this.charge = false;
     }
 
     /**
-     * Attack method containing the formula given how the logic behind a cavalry unit's attack
-     * is in the game
-     *
+     * Overrides the {@link Unit#attack(Unit)} method by adding logic to a cavalry unit's attack.
+     * This method ensures that if the unit is charging after a successful attack, the unit must
+     * stop its charge.
      * @param opponent, the unit that is attacked by this unit
      */
     @Override
     public void attack(Unit opponent) {
         super.attack(opponent);
-        if(isCharging()) stopCharging(); //the unit will stop charging after the first successful attack
+        if(isCharging()) stopCharging();
     }
 
     /**
-     * Method that returns an attack bonus for charge attack and melee combat
-     * @return1 integer value 6, is returned if charging
-     * @return2 integer value 2, is returned if not charging
+     * Returns an attack bonus for a charging attack and regular melee combat
+     * @return integer value 6 if charging, otherwise integer value 2.
      */
     @Override
     public int getAttackBonus() {
@@ -85,7 +87,7 @@ public class CavalryUnit extends Unit {
     }
 
     /**
-     * Method that returns a small resist bonus in close defense
+     * Returns a small resist bonus in close defense
      * @return integer value 1
      */
     @Override

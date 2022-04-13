@@ -1,5 +1,11 @@
 package edu.ntnu.idatt2001.magnulal.model.exceptions;
-//TODO: comment
+
+/**
+ * Custom subclass of RuntimeException with the name 'BlankStringException' describing the exceptional event
+ * @author Magnus Lutro Allison
+ * @version 0.3
+ * @since 0.3
+ */
 public class BlankStringException extends RuntimeException{
     /**
      * Constructs a new runtime exception with the specified detail message.

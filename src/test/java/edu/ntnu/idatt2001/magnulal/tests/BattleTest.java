@@ -56,14 +56,14 @@ public class BattleTest {
                     new Battle(testArmy, testArmy2);
                     fail("'checkConstructorOfBattleClassWrongParameterFirst' should have thrown an exception.");
                 } catch (IllegalArgumentException e) {
-                    assertEquals("The first army inputted did not have any units, please try again with " +
-                            "two armies containing units.", e.getMessage());
+                    assertEquals("The first army inputted: Alliance did not have any units, please try" +
+                            " again with two armies containing units.", e.getMessage());
                 }
             }
 
             @Test
-            @DisplayName("Checking that the constructor of Battle class throws with wrong input secondly")
-            public void checkConstructorOfBattleClassWrongParameterSecondly() {
+            @DisplayName("Checking that the constructor of Battle class throws with wrong input second")
+            public void checkConstructorOfBattleClassWrongParameterSecond() {
                 try {
                     ArrayList<Unit> unitsTestArray = new ArrayList<>();
                     unitsTestArray.add(new CavalryUnit("GrandLancer", 95, 12, 10));
@@ -74,8 +74,8 @@ public class BattleTest {
                     new Battle(testArmy, testArmy2);
                     fail("'checkConstructorOfBattleClassWrongParameterSecondly' should have thrown an exception.");
                 } catch (IllegalArgumentException e) {
-                    assertEquals("The second army inputted did not have any units, please try again with " +
-                            "two armies containing units.", e.getMessage());
+                    assertEquals("The second army inputted: Alliance did not have any units, please try " +
+                            "again with two armies containing units.", e.getMessage());
                 }
             }
         }

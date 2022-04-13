@@ -21,7 +21,8 @@ public abstract class Unit {
     private final int armor;
 
     /**
-     * Constructor for the superclass Unit
+     * Constructor for the superclass Unit, is used by subclass constructors which supers the
+     * parameters to this constructor
      * @param name, is a String, cannot be left blank or be 'null'
      * @param health, is an int, cannot be less than 0
      * @param attack, is an int, cannot be less than 0
@@ -30,7 +31,7 @@ public abstract class Unit {
      * @throws BlankStringException if the name argument is either an empty string or consists of only
      *          white spaces. Utilizes the .blank() method of the String-class
      * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
-     * //TODO: should it be possible to instantiate a unit with 0 health
+     * //TODO: should it be possible to instantiate a unit with 0 health?
      */
     public Unit(String name, int health, int attack, int armor) throws NullPointerException, BlankStringException,
             NegativeIntegerException {
@@ -49,9 +50,11 @@ public abstract class Unit {
     /*
        Exception handling methods
      */
+
     /**
-     * TODO: comment
-     * @param name
+     * Verifies that the string parameter name is a legal argument. The method checks if the value of the name is
+     * either 'null' or a blank string. If either of these checks are triggered, an exception is thrown.
+     * @param name is a string
      * @throws NullPointerException if the name parameter has the value 'null'
      * @throws BlankStringException if the name argument is either an empty string or consists of only
      *          white spaces. Utilizes the .blank() method of the String-class
@@ -64,10 +67,11 @@ public abstract class Unit {
     }
 
     /**
-     * TODO: comment
-     * @param health
-     * @param attack
-     * @param armor
+     * Verifies that the integer parameters are legal arguments. The method checks if any of the parameters
+     * have negative integer values. If this occurs a NegativeIntegerException is thrown
+     * @param health is an integer
+     * @param attack is an integer
+     * @param armor is an integer
      * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
      */
     private void checkLegalityOfIntegers(int health, int attack, int armor) throws NegativeIntegerException {
@@ -80,15 +84,12 @@ public abstract class Unit {
     }
     /**
      * Attack method containing the formula given how the logic behind a unit's attack
-     * is in the game
+     * The method gets the pre-given health of the opponent, subtracts this unit's attack and attackBonus,
+     * additions the opponents armor and resistBonus,
+     * and then sets the result as the new health of the @param opponent
      * @param opponent, is the opponent that is being attacked
      *                  The opponent's health is altered with its own mutator-method
      *                  setHealth
-     *                  The logic gets the pre-given health of the opponent,
-     *                  subtracts this unit's attack and attackBonus,
-     *                  additions the opponents armor and resistBonus,
-     *                  and then sets the result as the new health
-     *                  of the @param opponent
      */
     public void attack(Unit opponent){
         //An integer value for total damage is initialized
@@ -103,7 +104,7 @@ public abstract class Unit {
     }
 
     /**
-     * Accessor method that returns the name of this Unit
+     * Returns the name of this Unit
      * @return String name
      */
     public String getName() {
@@ -111,7 +112,7 @@ public abstract class Unit {
     }
 
     /**
-     * Accessor method that returns the health of this Unit
+     * Returns the health of this Unit
      * @return int health
      */
     public int getHealth() {
@@ -119,7 +120,7 @@ public abstract class Unit {
     }
 
     /**
-     * Accessor method that returns the attack-quantity of this Unit
+     * Returns the attack-stat of this Unit
      * @return int attack
      */
     public int getAttack() {
@@ -127,14 +128,15 @@ public abstract class Unit {
     }
 
     /**
-     * Accessor method that returns the armor-quantity of this Unit
+     * Returns the armor-stat of this Unit
      * @return int armor
      */
     public int getArmor() {
         return armor;
     }
     /**
-     * Mutator method that alters the current health attribute of this Unit
+     * Alters the current health attribute of this Unit
+     * This method is used by the {@link #attack(Unit)} method
      * @param health, is an integer, if the inputted integer is negative
      *                this represents an attack doing more damage than the defender has
      *                hit points. Then the health of this unit is set to zero

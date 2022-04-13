@@ -4,7 +4,9 @@ import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
 
 import java.io.File;
+import java.nio.file.InvalidPathException;
 import java.util.*;
+
 /**
  * Class describing an army containing various types of units
  * The army has a String value for its name, and a list of all
@@ -18,7 +20,7 @@ public class Army {
     private final List<Unit> units;
 
     /**
-     * Constructor 1 for the Army-class
+     * Constructs an Army utilizing only a string for its name, and sets the units list to an empty arraylist.
      * @param name, is a String value, cannot be blank or of value 'null'
      * The constructor also creates an empty arraylist to hold units
      * @throws NullPointerException if the name parameter has the value of 'null'
@@ -32,7 +34,7 @@ public class Army {
         this.units = new ArrayList<>();
     }
     /**
-     * Constructor 2 for the Army-class
+     * Constructs an Army with a string for its name and a list for the units that are in the army
      * @param name, is a non-blank String value
      * @param units, is a list-type with the List interface implemented, for example an
      *               ArrayList
@@ -48,17 +50,16 @@ public class Army {
         checkLegalityOfNameString(name);
         checkTypeOfList(units);
         this.name = name.trim();
-        this.units = units;
+        this.units = units; //TODO: Deep copy???
     }
     /*
       Exception handling private methods
     */
 
-    //TODO: comment
-
     /**
-     *
-     * @param name
+     * Verifies the string parameter's legality by checking if it is either 'null', or
+     * only a blank string. Exceptions are thrown if the checks are triggered.
+     * @param name is a string checked by this private method
      * @throws NullPointerException if the name parameter has the value of 'null'
      * @throws BlankStringException if the name parameter is either an empty string or consists of only
      *          white spaces. Utilizes the .blank() method of the String-class
@@ -70,7 +71,12 @@ public class Army {
                 " blank string, please try again.");
     }
 
-    //TODO: comment
+    /**
+     * Checks if the list is of an accepted type, implying either an arraylist or linkedList.
+     * Utilizes 'instanceof' to verify the list type. An exception is thrown if the check is triggered.
+     * @param units is a List with units which is verified
+     * @throws IllegalArgumentException, if the list-type is not an arraylist nor linked list
+     */
     private void checkTypeOfList(List<Unit> units) throws IllegalArgumentException {
         // checks that the inputted list is either an ArrayList or LinkedList. A Vector for example would throw
         if(!(units instanceof ArrayList || units instanceof LinkedList)) throw new IllegalArgumentException(
@@ -78,16 +84,15 @@ public class Army {
     }
 
     /**
-     * Accessor method to get the private attribute 'name' of this army
-     * @return String name
+     * Returns the private attribute 'name' of this army
+     * @return name, which is a String
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Add-method to add the parameter inputted unit to the list with
-     * units in this army
+     * Adds the parameter  unit to the list of units in this army
      * @param unit, an instance of a subclass of the Unit-class
      */
     public void add(Unit unit){
@@ -95,12 +100,9 @@ public class Army {
     }
 
     /**
-     * Add-method to add multiple units to the list with units in this
-     * army
+     * Adds multiple units to the list with units in this army
      * @param units, is a list with units
-     * @throws IllegalArgumentException, if the list-type is not
-     * suitable
-     * TODO: eval on shallow copy?
+     * @throws IllegalArgumentException, if the list-type is not an arraylist nor linked list
      * TODO: test on a linked list?
      */
     public void addAll(List<Unit> units) throws IllegalArgumentException {
@@ -111,10 +113,10 @@ public class Army {
     }
 
     /**
-     * Remove-method that removes the inputted unit from the current
-     * army list, is only used when the army contains this unit, and does not need a
-     * check
-     * @param unit, must be in the army, otherwise exception is thrown TODO: this is wrong?
+     * Removes the inputted unit from the current army list.
+     * Is only used when the army contains this unit, inferring that the methods does not need
+     * to check if the unit is in the list of this army
+     * @param unit, is of the class 'Unit'
      */
     public void remove(Unit unit){ //could implement illegalArgumentEx, but this is handled in the simulation
         this.units.remove(unit);
@@ -127,58 +129,66 @@ public class Army {
     public int getArmySize(){
         return this.units.size();
     }
+
     /**
-     * Boolean return method that returns true if the list for an
-     * army contains units
-     * @return boolean value
+     * Returns a boolean representing the presence of units in this army.
+     * The method returns true if the list contains units, and false otherwise
+     * @return boolean value,
+     * true -> army has units
+     * false -> army does not have units
      */
     public boolean hasUnits(){
         return getArmySize() > 0;
     }
 
     /**
-     * Accessor-method that returns the list of this army as a whole
-     * @return List<Unit> list-implementation
+     * Returns the list of this army as a whole
+     * @return list of units associated with this army
      */
     public List<Unit> getAllUnits(){
         return this.units;
     }
 
     /**
-     * Help-method to generate a random index integer within the range:
-     * 0 to army size-1
-     * @return a random integer of the list
+     * Generates a random integer within the range: 0 to army size-1
+     * Is a help method for the {@link #getRandom()}
+     * @return a random integer corresponding with an index of the list
      */
     private int getRandomListIndex(){
         return new Random().nextInt(getArmySize());
     }
 
     /**
-     * Accessor-method that returns a random unit from the army list
-     * @return Unit (at random index in the army list)
-     * Is only run on armies that has units, and does therefore not need a check
+     * Returns a random unit from the army list using the {@link java.util.Random} class
+     * @return Unit (at random index position in the army list)
+     * Is only run on armies that has units
      */
     public Unit getRandom(){
         return units.get(getRandomListIndex());
     }
 
     /**
-     * Help-method to specify a given List as an ArrayList.
-     * Is used by the accessor methods below, with the intent of not resulting in exceptions if
-     * the result-list is used to instantiate a new Army with the Army constructor.
-     * The Army constructor requires for the list to either be an instance of ArrayList or LinkedList.
+     * Specifies a given List as an ArrayList.
+     * Is used by the accessor methods:
+     * {@link #getInfantryUnits()},
+     * {@link #getCavalryUnits()},
+     * {@link #getRangedUnits()},
+     * {@link #getCommanderUnits()}
+     * TODO: update when more unit types are implemented
+     * The intent is to not result in exceptions if the result-list is used to instantiate a new Army
+     * with the Army constructor. The Army constructor requires for the list to either be an instance
+     * of ArrayList or LinkedList.
      * @param convertList, is the input list that is transfigured as an ArrayList.
-     * @return ArrayList with elements of the list 'convertList'.
-     * The method is only used
+     * @return ArrayList with elements of the list 'convertList'
      */
     private ArrayList<Unit> toArrayList(List<Unit> convertList){
         return new ArrayList<>(convertList);
     }
 
     /**
-     * Accessor-method to get a list of all InfantryUnits in this Army
+     * Returns a list containing all InfantryUnits in this Army
      * The returned List is of type ArrayList
-     * @return List of Units - implicating InfantryUnits
+     * @return arraylist of InfantryUnits
      */
     public List<Unit> getInfantryUnits(){
         return toArrayList(units.stream()
@@ -187,10 +197,9 @@ public class Army {
     }
 
     /**
-     * Accessor method to get a list of all exclusive CavalryUnits in this Army,
-     * meaning objects being only instance of CavalryUnit, and not of CommanderUnit
-     * The returned List is of type ArrayList
-     * @return List of Units - implicating exclusive CavalryUnits
+     * Returns a list of all exclusive CavalryUnits in this Army,
+     * The returned arraylist has objects that are only instance of CavalryUnit, and not of CommanderUnit
+     * @return arraylist of CavalryUnits
      */
     public List<Unit> getCavalryUnits(){
         return toArrayList(units.stream()
@@ -199,9 +208,9 @@ public class Army {
     }
 
     /**
-     * Accessor method to get a list of all RangedUnits in this Army
+     * Returns a list with all RangedUnits of this Army
      * The returned List is of type ArrayList
-     * @return List of Units - implicating RangedUnits
+     * @return List of RangedUnits
      */
     public List<Unit> getRangedUnits(){
         return toArrayList(units.stream()
@@ -210,9 +219,9 @@ public class Army {
     }
 
     /**
-     * Accessor method to get a list of all CommanderUnits in this Army
+     * Returns a list with all CommanderUnits of this Army
      * The returned List is of type ArrayList
-     * @return List of Units - implicating CommanderUnits
+     * @return List of CommanderUnits
      */
     public List<Unit> getCommanderUnits(){
         return toArrayList(units.stream()
@@ -221,14 +230,15 @@ public class Army {
     }
 
     /**
-     * Method to save the information of this army to a file at the given file path constructed
+     * Saves the information of this army to a file at the given file path constructed
      * from the String parameter fileName, the file is created if none of that name already exists
      * in the resources root of this project. If the file already exists, the information it
      * contained previously is overwritten
      * @param fileName is a String for the name of the file
-     *                 TODO: arent these throwing too?
+     * @throws InvalidPathException if the constructed file path is invalid. Is caused by special characters
+     * like '?' in the fileName
      */
-    public void saveThisArmyToFile(String fileName){
+    public void saveThisArmyToFile(String fileName) throws InvalidPathException{
         FileManager.writeArmyToFileWFileName(fileName, this);
     }
 

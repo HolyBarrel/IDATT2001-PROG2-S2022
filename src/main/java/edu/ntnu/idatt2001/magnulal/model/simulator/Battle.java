@@ -14,7 +14,7 @@ public class Battle {
     private final boolean armyOneIsCommencingBattle; //if true --> armyOne attacks
     // first in each turn, if false, armyTwo attacks first
     /**
-     * Constructor for the class Battle
+     * Constructs a Battle with two instances of the Class 'Army'
      * @param armyOne, the first army of this battle, cannot be an empty army
      * @param armyTwo, the second army of this battle, cannot be an empty army
      * @throws IllegalArgumentException if any of the inputted armies are armies without units
@@ -28,24 +28,38 @@ public class Battle {
         this.armyTwo = armyTwo;
         this.armyOneIsCommencingBattle = new Random().nextBoolean();
     }
-    //TODO: comment
-    private void checkIfArmiesHasUnits(Army armyOne, Army armyTwo) throws IllegalArgumentException{
-        if(!armyOne.hasUnits()) throw new IllegalArgumentException("The first army inputted did not have any units, " +
-                "please try again with two armies containing units.");
-        if(!armyTwo.hasUnits()) throw new IllegalArgumentException("The second army inputted did not have any units, "+
-                "please try again with two armies containing units.");
-    }
+
     /**
-     * Help method utilized to check if both armies in the battle have units
-     * @return true if both armies have units || false if one of the armies are
+     * Verifies if both parameter armies contains units using {@link Army#hasUnits()} method.
+     * IllegalArgumentException is thrown if the checks are triggered.
+     * @param armyOne, is of the 'Army' class
+     * @param armyTwo, is of the 'Army' class
+     * @throws IllegalArgumentException if one of the armies does not contain any units. There are two checks to create
+     * a specified exception-message which specifies which the empty army.
+     */
+    private void checkIfArmiesHasUnits(Army armyOne, Army armyTwo) throws IllegalArgumentException{
+        if(!armyOne.hasUnits()) throw new IllegalArgumentException("The first army inputted: " + armyOne.getName() +
+                " did not have any units, please try again with two armies containing units.");
+        if(!armyTwo.hasUnits()) throw new IllegalArgumentException("The second army inputted: " + armyOne.getName() +
+                " did not have any units, please try again with two armies containing units.");
+    }
+
+    /**
+     * Checks if both armies in the battle contains units using the {@link Army#hasUnits()} method.
+     * Is a help method used by:
+     * {@link #unitAttacks(Army, Army)}
+     * {@link #simulate()}
+     * @return true if both armies have units, false otherwise
      *
      */
     private boolean battleIsActive(){
         return armyOne.hasUnits() && armyTwo.hasUnits();
     }
+
     /**
-     * Help-method used by the 'unitAttacks' method presented beneath
      * Checks if the unit which has taken a blow (defenderUnit) is dead
+     * Is a help method utilized by:
+     * {@link #unitAttacks(Army, Army)}
      * @param defenderUnit, is the unit which is checked to see if is dead after
      *                      being attacked
      *                      if this unit has health == 0 after the attack, it is
@@ -55,14 +69,12 @@ public class Battle {
         if(defenderUnit.getHealth() == 0) defendingArmy.remove(defenderUnit);
     }
     /**
-     A help-method that simulates that a unit from attackingArmy attacks a unit from defendingArmy
-     * Chooses the attacker and defender randomly from named armies,
-     * via .getRandom-method of objects from the Army-class
-     * Then the method exercises .attack-method of the attackerUnit on the defenderUnit
-     * of subclasses of abstract superclass 'Unit' has inherited from 'Unit'-class or polymorphed
-     * Finally checks whether the defenderUnit, which has been attacked, is dead or not
+     * Simulates an attack by a unit from attackingArmy on a unit from defendingArmy.
+     * This method chooses the attacker and defender randomly from named armies, via {@link Army#getRandom()} method
+     * of the Army-class. Then the method exercises {@link Unit#attack(Unit)} of the attackerUnit on the defenderUnit.
+     * Finally, the method checks whether the defenderUnit, which has been attacked, is dead or not
      * If the defenderUnit is dead, then it is removed from its army
-     * using the .remove()-method for objects of the Army-class
+     * using the {@link Army#remove(Unit)} for objects of the Army-class
      * This sequence will occur as long as the help-method 'battleIsActive' is true
      * @param attackingArmy, parameter of class Army. From this army an attacking unit called
      *                       'attackerUnit' is chosen if the battle is active
@@ -78,12 +90,13 @@ public class Battle {
         }
     }
     /**
-     * Simulate-method that simulates a battle between armyOne and armyTwo
-     * Utilizes a series of help-methods described above:
-     * battleIsActive
-     * unitAttacks which, in turn uses help-methods: battleIsActive, removeDefenderIfDead
-     * @return victorious army is the army that has remaining units after a finite amount
-     * of attacks
+     * Simulates a battle between armyOne and armyTwo. Attacks occur as while both armies have units.
+     * The logic of attacking is turn-based, with attacks happening between a random units from the first attacking
+     * army attacks a random unit from the other army. Then another random unit from the other army attacks a newly
+     * chosen unit from the first army. This is one turn, in which each of the armies attacks. After each attack,
+     * the damaged unit is checked for being dead by the {@link #removeDefenderIfDead(Unit, Army)} help method. If
+     * it has died, the unit is removed from its army.
+     * @return victorious army, which is the army with remaining units after finite turns
      */
     public Army simulate(){
         while (battleIsActive()){

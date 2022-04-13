@@ -14,7 +14,7 @@ import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
  */
 public class CommanderUnit extends CavalryUnit{
     /**
-     * Constructor 1 for the class CommanderUnit
+     * Constructs a CommanderUnit using four given parameters.
      * Creates an object with the following parameters:
      * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
@@ -30,8 +30,10 @@ public class CommanderUnit extends CavalryUnit{
         super(name, health, attack, armor);
     }
     /**
-     * Constructor 2 for the class InfantryUnit with some default stats
-     * Creates an object with the following parameters:
+     * Constructs a CommanderUnit using two given parameters, and sets the values of
+     * attack to 25, and
+     * armor to 15
+     * Instantiates the object with the following parameters:
      * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
      * @throws NullPointerException if the name parameter has the value 'null'

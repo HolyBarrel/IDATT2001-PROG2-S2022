@@ -14,8 +14,8 @@ public enum UnitTypes {
     private final String unitType;
 
     /**
-     * Private constructor for the enum
-     * cannot be reached by other classes than this
+     * Constructs an enum of 'UnitTypes'
+     * This constructor cannot be reached by other classes since it is 'private'
      * @param unitType, is a string attached to the enum
      */
     UnitTypes(String unitType) {
@@ -24,7 +24,7 @@ public enum UnitTypes {
 
     /**
      * Static method to make enum easily usable with enhanced switch
-     * see FileManager 'readArmyFromFile'
+     * see {@link edu.ntnu.idatt2001.magnulal.utils.FileManager#readArmyFromFile(String)}
      * @param searchString is a string value which matched with any of the enum's string-attached
      *                     string returns the enum value
      * @return enum value corresponding with searchString if found, and 'null' otherwise

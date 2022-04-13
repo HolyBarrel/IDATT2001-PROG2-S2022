@@ -18,7 +18,7 @@ public class RangedUnit extends Unit{
     //and reflect over the use of the specified methods which increments this attribute for this unit
     private int hitsReceived = 0;
     /**
-     * Constructor 1 for the class RangedUnit
+     * Constructs a RangedUnit using four given parameters.
      * Creates an object with the following parameters:
      * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
@@ -34,8 +34,10 @@ public class RangedUnit extends Unit{
         super(name, health, attack, armor);
     }
     /**
-     * Constructor 2 for the class RangedUnit with some default stats
-     * Creates an object with the following parameters:
+     * Constructs a RangedUnit using two given parameters, and sets the values of
+     * attack to 15, and
+     * armor to 8
+     * Instantiates the object with the following parameters:
      * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
      * @throws NullPointerException if the name parameter has the value 'null'
@@ -48,8 +50,7 @@ public class RangedUnit extends Unit{
         super(name, health, 15, 8);
     }
     /**
-     * Accessor method that returns the number of attacks this RangedUnit
-     * has received
+     * Returns the number of attacks this RangedUnit has received
      * According to the project task, this also represents the proximity of the enemy
      * 0 hits --> enemy is far away
      * 1 hit --> enemy is nearing
@@ -59,8 +60,9 @@ public class RangedUnit extends Unit{
     public int getHitsReceived() {
         return hitsReceived;
     }
+
     /**
-     * Method that returns an attack bonus for ranged attacks
+     * Returns an attack bonus for ranged attacks
      * @return integer value 3 if the attack is done when this unit has received 0 or 1 hits,
      * which represents the RangedUnit attacking from range, else return 0
      */
@@ -73,20 +75,21 @@ public class RangedUnit extends Unit{
         }
     }
     /**
-     * Increment method to increase this unit's current number of received hits/attacks
+     * Increase this unit's current number of received attacks
      */
     public void enemyHitsThisUnit(){
         this.hitsReceived++;
     }
+
     /**
-     * Help method to assess the resist bonus this RangedUnit should be buffed with
-     * @return1 integer value 7 when the RangedUnit has not been hit
-     * -represents far-ranged combat
-     * @return2 integer value 5 when the RangedUnit has been hit 1 time
-     * -represents middle ranged combat
-     * @return3 integer value 2 when the RangedUnit has been hit 2 or more times
+     * Validates the resist bonus this RangedUnit should be buffed with.
+     * Is a help method utilized by the {@link #getResistBonus()} method of RangedUnits
+     * @return integer value 7 when the RangedUnit has not been hit
+     * -represents far-ranged combat,
+     * integer value 5 when the RangedUnit has been hit 1 time
+     * -represents middle ranged combat,
+     * integer value 2 when the RangedUnit has been hit 2 or more times
      * -represents close combat
-     * This help method is utilized in the getResistBonus-method beneath
      */
     private int resistBonusBasedOnDistanceFromOpposingArmy(){
         if(this.getHitsReceived() == 0){
@@ -98,16 +101,15 @@ public class RangedUnit extends Unit{
         }
     }
     /**
-     * Method that returns an integer resist bonus based on the amount of attacks this
-     * RangedUnit has received
-     * @return1 integer value 7 when the RangedUnit has not been hit
-     * -represents far-ranged combat
-     * @return2 integer value 5 when the RangedUnit has been hit 1 time
-     * -represents middle ranged combat
-     * @return3 integer value 2 when the RangedUnit has been hit 2 or more times
-     * -represents close combat
+     * Returns an integer resist bonus based on the amount of attacks this RangedUnit has received.
      * Also increments the times this unit has been hit, since this method is called
      * when this unit is defending an attack
+     * @return integer value 7 when the RangedUnit has not been hit
+     * -represents far-ranged combat,
+     * integer value 5 when the RangedUnit has been hit 1 time
+     * -represents middle ranged combat,
+     * integer value 2 when the RangedUnit has been hit 2 or more times
+     * -represents close combat
      */
     @Override
     public int getResistBonus() {

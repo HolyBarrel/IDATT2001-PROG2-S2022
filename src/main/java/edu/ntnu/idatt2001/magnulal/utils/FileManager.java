@@ -28,13 +28,13 @@ public class FileManager { //TODO: check charset also
     private FileManager(){}
 
     /**
-     * Help method to create a string that is a correctly formatted path to this
-     * project's 'resources' root
+     * Creates a string that is a correctly formatted path to this project's 'resources' root:
+     * 'src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments'.
      * @param fileName, is the file name specified
      * @return formatted string with 'src/main/resources' added to the start of the inputted
-     * file name, and '.csv' to the end of it. This creates a viable filepath to the resources
-     * root's directory called 'csvdocuments'. By using this method throughout the FileManager class
-     * this directory is the only accessible directory for the FileManager in this project
+     * file name, and '.csv' to the end of it if the parameter does not end with '.csv'. This creates a viable
+     * filepath to the resources root's directory called 'csvdocuments'. By using this method throughout the
+     * FileManager class this directory is the only manipulable directory for the FileManager
      */
     private static String constructFilePath(String fileName){
         if(fileName.endsWith(".csv")){
@@ -44,9 +44,14 @@ public class FileManager { //TODO: check charset also
         }
     }
 
+    /*
+       Exception handling private methods
+     */
+
     /** TODO: test and update
-     * Help method that checks if a file of the given fileName String parameter
-     * already has been created in the resources root
+     * Checks that a file of the given fileName String parameter already exists.
+     * This method utilizes the {@link File#exists()} method to check file existence.
+     * If this file does not exist, a FileNotFoundException is thrown.
      * @param fileName, is a string to a given file name
      * @throws FileNotFoundException if the file at the constructed file path does not exist
      */
@@ -55,20 +60,25 @@ public class FileManager { //TODO: check charset also
                 + " Was the path. Could not find a file with a corresponding file path, please try again.");
     }
 
-    //TODO: comment
+    /**
+     * Checks that a constructed file path is valid. This method uses the {@link #isPathValid(String)} method
+     * to exercise the check. If {@link #isPathValid(String)} returns 'false', an InvalidPathException is thrown.
+     * @param fileName is a string referring to the file name
+     * @throws InvalidPathException if the help method {@link #isPathValid(String)} returns false
+     */
     private static void checkValidityOfPath(String fileName) throws InvalidPathException {
         if(!isPathValid(fileName)) throw new InvalidPathException(constructFilePath(fileName), "The given file path " +
                 "contained forbidden characters. The application could not utilize it, please try again.");
     }
 
     /**
-     * Help method to check if the path that is created from the inputted
-     * String fileName parameter is valid. The path is invalid if there are forbidden
-     * characters in the file path. For example if characters such as '?' are entered into the
-     * fileName string as : 'file?Name'
+     * Checks if the path that is created from the inputted file name can serve as a valid path
+     * This method returns a boolean value representing whether the path is valid.
+     * The path is invalid if there are forbidden characters in the file path. For example if characters such as '?'
+     * are entered into the fileName string as : 'file?Name'. The method also checks if there are '\', '/', or '.' when
+     * the name does not end with '.csv'.
      * @param fileName, is a string to a given file name
-     * @return false if the path is invalid according to 'InvalidPathException' and the if-check,
-     * and true if the path is valid
+     * @return false if the path is invalid according to 'InvalidPathException' or the if-check, otherwise true
      */
     private static boolean isPathValid(String fileName){
         if(fileName.contains("\\") || fileName.contains("/") ||
@@ -82,13 +92,13 @@ public class FileManager { //TODO: check charset also
     }
 
     /**
-     * Method to write a given army to a file. The method will create a file with the fileName in
+     * Writes a given army to a file. The method will create a file with the fileName in
      * the 'resources' root of this project if no file with the String parameter fileName already
      * exists
      * @param fileName, is a String given as a file name
      * @param army, is an army
      * @throws InvalidPathException if the constructed file path is invalid. Is caused by special characters
-     * like '?' in the fileName
+     * such as '?' in the fileName
      */
     public static void writeArmyToFileWFileName(String fileName, Army army) throws InvalidPathException{
         checkValidityOfPath(fileName);
@@ -96,7 +106,7 @@ public class FileManager { //TODO: check charset also
     }
 
     /**
-     * Method to write an army to a given file. Utilizes the static help method 'writeArmyToFile' to
+     * Writes an army to a given file. Utilizes the static help method 'writeArmyToFile' to
      * write the specified parameter Army
      * @param file, is a File object that is already created
      * @param army, is an army
@@ -114,7 +124,7 @@ public class FileManager { //TODO: check charset also
     }
 
     /**
-     * Method to read an army from an already existing file. The method uses a Scanner to
+     * Read an army from an already existing file. The method uses a Scanner to
      * interpret each line in the target .csv document by using the 'readArmyFromExistingFile' method.
      * It also checks the validity of the path constructed from the String fileName parameter and makes
      * sure that the target file for reading actually exists
@@ -134,9 +144,9 @@ public class FileManager { //TODO: check charset also
     }
 
     /**
-     * Method to read an army from an already existing file.  The method uses a Scanner to
+     * Read an army from an already existing file. The method uses a Scanner to
      * interpret each line in the parameter file .csv document.
-     * @param file is an existing
+     * @param file is an existing file
      * @return an army created from the information in the file
      */
     public static Army readArmyFromExistingFile(File file) throws NullPointerException{//TODO: take reading into separate method
@@ -151,11 +161,19 @@ public class FileManager { //TODO: check charset also
                 readArmy.add(readUnit(lineValues));
             }
         } catch (IOException e) {
-            e.printStackTrace(); //TODO: handle better
+            e.printStackTrace(); //TODO: handle better / throw???
         }
         return readArmy;
     }
 
+    /**
+     * Reads a specific line of a string array, and constructs a unit type corresponding with the first string in
+     * the array. Utilizes the other indexes of the string array to create the unit.
+     * This method uses {@link UnitTypes} enum to form the logic behind the enhanced switch statement.
+     * @param readLineValues is a string array constructed from a line in a csv document
+     * @return a unit created from the string values of the readLineValues parameter array
+     * @throws NullPointerException if the line could not be matched with any unit type
+     */
     private static Unit readUnit(String[] readLineValues) throws NullPointerException{
         switch (Objects.requireNonNull(UnitTypes.getValueMatching(readLineValues[0].trim()))) {
             case INFANTRY -> {
@@ -177,8 +195,7 @@ public class FileManager { //TODO: check charset also
         }
     }
     /**
-     * Method to delete a given file at the file path constructed from the
-     * specified file name
+     * Deletes a given file at the file path constructed from the specified file name if a file of that name exists
      * @param fileName is a String of a file name that specifies which file in the
      *                 resource's directory called 'csvdocuments'. This way the delete-method
      *                 can only delete from that directory

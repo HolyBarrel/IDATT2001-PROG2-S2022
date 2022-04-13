@@ -14,7 +14,7 @@ import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
  */
 public class InfantryUnit extends Unit {
     /**
-     * Constructor 1 for the class InfantryUnit
+     * Constructs an InfantryUnit using four given parameters.
      * Creates an object with the following parameters:
      * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
@@ -31,8 +31,10 @@ public class InfantryUnit extends Unit {
     }
 
     /**
-     * Constructor 2 for the class InfantryUnit with some default stats
-     * Creates an object with the following parameters:
+     * Constructs an InfantryUnit using two given parameters, and sets the values of
+     * attack to 15, and
+     * armor to 10
+     * Instantiates the object with the following parameters:
      * @param name, String value, cannot be inputted as blank
      * @param health, integer value, cannot be inputted as less than zero
      * @throws NullPointerException if the name parameter has the value 'null'
@@ -46,7 +48,7 @@ public class InfantryUnit extends Unit {
     }
 
     /**
-     * Method that returns an attack bonus for melee combat
+     * Returns an attack bonus for regular melee combat
      * @return integer value 2
      */
     @Override
@@ -54,7 +56,7 @@ public class InfantryUnit extends Unit {
         return 2;
     }
     /**
-     * Method that returns a small resist bonus in close defense
+     * Returns a small resist bonus in close defense
      * @return integer value 1
      */
     @Override
