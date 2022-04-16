@@ -168,31 +168,15 @@ public class FileManager { //TODO: check charset also
 
     /**
      * Reads a specific line of a string array, and constructs a unit type corresponding with the first string in
-     * the array. Utilizes the other indexes of the string array to create the unit.
+     * the array. Utilizes the other indexes of the string array to create the unit. TODO update
      * This method uses {@link UnitTypes} enum to form the logic behind the enhanced switch statement.
      * @param readLineValues is a string array constructed from a line in a csv document
      * @return a unit created from the string values of the readLineValues parameter array
      * @throws NullPointerException if the line could not be matched with any unit type
      */
     private static Unit readUnit(String[] readLineValues) throws NullPointerException{
-        switch (Objects.requireNonNull(UnitTypes.getValueMatching(readLineValues[0].trim()))) {
-            case INFANTRY -> {
-                return new InfantryUnit(readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
-            }
-            case RANGED -> {
-                return new RangedUnit(readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
-            }
-            case CAVALRY -> {
-                return new CavalryUnit(readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
-            }
-            case COMMANDER -> {
-                return new CommanderUnit(readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
-            }
-            default -> {
-                throw new NullPointerException("A line in the CSV document did not " +
-                        "match the required comma separation to create a unit from the line.");
-            }
-        }
+        return UnitFactory.createUnit(Objects.requireNonNull(UnitTypes.getValueMatching(readLineValues[0].trim())),
+                readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
     }
     /**
      * Deletes a given file at the file path constructed from the specified file name if a file of that name exists
