@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BattleTest {
@@ -34,7 +35,7 @@ public class BattleTest {
                     unitsTestArray2.add(new InfantryUnit("Footman", 40, 10, 5));
                     Army testArmy = new Army("Alliance", unitsTestArray);
                     Army testArmy2 = new Army("Britforce", unitsTestArray2);
-                    assertDoesNotThrow(() -> new Battle(testArmy, testArmy2));
+                    assertDoesNotThrow(() -> new Battle(testArmy, testArmy2, PLAINS));
                 } catch (Exception e) {
                     fail(e.getMessage());
                 }
@@ -53,7 +54,7 @@ public class BattleTest {
                     unitsTestArray.add(new RangedUnit("CrossbowMan", 30, 10, 2));
                     Army testArmy = new Army("Alliance");
                     Army testArmy2 = new Army("Britforce", unitsTestArray);
-                    new Battle(testArmy, testArmy2);
+                    new Battle(testArmy, testArmy2, HILL);
                     fail("'checkConstructorOfBattleClassWrongParameterFirst' should have thrown an exception.");
                 } catch (IllegalArgumentException e) {
                     assertEquals("The first army inputted: Alliance did not have any units, please try" +
@@ -71,7 +72,7 @@ public class BattleTest {
                     unitsTestArray.add(new RangedUnit("CrossbowMan", 30, 10, 2));
                     Army testArmy = new Army("Alliance", unitsTestArray);
                     Army testArmy2 = new Army("Britforce");
-                    new Battle(testArmy, testArmy2);
+                    new Battle(testArmy, testArmy2, FOREST);
                     fail("'checkConstructorOfBattleClassWrongParameterSecondly' should have thrown an exception.");
                 } catch (IllegalArgumentException e) {
                     assertEquals("The second army inputted: Alliance did not have any units, please try " +
@@ -96,7 +97,7 @@ public class BattleTest {
             unitsTestArray2.add(new InfantryUnit("Footman", 40, 10, 5));
             Army testArmy = new Army("Alliance", unitsTestArray);
             Army testArmy2 = new Army("Britforce", unitsTestArray2);
-            Army testVictoriousArmy = new Battle(testArmy, testArmy2).simulate();
+            Army testVictoriousArmy = new Battle(testArmy, testArmy2, PLAINS).simulate();
             assertTrue(testVictoriousArmy.equals(testArmy) || testVictoriousArmy.equals(testArmy2));
         }
     }

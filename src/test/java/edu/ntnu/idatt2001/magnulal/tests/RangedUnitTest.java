@@ -1,10 +1,9 @@
 package edu.ntnu.idatt2001.magnulal.tests;
 import edu.ntnu.idatt2001.magnulal.model.units.RangedUnit;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
+import org.junit.jupiter.api.*;
 
+import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RangedUnitTest {
@@ -12,7 +11,12 @@ public class RangedUnitTest {
 
     @BeforeEach
     public void initiateTestRanger(){
+        ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         this.testRangedUnit = new RangedUnit("CrossbowMan", 40, 20,2);
+    }
+    @AfterEach
+    public void clearTerrain(){
+        ActiveTerrain.INSTANCE.setActiveTerrain(null);
     }
     @Nested
     @DisplayName("Positive tests for the subclass 'RangedUnit'")
@@ -35,15 +39,55 @@ public class RangedUnitTest {
             assertEquals(2, testRangedUnit.getResistBonus());
         }
         @Test
-        @DisplayName("Checking that getAttackBonus returns expected output")
-        public void checkGetAttackBonusReturn() {
-            assertEquals(3, testRangedUnit.getAttackBonus());
+        @DisplayName("Checking that getAttackBonus returns expected output in FOREST")
+        public void checkGetAttackBonusReturnInFOREST() {
+            assertEquals(4, testRangedUnit.getAttackBonus());
             testRangedUnit.getResistBonus();
-            assertEquals(3, testRangedUnit.getAttackBonus());
+            assertEquals(4, testRangedUnit.getAttackBonus());
             testRangedUnit.getResistBonus();
-            assertEquals(0, testRangedUnit.getAttackBonus());
+            assertEquals(1, testRangedUnit.getAttackBonus());
             testRangedUnit.getResistBonus();
-            assertEquals(0, testRangedUnit.getAttackBonus());
+            assertEquals(1, testRangedUnit.getAttackBonus());
+        }
+        @Test
+        @DisplayName("Checking that getAttackBonus returns expected output in HILL")
+        public void checkGetAttackBonusReturnInHILL() {
+            ActiveTerrain.INSTANCE.setActiveTerrain(HILL);
+            assertEquals(9, testRangedUnit.getAttackBonus());
+            testRangedUnit.getResistBonus();
+            assertEquals(9, testRangedUnit.getAttackBonus());
+            testRangedUnit.getResistBonus();
+            assertEquals(6, testRangedUnit.getAttackBonus());
+            testRangedUnit.getResistBonus();
+            assertEquals(6, testRangedUnit.getAttackBonus());
+        }
+        @Test
+        @DisplayName("Checking that getAttackBonus returns expected output on PLAINS")
+        public void checkGetAttackBonusReturnOnPlains() {
+            ActiveTerrain.INSTANCE.setActiveTerrain(PLAINS);
+            assertEquals(5, testRangedUnit.getAttackBonus());
+            testRangedUnit.getResistBonus();
+            assertEquals(5, testRangedUnit.getAttackBonus());
+            testRangedUnit.getResistBonus();
+            assertEquals(2, testRangedUnit.getAttackBonus());
+            testRangedUnit.getResistBonus();
+            assertEquals(2, testRangedUnit.getAttackBonus());
+        }
+    }
+    @Nested
+    @DisplayName("Negative tests for the subclass 'RangedUnit'")
+    class MethodsThrowsExceptions {
+        @Test
+        @DisplayName("Checking that getAttackBonus throws NullPointerException when active terrain is 'null'")
+        public void checkGetAttackBonusThrowingException() {
+            ActiveTerrain.INSTANCE.setActiveTerrain(null);
+            try{
+                testRangedUnit.getAttackBonus();
+                fail("'checkGetAttackBonusThrowingException' did not throw the expected NullPointerException");
+            }catch (NullPointerException n){
+                assertEquals("The terrain has not been set to a valid terrain type, please make sure this " +
+                        "is done before starting any simulation.", n.getMessage());
+            }
         }
     }
 }

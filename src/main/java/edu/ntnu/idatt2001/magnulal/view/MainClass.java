@@ -7,6 +7,8 @@ import edu.ntnu.idatt2001.magnulal.model.units.CommanderUnit;
 import edu.ntnu.idatt2001.magnulal.model.units.InfantryUnit;
 import edu.ntnu.idatt2001.magnulal.model.units.RangedUnit;
 
+import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.PLAINS;
+
 public class MainClass { //not any task
     public static void main(String[] args) {
 
@@ -28,6 +30,6 @@ public class MainClass { //not any task
         humanArmy.add(new CommanderUnit("MountainKing", 180, 40, 25)); //if armor is too high,
         // the battle will go on forever
         orcArmy.add(new CommanderUnit("Gul'dan", 180, 45, 15));
-        Battle battleOfAzeroth = new Battle(humanArmy, orcArmy);
+        Battle battleOfAzeroth = new Battle(humanArmy, orcArmy, PLAINS);
     }
 }

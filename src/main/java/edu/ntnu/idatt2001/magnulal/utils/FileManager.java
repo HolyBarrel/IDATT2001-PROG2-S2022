@@ -149,8 +149,7 @@ public class FileManager { //TODO: check charset also
      * @param file is an existing file
      * @return an army created from the information in the file
      */
-    public static Army readArmyFromExistingFile(File file) throws NullPointerException{//TODO: take reading into separate method
-        //TODO. handle exceptions for null return of readline
+    public static Army readArmyFromExistingFile(File file) throws NullPointerException{
         //TODO. test nullPointer
         Army readArmy = null;
         try (Scanner scanner = new Scanner(file)){
@@ -175,8 +174,10 @@ public class FileManager { //TODO: check charset also
      * @throws NullPointerException if the line could not be matched with any unit type
      */
     private static Unit readUnit(String[] readLineValues) throws NullPointerException{
-        return UnitFactory.createUnit(Objects.requireNonNull(UnitTypes.getValueMatching(readLineValues[0].trim())),
-                readLineValues[1].trim(), Integer.parseInt(readLineValues[2]));
+        return UnitFactory.createUnit(Objects.requireNonNull(UnitTypes.getValueMatching(
+                readLineValues[0].trim())),
+                readLineValues[1].trim(),
+                Integer.parseInt(readLineValues[2]));
     }
     /**
      * Deletes a given file at the file path constructed from the specified file name if a file of that name exists

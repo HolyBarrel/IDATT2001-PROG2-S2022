@@ -1,11 +1,13 @@
 package edu.ntnu.idatt2001.magnulal.model.simulator;
 import edu.ntnu.idatt2001.magnulal.model.units.Unit;
+import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
+import edu.ntnu.idatt2001.magnulal.utils.TerrainType;
 
 import java.util.Random;
 /**
  * Battle class to simulate a battle between to armies
  * @author Magnus Lutro Allison
- * @version 0.2
+ * @version 0.3 //TODO: UPDATE VERSIONS
  * @since 0.1
  */
 public class Battle {
@@ -15,18 +17,24 @@ public class Battle {
     // first in each turn, if false, armyTwo attacks first
     /**
      * Constructs a Battle with two instances of the Class 'Army'
+     * Also chooses a boolean value randomly for attribute 'armyOneIsCommencingBattle' which
+     * decides whether army one is striking first each turn
      * @param armyOne, the first army of this battle, cannot be an empty army
      * @param armyTwo, the second army of this battle, cannot be an empty army
      * @throws IllegalArgumentException if any of the inputted armies are armies without units
-     * Also chooses a boolean value randomly for attribute 'armyOneIsCommencingBattle' which
-     * decides whether army one is striking first each turn
+     * @throws NullPointerException if the terrainType parameter has 'null' as value
      * TODO: implement exception handling for an infinite battle
      */
-    public Battle(Army armyOne, Army armyTwo) throws IllegalArgumentException{
+    public Battle(Army armyOne, Army armyTwo, TerrainType terrainType) throws IllegalArgumentException,
+            NullPointerException{
         checkIfArmiesHasUnits(armyOne, armyTwo);
+        if(terrainType == null) throw new NullPointerException("The specified terrain type is not supported, please" +
+                "try one of the following terrain types: FOREST, HILL, PLAINS.");
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
         this.armyOneIsCommencingBattle = new Random().nextBoolean();
+        ActiveTerrain.INSTANCE.setActiveTerrain(terrainType);
+
     }
 
     /**

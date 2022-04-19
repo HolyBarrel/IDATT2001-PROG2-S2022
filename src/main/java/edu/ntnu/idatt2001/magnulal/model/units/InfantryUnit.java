@@ -48,19 +48,25 @@ public class InfantryUnit extends Unit {
     }
 
     /**
-     * Returns an attack bonus for regular melee combat
-     * @return integer value 2
+     * Returns an attack bonus for regular melee combat with additional terrain bonus
+     * if the specified case occurs (see {@link Unit#getTerrainDefenseBonus(Unit)} for case explanation)
+     * @return integer value 2 (5 if terrain is FOREST)
+     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
+     * 'null'-value
      */
     @Override
-    public int getAttackBonus() {
-        return 2;
+    public int getAttackBonus() throws NullPointerException{
+        return 2 + getTerrainAttackBonus(this);
     }
     /**
-     * Returns a small resist bonus in close defense
-     * @return integer value 1
+     * Returns a small resist bonus in close defense with additional terrain bonus
+     * if the specified case occurs (see {@link Unit#getTerrainDefenseBonus(Unit)} for case explanation)
+     * @return integer value 1 (4 if terrain is FOREST)
+     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
+     * 'null'-value
      */
     @Override
-    public int getResistBonus() {
-        return 1;
+    public int getResistBonus() throws NullPointerException{
+        return 1 + getTerrainDefenseBonus(this);
     }
 }

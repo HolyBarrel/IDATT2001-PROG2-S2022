@@ -2,6 +2,12 @@ package edu.ntnu.idatt2001.magnulal.model.units;
 
 import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
+import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 
 /**
  * Abstract superclass Unit describing commonalities for all unit-types
@@ -45,10 +51,9 @@ public abstract class Unit {
 
 //TODO: check if all exceptions are handled
     //TODo: correct for TDos in sticky notes!
-    //TODO: create own exceptions =)
 
     /*
-       Exception handling methods
+       Exception handling methods TODO redo structure
      */
 
     /**
@@ -145,6 +150,73 @@ public abstract class Unit {
     public void setHealth(int health){
         if(health < 0) health = 0; //health cannot wind up negative
         this.health = health;
+    }
+
+    /**
+     * Returns an integer value representing an attack bonus based on a unit's subclass in combination with current
+     * terrain that has been set.
+     * @param unit is the unit which is validated for its additional terrain attack bonus
+     * @return an integer representing the buffing/de-buffing bonus
+     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
+     * 'null'-value
+     */
+    protected int getTerrainAttackBonus(Unit unit) throws NullPointerException {
+        checkTerrainStatus();
+        switch (ActiveTerrain.INSTANCE.getActiveTerrain()) {
+            case FOREST -> {
+                if (unit instanceof InfantryUnit) {
+                    return 3;
+                }
+                if (unit instanceof RangedUnit) {
+                    return -1;
+                }
+            }
+            case HILL -> {
+                if (unit instanceof RangedUnit) {
+                    return 4;
+                }
+            }
+            case PLAINS -> {
+                if (unit instanceof CavalryUnit) {
+                    return 4;
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Returns an integer value representing a defense bonus based on a unit's subclass in combination with current
+     * terrain that has been set.
+     * @param unit is the unit which is validated for its additional terrain defense bonus
+     * @return an Integer representing the buffing/de-buffing bonus. Has return-type 'Integer' to
+     *  access the possibility of returning a 'null'-value, which informs the CavalryUnit's
+     *  {@link CavalryUnit#getResistBonus()} method to return zero for its resist bonus.
+     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
+     * 'null'-value
+     */
+    protected Integer getTerrainDefenseBonus(Unit unit) throws NullPointerException {
+        checkTerrainStatus();
+        if (ActiveTerrain.INSTANCE.getActiveTerrain() == FOREST) {
+            if (unit instanceof InfantryUnit) {
+                return 3;
+            }
+            if (unit instanceof CavalryUnit) {
+                return null;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Verifies that the ActiveTerrain has been associated with an enum of 'TerrainType' enums, since the
+     * terrain-calculated bonuses cannot be validated with this stat having a default 'null'-value
+     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
+     * 'null'-value
+     */
+    private void checkTerrainStatus() throws NullPointerException {
+        if(!ActiveTerrain.INSTANCE.isTerrainSet()) throw new NullPointerException("The terrain has not " +
+                "been set to a valid terrain type, please make sure this is done before starting any simulation.");
     }
 
     @Override

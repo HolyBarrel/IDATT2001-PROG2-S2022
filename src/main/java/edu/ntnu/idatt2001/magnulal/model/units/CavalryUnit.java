@@ -76,22 +76,30 @@ public class CavalryUnit extends Unit {
     }
 
     /**
-     * Returns an attack bonus for a charging attack and regular melee combat
-     * @return integer value 6 if charging, otherwise integer value 2.
+     * Returns an attack bonus for a charging attack and regular melee combat with additional terrain bonus
+     * if the specified case occurs (see {@link Unit#getTerrainAttackBonus(Unit)} for case explanation)
+     * @return integer value 6 (10 if terrain is PLAINS) if charging, otherwise integer value 2
+     * (6 if terrain is PLAINS).
+     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
+     * 'null'-value
      */
     @Override
-    public int getAttackBonus() {
+    public int getAttackBonus() throws NullPointerException {
         //The cavalry unit will get a further charge-bonus to its first attack
-        if(isCharging()) return 6; //additional 4 attackBonus when in charge
-        return 2; //the default attackBonus is integer value 2
+        if(isCharging()) return 6 + getTerrainAttackBonus(this); //additional 4 attackBonus when in charge
+        return 2 + getTerrainAttackBonus(this); //the default attackBonus is integer value 2
     }
 
     /**
-     * Returns a small resist bonus in close defense
-     * @return integer value 1
+     * Returns a small resist bonus in close defense with additional terrain bonus
+     * if the specified case occurs (see {@link Unit#getTerrainDefenseBonus(Unit)} for case explanation)
+     * @return integer value 1 (0 if terrain is FOREST)
+     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
+     * 'null'-value
      */
     @Override
-    public int getResistBonus() {
+    public int getResistBonus() throws NullPointerException {
+        if(getTerrainDefenseBonus(this) == null) return 0;
         return 1;
     }
 }

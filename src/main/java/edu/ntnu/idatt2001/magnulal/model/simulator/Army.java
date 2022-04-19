@@ -102,7 +102,7 @@ public class Army {
     /**
      * Adds multiple units to the list with units in this army
      * @param units, is a list with units
-     * @throws IllegalArgumentException, if the list-type is not an arraylist nor linked list
+     * @throws IllegalArgumentException, if the list-type is not an arraylist nor a linked list
      * TODO: test on a linked list?
      */
     public void addAll(List<Unit> units) throws IllegalArgumentException {

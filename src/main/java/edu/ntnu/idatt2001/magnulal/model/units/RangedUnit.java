@@ -62,16 +62,21 @@ public class RangedUnit extends Unit{
     }
 
     /**
-     * Returns an attack bonus for ranged attacks
-     * @return integer value 3 if the attack is done when this unit has received 0 or 1 hits,
-     * which represents the RangedUnit attacking from range, else return 0
+     * Returns an attack bonus for ranged attacks with additional terrain bonus
+     * if the specified case occurs (see {@link Unit#getTerrainDefenseBonus(Unit)} for case explanation)
+     * @return integer value 5 (4 if terrain is FOREST, and 9 if terrain is HILL)
+     * if the attack is done when this unit has received 0 or 1 hits,
+     * which represents the RangedUnit attacking from range,
+     * else return 2 (1 if terrain is FOREST, and 6 if terrain is HILL)
+     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
+     * 'null'-value
      */
     @Override
     public int getAttackBonus() {
         if(this.getHitsReceived() <= 1){
-            return 3;
+            return 5 + getTerrainAttackBonus(this);
         }else{
-            return 0;
+            return 2 + getTerrainAttackBonus(this);
         }
     }
     /**
