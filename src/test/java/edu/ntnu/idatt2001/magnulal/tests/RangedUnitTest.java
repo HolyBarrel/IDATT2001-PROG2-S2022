@@ -20,7 +20,7 @@ public class RangedUnitTest {
     }
     @Nested
     @DisplayName("Positive tests for the subclass 'RangedUnit'")
-    class MethodsReturnsAsExpected {
+    public class MethodsReturnsAsExpected {
         @Test
         @DisplayName("Checking that getHitsReceived returns expected output")
         public void checkGetHitsReceivedReturn() {
@@ -76,7 +76,7 @@ public class RangedUnitTest {
     }
     @Nested
     @DisplayName("Negative tests for the subclass 'RangedUnit'")
-    class MethodsThrowsExceptions {
+    public class MethodsThrowsExceptions {
         @Test
         @DisplayName("Checking that getAttackBonus throws NullPointerException when active terrain is 'null'")
         public void checkGetAttackBonusThrowingException() {

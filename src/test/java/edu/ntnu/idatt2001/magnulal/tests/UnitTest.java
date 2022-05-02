@@ -51,10 +51,10 @@ public class UnitTest {
     }
     @Nested
     @DisplayName("Testing the constructor of the abstract class Unit") //using anonymous classes
-    class TestsConstructorOfUnit{
+    public class TestsConstructorOfUnit{
         @Nested
         @DisplayName("Positive tests of the constructor of Unit")
-        class PositiveTestsConstructorOfUnit{
+        public class PositiveTestsConstructorOfUnit{
             @Test
             @DisplayName("Checking the name String-value")
             public void checkingCorrectNameStringValue() {
@@ -78,7 +78,7 @@ public class UnitTest {
         }
         @Nested
         @DisplayName("Negative tests of the constructor of Unit")
-        class NegativeTestsConstructorOfUnit{
+        public class NegativeTestsConstructorOfUnit{
             @Test
             @DisplayName("Name is inputted as a blank string")
             public void blankNameInput() {
@@ -192,7 +192,7 @@ public class UnitTest {
     //TODO: double check feedback in bb
     @Nested
     @DisplayName("Testing the toString of Unit") //using anonymous classes
-    class TestsToStringOfUnit{
+    public class TestsToStringOfUnit{
         @Test
         @DisplayName("Subclass of 'Unit' used to test Unit's toString, correct input")
         public void usingSubclassToTestCorrectInputOfUnitsToString() {
@@ -202,7 +202,7 @@ public class UnitTest {
     }
     @Nested
     @DisplayName("Testing the attack of Unit")
-    class TestsAttackMethod{
+    public class TestsAttackMethod{
         @Test
         @DisplayName("Testing attack-method for objects of subclasses of unit-class")
         public void attackMethodForUnits() {
@@ -228,7 +228,7 @@ public class UnitTest {
     }
     @Nested
     @DisplayName("Testing the setHealth-method")
-    class TestSetHealthMethod{
+    public class TestSetHealthMethod{
         @Test
         @DisplayName("SetHealth-method changes the health to the inputted integer value, correct input")
         public void setHealthSetsHealthToInputtedIntegerValue() {

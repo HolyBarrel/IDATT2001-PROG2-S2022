@@ -49,10 +49,10 @@ public class FileManagerTest {
     @DisplayName("Tests for the FileManager 'writeArmyToFileWFileName' method")
             //These tests also indirectly test the 'writeArmyToFileWFile' method since this is
             // used in the 'writeArmyToFileWFileName' method
-    class TestWriteArmyToFileWFileName{
+    public class TestWriteArmyToFileWFileName{
         @Nested
         @DisplayName("Positive tests for the 'writeArmyToFileWFileName' method")
-        class PositiveTestsForMethodWriteArmyToFileWFileName {
+        public class PositiveTestsForMethodWriteArmyToFileWFileName {
             @Test
             @DisplayName("writeArmyToFileWFileName creates a file")
             public void writeArmyToFileWFileName(){
@@ -85,7 +85,7 @@ public class FileManagerTest {
         @DisplayName("Negative tests for the 'writeArmyToFileWFileName' method")
                 //testing the private method 'isPathValid', which implies that other methods of FileHandler using
                 //this method does not need further negative tests
-        class NegativeTestsForMethodWriteArmyToFileWFileName {
+        public class NegativeTestsForMethodWriteArmyToFileWFileName {
             @Test
             @DisplayName("writeArmyToFileWFileName throws 'InvalidPathException' when name contains Q-mark")
             public void writeArmyToFileWFileNameThrowsWhenQmarkIsInFileName(){
@@ -128,10 +128,10 @@ public class FileManagerTest {
     @DisplayName("Tests for the FileManager 'readArmyFromFile' method")
             //These tests also tests if the 'readArmyFromExistingFile' method works, since 'readArmyFromFile'
             // uses that method
-    class TestReadArmyFromFileMethod{
+    public class TestReadArmyFromFileMethod{
         @Nested
         @DisplayName("Positive tests for the 'readArmyFromFile' method")
-        class PositiveTestsForReadArmyFromFileMethod {
+        public class PositiveTestsForReadArmyFromFileMethod {
             @Test
             @DisplayName("readArmyFromFile method creates a correct Army without .csv ending in name")
             public void readArmyFromFile(){
@@ -161,7 +161,7 @@ public class FileManagerTest {
         }
         @Nested
         @DisplayName("Negative tests for the 'readArmyFromFile' method")
-        class NegativeTestsForReadArmyFromFileMethod {
+        public class NegativeTestsForReadArmyFromFileMethod {
             @Test
             @DisplayName("readArmyFromFile method throws 'NullPointerException' on nonexistent filename")
             public void readArmyFromFileFileNameDoesNotExist(){
@@ -177,10 +177,10 @@ public class FileManagerTest {
     }
     @Nested
     @DisplayName("Tests for the FileManager 'deleteAFile' method")
-    class TestDeleteAFileMethod {
+    public class TestDeleteAFileMethod {
         @Nested
         @DisplayName("Positive tests for the 'deleteAFile' method")
-        class PositiveTestsForDeleteAFileMethod {
+        public class PositiveTestsForDeleteAFileMethod {
             @Test
             @DisplayName("DeleteAFile method removes an army when the target file exists")
             public void deleteAFileWorksCorrectly() {
@@ -206,7 +206,7 @@ public class FileManagerTest {
         }
         @Nested
         @DisplayName("Negative tests for the 'deleteAFile' method")
-        class NegativeTestsForDeleteAFileMethod {
+        public class NegativeTestsForDeleteAFileMethod {
             //Only one negative test is included because 'deleteAFile' method throws by using the same help method
             //isPathValid as 'writeArmyToFileWFileName'
             @Test

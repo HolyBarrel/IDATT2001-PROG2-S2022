@@ -21,7 +21,7 @@ public class CavalryUnitTest {
     }
     @Nested
     @DisplayName("Positive tests for the subclass 'CavalryUnit'")
-    class MethodsReturnsAsExpected {
+    public class MethodsReturnsAsExpected {
         @Test
         @DisplayName("Checking that isCharging returns expected output")
         public void checkIsChargingAttacksReturn() {
@@ -78,7 +78,7 @@ public class CavalryUnitTest {
     }
     @Nested
     @DisplayName("Negative tests for the subclass 'CavalryUnit'")
-    class MethodsThrowsExceptions {
+    public class MethodsThrowsExceptions {
         @Test
         @DisplayName("Checking that getAttackBonus throws NullPointerException when active terrain is 'null'")
         public void checkGetAttackBonusThrowingException() {

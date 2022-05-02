@@ -6,6 +6,7 @@ import edu.ntnu.idatt2001.magnulal.model.units.*;
 import java.io.File;
 import java.nio.file.InvalidPathException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Class describing an army containing various types of units
@@ -193,7 +194,7 @@ public class Army {
     public List<Unit> getInfantryUnits(){
         return toArrayList(units.stream()
                 .filter(u -> u instanceof InfantryUnit)
-                .toList());
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -204,7 +205,7 @@ public class Army {
     public List<Unit> getCavalryUnits(){
         return toArrayList(units.stream()
                 .filter(u -> u instanceof CavalryUnit && !(u instanceof CommanderUnit))
-                .toList());
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -215,7 +216,7 @@ public class Army {
     public List<Unit> getRangedUnits(){
         return toArrayList(units.stream()
                 .filter(u -> u instanceof RangedUnit)
-                .toList());
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -226,7 +227,7 @@ public class Army {
     public List<Unit> getCommanderUnits(){
         return toArrayList(units.stream()
                 .filter(u -> u instanceof CommanderUnit)
-                .toList());
+                .collect(Collectors.toList()));
     }
 
     /**

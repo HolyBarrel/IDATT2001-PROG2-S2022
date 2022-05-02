@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 //TODO: restructure tests to be packaged n the same way as main/java..
@@ -13,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ArmyTest {
     @Nested
     @DisplayName("Tests for the Army Constructor")
-    class TestsForArmyConstructor{
+    public class TestsForArmyConstructor{
         @Nested
         @DisplayName("Positive tests for the Army Constructor")
-        class positiveTestsForArmyConstructor{
+        public class positiveTestsForArmyConstructor{
             @Test
             @DisplayName("Checking that constructor accepts just a string")
             public void checkConstructorWithNameString() {
@@ -43,7 +44,7 @@ public class ArmyTest {
         }
         @Nested
         @DisplayName("Negative tests for the Army Constructor")
-        class negativeTestsForArmyConstructor {
+        public class negativeTestsForArmyConstructor {
             @Test
             @DisplayName("Testing constructor of 'Army' class with empty string-parameter")
             public void constructor1WithStringAsParameter() {
@@ -120,7 +121,7 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("Tests for add-method of Army")
-    class TestAddToArmy{
+    public class TestAddToArmy{
         @Test
         @DisplayName("Testing if the add()-method adds a unit to the army")
         public void addToArmyMethod() {
@@ -131,10 +132,10 @@ public class ArmyTest {
     }
     @Nested
     @DisplayName("Tests for addAll-method of Army")
-    class TestsAddAllToArmy{
+    public class TestsAddAllToArmy{
         @Nested
         @DisplayName("Positive tests for addAll-method of Army")
-        class positiveTestsAddAllToArmy{
+        public class positiveTestsAddAllToArmy{
             @Test
             @DisplayName("Testing addAll()-method to add multiple units to army")
             public void addAllUnitsOfAListMethod() {
@@ -153,7 +154,7 @@ public class ArmyTest {
         }
         @Nested
         @DisplayName("Negative tests for addAll-method of Army")
-        class negativeTestsAddAllToArmy{
+        public class negativeTestsAddAllToArmy{
             @Test
             @DisplayName("Testing addAll method with wrong list-parameter")
             public void addAllMethodWithWrongListTypeAsParameter() {
@@ -174,7 +175,7 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("Tests for remove-method of Army")
-    class TestsRemoveMethodOfArmyClass{
+    public class TestsRemoveMethodOfArmyClass{
         @Test
         @DisplayName("Testing if the remove()-method removes a units from the army")
         public void removeFromArmyMethod() {
@@ -205,7 +206,7 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("Tests for hasUnits method of Army")
-    class TestsHasUnitsMethod {
+    public class TestsHasUnitsMethod {
         @Test
         @DisplayName("Testing if the hasUnits method detects if the army has units")
         public void hasUnitsMethod() {
@@ -219,7 +220,7 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("Tests for getRandom method of Army")
-    class TestsGetRandomMethod{
+    public class TestsGetRandomMethod{
         @Test
         @DisplayName("Testing that getRandom unit method gets a unit from the army")
         public void getRandomMethod() {
@@ -238,7 +239,7 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("Tests for toString method of Army")
-    class TestsToString{
+    public class TestsToString{
         @Test
         @DisplayName("Testing toString method for an army")
         public void toStringMethod() {
@@ -258,7 +259,7 @@ public class ArmyTest {
     }
     @Nested
     @DisplayName("Tests for equals and hashCode methods of Army")
-    class TestsHashCodeAndEquals{
+    public class TestsHashCodeAndEquals{
         @Test
         @DisplayName("Testing equals method for armies that are considered equal")
         public void equalsMethodOnEqualArmies() {
@@ -319,7 +320,7 @@ public class ArmyTest {
     }
     @Nested
     @DisplayName("Tests for getInfantryUnits method of Army")
-    class TestsForGetInfantryUnitsMethod {
+    public class TestsForGetInfantryUnitsMethod {
         @Test
         @DisplayName("Validating correctness of getInfantryUnits method's output")
         public void validatingGetInfantryUnitsWithArmyContainingInfantry() {
@@ -348,13 +349,13 @@ public class ArmyTest {
             testArmy.add(testRangedUnit);
             CavalryUnit testCavalryUnit = new CavalryUnit("GrandLancer", 75, 12, 10);
             testArmy.add(testCavalryUnit);
-            assertEquals(0, testArmy.getInfantryUnits().stream()
-                    .filter(u -> u instanceof InfantryUnit).toList().size());
+            assertEquals(0, (int) testArmy.getInfantryUnits().stream()
+                    .filter(u -> u instanceof InfantryUnit).count());
         }
     }
     @Nested
     @DisplayName("Tests for getCavalryUnits method of Army")
-    class TestsForGetCavalryUnitsMethod {
+    public class TestsForGetCavalryUnitsMethod {
         @Test
         @DisplayName("Validating correctness of getCavalryUnit method's output")
         public void validatingGetCavalryUnitsWithArmyContainingCavalry() {
@@ -384,12 +385,12 @@ public class ArmyTest {
             InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
             testArmy.add(testInfantryUnit2);
             assertEquals(0, testArmy.getCavalryUnits().stream()
-                    .filter(u -> u instanceof CavalryUnit).toList().size());
+                    .filter(u -> u instanceof CavalryUnit).count());
         }
     }
     @Nested
     @DisplayName("Tests for getRangedUnits method of Army")
-    class TestsForGetRangedUnitsMethod {
+    public class TestsForGetRangedUnitsMethod {
         @Test
         @DisplayName("Validating correctness of getRangedUnit method's output")
         public void validatingGetRangedUnitsWithArmyContainingRanged() {
@@ -423,12 +424,12 @@ public class ArmyTest {
             InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
             testArmy.add(testInfantryUnit2);
             assertEquals(0, testArmy.getRangedUnits().stream()
-                    .filter(u -> u instanceof RangedUnit).toList().size());
+                    .filter(u -> u instanceof RangedUnit).count());
         }
     }
     @Nested
     @DisplayName("Tests for getCommanderUnits method of Army")
-    class TestsForGetCommanderUnitsMethod {
+    public class TestsForGetCommanderUnitsMethod {
         @Test
         @DisplayName("Validating correctness of getCommanderUnit method's output")
         public void validatingGetCommanderUnitsWithArmyContainingCommander() {
@@ -466,7 +467,7 @@ public class ArmyTest {
             InfantryUnit testInfantryUnit2 = new InfantryUnit("Musket man", 30, 40, 18);
             testArmy.add(testInfantryUnit2);
             assertEquals(0, testArmy.getCommanderUnits().stream()
-                    .filter(u -> u instanceof CommanderUnit).toList().size());
+                    .filter(u -> u instanceof CommanderUnit).count());
         }
     }
 }

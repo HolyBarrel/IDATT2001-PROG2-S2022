@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BattleTest {
     @Nested
     @DisplayName("Constructor tests for the class 'Battle'")
-    class TestingConstructor {
+    public class TestingConstructor {
         @Nested
         @DisplayName("Positive tests for the constructor")
-        class positiveTestsForConstructor {
+        public class positiveTestsForConstructor {
             @Test
             @DisplayName("Checking that the constructor of Battle class works with correct input")
             public void checkConstructorOfBattleClass() {
@@ -43,7 +43,7 @@ public class BattleTest {
         }
         @Nested
         @DisplayName("Negative tests for the constructor")
-        class negativeTestsForConstructor {
+        public class negativeTestsForConstructor {
             @Test
             @DisplayName("Checking that the constructor of Battle class throws with wrong input first")
             public void checkConstructorOfBattleClassWrongParameterFirst() {
@@ -83,7 +83,7 @@ public class BattleTest {
     }
     @Nested
     @DisplayName("Simulate-method test for the class 'Battle'")
-    class testingSimulate {
+    public class testingSimulate {
         @Test
         @DisplayName("Checking that the simulate-method returns correctly")
         public void checkSimulateMethodOfBattleClass() {

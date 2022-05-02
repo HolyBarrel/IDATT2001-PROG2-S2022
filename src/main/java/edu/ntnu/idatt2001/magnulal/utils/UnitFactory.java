@@ -27,7 +27,7 @@ public class UnitFactory {
      */
     public static Unit createUnit(UnitTypes unitType, String unitName, int unitHealth) throws NullPointerException,
             BlankStringException, NegativeIntegerException {
-        switch (unitType){
+        switch (unitType) {
             case INFANTRY -> {
                 return new InfantryUnit(unitName, unitHealth);
             }
@@ -35,7 +35,7 @@ public class UnitFactory {
                 return new RangedUnit(unitName, unitHealth);
             }
             case CAVALRY -> {
-                return new CavalryUnit(unitName,unitHealth);
+                return new CavalryUnit(unitName, unitHealth);
             }
             case COMMANDER -> {
                 return new CommanderUnit(unitName, unitHealth);

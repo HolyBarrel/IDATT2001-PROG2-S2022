@@ -20,7 +20,7 @@ public class InfantryUnitTest {
     }
     @Nested
     @DisplayName("Positive tests for the subclass 'InfantryUnit'")
-    class MethodsReturnsAsExpected {
+    public class MethodsReturnsAsExpected {
         @Test
         @DisplayName("Checking that getAttackBonus returns expected output in FOREST")
         public void checkGetAttackBonusReturnInFOREST() {
@@ -58,7 +58,7 @@ public class InfantryUnitTest {
     }
     @Nested
     @DisplayName("Negative tests for the subclass 'InfantryUnit'")
-    class MethodThrowsException {
+    public class MethodThrowsException {
         @Test
         @DisplayName("Checking that getAttackBonus throws NullPointerException when active terrain is 'null'")
         public void checkGetAttackBonusThrowingException() {
