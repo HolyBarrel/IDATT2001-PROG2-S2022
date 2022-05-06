@@ -7,6 +7,9 @@ import edu.ntnu.idatt2001.magnulal.model.units.Unit;
  * These different TerrainTypes aid in creating variation in buffing units with terrain bonuses
  * To further see the logic, see {@link edu.ntnu.idatt2001.magnulal.model.units.Unit} for methods calculating
  * these bonuses
+ * @author magnulal
+ * @version 0.3
+ * @since 0.3
  */
 public enum TerrainType {
     FOREST,

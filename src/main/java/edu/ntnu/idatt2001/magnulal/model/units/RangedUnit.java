@@ -8,8 +8,8 @@ import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
  * attackBonus = 3, is specific for this subclass
  * resistBonus is either 7, 5 or 2, depending on how many times this unit-object of
  * class has been hit, this is a way to represent how far away the enemy is
- * @author Magnus Lutro Allison
- * @version 0.2
+ * @author magnulal
+ * @version 0.3
  * @since 0.1
  */
 public class RangedUnit extends Unit{

@@ -10,8 +10,8 @@ import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
  *  = attackBonus: 6, or not = attackBonus: 2
  *  A cavalryUnit is set to charge on the first attack it makes
  *  resistBonus = 1, specific for objects of this subclass
- * @author Magnus Lutro Allison
- * @version 0.2
+ * @author magnulal
+ * @version 0.3
  * @since 0.1
  */
 public class CavalryUnit extends Unit {

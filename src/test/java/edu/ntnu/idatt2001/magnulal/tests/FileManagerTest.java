@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FileManagerTest {
+public class FileManagerTest { //TODO: test all methods of FileManager
 
     private String fileName;
     private Army humanArmy = new Army("Alliance");
@@ -39,6 +39,7 @@ public class FileManagerTest {
         humanArmy.add(new CommanderUnit("MountainKing", 180));
         orcArmy.add(new CommanderUnit("Gul'dan", 180));
     }
+
     @AfterEach
     public void deleteLastFile(){
         if(this.fileName != null){
@@ -56,7 +57,7 @@ public class FileManagerTest {
             @Test
             @DisplayName("writeArmyToFileWFileName creates a file")
             public void writeArmyToFileWFileName(){
-                fileName = "humanarmy";
+                fileName = "human-army";
                 FileManager.writeArmyToFileWFileName(fileName, humanArmy);
                 assertTrue(Files.exists(Paths.get(
                         "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/"
@@ -137,7 +138,7 @@ public class FileManagerTest {
             public void readArmyFromFile(){
                 Army testArmy = null;
                 try {
-                    testArmy = FileManager.readArmyFromFile("human-army");
+                    testArmy = FileManager.readArmyFromFile("humanarmy");
                 } catch (FileNotFoundException f) {
                     fail("'readArmyFromFile' failed with the message: "
                             + f.getMessage());

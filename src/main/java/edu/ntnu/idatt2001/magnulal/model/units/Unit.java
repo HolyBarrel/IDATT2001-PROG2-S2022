@@ -16,7 +16,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
  * InfantryUnit
  * CavalryUnit --> which in turn is inherited by CommanderUnit
  * RangedUnit
- * @author Magnus Lutro Allison
+ * @author magnulal
  * @version 0.3
  * @since 0.1
  */
@@ -213,7 +213,7 @@ public abstract class Unit {
      * terrain-calculated bonuses cannot be validated with this stat having a default 'null'-value
      * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
      * 'null'-value
-     */ //TODO: rename all, movE
+     */ //TODO: rename all, move
     private void checkTerrainStatus() throws NullPointerException {
         if(!ActiveTerrain.INSTANCE.isTerrainSet()) throw new NullPointerException("The terrain has not " +
                 "been set to a valid terrain type, please make sure this is done before starting any simulation.");

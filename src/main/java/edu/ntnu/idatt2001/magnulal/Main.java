@@ -11,7 +11,8 @@ import java.io.IOException;
  * Main class that inherits from Application
  * The class has a start-method that shows the given stage
  * @author magnulal
- * @version 2022-03-30 TODO update
+ * @version 0.3
+ * @since 0.3
 */
 public class Main extends Application {
     @Override

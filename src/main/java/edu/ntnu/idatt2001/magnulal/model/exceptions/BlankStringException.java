@@ -2,7 +2,7 @@ package edu.ntnu.idatt2001.magnulal.model.exceptions;
 
 /**
  * Custom subclass of RuntimeException with the name 'BlankStringException' describing the exceptional event
- * @author Magnus Lutro Allison
+ * @author magnulal
  * @version 0.3
  * @since 0.3
  */

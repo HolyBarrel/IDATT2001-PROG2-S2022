@@ -15,8 +15,8 @@ import java.util.Scanner;
  * The constructor is private to ensure that other classes cannot instantiate objects of
  * the FileManager
  * This is because this class is only used for its static methods
- * @author Magnus Lutro Allison
- * @version 0.2
+ * @author magnulal
+ * @version 0.3
  * @since 0.2
  */
 public class FileManager { //TODO: check charset also

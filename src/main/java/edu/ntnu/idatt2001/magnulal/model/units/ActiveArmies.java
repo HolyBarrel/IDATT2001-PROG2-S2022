@@ -4,8 +4,9 @@ import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 
 /**
  * TODO COMMENT ALL
+ * TODO: move to utils
  */
-public class ActiveArmies { //TODO: make into twingleton TODO: DELETE
+public class ActiveArmies { //TODO: make into twingleton
     private static Army activeArmy1;
     private static String activeArmy1Path;
     private static Army activeArmy2;

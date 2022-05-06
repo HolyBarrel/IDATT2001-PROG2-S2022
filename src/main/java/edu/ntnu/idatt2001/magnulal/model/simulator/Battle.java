@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * Battle class to simulate a battle between to armies
  * @author Magnus Lutro Allison
- * @version 0.3 //TODO: UPDATE VERSIONS
+ * @version 0.3
  * @since 0.1
  */
 public class Battle {

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * Class describing an army containing various types of units
  * The army has a String value for its name, and a list of all
  * Unit-subclass units in this army
- * @author Magnus Lutro Allison
+ * @author magnulal
  * @version 0.3
  * @since 0.1
  */

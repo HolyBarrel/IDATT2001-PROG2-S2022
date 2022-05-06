@@ -7,16 +7,23 @@ import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
 import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 
 /**
- * TODO COMMENT
+ * Home screen controller for the Wargames application //TODO: COMMENT ALL
+ * @author magnulal
+ * @version 0.3
+ * @since 0.3
  */
 public class HomeController {
     //Source: https://stackoverflow.com/questions/14256588/opening-a-javafx-filechooser-in-the-user-directory,
@@ -45,8 +52,6 @@ public class HomeController {
     @FXML
     private Label cavArmy2;
     @FXML
-    private Button btnSaveArmy1;
-    @FXML
     private Label infArmy1;
     @FXML
     private Label infArmy2;
@@ -65,8 +70,6 @@ public class HomeController {
     @FXML
     private Button btnResetArmy2;
     @FXML
-    private Button btnSaveArmy2;
-    @FXML
     private Button btnResetArmy1;
     @FXML
     private Button btnSeeArmy1;
@@ -81,7 +84,7 @@ public class HomeController {
     @FXML
     private Label sumUnitsArmy1;
 
-    @FXML
+    @Deprecated
     public void initialize() throws FileNotFoundException { //TODO: handle
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
@@ -172,10 +175,6 @@ public class HomeController {
     }
 
     @FXML
-    public void saveArmy1(ActionEvent actionEvent) {
-    }
-
-    @FXML
     public void loadArmy1(ActionEvent actionEvent) { //TODO: MAKE ROBUST
         File file = openFileExplorer();
         ActiveArmies.setActiveArmy1(FileManager.readArmyFromExistingFile(file));
@@ -209,10 +208,6 @@ public class HomeController {
     }
 
     @FXML
-    public void saveArmy2(ActionEvent actionEvent) {
-    }
-
-    @FXML
     public void resetArmy2(ActionEvent actionEvent) throws FileNotFoundException { // TODO: hanlde
         ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(ActiveArmies.getActiveArmy2Path()));
         setStatsArmy2();
@@ -220,10 +215,26 @@ public class HomeController {
 
     @FXML
     public void seeArmy2(ActionEvent actionEvent) {
+        //TODO: is under development, this is just a temporary solution to fulfill the minimum requirements for task 3
+        //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
+        //TODO: revise
+        JTextArea armyInformation = new JTextArea(ActiveArmies.getActiveArmy2().toString());
+        JScrollPane scrollInfoPane = new JScrollPane(armyInformation);
+        scrollInfoPane.setPreferredSize( new Dimension( 900, 611));
+        JOptionPane.showMessageDialog(null, scrollInfoPane, "Selected army:",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     @FXML
     public void seeArmy1(ActionEvent actionEvent) {
+        //TODO: is under development, this is just a temporary solution to fulfill the minimum requirements for task 3
+        //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
+        //TODO: revise
+        JTextArea armyInformation = new JTextArea(ActiveArmies.getActiveArmy1().toString());
+        JScrollPane scrollInfoPane = new JScrollPane(armyInformation);
+        scrollInfoPane.setPreferredSize( new Dimension( 900, 611));
+        JOptionPane.showMessageDialog(null, scrollInfoPane, "Selected army:",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 //TODO: dialog box when quitting
 }

@@ -11,6 +11,9 @@ import java.util.List;
  * UnitFactory class to extract the ability to instantiate units to a separate class
  * This class has a method to create a single unit, and also to create a list with
  * a given integer amount of duplicated units
+ * @author magnulal
+ * @version 0.3
+ * @since 0.3
  */
 public class UnitFactory {
     /**

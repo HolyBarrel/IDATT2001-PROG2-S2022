@@ -8,8 +8,8 @@ import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
  * 'CavalryUnit' which in turn is a subclass of the abstract superclass 'Unit'
  * A CommanderUnit is a more capable version of the CavalryUnit, and does therefore
  * have a buffed attack and armor compared to its superclass
- * @author Magnus Lutro Allison
- * @version 0.2
+ * @author magnulal
+ * @version 0.3
  * @since 0.1
  */
 public class CommanderUnit extends CavalryUnit{

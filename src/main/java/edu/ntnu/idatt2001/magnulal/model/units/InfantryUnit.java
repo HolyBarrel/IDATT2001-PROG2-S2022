@@ -8,8 +8,8 @@ import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
  * superclass 'Unit'
  * attackBonus = 2, specific value for objects of this subclass
  * resistBonus = 1, specific value for objects of this subclass
- * @author Magnus Lutro Allison
- * @version 0.2
+ * @author magnulal
+ * @version 0.3
  * @since 0.1
  */
 public class InfantryUnit extends Unit {

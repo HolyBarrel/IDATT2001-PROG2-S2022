@@ -140,11 +140,6 @@
             </HBox>
             <HBox prefHeight="46.0" prefWidth="327.0">
                <children>
-                  <Pane prefHeight="46.0" prefWidth="19.0" />
-                  <Button fx:id="btnSaveArmy1" mnemonicParsing="false" onAction="#saveArmy1" prefHeight="46.0" prefWidth="74.0" text="Save">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font></Button>
                   <Pane layoutX="105.0" layoutY="10.0" prefHeight="46.0" prefWidth="19.0">
                      <children>
                         <Pane prefHeight="46.0" prefWidth="19.0" />
@@ -267,12 +262,6 @@
             </HBox>
             <HBox prefHeight="46.0" prefWidth="327.0">
                <children>
-                  <Pane prefHeight="46.0" prefWidth="19.0" />
-                  <Button fx:id="btnSaveArmy2" mnemonicParsing="false" onAction="#saveArmy2" prefHeight="46.0" prefWidth="74.0" text="Save">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Button>
                   <Pane prefHeight="46.0" prefWidth="19.0" />
                   <Button fx:id="btnLoadArmy2" mnemonicParsing="false" onAction="#loadArmy2" prefHeight="46.0" prefWidth="74.0" text="Load">
                      <font>
