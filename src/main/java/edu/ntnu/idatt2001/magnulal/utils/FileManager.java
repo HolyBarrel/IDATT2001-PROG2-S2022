@@ -36,13 +36,23 @@ public class FileManager { //TODO: check charset also
      * filepath to the resources root's directory called 'csvdocuments'. By using this method throughout the
      * FileManager class this directory is the only manipulable directory for the FileManager
      */
-    private static String constructFilePath(String fileName){
+    public static String constructFilePath(String fileName){ //TODO: change back to private
         if(fileName.endsWith(".csv")){
             return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/%s", fileName);
         }else{
             return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/%s.csv", fileName);
         }
     }
+    //TODO: ADD METHOD TO EXTRACT FILE NAME
+
+    /**
+     * TODO: comment
+     * @return or default
+     */
+    public static String constructHomePath(){
+        return System.getProperty("user.home").replace("\\", "/");
+    }
+
 
     /*
        Exception handling private methods
@@ -135,12 +145,25 @@ public class FileManager { //TODO: check charset also
      * file with the path does exist
      * @throws NullPointerException if the file at the target file path does not exist
      * The method catches IOException and prints the stack trace of it, if this occurs during reading
-     */
+     */ //TODO: delete
     public static Army readArmyFromFile(String fileName) throws InvalidPathException, NullPointerException,
             FileNotFoundException {
         checkValidityOfPath(fileName);
         checkIfFileExists(fileName);
         return readArmyFromExistingFile(new File(constructFilePath(fileName)));
+    }
+
+    /**
+     * TODO: COMMENT, revise CLASS, add ex handl
+     * @param filePath
+     * @return
+     * @throws InvalidPathException
+     * @throws NullPointerException
+     * @throws FileNotFoundException
+     */
+    public static Army readArmyFromFullFilePath(String filePath) throws InvalidPathException, NullPointerException,
+            FileNotFoundException { //TODO: move, redo FileHandler
+        return readArmyFromExistingFile(new File(filePath));
     }
 
     /**

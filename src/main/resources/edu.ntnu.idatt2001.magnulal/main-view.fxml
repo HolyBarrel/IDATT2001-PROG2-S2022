@@ -8,54 +8,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="450.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.controller.HomeController">
+<BorderPane minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.controller.HomeController">
    <bottom>
-      <HBox alignment="CENTER" prefHeight="137.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="137.0" prefWidth="900.0" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
-            <TextFlow prefHeight="143.0" prefWidth="282.0">
+            <Label fx:id="lblPathArmy1" alignment="BOTTOM_CENTER" text="File Path Army 1: " wrapText="true" />
+            <VBox prefHeight="137.0" prefWidth="320.0">
                <children>
-                  <Label fx:id="lblPathArmy1" prefHeight="137.0" prefWidth="271.0" text="File Path Army 1: " />
-               </children>
-            </TextFlow>
-            <Pane prefHeight="137.0" prefWidth="340.0">
-               <children>
-                  <VBox layoutX="-1.0" prefHeight="139.0" prefWidth="330.0">
+                  <HBox alignment="CENTER">
                      <children>
-                        <HBox prefHeight="61.0" prefWidth="314.0">
+                        <Button fx:id="btnTerrainLeft" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#rotateTerrainLeft" prefHeight="40.0" prefWidth="40.0" text="&lt;" />
+                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="233.0">
                            <children>
-                              <Button fx:id="btnTerrainLeft" mnemonicParsing="false" onAction="#rotateTerrainLeft" prefHeight="49.0" prefWidth="57.0" text="&lt;" />
-                              <VBox prefHeight="60.0" prefWidth="233.0">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="241.0" text="Choose Terrain:">
-                                       <font>
-                                          <Font name="System Bold" size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="currentTerrain" alignment="CENTER" prefHeight="33.0" prefWidth="238.0" text="TerrainType">
-                                       <font>
-                                          <Font name="System Bold Italic" size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <Button fx:id="btnTerrainRight" mnemonicParsing="false" onAction="#rotateTerrainRight" prefHeight="49.0" prefWidth="57.0" text="&gt;" />
+                              <Label alignment="CENTER" text="Choose Terrain:">
+                                 <font>
+                                    <Font name="System Bold" size="19.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="currentTerrain" alignment="CENTER" text="TerrainType">
+                                 <font>
+                                    <Font name="System Bold Italic" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
-                        </HBox>
-                        <Button fx:id="btnSimBattle" mnemonicParsing="false" prefHeight="73.0" prefWidth="336.0" text="SIMULATE BATTLE">
-                           <font>
-                              <Font size="32.0" />
-                           </font>
-                        </Button>
+                        </VBox>
+                        <Button fx:id="btnTerrainRight" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#rotateTerrainRight" prefHeight="40.0" prefWidth="40.0" text="&gt;" />
                      </children>
-                  </VBox>
+                  </HBox>
+                  <Button fx:id="btnSimBattle" minHeight="75.0" minWidth="320.0" mnemonicParsing="false" onAction="#initiateSimulation" prefHeight="75.0" prefWidth="320.0" text="SIMULATE BATTLE" textFill="#d30000">
+                     <font>
+                        <Font name="System Bold Italic" size="32.0" />
+                     </font>
+                  </Button>
                </children>
-            </Pane>
-            <Label fx:id="lblPathArmy2" contentDisplay="CENTER" prefHeight="137.0" prefWidth="255.0" text="File Path Army 2: " />
+            </VBox>
+            <Label fx:id="lblPathArmy2" alignment="BOTTOM_RIGHT" text="File Path Army 2: " wrapText="true" />
          </children>
       </HBox>
    </bottom>
    <left>
-      <VBox prefHeight="354.0" prefWidth="368.0" BorderPane.alignment="CENTER">
+      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="368.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="labelArmy1" alignment="CENTER" contentDisplay="CENTER" prefHeight="51.0" prefWidth="368.0" text="Army 1" textAlignment="CENTER">
                <font>
@@ -66,7 +58,7 @@
                <children>
                   <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Unit Type">
                      <font>
-                        <Font size="26.0" />
+                        <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
                   <Label alignment="CENTER" prefHeight="46.0" prefWidth="205.0" text="Amount">
@@ -134,29 +126,55 @@
             </HBox>
             <HBox prefHeight="46.0" prefWidth="327.0">
                <children>
-                  <Pane layoutX="105.0" layoutY="10.0" prefHeight="48.0" prefWidth="29.0" />
-                  <Button fx:id="btnSaveArmy1" mnemonicParsing="false" prefHeight="46.0" prefWidth="95.0" text="Save">
+                  <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Sum of units">
                      <font>
-                        <Font size="20.0" />
-                     </font></Button>
-                  <Pane prefHeight="48.0" prefWidth="29.0" />
-                  <Button fx:id="btnSaveArmy1" mnemonicParsing="false" prefHeight="46.0" prefWidth="98.0" text="Load">
-                     <font>
-                        <Font size="22.0" />
-                     </font></Button>
-                  <Pane layoutX="105.0" layoutY="10.0" prefHeight="48.0" prefWidth="29.0" />
-                  <Button fx:id="btnViewArmy1" mnemonicParsing="false" prefHeight="46.0" prefWidth="100.0" text="View Units" wrapText="true">
-                     <font>
-                        <Font size="16.0" />
+                        <Font size="21.0" />
                      </font>
-                  </Button>
+                  </Label>
+                  <Label fx:id="sumUnitsArmy1" alignment="CENTER" prefHeight="46.0" prefWidth="204.0" text="0">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
+            <HBox prefHeight="46.0" prefWidth="327.0">
+               <children>
+                  <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button fx:id="btnSaveArmy1" mnemonicParsing="false" onAction="#saveArmy1" prefHeight="46.0" prefWidth="74.0" text="Save">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font></Button>
+                  <Pane layoutX="105.0" layoutY="10.0" prefHeight="46.0" prefWidth="19.0">
+                     <children>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
+                     </children></Pane>
+                  <Button fx:id="btnLoadArmy1" mnemonicParsing="false" onAction="#loadArmy1" prefHeight="46.0" prefWidth="74.0" text="Load">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button fx:id="btnResetArmy1" mnemonicParsing="false" onAction="#resetArmy1" prefHeight="46.0" prefWidth="77.0" text="Reset">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button fx:id="btnSeeArmy1" mnemonicParsing="false" onAction="#seeArmy1" prefHeight="46.0" prefWidth="112.0" text="See Units">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="46.0" prefWidth="19.0" />
+               </children>
+            </HBox>
+            <Pane prefHeight="30.0" prefWidth="368.0" />
          </children>
       </VBox>
    </left>
    <right>
-      <VBox prefHeight="354.0" prefWidth="368.0" BorderPane.alignment="CENTER">
+      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="368.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="labelArmy2" alignment="CENTER" contentDisplay="CENTER" prefHeight="51.0" prefWidth="369.0" text="Army 2" textAlignment="CENTER">
                <font>
@@ -167,7 +185,7 @@
                <children>
                   <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Unit Type">
                      <font>
-                        <Font size="26.0" />
+                        <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
                   <Label alignment="CENTER" prefHeight="46.0" prefWidth="205.0" text="Amount">
@@ -235,30 +253,53 @@
             </HBox>
             <HBox prefHeight="46.0" prefWidth="327.0">
                <children>
-                  <Pane layoutX="217.0" layoutY="10.0" prefHeight="46.0" prefWidth="14.0" />
-                  <Button fx:id="btnSaveArmy2" mnemonicParsing="false" prefHeight="46.0" prefWidth="95.0" text="Save">
+                  <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Sum of units">
                      <font>
-                        <Font size="20.0" />
-                     </font></Button>
-                  <Pane prefHeight="48.0" prefWidth="29.0" />
-                  <Button fx:id="btnLoadArmy2" mnemonicParsing="false" prefHeight="46.0" prefWidth="98.0" text="Load">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Button>
-                  <Pane prefHeight="48.0" prefWidth="29.0" />
-                  <Button fx:id="btnViewArmy2" mnemonicParsing="false" prefHeight="46.0" prefWidth="100.0" text="View Units" wrapText="true">
-                     <font>
-                        <Font size="16.0" />
+                        <Font size="21.0" />
                      </font>
-                  </Button>
-                  <Pane prefHeight="48.0" prefWidth="29.0" />
+                  </Label>
+                  <Label fx:id="sumUnitsArmy2" alignment="CENTER" prefHeight="46.0" prefWidth="204.0" text="0">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
+            <HBox prefHeight="46.0" prefWidth="327.0">
+               <children>
+                  <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button fx:id="btnSaveArmy2" mnemonicParsing="false" onAction="#saveArmy2" prefHeight="46.0" prefWidth="74.0" text="Save">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button fx:id="btnLoadArmy2" mnemonicParsing="false" onAction="#loadArmy2" prefHeight="46.0" prefWidth="74.0" text="Load">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button fx:id="btnResetArmy2" mnemonicParsing="false" onAction="#resetArmy2" prefHeight="46.0" prefWidth="77.0" text="Reset">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button fx:id="btnSeeArmy2" mnemonicParsing="false" onAction="#seeArmy2" prefHeight="46.0" prefWidth="112.0" text="See Units">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="46.0" prefWidth="19.0" />
+               </children>
+            </HBox>
+            <Pane prefHeight="30.0" prefWidth="368.0" />
          </children>
       </VBox>
    </right>
    <center>
-      <Label prefHeight="30.0" prefWidth="33.0" text="VS" BorderPane.alignment="CENTER">
+      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="33.0" text="VS" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -267,12 +308,15 @@
    <top>
       <VBox alignment="CENTER" prefHeight="118.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="WARGAMES">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="365.0" text="WARGAMES">
                <font>
                   <Font name="System Bold Italic" size="64.0" />
                </font>
             </Label>
-            <Label fx:id="exMsg" prefHeight="27.0" prefWidth="691.0" />
+            <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="884.0" textFill="#d30000" wrapText="true">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
          </children>
       </VBox>
    </top>

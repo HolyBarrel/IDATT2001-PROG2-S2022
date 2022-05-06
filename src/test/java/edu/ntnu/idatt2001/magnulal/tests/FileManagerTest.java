@@ -150,7 +150,7 @@ public class FileManagerTest {
             public void readArmyFromFileWCSVEnding(){
                 Army testArmy = null;
                 try {
-                    testArmy = FileManager.readArmyFromFile("human-army.csv");
+                    testArmy = FileManager.readArmyFromFile("humanarmy.csv");
                 } catch (FileNotFoundException f) {
                     fail("'readArmyFromFileWCSVEnding' failed with the message: "
                             + f.getMessage());

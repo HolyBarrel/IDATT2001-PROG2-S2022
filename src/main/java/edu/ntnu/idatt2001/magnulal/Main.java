@@ -22,6 +22,8 @@ public class Main extends Application {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Wargames");
             stage.setScene(scene);
+            stage.setMinHeight(540);
+            stage.setMinWidth(720);
             stage.show();
         }catch (IOException i){
             i.printStackTrace();
