@@ -12,7 +12,10 @@
    <bottom>
       <HBox alignment="BOTTOM_CENTER" prefHeight="137.0" prefWidth="900.0" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblPathArmy1" alignment="BOTTOM_CENTER" text="File Path Army 1: " wrapText="true" />
+            <Label fx:id="lblPathArmy1" alignment="BOTTOM_CENTER" maxWidth="240.0" text="File Path Army 1: " textFill="#002effa3" wrapText="true">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font></Label>
             <VBox prefHeight="137.0" prefWidth="320.0">
                <children>
                   <HBox alignment="CENTER">
@@ -42,7 +45,10 @@
                   </Button>
                </children>
             </VBox>
-            <Label fx:id="lblPathArmy2" alignment="BOTTOM_RIGHT" text="File Path Army 2: " wrapText="true" />
+            <Label fx:id="lblPathArmy2" alignment="BOTTOM_RIGHT" maxWidth="260.0" text="File Path Army 2: " textFill="#002fffa3" wrapText="true">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font></Label>
          </children>
       </HBox>
    </bottom>

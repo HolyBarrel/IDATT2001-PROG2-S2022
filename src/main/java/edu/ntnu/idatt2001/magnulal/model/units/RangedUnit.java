@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001.magnulal.model.units;
 
-import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
-import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
 
 /**
  * Class for a ranged unit which is a subclass of the abstract superclass 'Unit'

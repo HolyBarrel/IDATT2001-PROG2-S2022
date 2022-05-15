@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001.magnulal.controller;
 
 import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
-import edu.ntnu.idatt2001.magnulal.model.units.ActiveArmies;
+import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
 import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import javafx.event.ActionEvent;
@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
-
+//todo: modality
 
 import javax.swing.*;
 import java.awt.*;
@@ -88,8 +88,8 @@ public class HomeController {
     public void initialize() throws FileNotFoundException { //TODO: handle
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
-        updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/humanarmy.csv",
-                "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/orchorde.csv");
+        updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/humanarmy.csv",
+                "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/orchorde.csv");
     }
 
     /**
@@ -171,6 +171,7 @@ public class HomeController {
         File file = openFileExplorer();
         ActiveArmies.setActiveArmy2(FileManager.readArmyFromExistingFile(file));
         ActiveArmies.setActiveArmy2Path(file.getAbsolutePath());
+        lblPathArmy2.setText("Path: " + file.getAbsolutePath());
         setStatsArmy2();
     }
 
@@ -179,6 +180,7 @@ public class HomeController {
         File file = openFileExplorer();
         ActiveArmies.setActiveArmy1(FileManager.readArmyFromExistingFile(file));
         ActiveArmies.setActiveArmy1Path(file.getAbsolutePath());
+        lblPathArmy1.setText("Path: " + file.getAbsolutePath()); //TODO: make not weird
         setStatsArmy1();
     }
 
@@ -186,7 +188,7 @@ public class HomeController {
      * TODO: comment
      * @return
      */
-    private File openFileExplorer(){
+    private File openFileExplorer(){ //TODO: Exception handling
         //Source: https://stackoverflow.com/questions/14256588/opening-a-javafx-filechooser-in-the-user-directory,
         // 05.05.2022
         currentFileChooser.getExtensionFilters().add(currentExtFilter);

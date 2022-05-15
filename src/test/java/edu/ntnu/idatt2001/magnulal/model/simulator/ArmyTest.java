@@ -1,12 +1,11 @@
-package edu.ntnu.idatt2001.magnulal.tests;
-import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
+package edu.ntnu.idatt2001.magnulal.model.simulator;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 //TODO: restructure tests to be packaged n the same way as main/java..
@@ -249,7 +248,8 @@ public class ArmyTest {
             unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20, 2));
             Army testArmy = new Army("Alliance", unitsTestArray);
             String underLine = "\n|_______________________________________________________________\n";
-            String testStr = underLine + "| Units of the army: 'Alliance'" + underLine +
+            String testStr = "\n _______________________________________________________________\n" +
+                    "| Units of the army: 'Alliance'" + underLine +
                     "| Name: 'GrandLancer'  Health: 75   Attack: 12   Armor: 10   " + underLine +
                     "| Name: 'GrandLancer'  Health: 65   Attack: 10   Armor: 10   " + underLine +
                     "| Name: 'CrossbowMan'  Health: 40   Attack: 20   Armor: 2    " + underLine +

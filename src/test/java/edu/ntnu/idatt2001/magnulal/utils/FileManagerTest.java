@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.tests;
+package edu.ntnu.idatt2001.magnulal.utils;
 
 import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
@@ -60,7 +60,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 fileName = "human-army";
                 FileManager.writeArmyToFileWFileName(fileName, humanArmy);
                 assertTrue(Files.exists(Paths.get(
-                        "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/"
+                        "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/"
                                 + fileName + ".csv")));
             }
             @Test
@@ -69,7 +69,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 fileName = "orcarmy2";
                 FileManager.writeArmyToFileWFileName(fileName, orcArmy);
                 assertTrue(Files.exists(Paths.get(
-                        "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/"
+                        "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/"
                                 + fileName + ".csv")));
                 Army testArmy = null;
                 try {
@@ -95,7 +95,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 }catch (InvalidPathException i){
                     assertEquals("The given file path contained forbidden characters. " +
                                     "The application could not utilize it, please try again.: " +
-                                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/orcarmy2?.csv",
+                                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/orcarmy2?.csv",
                             i.getMessage());
                 }
             }
@@ -107,7 +107,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 }catch (InvalidPathException i){
                     assertEquals("The given file path contained forbidden characters. The application could " +
                                     "not utilize it, please try again.: " +
-                                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/orcarmy2/.csv",
+                                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/orcarmy2/.csv",
                             i.getMessage());
                 }
             }
@@ -119,7 +119,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 }catch (InvalidPathException i){
                     assertEquals("The given file path contained forbidden characters. " +
                                     "The application could not utilize it, please try again.: " +
-                                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/orcarmy\\2.csv",
+                                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/orcarmy\\2.csv",
                             i.getMessage());
                 }
             }
@@ -169,7 +169,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 try{
                     FileManager.readArmyFromFile("hummy.csv");
                 }catch (FileNotFoundException f){
-                    assertEquals("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/hummy.csv " +
+                    assertEquals("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/hummy.csv " +
                             "Was the path. Could not find a file with a corresponding file path, please try again.",
                             f.getMessage());
                 }
@@ -191,18 +191,18 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 FileManager.deleteAFile("orcish army");
                 assertFalse(Files.exists(
                         Paths.get(
-                                "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/orcish army.csv")));
+                                "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/orcish army.csv")));
             }
             @Test
             @DisplayName("DeleteAFile does not find a file to remove")
             public void deleteAFileDoesNotReachAnyTargetFile() {
                 assertFalse(Files.exists(
                         Paths.get(
-                                "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/hummy.csv")));
+                                "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/hummy.csv")));
                 FileManager.deleteAFile("hummy");
                 assertFalse(Files.exists(
                         Paths.get(
-                                "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/hummy.csv")));
+                                "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/hummy.csv")));
             }
         }
         @Nested
@@ -218,7 +218,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 }catch (InvalidPathException i){
                     assertEquals("The given file path contained forbidden characters. " +
                                     "The application could not utilize it, please try again.: " +
-                                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/orcarmy2?.csv",
+                                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/orcarmy2?.csv",
                             i.getMessage());
                 }
             }

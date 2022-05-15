@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.model.exceptions;
+package edu.ntnu.idatt2001.magnulal.utils.exceptions;
 
 /**
  * Custom subclass of RuntimeException with the name 'NegativeIntegerException' describing the exceptional event

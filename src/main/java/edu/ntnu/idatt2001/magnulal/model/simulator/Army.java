@@ -1,5 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.model.simulator;
-import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
 
@@ -256,7 +256,8 @@ public class Army {
     @Override
     public String toString() {
         String underLine = "\n|_______________________________________________________________\n";
-        StringBuilder sb = new StringBuilder(underLine).append("| Units of the army: '").append(getName()).append("'");
+        StringBuilder sb = new StringBuilder("\n _______________________________________________________________\n")
+                .append("| Units of the army: '").append(getName()).append("'");
         for(Unit unit: getAllUnits()){
             sb.append(underLine);
             sb.append(unit.toString());

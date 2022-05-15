@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.tests;
+package edu.ntnu.idatt2001.magnulal.model.units;
 import edu.ntnu.idatt2001.magnulal.model.units.InfantryUnit;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
 import org.junit.jupiter.api.*;

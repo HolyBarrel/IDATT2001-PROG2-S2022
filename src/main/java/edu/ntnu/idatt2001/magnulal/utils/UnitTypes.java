@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001.magnulal.utils;
 
+import java.util.Arrays;
+
 /**
  * Enum to represent all the types of units in this project
  * the enum has attached string values corresponding to each unit subclass'
@@ -10,7 +12,10 @@ package edu.ntnu.idatt2001.magnulal.utils;
  */
 public enum UnitTypes {
     //Enums
-    INFANTRY("InfantryUnit"),CAVALRY("CavalryUnit"),COMMANDER("CommanderUnit"),RANGED("RangedUnit");
+    INFANTRY("InfantryUnit"),
+    CAVALRY("CavalryUnit"),
+    COMMANDER("CommanderUnit"),
+    RANGED("RangedUnit");
     private final String unitType;
 
     /**
@@ -25,14 +30,14 @@ public enum UnitTypes {
     /**
      * Static method to make enum easily usable with enhanced switch
      * see {@link edu.ntnu.idatt2001.magnulal.utils.FileManager#readArmyFromFile(String)}
-     * @param searchString is a string value which matched with any of the enum's string-attached
-     *                     string returns the enum value
+     * @param nameString is a string value which is matched with any of the enum's string-attached
+     *                     string returns the enum value// todo: rewrite
      * @return enum value corresponding with searchString if found, and 'null' otherwise
      */
-    public static UnitTypes getValueMatching(String searchString){
-        for (UnitTypes t: values()) {
-            if(t.unitType.equals(searchString)){
-                return t;
+    public static UnitTypes getValueMatching(String nameString){
+        for (UnitTypes type: values()) { //TODO: CHANGE TO WHILE
+            if(type.unitType.equals(nameString)){
+                return type;
             }
         }
         return null;

@@ -18,8 +18,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(
-                    Main.class.getResource("/edu.ntnu.idatt2001.magnulal/main-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader( //TODO: make a SceneManager
+                    Main.class.getResource("/edu.ntnu.idatt2001.magnulal/fxml/main-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Wargames");
             stage.setScene(scene);

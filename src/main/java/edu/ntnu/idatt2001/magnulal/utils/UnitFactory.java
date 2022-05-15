@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001.magnulal.utils;
 
-import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
-import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
 
 import java.util.ArrayList;
@@ -30,23 +30,13 @@ public class UnitFactory {
      */
     public static Unit createUnit(UnitTypes unitType, String unitName, int unitHealth) throws NullPointerException,
             BlankStringException, NegativeIntegerException {
-        switch (unitType) {
-            case INFANTRY -> {
-                return new InfantryUnit(unitName, unitHealth);
-            }
-            case RANGED -> {
-                return new RangedUnit(unitName, unitHealth);
-            }
-            case CAVALRY -> {
-                return new CavalryUnit(unitName, unitHealth);
-            }
-            case COMMANDER -> {
-                return new CommanderUnit(unitName, unitHealth);
-            }
-            default -> {
-                throw new NullPointerException("The requested unit type could not be found.");
-            }
-        }
+        return switch (unitType) {
+            case INFANTRY -> new InfantryUnit(unitName, unitHealth);
+            case RANGED -> new RangedUnit(unitName, unitHealth);
+            case CAVALRY -> new CavalryUnit(unitName, unitHealth);
+            case COMMANDER -> new CommanderUnit(unitName, unitHealth);
+            //default -> throw new NullPointerException("The requested unit type could not be found.");
+        };
     }
 
     /**

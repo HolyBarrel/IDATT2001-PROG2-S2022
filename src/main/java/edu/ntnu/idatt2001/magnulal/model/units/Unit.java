@@ -1,11 +1,8 @@
 package edu.ntnu.idatt2001.magnulal.model.units;
 
-import edu.ntnu.idatt2001.magnulal.model.exceptions.BlankStringException;
-import edu.ntnu.idatt2001.magnulal.model.exceptions.NegativeIntegerException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 

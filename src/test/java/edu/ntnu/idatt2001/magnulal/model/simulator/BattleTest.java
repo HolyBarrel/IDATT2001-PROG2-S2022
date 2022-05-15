@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.tests;
+package edu.ntnu.idatt2001.magnulal.model.simulator;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
 import edu.ntnu.idatt2001.magnulal.model.units.CavalryUnit;

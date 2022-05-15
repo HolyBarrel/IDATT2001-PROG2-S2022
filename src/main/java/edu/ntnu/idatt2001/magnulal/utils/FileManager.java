@@ -29,18 +29,18 @@ public class FileManager { //TODO: check charset also
 
     /**
      * Creates a string that is a correctly formatted path to this project's 'resources' root:
-     * 'src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments'.
+     * 'src/main/resources/edu.ntnu.idatt2001.magnulal/csv'.
      * @param fileName, is the file name specified
      * @return formatted string with 'src/main/resources' added to the start of the inputted
      * file name, and '.csv' to the end of it if the parameter does not end with '.csv'. This creates a viable
-     * filepath to the resources root's directory called 'csvdocuments'. By using this method throughout the
+     * filepath to the resources root's directory called 'csv'. By using this method throughout the
      * FileManager class this directory is the only manipulable directory for the FileManager
      */
     public static String constructFilePath(String fileName){ //TODO: change back to private
         if(fileName.endsWith(".csv")){
-            return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/%s", fileName);
+            return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/%s", fileName);
         }else{
-            return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments/%s.csv", fileName);
+            return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/%s.csv", fileName);
         }
     }
     //TODO: ADD METHOD TO EXTRACT FILE NAME
@@ -139,7 +139,7 @@ public class FileManager { //TODO: check charset also
      * It also checks the validity of the path constructed from the String fileName parameter and makes
      * sure that the target file for reading actually exists
      * @param fileName is a string for the targeted file name in the directory at the root:
-                      'src/main/resources/edu.ntnu.idatt2001.magnulal/csvdocuments' of this project
+                      'src/main/resources/edu.ntnu.idatt2001.magnulal/csv' of this project
      * @return an army from the information in the target file
      * @throws InvalidPathException if the constructed file path is invalid or if no
      * file with the path does exist
@@ -197,15 +197,21 @@ public class FileManager { //TODO: check charset also
      * @throws NullPointerException if the line could not be matched with any unit type
      */
     private static Unit readUnit(String[] readLineValues) throws NullPointerException{
-        return UnitFactory.createUnit(Objects.requireNonNull(UnitTypes.getValueMatching(
-                readLineValues[0].trim())),
-                readLineValues[1].trim(),
-                Integer.parseInt(readLineValues[2]));
+        try{
+            return UnitFactory.createUnit(Objects.requireNonNull(UnitTypes.getValueMatching(
+                            readLineValues[0].trim())),
+                    readLineValues[1].trim(),
+                    Integer.parseInt(readLineValues[2]));
+        }catch (NullPointerException n){
+            throw new NullPointerException("The requested unit type could not be found.");
+        }
+
+        //TODO: LAG EN SOM reader hele andre constructøren fra unit
     }
     /**
      * Deletes a given file at the file path constructed from the specified file name if a file of that name exists
      * @param fileName is a String of a file name that specifies which file in the
-     *                 resource's directory called 'csvdocuments'. This way the delete-method
+     *                 resource's directory called 'csv'. This way the delete-method
      *                 can only delete from that directory
      * @throws InvalidPathException if the constructed path contains forbidden characters
      */
