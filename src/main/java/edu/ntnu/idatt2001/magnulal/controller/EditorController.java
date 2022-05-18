@@ -125,16 +125,20 @@ public class EditorController {
         try{
             exMsg.setText("");
             confirmInputValues();
+
             Army prevArmy1 = ActiveArmies.getActiveArmy1();
             Army prevArmy2 = ActiveArmies.getActiveArmy2();
-            Army newArmy1 = parseToArmy(prevArmy1, comNrArmy1, infNrArmy1, cavNrArmy1, ranNrArmy1, nameArmy1);
+
+            Army newArmy1 = parseToArmy(1, prevArmy1, comNrArmy1, infNrArmy1, cavNrArmy1, ranNrArmy1, nameArmy1);
             if(newArmy1 != null){
+                FileManager.writeArmyToFileWFileName(nameArmy1.getText(), newArmy1);
                 ActiveArmies.setActiveArmy1(newArmy1);
                 ActiveArmies.setActiveArmy1Path(nameArmy1.getText());
             }
             /////
-            Army newArmy2 = parseToArmy(prevArmy2, comNrArmy2, infNrArmy2, cavNrArmy2, ranNrArmy2, nameArmy2);
+            Army newArmy2 = parseToArmy(2, prevArmy2, comNrArmy2, infNrArmy2, cavNrArmy2, ranNrArmy2, nameArmy2);
             if(newArmy2 != null){
+                FileManager.writeArmyToFileWFileName(nameArmy2.getText(), newArmy2);
                 ActiveArmies.setActiveArmy2(newArmy2);
                 ActiveArmies.setActiveArmy2Path(nameArmy2.getText());
             }
@@ -153,7 +157,7 @@ public class EditorController {
 
     /**
      * TODO: rewrite
-     * @param prevArmy1
+     * @param prevArmy
      * @param comNrArmy1
      * @param infNrArmy1
      * @param cavNrArmy1
@@ -161,29 +165,40 @@ public class EditorController {
      * @param nameArmy1
      * @return
      */
-    private Army parseToArmy(Army prevArmy1, TextField comNrArmy1, TextField infNrArmy1, TextField cavNrArmy1, TextField ranNrArmy1, TextField nameArmy1) {
+    private Army parseToArmy(int armyNumber,Army prevArmy, TextField comNrArmy1, TextField infNrArmy1, TextField cavNrArmy1, TextField ranNrArmy1, TextField nameArmy1) throws FileNotFoundException {
         int comNum = Integer.parseInt(comNrArmy1.getText());
         int infNum = Integer.parseInt(infNrArmy1.getText());
         int cavNum = Integer.parseInt(cavNrArmy1.getText());
         int ranNum = Integer.parseInt(ranNrArmy1.getText());
-        if(!(prevArmy1.getName().equals(nameArmy1.getText()))
-                || prevArmy1.getCommanderUnits().size() != comNum
-                || prevArmy1.getInfantryUnits().size() != infNum
-                || prevArmy1.getCavalryUnits().size() != cavNum
-                || prevArmy1.getRangedUnits().size() != ranNum){
-            Army newArmy1 = new Army(nameArmy1.getText());
-            newArmy1.addAll(UnitFactory.createListOfUnits(COMMANDER, prevArmy1.getCommanderUnits().get(0).getName(),
-                    prevArmy1.getCommanderUnits().get(0).getHealth(), comNum));
-            newArmy1.addAll(UnitFactory.createListOfUnits(INFANTRY, prevArmy1.getInfantryUnits().get(0).getName(),
-                    prevArmy1.getInfantryUnits().get(0).getHealth(), infNum));
-            newArmy1.addAll(UnitFactory.createListOfUnits(CAVALRY, prevArmy1.getCavalryUnits().get(0).getName(),
-                    prevArmy1.getCavalryUnits().get(0).getHealth(), cavNum));
-            newArmy1.addAll(UnitFactory.createListOfUnits(RANGED, prevArmy1.getRangedUnits().get(0).getName(),
-                    prevArmy1.getRangedUnits().get(0).getHealth(), ranNum));
-            FileManager.writeArmyToFileWFileName(nameArmy1.getText(), newArmy1);
-            return newArmy1;
+        if(!(prevArmy.getName().equals(nameArmy1.getText()))
+                || prevArmy.getCommanderUnits().size() != comNum
+                || prevArmy.getInfantryUnits().size() != infNum
+                || prevArmy.getCavalryUnits().size() != cavNum
+                || prevArmy.getRangedUnits().size() != ranNum){
+            return buildArmy(armyNumber,comNum,infNum,cavNum,ranNum);
         } //TODO: exceptions
         return null;
+    }
+
+    private Army buildArmy(int armyNumber, int comNum, int infNum,int cavNum, int ranNum) throws FileNotFoundException { //TODO: builderPattern
+        Army newArmy;
+        Army baseArmy;
+        if(armyNumber == 1){
+            newArmy = new Army(nameArmy1.getText());
+            baseArmy = FileManager.readArmyFromFile("AllianceDoNotEditThisArmy");
+        }else{
+            newArmy = new Army(nameArmy2.getText());
+            baseArmy = FileManager.readArmyFromFile("HordeDoNotEditThisArmy");
+        }
+        newArmy.addAll(UnitFactory.createListOfUnits(COMMANDER, baseArmy.getCommanderUnits().get(0).getName(),
+                baseArmy.getCommanderUnits().get(0).getHealth(), comNum));
+        newArmy.addAll(UnitFactory.createListOfUnits(INFANTRY, baseArmy.getInfantryUnits().get(0).getName(),
+                baseArmy.getInfantryUnits().get(0).getHealth(), infNum));
+        newArmy.addAll(UnitFactory.createListOfUnits(CAVALRY, baseArmy.getCavalryUnits().get(0).getName(),
+                baseArmy.getCavalryUnits().get(0).getHealth(), cavNum));
+        newArmy.addAll(UnitFactory.createListOfUnits(RANGED, baseArmy.getRangedUnits().get(0).getName(),
+                baseArmy.getRangedUnits().get(0).getHealth(), ranNum));
+        return newArmy;
     }
 
     private void confirmInputValues() throws BlankStringException,

@@ -102,7 +102,7 @@ public class HomeController {
         currentTerrain.setText(fetchActiveTerrain());
         try {
             updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
-                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv");
+                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"); //TODO: change to update to the latest used armies
         } catch (InvalidAttributesException e) {
             exMsg.setText(e.getMessage());
         }
