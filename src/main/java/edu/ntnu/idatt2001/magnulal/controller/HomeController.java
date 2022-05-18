@@ -25,7 +25,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 /**
  * Home screen controller for the Wargames application
  * @author magnulal
- * @version 0.3
+ * @version 0.3 //TODO: update versions
  * @since 0.3
  */
 public class HomeController {
@@ -332,5 +332,6 @@ public class HomeController {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 //TODO: dialog box when quitting
+    //TODO: remember create button for army
 }
 
