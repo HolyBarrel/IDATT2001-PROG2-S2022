@@ -19,7 +19,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader( //TODO: make a SceneManager
-                    Main.class.getResource("/edu.ntnu.idatt2001.magnulal/fxml/main-view.fxml"));
+                    Main.class.getResource("/edu.ntnu.idatt2001.magnulal/fxml/main.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Wargames");
             stage.setScene(scene);

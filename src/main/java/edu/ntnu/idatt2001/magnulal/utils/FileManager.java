@@ -182,8 +182,8 @@ public class FileManager { //TODO: check charset also
                 String[] lineValues = scanner.nextLine().split(",");
                 readArmy.add(readUnit(lineValues));
             }
-        } catch (IOException e) {
-            e.printStackTrace(); //TODO: handle better / throw???
+        } catch (IOException i) {
+            i.printStackTrace(); //Todo. IMPROVE
         }
         return readArmy;
     }

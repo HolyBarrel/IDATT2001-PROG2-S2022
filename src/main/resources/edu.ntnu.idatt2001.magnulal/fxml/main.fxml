@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.controller.HomeController">
+    <bottom>
+        <HBox alignment="BOTTOM_CENTER" prefHeight="137.0" prefWidth="900.0" spacing="6.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="lblPathArmy1" alignment="BOTTOM_CENTER" maxWidth="240.0" text="File Path Army 1: " textFill="#002effa3" wrapText="true">
+                    <font>
+                        <Font name="System Italic" size="13.0" />
+                    </font></Label>
+                <VBox prefHeight="137.0" prefWidth="320.0">
+                    <children>
+                        <HBox alignment="CENTER">
+                            <children>
+                                <Button fx:id="btnTerrainLeft" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#rotateTerrainLeft" prefHeight="40.0" prefWidth="40.0" text="&lt;" />
+                                <VBox alignment="CENTER" prefHeight="60.0" prefWidth="233.0">
+                                    <children>
+                                        <Label alignment="CENTER" text="Choose Terrain:">
+                                            <font>
+                                                <Font name="System Bold" size="19.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="currentTerrain" alignment="CENTER" text="TerrainType">
+                                            <font>
+                                                <Font name="System Bold Italic" size="18.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                                <Button fx:id="btnTerrainRight" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#rotateTerrainRight" prefHeight="40.0" prefWidth="40.0" text="&gt;" />
+                            </children>
+                        </HBox>
+                        <Button fx:id="btnSimBattle" minHeight="75.0" minWidth="320.0" mnemonicParsing="false" onAction="#initiateSimulation" prefHeight="75.0" prefWidth="320.0" text="SIMULATE BATTLE" textFill="#d30000">
+                            <font>
+                                <Font name="System Bold Italic" size="32.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+                <Label fx:id="lblPathArmy2" alignment="BOTTOM_RIGHT" maxWidth="260.0" text="File Path Army 2: " textFill="#002fffa3" wrapText="true">
+                    <font>
+                        <Font name="System Italic" size="13.0" />
+                    </font></Label>
+            </children>
+        </HBox>
+    </bottom>
+    <left>
+        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="368.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="labelArmy1" alignment="CENTER" contentDisplay="CENTER" prefHeight="51.0" prefWidth="368.0" text="Army 1" textAlignment="CENTER">
+                    <font>
+                        <Font name="System Bold Italic" size="35.0" />
+                    </font>
+                </Label>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Unit Type">
+                            <font>
+                                <Font name="System Bold" size="26.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="205.0" text="Amount">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Commander">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="comArmy1" alignment="CENTER" prefHeight="46.0" prefWidth="204.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Infantry">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="infArmy1" alignment="CENTER" prefHeight="46.0" prefWidth="203.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Cavalry">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="cavArmy1" alignment="CENTER" prefHeight="46.0" prefWidth="208.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Ranged">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="ranArmy1" alignment="CENTER" prefHeight="46.0" prefWidth="204.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Sum of units">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="sumUnitsArmy1" alignment="CENTER" prefHeight="46.0" prefWidth="204.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Pane layoutX="105.0" layoutY="10.0" prefHeight="46.0" prefWidth="19.0">
+                            <children>
+                                <Pane prefHeight="46.0" prefWidth="19.0" />
+                            </children></Pane>
+                        <Button fx:id="btnLoadArmy1" mnemonicParsing="false" onAction="#loadArmy1" text="Load">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0" />
+                            </font>
+                        </Button>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
+                        <Button fx:id="btnResetArmy1" mnemonicParsing="false" onAction="#resetArmy1" text="Reset">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0" />
+                            </font>
+                        </Button>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
+                        <Button fx:id="btnSeeArmy1" mnemonicParsing="false" onAction="#seeArmy1" text="See Units">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0" />
+                            </font>
+                        </Button>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button mnemonicParsing="false" text="Edit" />
+                    </children>
+                </HBox>
+                <Pane prefHeight="30.0" prefWidth="368.0" />
+            </children>
+        </VBox>
+    </left>
+    <right>
+        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="368.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="labelArmy2" alignment="CENTER" contentDisplay="CENTER" prefHeight="51.0" prefWidth="369.0" text="Army 2" textAlignment="CENTER">
+                    <font>
+                        <Font name="System Bold Italic" size="35.0" />
+                    </font>
+                </Label>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Unit Type">
+                            <font>
+                                <Font name="System Bold" size="26.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="205.0" text="Amount">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Commander">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="comArmy2" alignment="CENTER" prefHeight="46.0" prefWidth="204.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Infantry">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="infArmy2" alignment="CENTER" prefHeight="46.0" prefWidth="203.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Cavalry">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="cavArmy2" alignment="CENTER" prefHeight="46.0" prefWidth="208.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Ranged">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="ranArmy2" alignment="CENTER" prefHeight="46.0" prefWidth="204.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Sum of units">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="sumUnitsArmy2" alignment="CENTER" prefHeight="46.0" prefWidth="204.0" text="0">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
+                        <Button fx:id="btnLoadArmy2" mnemonicParsing="false" onAction="#loadArmy2" text="Load">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0" />
+                            </font>
+                        </Button>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
+                        <Button fx:id="btnResetArmy2" mnemonicParsing="false" onAction="#resetArmy2" text="Reset">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0" />
+                            </font>
+                        </Button>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
+                        <Button fx:id="btnSeeArmy2" mnemonicParsing="false" onAction="#seeArmy2" text="See Units">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0" />
+                            </font>
+                        </Button>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button mnemonicParsing="false" text="Edit">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+                    </children>
+                </HBox>
+                <Pane prefHeight="30.0" prefWidth="368.0" />
+            </children>
+        </VBox>
+    </right>
+    <center>
+        <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="33.0" text="VS" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+    </center>
+    <top>
+        <VBox alignment="CENTER" prefHeight="118.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="365.0" text="WARGAMES">
+                    <font>
+                        <Font name="System Bold Italic" size="64.0" />
+                    </font>
+                </Label>
+                <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="884.0" textFill="#d30000" wrapText="true">
+                    <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                    </font></Label>
+            </children>
+        </VBox>
+    </top>
+</BorderPane>
