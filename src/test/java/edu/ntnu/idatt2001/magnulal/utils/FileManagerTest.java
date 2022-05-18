@@ -42,9 +42,9 @@ public class FileManagerTest { //TODO: test all methods of FileManager
 
     @AfterEach
     public void deleteLastFile(){
-        if(this.fileName != null){
-            FileManager.deleteAFile(fileName);
-        }
+        //if(this.fileName != null){
+         //   FileManager.deleteAFile(fileName);
+        //}
     }
     @Nested
     @DisplayName("Tests for the FileManager 'writeArmyToFileWFileName' method")
@@ -57,7 +57,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
             @Test
             @DisplayName("writeArmyToFileWFileName creates a file")
             public void writeArmyToFileWFileName(){
-                fileName = "human-army";
+                fileName = "Alliance";
                 FileManager.writeArmyToFileWFileName(fileName, humanArmy);
                 assertTrue(Files.exists(Paths.get(
                         "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/"
@@ -132,13 +132,13 @@ public class FileManagerTest { //TODO: test all methods of FileManager
     public class TestReadArmyFromFileMethod{
         @Nested
         @DisplayName("Positive tests for the 'readArmyFromFile' method")
-        public class PositiveTestsForReadArmyFromFileMethod {
+        public class PositiveTestsForReadArmyFromFileMethod { //TODO: fix
             @Test
             @DisplayName("readArmyFromFile method creates a correct Army without .csv ending in name")
             public void readArmyFromFile(){
                 Army testArmy = null;
                 try {
-                    testArmy = FileManager.readArmyFromFile("humanarmy");
+                    testArmy = FileManager.readArmyFromFile("Alliance");
                 } catch (FileNotFoundException f) {
                     fail("'readArmyFromFile' failed with the message: "
                             + f.getMessage());
@@ -151,7 +151,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
             public void readArmyFromFileWCSVEnding(){
                 Army testArmy = null;
                 try {
-                    testArmy = FileManager.readArmyFromFile("humanarmy.csv");
+                    testArmy = FileManager.readArmyFromFile("Alliance.csv");
                 } catch (FileNotFoundException f) {
                     fail("'readArmyFromFileWCSVEnding' failed with the message: "
                             + f.getMessage());

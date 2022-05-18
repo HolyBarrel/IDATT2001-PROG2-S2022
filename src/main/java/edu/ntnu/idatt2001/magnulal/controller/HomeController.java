@@ -101,8 +101,8 @@ public class HomeController {
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
         try {
-            updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/humanarmy.csv",
-                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/orchorde.csv");
+            updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
+                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv");
         } catch (InvalidAttributesException e) {
             exMsg.setText(e.getMessage());
         }

@@ -2,10 +2,8 @@ package edu.ntnu.idatt2001.magnulal.controller;
 
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
-import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
-import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
-import edu.ntnu.idatt2001.magnulal.utils.FileManager;
-import edu.ntnu.idatt2001.magnulal.utils.SceneManager;
+import edu.ntnu.idatt2001.magnulal.utils.*;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -24,6 +22,7 @@ import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
 
 import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
+import static edu.ntnu.idatt2001.magnulal.utils.UnitTypes.*;
 
 public class EditorController {
     @FXML
@@ -56,8 +55,8 @@ public class EditorController {
     @Deprecated
     public void initialize() throws FileNotFoundException { //TODO: handle
         try {
-            updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/humanarmy.csv",
-                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/orchorde.csv");
+            updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
+                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv");
         } catch (InvalidAttributesException e) {
             exMsg.setText(e.getMessage());
         }
@@ -122,46 +121,101 @@ public class EditorController {
     }
 
     @FXML
-    public void saveAndReturn(ActionEvent actionEvent) {
-
-        try {
-            SceneManager.switchView("main");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-/*
-    private boolean saveArmy1() throws {
+    public void saveAndReturn(ActionEvent actionEvent) { //TODO: implement editing of names
         try{
-            Army saveArmy = new Army(nameArmy1.getText());
+            exMsg.setText("");
+            confirmInputValues();
+            Army prevArmy1 = ActiveArmies.getActiveArmy1();
+            Army prevArmy2 = ActiveArmies.getActiveArmy2();
+            Army newArmy1 = parseToArmy(prevArmy1, comNrArmy1, infNrArmy1, cavNrArmy1, ranNrArmy1, nameArmy1);
+            if(newArmy1 != null){
+                ActiveArmies.setActiveArmy1(newArmy1);
+                ActiveArmies.setActiveArmy1Path(nameArmy1.getText());
+            }
+            /////
+            Army newArmy2 = parseToArmy(prevArmy2, comNrArmy2, infNrArmy2, cavNrArmy2, ranNrArmy2, nameArmy2);
+            if(newArmy2 != null){
+                ActiveArmies.setActiveArmy2(newArmy2);
+                ActiveArmies.setActiveArmy2Path(nameArmy2.getText());
+            }
+            ////
+            SceneManager.switchView("main");
+        }catch (BlankStringException | NegativeIntegerException | NumberFormatException | IOException n){
+            if(n instanceof IOException){
+                exMsg.setText("Could not load the home screen, please reload the application.");
+            }else{
+                exMsg.setText("The given input is wrong: " + n.getMessage() + " Cannot not save to file with " +
+                        "these values.");
+            }
 
         }
     }
-    */
+
+    /**
+     * TODO: rewrite
+     * @param prevArmy1
+     * @param comNrArmy1
+     * @param infNrArmy1
+     * @param cavNrArmy1
+     * @param ranNrArmy1
+     * @param nameArmy1
+     * @return
+     */
+    private Army parseToArmy(Army prevArmy1, TextField comNrArmy1, TextField infNrArmy1, TextField cavNrArmy1, TextField ranNrArmy1, TextField nameArmy1) {
+        int comNum = Integer.parseInt(comNrArmy1.getText());
+        int infNum = Integer.parseInt(infNrArmy1.getText());
+        int cavNum = Integer.parseInt(cavNrArmy1.getText());
+        int ranNum = Integer.parseInt(ranNrArmy1.getText());
+        if(!(prevArmy1.getName().equals(nameArmy1.getText()))
+                || prevArmy1.getCommanderUnits().size() != comNum
+                || prevArmy1.getInfantryUnits().size() != infNum
+                || prevArmy1.getCavalryUnits().size() != cavNum
+                || prevArmy1.getRangedUnits().size() != ranNum){
+            Army newArmy1 = new Army(nameArmy1.getText());
+            newArmy1.addAll(UnitFactory.createListOfUnits(COMMANDER, prevArmy1.getCommanderUnits().get(0).getName(),
+                    prevArmy1.getCommanderUnits().get(0).getHealth(), comNum));
+            newArmy1.addAll(UnitFactory.createListOfUnits(INFANTRY, prevArmy1.getInfantryUnits().get(0).getName(),
+                    prevArmy1.getInfantryUnits().get(0).getHealth(), infNum));
+            newArmy1.addAll(UnitFactory.createListOfUnits(CAVALRY, prevArmy1.getCavalryUnits().get(0).getName(),
+                    prevArmy1.getCavalryUnits().get(0).getHealth(), cavNum));
+            newArmy1.addAll(UnitFactory.createListOfUnits(RANGED, prevArmy1.getRangedUnits().get(0).getName(),
+                    prevArmy1.getRangedUnits().get(0).getHealth(), ranNum));
+            FileManager.writeArmyToFileWFileName(nameArmy1.getText(), newArmy1);
+            return newArmy1;
+        } //TODO: exceptions
+        return null;
+    }
+
+    private void confirmInputValues() throws BlankStringException,
+            NegativeIntegerException, NumberFormatException {
+        exMsg.setText("");
+        ArrayList<Integer> numberOfDifferentUnits = new ArrayList<>();
+        numberOfDifferentUnits.add(Integer.parseInt(comNrArmy1.getText()));
+        numberOfDifferentUnits.add(Integer.parseInt(infNrArmy1.getText()));
+        numberOfDifferentUnits.add(Integer.parseInt(cavNrArmy1.getText()));
+        numberOfDifferentUnits.add(Integer.parseInt(ranNrArmy1.getText()));
+        numberOfDifferentUnits.add(Integer.parseInt(comNrArmy2.getText()));
+        numberOfDifferentUnits.add(Integer.parseInt(comNrArmy2.getText()));
+        numberOfDifferentUnits.add(Integer.parseInt(infNrArmy2.getText()));
+        numberOfDifferentUnits.add(Integer.parseInt(cavNrArmy2.getText()));
+        numberOfDifferentUnits.add(Integer.parseInt(ranNrArmy2.getText()));
+        if(numberOfDifferentUnits.stream().anyMatch(integer -> integer < 0)){
+            throw new NegativeIntegerException("One input is negative, this is not accepted as a legal " +
+                    "amount of units.");
+        }
+        if(nameArmy2.getText().isBlank() || nameArmy1.getText().isBlank()){
+            throw new BlankStringException("Cannot create an army with a blank name.");
+        }
+    }
 
 
     @FXML
     public void checkIntegerInput(Event event) {
         try{
-            exMsg.setText("");
-            ArrayList<Integer> numberOfDifferentUnits = new ArrayList<>();
-            numberOfDifferentUnits.add(Integer.parseInt(comNrArmy1.getText()));
-            numberOfDifferentUnits.add(Integer.parseInt(infNrArmy1.getText()));
-            numberOfDifferentUnits.add(Integer.parseInt(cavNrArmy1.getText()));
-            numberOfDifferentUnits.add(Integer.parseInt(ranNrArmy1.getText()));
-            numberOfDifferentUnits.add(Integer.parseInt(comNrArmy2.getText()));
-            numberOfDifferentUnits.add(Integer.parseInt(comNrArmy2.getText()));
-            numberOfDifferentUnits.add(Integer.parseInt(infNrArmy2.getText()));
-            numberOfDifferentUnits.add(Integer.parseInt(cavNrArmy2.getText()));
-            numberOfDifferentUnits.add(Integer.parseInt(ranNrArmy2.getText()));
-            if(numberOfDifferentUnits.stream().anyMatch(integer -> integer < 0)){
-                throw new NegativeIntegerException("One input is negative, this is not accepted as a legal " +
-                        "amount of units.");
-            }
-
-
-        }catch (NegativeIntegerException | NumberFormatException n){
-            exMsg.setText("The given input is wrong: " + n.getMessage() + "Could not save to file.");
+            confirmInputValues();
+        }catch (BlankStringException | NegativeIntegerException | NumberFormatException n){
+            exMsg.setText("The given input is wrong: " + n.getMessage() + " Cannot not save to file with " +
+                    "these values.");
         }
     }
 }

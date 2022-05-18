@@ -16,7 +16,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Pane prefHeight="100.0" prefWidth="87.0" />
-                  <TextField fx:id="nameArmy1" />
+                  <TextField fx:id="nameArmy1" onKeyTyped="#checkIntegerInput" />
                   <Pane prefHeight="100.0" prefWidth="87.0" />
                </children>
             </HBox>
@@ -85,7 +85,7 @@
             <Label alignment="CENTER" text="Army 2 Name:" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="nameArmy2" />
+                  <TextField fx:id="nameArmy2" onKeyTyped="#checkIntegerInput" />
                </children></HBox>
                 <HBox prefHeight="46.0" prefWidth="327.0">
                     <children>
