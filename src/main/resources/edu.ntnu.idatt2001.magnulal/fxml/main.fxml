@@ -162,16 +162,16 @@
                             </font>
                         </Button>
                         <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button fx:id="btnEditArmy1" minWidth="57.0" mnemonicParsing="false" onAction="#editArmy1" text="Edit">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font></Button>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
                         <Button fx:id="btnSeeArmy1" minWidth="102.0" mnemonicParsing="false" onAction="#seeArmy1" text="See Units">
                             <font>
                                 <Font name="System Bold Italic" size="18.0" />
                             </font>
                         </Button>
-                        <Pane prefHeight="46.0" prefWidth="19.0" />
-                  <Button minWidth="57.0" mnemonicParsing="false" text="Edit">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font></Button>
                     </children>
                 </HBox>
                 <Pane prefHeight="30.0" prefWidth="368.0" />
@@ -284,17 +284,17 @@
                             </font>
                         </Button>
                         <Pane prefHeight="46.0" prefWidth="19.0" />
+                  <Button fx:id="btnEditArmy2" minWidth="57.0" mnemonicParsing="false" onAction="#editArmy2" text="Edit">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+                        <Pane prefHeight="46.0" prefWidth="19.0" />
                         <Button fx:id="btnSeeArmy2" minWidth="102.0" mnemonicParsing="false" onAction="#seeArmy2" text="See Units">
                             <font>
                                 <Font name="System Bold Italic" size="18.0" />
                             </font>
                         </Button>
-                        <Pane prefHeight="46.0" prefWidth="19.0" />
-                  <Button minWidth="57.0" mnemonicParsing="false" text="Edit">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Button>
                         <Pane prefHeight="46.0" prefWidth="19.0" />
                     </children>
                 </HBox>

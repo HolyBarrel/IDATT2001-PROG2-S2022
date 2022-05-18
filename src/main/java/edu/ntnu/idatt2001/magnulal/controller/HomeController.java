@@ -4,6 +4,7 @@ import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
 import edu.ntnu.idatt2001.magnulal.utils.FileManager;
+import edu.ntnu.idatt2001.magnulal.utils.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -86,6 +87,10 @@ public class HomeController {
     private Label sumUnitsArmy2;
     @FXML
     private Label sumUnitsArmy1;
+    @FXML
+    private Button btnEditArmy1;
+    @FXML
+    private Button btnEditArmy2;
 
     /**
      * Runs on initialization of the graphical user interface to specify pre-defined data
@@ -303,6 +308,7 @@ public class HomeController {
      */
     @FXML
     public void resetArmy2(ActionEvent actionEvent) throws FileNotFoundException { // TODO: hanlde
+        //TRY CATCH
         ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(ActiveArmies.getActiveArmy2Path()));
         setStatsArmy2();
     }
@@ -330,6 +336,25 @@ public class HomeController {
         scrollInfoPane.setPreferredSize( new Dimension( 900, 611));
         JOptionPane.showMessageDialog(null, scrollInfoPane, "Selected army:",
                 JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @FXML
+    public void editArmy2(ActionEvent actionEvent) {
+        try {
+            SceneManager.switchView("editor");
+        } catch (IOException i) {
+            exMsg.setText(i.getMessage());
+        }
+    }
+
+    @FXML
+    public void editArmy1(ActionEvent actionEvent) {
+        try {
+            SceneManager.switchView("editor");
+        } catch (IOException i) {
+            exMsg.setText(i.getMessage());
+            System.out.println(i.getMessage());
+        }
     }
 //TODO: dialog box when quitting
     //TODO: remember create button for army

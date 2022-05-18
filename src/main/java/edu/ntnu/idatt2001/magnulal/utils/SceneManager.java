@@ -60,15 +60,4 @@ public class SceneManager {
         SceneManager.activeScene = targetScene;
     }
 
-    /**
-     * //TODO: remove?
-     * @return .
-     */
-    public static Stage getActiveStage() {
-        return activeStage;
-    }
-
-    public static void setActiveStage(Stage activeStage) {
-        SceneManager.activeStage = activeStage;
-    }
 }

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.controller.EditorController">
+    <left>
+        <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="368.0" BorderPane.alignment="CENTER">
+            <children>
+            <Label alignment="CENTER" text="Army 1 Name:" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="87.0" />
+                  <TextField fx:id="nameArmy1" />
+                  <Pane prefHeight="100.0" prefWidth="87.0" />
+               </children>
+            </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Unit Type">
+                            <font>
+                                <Font name="System Bold" size="26.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="205.0" text="Amount">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="222.0" text="Commander">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                  <TextField fx:id="comNrArmy1" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="222.0" text="Infantry">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                  <TextField fx:id="infNrArmy1" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="222.0" text="Cavalry">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                  <TextField fx:id="cavNrArmy1" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="222.0" text="Ranged">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                  <TextField fx:id="ranNrArmy1" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0" />
+                <Pane prefHeight="30.0" prefWidth="368.0" />
+            </children>
+        </VBox>
+    </left>
+    <right>
+        <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="368.0" BorderPane.alignment="CENTER">
+            <children>
+            <Label alignment="CENTER" text="Army 2 Name:" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="nameArmy2" />
+               </children></HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="164.0" text="Unit Type">
+                            <font>
+                                <Font name="System Bold" size="26.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="205.0" text="Amount">
+                            <font>
+                                <Font size="26.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="222.0" text="Commander">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                  <TextField fx:id="comNrArmy2" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="222.0" text="Infantry">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                  <TextField fx:id="infNrArmy2" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="222.0" text="Cavalry">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                  <TextField fx:id="cavNrArmy2" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="222.0" text="Ranged">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                  <TextField fx:id="ranNrArmy2" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="327.0" />
+                <Pane prefHeight="30.0" prefWidth="368.0" />
+            </children>
+        </VBox>
+    </right>
+    <top>
+        <VBox alignment="CENTER" prefHeight="118.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="365.0" text="WARGAMES">
+                    <font>
+                        <Font name="System Bold Italic" size="64.0" />
+                    </font>
+                </Label>
+            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#returnHome" text="Home" />
+                <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="884.0" textFill="#d30000" wrapText="true">
+                    <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                    </font></Label>
+            </children>
+        </VBox>
+    </top>
+   <center>
+      <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveAndReturn" text="Save and return" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <Label text="NOTE: Editing the name of an army before saving, will result in creating a new file with that army." BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

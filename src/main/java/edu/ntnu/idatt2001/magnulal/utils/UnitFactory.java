@@ -35,7 +35,7 @@ public class UnitFactory {
             case RANGED -> new RangedUnit(unitName, unitHealth);
             case CAVALRY -> new CavalryUnit(unitName, unitHealth);
             case COMMANDER -> new CommanderUnit(unitName, unitHealth);
-            //default -> throw new NullPointerException("The requested unit type could not be found.");
+            //default -> throw new NullPointerException("The requested unit type could not be found."); //TODO.remove?
         };
     }
 
