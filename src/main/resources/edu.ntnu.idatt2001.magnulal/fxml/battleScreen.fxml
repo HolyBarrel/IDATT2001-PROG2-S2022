@@ -25,7 +25,7 @@
       <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="nameArmy1" text="Army 1:" />
-            <ScrollPane fx:id="visualArmy1" maxWidth="280.0" prefHeight="200.0">
+            <ScrollPane fx:id="visualArmy1" maxWidth="110.0" prefHeight="200.0">
               <content>
                 <AnchorPane fx:id="visualPaneArmy1" prefHeight="400.0">
                      <children>
@@ -42,7 +42,7 @@
       <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="nameArmy2" text="Army 2" />
-            <ScrollPane fx:id="visualArmy2" maxWidth="280.0" prefHeight="200.0">
+            <ScrollPane fx:id="visualArmy2" maxWidth="110.0" prefHeight="200.0">
               <content>
                 <AnchorPane fx:id="visualPaneArmy2" prefHeight="200.0">
                      <children>
@@ -63,7 +63,7 @@
                   <Font name="System Italic" size="18.0" />
                </font>
             </Label>
-            <ScrollPane maxHeight="120.0" maxWidth="800.0" minHeight="100.0" minWidth="800.0" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane maxHeight="120.0" maxWidth="600.0" minHeight="100.0" minWidth="600.0" prefHeight="200.0" prefWidth="200.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
               </content>
@@ -88,7 +88,7 @@
             <Label text="Visual Representation Info:" />
             <Label text="Blue: Commander" />
             <Label text="Red: Cavalry" />
-            <Label text="Lilla: Infantry" />
+            <Label text="Purple: Infantry" />
             <Label text="Yellow: Ranged" />
          </children>
       </VBox>

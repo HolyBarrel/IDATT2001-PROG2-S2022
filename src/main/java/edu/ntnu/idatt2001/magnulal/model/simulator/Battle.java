@@ -11,8 +11,8 @@ import java.util.Random;
  * @since 0.1
  */
 public class Battle {
-    private final Army armyOne;
-    private final Army armyTwo;
+    private Army armyOne;
+    private Army armyTwo;
     private final boolean armyOneIsCommencingBattle; //if true --> armyOne attacks
     // first in each turn, if false, armyTwo attacks first
     /**
@@ -119,6 +119,40 @@ public class Battle {
         if(armyOne.hasUnits()) return armyOne;
         return armyTwo;
     }
+
+    /**
+     * TODO: comment
+     * @return
+     */
+    public Battle simulateTurnForGUI(){
+        if(this.armyOneIsCommencingBattle){
+            unitAttacks(armyOne,armyTwo);
+            if(!battleIsActive()) return this;
+            unitAttacks(armyTwo,armyOne);
+        }else{
+            unitAttacks(armyTwo,armyOne);
+            if(!battleIsActive()) return this;
+            unitAttacks(armyOne,armyTwo);
+        }
+        return this;
+    }
+
+    public Army getArmyOne() {
+        return armyOne;
+    }
+
+    public Army getArmyTwo() {
+        return armyTwo;
+    }
+
+    public void setArmyOne(Army armyOne) {
+        this.armyOne = armyOne;
+    }
+
+    public void setArmyTwo(Army armyTwo) {
+        this.armyTwo = armyTwo;
+    }
+
     @Override
     public String toString() {
         return "The Great Battle of '" +
