@@ -24,7 +24,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
     public void initiateAndSaveTestArmyToCSV(){
         this.humanArmy = new Army("Alliance");
         this.orcArmy = new Army("Horde");
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) { //TODO. unitFactory
             humanArmy.add(new InfantryUnit("Footman", 100));
             orcArmy.add(new InfantryUnit("Grunt", 100));
         }

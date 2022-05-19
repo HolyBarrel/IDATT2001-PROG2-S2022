@@ -3,6 +3,7 @@ import edu.ntnu.idatt2001.magnulal.model.units.Unit;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
 import edu.ntnu.idatt2001.magnulal.utils.TerrainType;
 
+import java.util.ArrayList;
 import java.util.Random;
 /**
  * Battle class to simulate a battle between to armies
@@ -97,6 +98,29 @@ public class Battle {
             removeDefenderIfDead(defenderUnit, defendingArmy);
         }
     }
+
+    /**
+     * TODO: comment
+     * @param attackingArmy
+     * @param defendingArmy
+     * @return
+     */
+    private ArrayList<Object> unitAttacksGetInfo(Army attackingArmy, Army defendingArmy){
+        ArrayList<Object> returnInformation = new ArrayList<>();
+        if(battleIsActive()){
+            Unit attackerUnit = attackingArmy.getRandom();
+            returnInformation.add(attackerUnit);
+            Unit defenderUnit = defendingArmy.getRandom();
+            returnInformation.add(defenderUnit);
+            int healthBeforeAttack = defenderUnit.getHealth();
+            attackerUnit.attack(defenderUnit);
+            int healthAfterAttack = defenderUnit.getHealth();
+            returnInformation.add(healthAfterAttack);
+            returnInformation.add(healthBeforeAttack-healthAfterAttack);
+            removeDefenderIfDead(defenderUnit, defendingArmy);
+        }
+        return returnInformation;
+    }
     /**
      * Simulates a battle between armyOne and armyTwo. Attacks occur as while both armies have units.
      * The logic of attacking is turn-based, with attacks happening between a random units from the first attacking
@@ -124,17 +148,22 @@ public class Battle {
      * TODO: comment
      * @return
      */
-    public Battle simulateTurnForGUI(){
+    public ArrayList<Object> simulateTurnForGUI(){
+        ArrayList<Object> returnInformation = new ArrayList<>();
         if(this.armyOneIsCommencingBattle){
-            unitAttacks(armyOne,armyTwo);
-            if(!battleIsActive()) return this;
-            unitAttacks(armyTwo,armyOne);
+            returnInformation.addAll(unitAttacksGetInfo(armyOne,armyTwo));
+            returnInformation.add(this);
+            if(!battleIsActive()) return returnInformation;
+            returnInformation.addAll(unitAttacksGetInfo(armyTwo,armyOne));
+            returnInformation.add(this);
         }else{
-            unitAttacks(armyTwo,armyOne);
-            if(!battleIsActive()) return this;
-            unitAttacks(armyOne,armyTwo);
+            returnInformation.addAll(unitAttacksGetInfo(armyTwo,armyOne));
+            returnInformation.add(this);
+            if(!battleIsActive()) return returnInformation;
+            returnInformation.addAll(unitAttacksGetInfo(armyOne,armyTwo));
+            returnInformation.add(this);
         }
-        return this;
+        return returnInformation;
     }
 
     public Army getArmyOne() {
