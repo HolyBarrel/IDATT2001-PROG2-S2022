@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.magnulal.guiControllers;
 
+import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
@@ -100,12 +101,25 @@ public class HomeController {
     public void initialize() throws FileNotFoundException { //TODO: handle
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
+        //TODO: improve load
         try {
             updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
                     "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"); //TODO: change to update to the latest used armies
         } catch (InvalidAttributesException e) {
             exMsg.setText(e.getMessage());
         }
+        /* TODO. implement
+        if(ActiveArmies.getActiveArmy1() == null && ActiveArmies.getActiveArmy2() == null){
+            try {
+                updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
+                        "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"); //TODO: change to update to the latest used armies
+            } catch (InvalidAttributesException e) {
+                exMsg.setText(e.getMessage());
+            }
+        }else{
+            updateWArmies(ActiveArmies.getActiveArmy1(),ActiveArmies.getActiveArmy2());
+        }
+        */
     }
 
     /**
@@ -129,6 +143,15 @@ public class HomeController {
         ActiveArmies.setActiveArmy2Path(pathArmy2);
         lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
         lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
+        setStatsArmy1();
+        setStatsArmy2();
+    }
+
+    private void updateWArmies(Army army1, Army army2){
+        ActiveArmies.setActiveArmy1(army1);
+        ActiveArmies.setActiveArmy2(army2);
+        ActiveArmies.setActiveArmy1Path(ActiveArmies.getActiveArmy1Path());
+        ActiveArmies.setActiveArmy2Path(ActiveArmies.getActiveArmy2Path());
         setStatsArmy1();
         setStatsArmy2();
     }
@@ -244,8 +267,8 @@ public class HomeController {
         try{
             File file = openFileExplorer();
             ActiveArmies.setActiveArmy2(FileManager.readArmyFromExistingFile(file));
-            ActiveArmies.setActiveArmy2Path(file.getAbsolutePath());
-            lblPathArmy2.setText("Path: " + file.getAbsolutePath());
+            ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy2().getName() + ".csv");
+            lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
             setStatsArmy2();
         }catch (NullPointerException n){ //TODO. improve
             exMsg.setText(n.getMessage());
@@ -264,8 +287,9 @@ public class HomeController {
         try{
             File file = openFileExplorer();
             ActiveArmies.setActiveArmy1(FileManager.readArmyFromExistingFile(file));
-            ActiveArmies.setActiveArmy1Path(file.getAbsolutePath());
-            lblPathArmy1.setText("Path: " + file.getAbsolutePath()); //TODO: make not weird
+            ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy1().getName() + ".csv");
+            lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path()); //TODO. improve the other as well
+            //TODO: THE ARMIES SHOULD BE ABLE TO BE LOADED AND THEN USED FOR SIMULATION
             setStatsArmy1();
         }catch (NullPointerException n){
             exMsg.setText(n.getMessage());

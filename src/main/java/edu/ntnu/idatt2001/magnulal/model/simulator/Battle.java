@@ -105,21 +105,23 @@ public class Battle {
      * @param defendingArmy
      * @return
      */
-    private ArrayList<Object> unitAttacksGetInfo(Army attackingArmy, Army defendingArmy){
-        ArrayList<Object> returnInformation = new ArrayList<>();
+    private StringBuilder unitAttacksGetInfo(Army attackingArmy, Army defendingArmy){
+        StringBuilder sb = new StringBuilder();
         if(battleIsActive()){
             Unit attackerUnit = attackingArmy.getRandom();
-            returnInformation.add(attackerUnit);
+            sb.append("\n").append(attackerUnit.getName()).append(" attacked: ");
             Unit defenderUnit = defendingArmy.getRandom();
-            returnInformation.add(defenderUnit);
+            sb.append(defenderUnit.getName()).append(" (HP: ");
             int healthBeforeAttack = defenderUnit.getHealth();
+            sb.append(healthBeforeAttack). append(") - (DEALT DMG: ");
             attackerUnit.attack(defenderUnit);
             int healthAfterAttack = defenderUnit.getHealth();
-            returnInformation.add(healthAfterAttack);
-            returnInformation.add(healthBeforeAttack-healthAfterAttack);
+            sb.append(healthBeforeAttack-healthAfterAttack).append(") - (NEW HP: ");
+            sb.append(healthAfterAttack).append(")");
+            if(healthAfterAttack == 0) sb.append(" - The ").append(defenderUnit.getName()).append(" was killed!");
             removeDefenderIfDead(defenderUnit, defendingArmy);
         }
-        return returnInformation;
+        return sb;
     }
     /**
      * Simulates a battle between armyOne and armyTwo. Attacks occur as while both armies have units.
@@ -150,17 +152,22 @@ public class Battle {
      */
     public ArrayList<Object> simulateTurnForGUI(){
         ArrayList<Object> returnInformation = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         if(this.armyOneIsCommencingBattle){
-            returnInformation.addAll(unitAttacksGetInfo(armyOne,armyTwo));
+            sb.append(unitAttacksGetInfo(armyOne,armyTwo));
+            returnInformation.add(sb);
             returnInformation.add(this);
             if(!battleIsActive()) return returnInformation;
-            returnInformation.addAll(unitAttacksGetInfo(armyTwo,armyOne));
+            sb.append(unitAttacksGetInfo(armyTwo,armyOne));
+            returnInformation.add(sb);
             returnInformation.add(this);
         }else{
-            returnInformation.addAll(unitAttacksGetInfo(armyTwo,armyOne));
+            sb.append(unitAttacksGetInfo(armyTwo,armyOne));
+            returnInformation.add(sb);
             returnInformation.add(this);
             if(!battleIsActive()) return returnInformation;
-            returnInformation.addAll(unitAttacksGetInfo(armyOne,armyTwo));
+            sb.append(unitAttacksGetInfo(armyOne,armyTwo));
+            returnInformation.add(sb);
             returnInformation.add(this);
         }
         return returnInformation;

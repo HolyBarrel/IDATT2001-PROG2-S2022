@@ -221,40 +221,17 @@ public class BattleController {
         activeBattle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(), ActiveTerrain.INSTANCE.getActiveTerrain());
         VBox vb = new VBox();
         battleFeed.setContent(vb);
-        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.05), event -> {
+        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.1), event -> {
 
             if(!hasSkipBeenPressed) {
                 //tenthSeconds++; TODO implement
                 ArrayList<Object> battleLogInfo = activeBattle.simulateTurnForGUI();
                 //retrieve the last element, which is always the active battle
                 activeBattle = (Battle)battleLogInfo.get(battleLogInfo.size()-1);
-                if(battleLogInfo.size() == 5){
-                    Unit attackerUnit3 = (Unit)battleLogInfo.get(0);
-                    Unit defenderUnit3 = (Unit)battleLogInfo.get(1);
-                    int health3 = (int)battleLogInfo.get(2);
-                    int dmg3 = (int)battleLogInfo.get(3);
-                    vb.getChildren().add(new Label(attackerUnit3.getName() + " attacked: " + defenderUnit3.getName() + " -- ( HP:  " + health3 + " ) -- " + " ( DMG dealt:  " + dmg3 + " )" + " -- The unit: " + defenderUnit3.getName() + " was killed!"));
-                }else{
-                    Unit attackerUnit = (Unit)battleLogInfo.get(0);
-                    Unit defenderUnit = (Unit)battleLogInfo.get(1);
-                    int health = (int)battleLogInfo.get(2);
-                    int dmg = (int)battleLogInfo.get(3);
-                    if(health == 0){
-                        vb.getChildren().add(new Label(attackerUnit.getName() + " attacked: " + defenderUnit.getName() + " -- ( HP:  " + health + " ) --" + " ( DMG dealt:  " + dmg + " )" + " -- The unit: " + defenderUnit.getName() + " was killed!"));
-                    }else{
-                        vb.getChildren().add(new Label(attackerUnit.getName() + " attacked: " + defenderUnit.getName() + " -- ( HP:  " + health + " ) --" + " ( DMG dealt:  " + dmg + " )"));
-                    }
-
-                    Unit attackerUnit2 = (Unit)battleLogInfo.get(5);
-                    Unit defenderUnit2 = (Unit)battleLogInfo.get(6);
-                    int health2 = (int)battleLogInfo.get(7);
-                    int dmg2 = (int)battleLogInfo.get(8);
-                    if(health2 == 0){
-                        vb.getChildren().add(new Label(attackerUnit2.getName() + " attacked: " + defenderUnit2.getName() + " -- ( HP:  " + health2 + " ) --" + " ( DMG dealt:  " + dmg2 + " )" + " -- The unit: " + defenderUnit2.getName() + " was killed!"));
-                    }else{
-                        vb.getChildren().add(new Label(attackerUnit2.getName() + " attacked: " + defenderUnit2.getName() + " -- ( HP:  " + health2 + " ) --" + " ( DMG dealt:  " + dmg2 + " )"));
-                    }
-
+                if(battleLogInfo.size() == 2){
+                    vb.getChildren().add(new Label(String.valueOf(battleLogInfo.get(0))));
+                }else {
+                    vb.getChildren().add(new Label(String.valueOf(battleLogInfo.get(2))));
                 }
                 try {
                     updateVisualArmy1();
@@ -284,7 +261,19 @@ public class BattleController {
                 }
             }else{
                 Army victoriousArmy = activeBattle.simulate();
+                ActiveArmies.setActiveArmy1(activeBattle.getArmyOne());
+                ActiveArmies.setActiveArmy2(activeBattle.getArmyTwo());
                 battleFeed.setContent(new Label("Victorious army: \n" + victoriousArmy.toString()));
+                try {
+                    updateVisualArmy1();
+                } catch (FileNotFoundException e) {
+                    exMsg.setText(e.getMessage());
+                }
+                try {
+                    updateVisualArmy2();
+                } catch (FileNotFoundException e) {
+                    exMsg.setText(e.getMessage());
+                }
                 simulationTimeline.stop();
             }
             battleFeed.setVvalue(1.0);
@@ -292,6 +281,6 @@ public class BattleController {
         }));
         simulationTimeline.setCycleCount(Animation.INDEFINITE);
         simulationTimeline.play();
+        battleFeed.setVvalue(1.0);
     }
-
 }
