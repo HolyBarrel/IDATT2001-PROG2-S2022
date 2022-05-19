@@ -1,7 +1,6 @@
-package edu.ntnu.idatt2001.magnulal.controller;
+package edu.ntnu.idatt2001.magnulal.guiControllers;
 
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
-import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
 import edu.ntnu.idatt2001.magnulal.utils.*;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
@@ -11,17 +10,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.FileChooser;
 //todo: modality
 import javax.naming.directory.InvalidAttributesException;
-import javax.swing.*;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
 
-import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 import static edu.ntnu.idatt2001.magnulal.utils.UnitTypes.*;
 
 public class EditorController {

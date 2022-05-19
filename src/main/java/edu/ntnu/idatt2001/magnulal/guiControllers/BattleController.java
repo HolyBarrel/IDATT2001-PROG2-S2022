@@ -1,9 +1,9 @@
-package edu.ntnu.idatt2001.magnulal.controller;
+package edu.ntnu.idatt2001.magnulal.guiControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class EditController {
+public class BattleController {
     @FXML
     private Button btn;
 }

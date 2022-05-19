@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.controller.EditorController">
+<BorderPane minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.guiControllers.EditorController">
     <left>
         <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="368.0" BorderPane.alignment="CENTER">
             <children>

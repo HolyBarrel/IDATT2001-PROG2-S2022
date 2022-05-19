@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.magnulal.controller;
+package edu.ntnu.idatt2001.magnulal.guiControllers;
 
 import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
@@ -213,6 +213,12 @@ public class HomeController {
     @FXML
     public void initiateSimulation(ActionEvent actionEvent){ //TODO: ex handling
         try {
+            SceneManager.switchView("battleScreen");
+        } catch (IOException e) {
+            exMsg.setText(e.getMessage());
+        }
+        /**
+        try {
             Battle battle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(), ActiveTerrain.INSTANCE.getActiveTerrain());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Battle result");
@@ -223,6 +229,7 @@ public class HomeController {
         }catch (IllegalArgumentException i){
             exMsg.setText(i.getMessage());
         }
+         */
     }
 
     /**
