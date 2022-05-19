@@ -76,7 +76,15 @@
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="VS" />
-            <Pane prefHeight="75.0" prefWidth="300.0" />
+            <Pane prefHeight="75.0" prefWidth="300.0">
+               <children>
+                  <Button fx:id="btnSimulate" layoutX="100.0" layoutY="18.0" mnemonicParsing="false" onAction="#simulateStart" text="Simulate">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
             <Label text="Visual Representation Info:" />
             <Label text="Blue: Commander" />
             <Label text="Red: Cavalry" />

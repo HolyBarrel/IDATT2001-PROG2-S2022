@@ -4,6 +4,10 @@ import edu.ntnu.idatt2001.magnulal.Main;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.units.Unit;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
+import edu.ntnu.idatt2001.magnulal.utils.SceneManager;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -16,15 +20,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import javax.swing.text.Position;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Objects;
 
 public class BattleController {
     private static boolean hasSkipBeenPressed = false;
-
+    private Timeline simulationTimeline;
+    private int halfSeconds = 0;
     @FXML
     private Button btnSkipToResults;
     @FXML
@@ -50,6 +57,8 @@ public class BattleController {
 
     private final HBox hb = new HBox();
     private final HBox hb2 = new HBox();
+    @FXML
+    private Button btnSimulate;
 
     @FXML
     public void initialize() throws FileNotFoundException {
@@ -126,25 +135,32 @@ public class BattleController {
         hb2.getChildren().add(vb3);
         hb2.getChildren().add(vb4);
 
-        //ScrollPane sp = new ScrollPane();
         visualArmy2.setContent(hb2);
-
-        //Passing FileInputStream object as a parameter
-        //FileInputStream inputstream = new FileInputStream("edu.ntnu.idatt2001.magnulal/images/commanderBlue.png");
-        //Image image = new Image(inputstream);
-        //String path = String.format("/edu.ntnu.idatt2001.magnulal/images/%s.png", "commanderBlue");
-        //Image image = new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png")));
-        //visualArmy1.setContent(new ImageView(image));
-//Loading image from URL
-//Image image = new Image(new FileInputStream("url for the image));
-
     }
     @FXML
     public void returnHome(ActionEvent actionEvent) {
+        try {
+            SceneManager.switchView("main");
+        } catch (IOException e) {
+            exMsg.setText(e.getMessage());
+        }
     }
 
     @FXML
     public void skipToResults(ActionEvent actionEvent) {
         hasSkipBeenPressed = true;
     }
+
+    @FXML
+    public void simulateStart(ActionEvent actionEvent) {
+        btnSimulate.setDisable(true);
+
+        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
+            halfSeconds++;
+            if(halfSeconds > 10) simulationTimeline.stop();
+        }));
+        simulationTimeline.setCycleCount(Animation.INDEFINITE);
+        simulationTimeline.play();
+    }
+
 }
