@@ -6,12 +6,15 @@ import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
  * TODO COMMENT ALL
  * TODO: move to utils
  */
-public class ActiveArmies { //TODO: make into twingleton
+public class ActiveArmies {
     //TODO: UPPERCASE???
+
     private static Army activeArmy1;
     private static String activeArmy1Path;
     private static Army activeArmy2;
     private static String activeArmy2Path;
+
+    private ActiveArmies(){}
 
     public static String getActiveArmy1Path() {
         return activeArmy1Path;

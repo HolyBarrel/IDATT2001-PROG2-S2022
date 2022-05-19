@@ -127,8 +127,8 @@ public class HomeController {
         ActiveArmies.setActiveArmy1Path(pathArmy1);
         ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(pathArmy2));
         ActiveArmies.setActiveArmy2Path(pathArmy2);
-        lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path()); //TODO: make text copy-able
-        lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path()); //TODO: make text copy-able
+        lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
+        lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
         setStatsArmy1();
         setStatsArmy2();
     }
@@ -299,7 +299,7 @@ public class HomeController {
      * Resets the first army to its original state by reading the active path which is associated with that army.
      * The stats for the first army is visually displayed by the application.
      * Occurs at the click event of the button: {@link HomeController#btnResetArmy1}
-     * @param actionEvent is the button click-event
+     * @param actionEvent is the button click-event //TODO: this is wrong
      */
     @FXML
     public void resetArmy1(ActionEvent actionEvent) throws FileNotFoundException { //TODO: handle
@@ -323,24 +323,20 @@ public class HomeController {
 
     @FXML
     public void seeArmy2(ActionEvent actionEvent) {
-        //TODO: is under development, this is just a temporary solution to fulfill the minimum requirements for task 3
         //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
-        //TODO: revise
         JTextArea armyInformation = new JTextArea(ActiveArmies.getActiveArmy2().toString());
         JScrollPane scrollInfoPane = new JScrollPane(armyInformation);
-        scrollInfoPane.setPreferredSize( new Dimension( 900, 611));
+        scrollInfoPane.setPreferredSize( new Dimension( 500, 611));
         JOptionPane.showMessageDialog(null, scrollInfoPane, "Selected army:",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
     @FXML
     public void seeArmy1(ActionEvent actionEvent) {
-        //TODO: is under development, this is just a temporary solution to fulfill the minimum requirements for task 3
         //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
-        //TODO: revise
         JTextArea armyInformation = new JTextArea(ActiveArmies.getActiveArmy1().toString());
         JScrollPane scrollInfoPane = new JScrollPane(armyInformation);
-        scrollInfoPane.setPreferredSize( new Dimension( 900, 611));
+        scrollInfoPane.setPreferredSize( new Dimension( 500, 611));
         JOptionPane.showMessageDialog(null, scrollInfoPane, "Selected army:",
                 JOptionPane.INFORMATION_MESSAGE);
     }
@@ -363,7 +359,6 @@ public class HomeController {
             System.out.println(i.getMessage());
         }
     }
-//TODO: dialog box when quitting
     //TODO: remember create button for army
 }
 
