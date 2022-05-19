@@ -59,6 +59,8 @@ public class BattleController {
     private AnchorPane visualPaneArmy1;
     @FXML
     private Button btnSimulate;
+    @FXML
+    private ScrollPane battleFeed;
 
     private void updateVisualArmy1() throws FileNotFoundException {
         HBox hb = new HBox();
@@ -216,25 +218,33 @@ public class BattleController {
         btnSimulate.setDisable(true);
         activeBattle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(), ActiveTerrain.INSTANCE.getActiveTerrain());
         simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.05), event -> {
-            tenthSeconds++;
-            activeBattle = activeBattle.simulateTurnForGUI();
-            try {
-                updateVisualArmy1();
-            } catch (FileNotFoundException e) {
-                exMsg.setText(e.getMessage());
-            }
-            try {
-                updateVisualArmy2();
-            } catch (FileNotFoundException e) {
-                exMsg.setText(e.getMessage());
-            }
-            ActiveArmies.setActiveArmy1(activeBattle.getArmyOne());
-            ActiveArmies.setActiveArmy2(activeBattle.getArmyTwo());
+            if(!hasSkipBeenPressed) {
+                tenthSeconds++;
+                activeBattle = activeBattle.simulateTurnForGUI();
+                try {
+                    updateVisualArmy1();
+                } catch (FileNotFoundException e) {
+                    exMsg.setText(e.getMessage());
+                }
+                try {
+                    updateVisualArmy2();
+                } catch (FileNotFoundException e) {
+                    exMsg.setText(e.getMessage());
+                }
+                ActiveArmies.setActiveArmy1(activeBattle.getArmyOne());
+                ActiveArmies.setActiveArmy2(activeBattle.getArmyTwo());
 
-            if(!ActiveArmies.getActiveArmy1().hasUnits() || !ActiveArmies.getActiveArmy2().hasUnits()) {
+                if (!ActiveArmies.getActiveArmy1().hasUnits() || !ActiveArmies.getActiveArmy2().hasUnits()) {
+                    simulationTimeline.stop();
+                    if (ActiveArmies.getActiveArmy1().hasUnits())
+                        System.out.println(ActiveArmies.getActiveArmy1().getName());
+                    if (ActiveArmies.getActiveArmy2().hasUnits())
+                        System.out.println(ActiveArmies.getActiveArmy2().getName());
+                }
+            }else{
+                Army victoriousArmy = activeBattle.simulate();
+                battleFeed.setContent(new Label("Victorious army: \n" + victoriousArmy.toString()));
                 simulationTimeline.stop();
-                if(ActiveArmies.getActiveArmy1().hasUnits()) System.out.println(ActiveArmies.getActiveArmy1().getName());
-                if(ActiveArmies.getActiveArmy2().hasUnits()) System.out.println(ActiveArmies.getActiveArmy2().getName());
             }
 
         }));
