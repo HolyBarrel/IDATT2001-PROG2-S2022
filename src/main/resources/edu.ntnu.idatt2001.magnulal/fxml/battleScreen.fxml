@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -8,10 +9,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.guiControllers.BattleController">
-   <center>
-      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="33.0" text="VS" BorderPane.alignment="CENTER">
-      </Label>
-   </center>
    <top>
       <VBox alignment="CENTER" prefHeight="118.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
@@ -28,11 +25,16 @@
       <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="nameArmy1" text="Army 1:" />
-            <ScrollPane maxWidth="280.0" prefHeight="200.0">
+            <ScrollPane fx:id="visualArmy1" maxWidth="280.0" prefHeight="200.0">
               <content>
-                <AnchorPane prefHeight="400.0" />
+                <AnchorPane fx:id="visualPaneArmy1" prefHeight="400.0">
+                     <children>
+                        <Label />
+                     </children></AnchorPane>
               </content>
             </ScrollPane>
+            <Label text="Number of units:" />
+            <Label fx:id="numUnitsArmy1" text="0" />
          </children>
       </VBox>
    </left>
@@ -40,11 +42,16 @@
       <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="nameArmy2" text="Army 2" />
-            <ScrollPane maxWidth="280.0" prefHeight="200.0">
+            <ScrollPane fx:id="visualArmy2" maxWidth="280.0" prefHeight="200.0">
               <content>
-                <AnchorPane prefHeight="200.0" />
+                <AnchorPane fx:id="visualPaneArmy2" prefHeight="200.0">
+                     <children>
+                        <Label />
+                     </children></AnchorPane>
               </content>
             </ScrollPane>
+            <Label text="Number of units:" />
+            <Label fx:id="numUnitsArmy2" text="0" />
          </children>
       </VBox>
    </right>
@@ -65,4 +72,17 @@
          </children>
       </VBox>
    </bottom>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="VS" />
+            <Pane prefHeight="75.0" prefWidth="300.0" />
+            <Label text="Visual Representation Info:" />
+            <Label text="Blue: Commander" />
+            <Label text="Red: Cavalry" />
+            <Label text="Lilla: Infantry" />
+            <Label text="Yellow: Ranged" />
+         </children>
+      </VBox>
+   </center>
 </BorderPane>
