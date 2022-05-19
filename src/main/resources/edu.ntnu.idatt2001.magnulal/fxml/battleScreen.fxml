@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.guiControllers.BattleController">
-   <children>
-      <Button fx:id="btn" layoutX="197.0" layoutY="100.0" mnemonicParsing="false" text="Button" />
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.guiControllers.BattleController">
+   <center>
+      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="33.0" text="VS" BorderPane.alignment="CENTER">
+      </Label>
+   </center>
+   <top>
+      <VBox alignment="CENTER" prefHeight="118.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="365.0" text="WARGAMES">
+               <font>
+                  <Font name="System Bold Italic" size="64.0" />
+               </font></Label>
+            <Button fx:id="btnReturnHome" mnemonicParsing="false" onAction="#returnHome" text="Home" />
+            <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="884.0" textFill="#d30000" wrapText="true" />
+         </children>
+      </VBox>
+   </top>
+   <left>
+      <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="nameArmy1" text="Army 1:" />
+            <ScrollPane maxWidth="280.0" prefHeight="200.0">
+              <content>
+                <AnchorPane prefHeight="400.0" />
+              </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="nameArmy2" text="Army 2" />
+            <ScrollPane maxWidth="280.0" prefHeight="200.0">
+              <content>
+                <AnchorPane prefHeight="200.0" />
+              </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </right>
+   <bottom>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Battle Feed">
+               <font>
+                  <Font name="System Italic" size="18.0" />
+               </font>
+            </Label>
+            <ScrollPane maxHeight="120.0" maxWidth="800.0" minHeight="100.0" minWidth="800.0" prefHeight="200.0" prefWidth="200.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+            <Button fx:id="btnSkipToResults" mnemonicParsing="false" onAction="#skipToResults" text="Skip to results" />
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>
