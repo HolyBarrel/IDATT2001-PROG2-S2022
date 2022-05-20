@@ -372,6 +372,13 @@ public class HomeController {
 
     @FXML
     public void editArmy2(ActionEvent actionEvent) {
+        if(!new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv").exists()) {
+            try {
+                FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             SceneManager.switchView("editor");
         } catch (IOException i) {
@@ -381,6 +388,13 @@ public class HomeController {
 
     @FXML
     public void editArmy1(ActionEvent actionEvent) {
+        if(!new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv").exists()) {
+            try {
+                FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             SceneManager.switchView("editor");
         } catch (IOException i) {
