@@ -7,6 +7,7 @@ import edu.ntnu.idatt2001.magnulal.model.units.Unit;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
 import edu.ntnu.idatt2001.magnulal.utils.SceneManager;
+import edu.ntnu.idatt2001.magnulal.utils.TerrainType;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -62,6 +63,8 @@ public class BattleController {
     private Button btnSimulate;
     @FXML
     private ScrollPane battleFeed;
+    @FXML
+    private Label terrainInfo;
 
     private void updateVisualArmy1() throws FileNotFoundException {
         HBox hb = new HBox();
@@ -202,6 +205,8 @@ public class BattleController {
     }
     @FXML
     public void returnHome(ActionEvent actionEvent) {
+
+        if(simulationTimeline != null) simulationTimeline.stop();
         try {
             SceneManager.switchView("main");
         } catch (IOException e) {
@@ -216,12 +221,13 @@ public class BattleController {
 
     @FXML
     public void simulateStart(ActionEvent actionEvent) {
+        terrainInfo.setText("Terrain: " + ActiveTerrain.INSTANCE.getActiveTerrain().name());
         btnSimulate.setDisable(true);
         battleFeed.setVvalue(1.0);
         activeBattle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(), ActiveTerrain.INSTANCE.getActiveTerrain());
         VBox vb = new VBox();
         battleFeed.setContent(vb);
-        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.1), event -> {
+        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.2), event -> {
 
             if(!hasSkipBeenPressed) {
                 //tenthSeconds++; TODO implement

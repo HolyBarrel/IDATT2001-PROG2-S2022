@@ -114,13 +114,9 @@ public class EditorController {
             e.printStackTrace();
         }
     }
-
+//TODO. ex.handling on huge armies
     @FXML
     public void saveAndReturn(ActionEvent actionEvent) { //TODO: implement editing of names
-/* TODO
-        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy1().getName() + ".csv");
-        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy1().getName() + ".csv");
-        */
         try{
             exMsg.setText("");
             confirmInputValues();

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.guiControllers.BattleController">
+<BorderPane maxHeight="611.0" maxWidth="900.0" minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.guiControllers.BattleController">
    <top>
       <VBox alignment="CENTER" prefHeight="118.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
@@ -25,7 +25,7 @@
       <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="nameArmy1" text="Army 1:" />
-            <ScrollPane fx:id="visualArmy1" maxWidth="110.0" prefHeight="200.0">
+            <ScrollPane fx:id="visualArmy1" maxWidth="110.0" minHeight="200.0">
               <content>
                 <AnchorPane fx:id="visualPaneArmy1" prefHeight="400.0">
                      <children>
@@ -42,7 +42,7 @@
       <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="nameArmy2" text="Army 2" />
-            <ScrollPane fx:id="visualArmy2" maxWidth="110.0" prefHeight="200.0">
+            <ScrollPane fx:id="visualArmy2" maxWidth="110.0" minHeight="200.0">
               <content>
                 <AnchorPane fx:id="visualPaneArmy2" prefHeight="200.0">
                      <children>
@@ -63,19 +63,22 @@
                   <Font name="System Italic" size="18.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="battleFeed" maxHeight="120.0" maxWidth="600.0" minHeight="100.0" minWidth="600.0" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane fx:id="battleFeed" maxHeight="150.0" maxWidth="600.0" minHeight="150.0" minWidth="600.0" prefHeight="200.0" prefWidth="200.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
               </content>
             </ScrollPane>
-            <Button fx:id="btnSkipToResults" mnemonicParsing="false" onAction="#skipToResults" text="Skip to results" />
+            <Button fx:id="btnSkipToResults" maxHeight="30.0" mnemonicParsing="false" onAction="#skipToResults" prefHeight="22.0" prefWidth="136.0" text="Skip to results" />
          </children>
       </VBox>
    </bottom>
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="VS" />
+            <Label fx:id="terrainInfo" text="VS">
+               <font>
+                  <Font name="System Bold Italic" size="25.0" />
+               </font></Label>
             <Pane prefHeight="75.0" prefWidth="300.0">
                <children>
                   <Button fx:id="btnSimulate" layoutX="100.0" layoutY="18.0" mnemonicParsing="false" onAction="#simulateStart" text="Simulate">

@@ -102,13 +102,15 @@ public class HomeController {
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
         //TODO: improve load
+        /*
         try {
             updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
                     "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"); //TODO: change to update to the latest used armies
         } catch (InvalidAttributesException e) {
             exMsg.setText(e.getMessage());
         }
-        /* TODO. implement
+        */
+
         if(ActiveArmies.getActiveArmy1() == null && ActiveArmies.getActiveArmy2() == null){
             try {
                 updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
@@ -119,7 +121,6 @@ public class HomeController {
         }else{
             updateWArmies(ActiveArmies.getActiveArmy1(),ActiveArmies.getActiveArmy2());
         }
-        */
     }
 
     /**
@@ -147,11 +148,18 @@ public class HomeController {
         setStatsArmy2();
     }
 
+    /**TODO
+     *
+     * @param army1
+     * @param army2
+     */
     private void updateWArmies(Army army1, Army army2){
         ActiveArmies.setActiveArmy1(army1);
         ActiveArmies.setActiveArmy2(army2);
-        ActiveArmies.setActiveArmy1Path(ActiveArmies.getActiveArmy1Path());
-        ActiveArmies.setActiveArmy2Path(ActiveArmies.getActiveArmy2Path());
+        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy1().getName() + ".csv");
+        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy2().getName() + ".csv");
+        lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
+        lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
         setStatsArmy1();
         setStatsArmy2();
     }
@@ -235,10 +243,18 @@ public class HomeController {
      */
     @FXML
     public void initiateSimulation(ActionEvent actionEvent){ //TODO: ex handling
-        try {
-            SceneManager.switchView("battleScreen");
-        } catch (IOException e) {
-            exMsg.setText(e.getMessage());
+        if(ActiveArmies.getActiveArmy1().hasUnits() && ActiveArmies.getActiveArmy2().hasUnits()) {
+            try {
+                SceneManager.switchView("battleScreen");
+            } catch (IOException e) {
+                exMsg.setText(e.getMessage());
+            }
+        }else{
+            if(!ActiveArmies.getActiveArmy1().hasUnits()){
+                exMsg.setText("The army called: " + ActiveArmies.getActiveArmy1().getName() + " did not contain any units, and could not participate in battle.");
+            }else{
+                exMsg.setText("The army called: " + ActiveArmies.getActiveArmy2().getName() + " did not contain any units, and could not participate in battle.");
+            }
         }
         /**
         try {
