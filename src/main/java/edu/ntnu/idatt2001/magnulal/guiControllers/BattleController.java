@@ -33,8 +33,13 @@ import java.util.ArrayList;
 public class BattleController {
     private boolean hasSkipBeenPressed = false;
     private Timeline simulationTimeline;
-    private int tenthSeconds = 0;
+    private int tenthSeconds = 0; //TODO: undo
     private Battle activeBattle;
+
+    private static Image commanderImg;
+    private static Image cavalryImg;
+    private static Image infantryImg;
+    private static Image rangedImg;
     @FXML
     private Button btnSkipToResults;
     @FXML
@@ -69,24 +74,19 @@ public class BattleController {
         numUnitsArmy1.setText(String.valueOf(ActiveArmies.getActiveArmy1().getAllUnits().size()));
         VBox vb1 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy1().getCommanderUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png");
-            vb1.getChildren().add(new ImageView(new Image(inputstream)));
+            vb1.getChildren().add(new ImageView(commanderImg));
         }
         VBox vb2 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy1().getCavalryUnits().size(); i++) {
-
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png");
-            vb2.getChildren().add(new ImageView(new Image(inputstream)));
+            vb2.getChildren().add(new ImageView(cavalryImg));
         }
         VBox vb3 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy1().getInfantryUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png");
-            vb3.getChildren().add(new ImageView(new Image(inputstream)));
+            vb3.getChildren().add(new ImageView(infantryImg));
         }
         VBox vb4 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy1().getRangedUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png");
-            vb4.getChildren().add(new ImageView(new Image(inputstream)));
+            vb4.getChildren().add(new ImageView(rangedImg));
         }
         hb.getChildren().add(vb1);
         hb.getChildren().add(vb2);
@@ -103,24 +103,20 @@ public class BattleController {
         HBox hb2 = new HBox();
         VBox vb1 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy2().getCommanderUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png");
-            vb1.getChildren().add(new ImageView(new Image(inputstream)));
+            vb1.getChildren().add(new ImageView(commanderImg));
         }
         VBox vb2 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy2().getCavalryUnits().size(); i++) {
 
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png");
-            vb2.getChildren().add(new ImageView(new Image(inputstream)));
+            vb2.getChildren().add(new ImageView(cavalryImg));
         }
         VBox vb3 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy2().getInfantryUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png");
-            vb3.getChildren().add(new ImageView(new Image(inputstream)));
+            vb3.getChildren().add(new ImageView(infantryImg));
         }
         VBox vb4 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy2().getRangedUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png");
-            vb4.getChildren().add(new ImageView(new Image(inputstream)));
+            vb4.getChildren().add(new ImageView(rangedImg));
         }
         hb2.getChildren().add(vb1);
         hb2.getChildren().add(vb2);
@@ -131,7 +127,11 @@ public class BattleController {
     }
 
     @FXML
-    public void initialize() throws FileNotFoundException {
+    public void initialize() throws FileNotFoundException { //TODO: throw IO
+        commanderImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png"));
+        cavalryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png"));
+        infantryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png"));
+        rangedImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png"));
         HBox hb = new HBox();
         Army army1 = ActiveArmies.getActiveArmy1();
         Army army2 = ActiveArmies.getActiveArmy2();
@@ -143,24 +143,19 @@ public class BattleController {
 
         VBox vb1 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy1().getCommanderUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png");
-            vb1.getChildren().add(new ImageView(new Image(inputstream)));
+            vb1.getChildren().add(new ImageView(commanderImg));
         }
         VBox vb2 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy1().getCavalryUnits().size(); i++) {
-
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png");
-            vb2.getChildren().add(new ImageView(new Image(inputstream)));
+            vb2.getChildren().add(new ImageView(cavalryImg));
         }
         VBox vb3 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy1().getInfantryUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png");
-            vb3.getChildren().add(new ImageView(new Image(inputstream)));
+            vb3.getChildren().add(new ImageView(infantryImg));
         }
         VBox vb4 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy1().getRangedUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png");
-            vb4.getChildren().add(new ImageView(new Image(inputstream)));
+            vb4.getChildren().add(new ImageView(rangedImg));
         }
         hb.getChildren().add(vb1);
         hb.getChildren().add(vb2);
@@ -173,24 +168,20 @@ public class BattleController {
         HBox hb2 = new HBox();
         vb1 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy2().getCommanderUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png");
-            vb1.getChildren().add(new ImageView(new Image(inputstream)));
+            vb1.getChildren().add(new ImageView(commanderImg));
         }
         vb2 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy2().getCavalryUnits().size(); i++) {
 
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png");
-            vb2.getChildren().add(new ImageView(new Image(inputstream)));
+            vb2.getChildren().add(new ImageView(cavalryImg));
         }
         vb3 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy2().getInfantryUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png");
-            vb3.getChildren().add(new ImageView(new Image(inputstream)));
+            vb3.getChildren().add(new ImageView(infantryImg));
         }
         vb4 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy2().getRangedUnits().size(); i++) {
-            FileInputStream inputstream = new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png");
-            vb4.getChildren().add(new ImageView(new Image(inputstream)));
+            vb4.getChildren().add(new ImageView(rangedImg));
         }
 
         hb2.getChildren().add(vb1);

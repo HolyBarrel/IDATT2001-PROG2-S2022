@@ -46,7 +46,7 @@ public class EditorController {
     @FXML
     private TextField comNrArmy2;
 
-    @Deprecated
+    @FXML
     public void initialize() throws FileNotFoundException { //TODO: handle
         try {
             updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
@@ -179,10 +179,10 @@ public class EditorController {
         Army baseArmy;
         if(armyNumber == 1){
             newArmy = new Army(nameArmy1.getText());
-            baseArmy = FileManager.readArmyFromFile("AllianceDoNotEditThisArmy");
+            baseArmy = FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv");
         }else{
             newArmy = new Army(nameArmy2.getText());
-            baseArmy = FileManager.readArmyFromFile("HordeDoNotEditThisArmy");
+            baseArmy = FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv");
         }
         newArmy.addAll(UnitFactory.createListOfUnits(COMMANDER, baseArmy.getCommanderUnits().get(0).getName(),
                 baseArmy.getCommanderUnits().get(0).getHealth(), comNum));
