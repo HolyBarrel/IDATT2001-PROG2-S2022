@@ -25,12 +25,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import javax.swing.text.Position;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class BattleController {
     private boolean hasSkipBeenPressed = false;
@@ -172,7 +170,6 @@ public class BattleController {
         visualArmy1.setContent(hb);
 
         //TODO: define local variables
-        //TODO: if more than 30
         HBox hb2 = new HBox();
         vb1 = new VBox();
         for (int i = 0; i < ActiveArmies.getActiveArmy2().getCommanderUnits().size(); i++) {
@@ -227,8 +224,8 @@ public class BattleController {
         activeBattle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(), ActiveTerrain.INSTANCE.getActiveTerrain());
         VBox vb = new VBox();
         battleFeed.setContent(vb);
-        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.2), event -> {
-
+        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.175), event -> { //TODO: improve to call less times -- use less memry
+//todo: should user be able to change speed????
             if(!hasSkipBeenPressed) {
                 //tenthSeconds++; TODO implement
                 ArrayList<Object> battleLogInfo = activeBattle.simulateTurnForGUI();

@@ -41,7 +41,7 @@
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="comNrArmy1" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                  <TextField fx:id="comNrArmy1" maxWidth="100.0" minHeight="45.0" onKeyTyped="#checkIntegerInput" />
                     </children>
                 </HBox>
                 <HBox prefHeight="46.0" prefWidth="327.0">
@@ -51,7 +51,7 @@
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="infNrArmy1" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                  <TextField fx:id="infNrArmy1" maxWidth="100.0" minHeight="45.0" onKeyTyped="#checkIntegerInput" />
                     </children>
                 </HBox>
                 <HBox prefHeight="46.0" prefWidth="327.0">
@@ -61,7 +61,7 @@
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="cavNrArmy1" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                  <TextField fx:id="cavNrArmy1" maxWidth="100.0" minHeight="45.0" onKeyTyped="#checkIntegerInput" />
                     </children>
                 </HBox>
                 <HBox prefHeight="46.0" prefWidth="327.0">
@@ -71,7 +71,7 @@
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="ranNrArmy1" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                  <TextField fx:id="ranNrArmy1" maxWidth="100.0" minHeight="45.0" onKeyTyped="#checkIntegerInput" />
                     </children>
                 </HBox>
                 <HBox prefHeight="46.0" prefWidth="327.0" />
@@ -108,7 +108,7 @@
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="comNrArmy2" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                  <TextField fx:id="comNrArmy2" maxWidth="100.0" minHeight="45.0" onKeyTyped="#checkIntegerInput" />
                     </children>
                 </HBox>
                 <HBox prefHeight="46.0" prefWidth="327.0">
@@ -118,7 +118,7 @@
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="infNrArmy2" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                  <TextField fx:id="infNrArmy2" maxWidth="100.0" minHeight="45.0" onKeyTyped="#checkIntegerInput" />
                     </children>
                 </HBox>
                 <HBox prefHeight="46.0" prefWidth="327.0">
@@ -128,7 +128,7 @@
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="cavNrArmy2" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                  <TextField fx:id="cavNrArmy2" maxWidth="100.0" minHeight="45.0" onKeyTyped="#checkIntegerInput" />
                     </children>
                 </HBox>
                 <HBox prefHeight="46.0" prefWidth="327.0">
@@ -138,7 +138,7 @@
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="ranNrArmy2" maxWidth="100.0" onKeyTyped="#checkIntegerInput" />
+                  <TextField fx:id="ranNrArmy2" maxWidth="100.0" minHeight="45.0" onKeyTyped="#checkIntegerInput" />
                     </children>
                 </HBox>
                 <HBox prefHeight="46.0" prefWidth="327.0" />

@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-//TODO: restructure tests to be packaged n the same way as main/java..
 //TODO: rewrite display names in accordance with bb
+//TODO: CHECK BB AND STICKY NOTE
 public class ArmyTest {
     @Nested
     @DisplayName("Tests for the Army Constructor")

@@ -43,7 +43,6 @@ public class FileManager { //TODO: check charset also
             return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/%s.csv", fileName);
         }
     }
-    //TODO: ADD METHOD TO EXTRACT FILE NAME
 
     /**
      * TODO: comment
@@ -145,7 +144,7 @@ public class FileManager { //TODO: check charset also
      * file with the path does exist
      * @throws NullPointerException if the file at the target file path does not exist
      * The method catches IOException and prints the stack trace of it, if this occurs during reading
-     */ //TODO: delete
+     */ //TODO: delete methods that are never used, but check task first
     public static Army readArmyFromFile(String fileName) throws InvalidPathException, NullPointerException,
             FileNotFoundException {
         checkValidityOfPath(fileName);
@@ -162,7 +161,7 @@ public class FileManager { //TODO: check charset also
      * @throws FileNotFoundException
      */
     public static Army readArmyFromFullFilePath(String filePath) throws InvalidPathException, NullPointerException,
-            FileNotFoundException { //TODO: move, redo FileHandler
+            FileNotFoundException {
         return readArmyFromExistingFile(new File(filePath));
     }
 
@@ -221,7 +220,6 @@ public class FileManager { //TODO: check charset also
             Files.deleteIfExists(Path.of(constructFilePath(fileName)));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: handle better
-            //TODO: implement finally?
         }
     }
 }

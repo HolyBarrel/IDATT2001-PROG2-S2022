@@ -16,13 +16,14 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileManagerTest { //TODO: test all methods of FileManager
+    //TODO: implement serializable
 
     private String fileName;
     private Army humanArmy = new Army("Alliance");
     private Army orcArmy = new Army("Horde");
     @BeforeEach
     public void initiateAndSaveTestArmyToCSV(){
-        this.humanArmy = new Army("Alliance");
+        this.humanArmy = new Army("AllianceTestArmy");
         this.orcArmy = new Army("Horde");
         for (int i = 0; i < 20; i++) { //TODO. unitFactory
             humanArmy.add(new InfantryUnit("Footman", 100));
@@ -42,9 +43,9 @@ public class FileManagerTest { //TODO: test all methods of FileManager
 
     @AfterEach
     public void deleteLastFile(){
-        //if(this.fileName != null){
-         //   FileManager.deleteAFile(fileName);
-        //}
+        if(this.fileName != null){
+            FileManager.deleteAFile(fileName);
+        }
     }
     @Nested
     @DisplayName("Tests for the FileManager 'writeArmyToFileWFileName' method")
@@ -138,7 +139,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
             public void readArmyFromFile(){
                 Army testArmy = null;
                 try {
-                    testArmy = FileManager.readArmyFromFile("Alliance");
+                    testArmy = FileManager.readArmyFromFile("AllianceTestArmy");
                 } catch (FileNotFoundException f) {
                     fail("'readArmyFromFile' failed with the message: "
                             + f.getMessage());
@@ -151,7 +152,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
             public void readArmyFromFileWCSVEnding(){
                 Army testArmy = null;
                 try {
-                    testArmy = FileManager.readArmyFromFile("Alliance.csv");
+                    testArmy = FileManager.readArmyFromFile("AllianceTestArmy.csv");
                 } catch (FileNotFoundException f) {
                     fail("'readArmyFromFileWCSVEnding' failed with the message: "
                             + f.getMessage());
@@ -223,5 +224,6 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 }
             }
         }
+        //TODO. negative test corrupted armies
     }
 }

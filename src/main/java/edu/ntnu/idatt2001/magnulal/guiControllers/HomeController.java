@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
-//todo: modality
 
 import javax.naming.directory.InvalidAttributesException;
 import javax.swing.*;
@@ -101,20 +100,11 @@ public class HomeController {
     public void initialize() throws FileNotFoundException { //TODO: handle
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
-        //TODO: improve load
-        /*
-        try {
-            updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
-                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"); //TODO: change to update to the latest used armies
-        } catch (InvalidAttributesException e) {
-            exMsg.setText(e.getMessage());
-        }
-        */
 
         if(ActiveArmies.getActiveArmy1() == null && ActiveArmies.getActiveArmy2() == null){
             try {
-                updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
-                        "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"); //TODO: change to update to the latest used armies
+                updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv",
+                        "src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv");
             } catch (InvalidAttributesException e) {
                 exMsg.setText(e.getMessage());
             }
@@ -139,9 +129,9 @@ public class HomeController {
     private void updateDisplayedArmies(String pathArmy1, String pathArmy2) throws FileNotFoundException,
             InvalidPathException, InvalidAttributesException { //TODO: handle
         ActiveArmies.setActiveArmy1(FileManager.readArmyFromFullFilePath(pathArmy1));
-        ActiveArmies.setActiveArmy1Path(pathArmy1);
+        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv");
         ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(pathArmy2));
-        ActiveArmies.setActiveArmy2Path(pathArmy2);
+        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv2/Horde.csv");
         lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
         lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
         setStatsArmy1();
@@ -304,8 +294,7 @@ public class HomeController {
             File file = openFileExplorer();
             ActiveArmies.setActiveArmy1(FileManager.readArmyFromExistingFile(file));
             ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy1().getName() + ".csv");
-            lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path()); //TODO. improve the other as well
-            //TODO: THE ARMIES SHOULD BE ABLE TO BE LOADED AND THEN USED FOR SIMULATION
+            lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
             setStatsArmy1();
         }catch (NullPointerException n){
             exMsg.setText(n.getMessage());
@@ -399,6 +388,5 @@ public class HomeController {
             System.out.println(i.getMessage());
         }
     }
-    //TODO: remember create button for army
 }
 

@@ -34,7 +34,6 @@ public abstract class Unit {
      * @throws BlankStringException if the name argument is either an empty string or consists of only
      *          white spaces. Utilizes the .blank() method of the String-class
      * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
-     * //TODO: should it be possible to instantiate a unit with 0 health?
      */
     public Unit(String name, int health, int attack, int armor) throws NullPointerException, BlankStringException,
             NegativeIntegerException {

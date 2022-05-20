@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-//todo: modality
 import javax.naming.directory.InvalidAttributesException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -116,7 +115,7 @@ public class EditorController {
     }
 //TODO. ex.handling on huge armies
     @FXML
-    public void saveAndReturn(ActionEvent actionEvent) { //TODO: implement editing of names
+    public void saveAndReturn(ActionEvent actionEvent) {
         try{
             exMsg.setText("");
             confirmInputValues();
