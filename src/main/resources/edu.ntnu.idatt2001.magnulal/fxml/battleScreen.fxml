@@ -63,12 +63,15 @@
                   <Font name="System Italic" size="18.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="battleFeed" maxHeight="150.0" maxWidth="600.0" minHeight="150.0" minWidth="600.0" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane fx:id="battleFeed" maxHeight="130.0" maxWidth="600.0" minHeight="130.0" minWidth="600.0" prefHeight="200.0" prefWidth="200.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
               </content>
             </ScrollPane>
-            <Button fx:id="btnSkipToResults" maxHeight="30.0" mnemonicParsing="false" onAction="#skipToResults" prefHeight="22.0" prefWidth="136.0" text="Skip to results" />
+            <Button fx:id="btnSkipToResults" maxHeight="30.0" mnemonicParsing="false" onAction="#skipToResults" prefHeight="22.0" prefWidth="150.0" text="Skip to results">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
          </children>
       </VBox>
    </bottom>
