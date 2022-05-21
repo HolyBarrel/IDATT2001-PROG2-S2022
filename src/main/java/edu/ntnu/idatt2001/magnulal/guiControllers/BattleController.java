@@ -68,8 +68,6 @@ public class BattleController {
     @FXML
     private Label terrainInfo;
 
-    //TODO. ex handling on all button in GUI
-
     /**
      * Initializes the BattleController by creating necessary images for the visual representation of the active armies.
      * Also sets relevant data for the user.

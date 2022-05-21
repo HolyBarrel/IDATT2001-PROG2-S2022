@@ -10,13 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 
-import javax.naming.directory.InvalidAttributesException;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.InvalidPathException;
 
 import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 
@@ -29,8 +27,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 public class HomeController {
     //Source: https://stackoverflow.com/questions/14256588/opening-a-javafx-filechooser-in-the-user-directory,
     // 05.05.2022
-    private int timesInitialized = 0;
-    private static FileChooser currentFileChooser = new FileChooser(); //TODO: needs to be static?
+    private static FileChooser currentFileChooser = new FileChooser();
     private static FileChooser.ExtensionFilter currentExtFilter =
             new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
 
@@ -92,13 +89,15 @@ public class HomeController {
 
     /**
      * Runs on initialization of the graphical user interface to specify pre-defined data
-     * for the application.
+     * for the application. If the active armies has not already been set, the
+     * {@link FileManager#writeArmyToFileWFile(File, Army)} method is used to write the backup armies to the:
+     * src/main/resources/edu.ntnu.idatt2001.magnulal/csv directory.
+     * The graphical representation of the active armies are also updated.
      */
     @FXML
-    public void initialize(){ //TODO: handle
+    public void initialize(){
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
-        //TODO. reassess
 
         if(ActiveArmies.getActiveArmy1() == null && ActiveArmies.getActiveArmy2() == null) {
             try {
@@ -117,16 +116,19 @@ public class HomeController {
         updateWArmies(ActiveArmies.getActiveArmy1(),ActiveArmies.getActiveArmy2());
     }
 
-    /**TODO
-     *
-     * @param army1 is the first active army
-     * @param army2
+    /**
+     * Updates the armies of the application to the graphical representation in the GUI and sets the
+     * active armies. See {@link ActiveArmies}.
+     * @param army1 is the first army for the simulation
+     * @param army2 is the second army for the simulation
      */
     private void updateWArmies(Army army1, Army army2){
         ActiveArmies.setActiveArmy1(army1);
         ActiveArmies.setActiveArmy2(army2);
-        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy1().getName() + ".csv");
-        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy2().getName() + ".csv");
+        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
+                ActiveArmies.getActiveArmy1().getName() + ".csv");
+        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
+                ActiveArmies.getActiveArmy2().getName() + ".csv");
         lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
         lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
         setStatsArmy1();
@@ -182,7 +184,7 @@ public class HomeController {
     }
 
     /**
-     * Retrieves the currently active terrain which is set by the application
+     * Retrieves the currently active terrain which is set by the application in string-form
      * @return toString of the terrain type which is active
      */
     private String fetchActiveTerrain(){
@@ -208,7 +210,7 @@ public class HomeController {
      * This event is instantiated by the {@link HomeController#btnSimBattle} button.
      */
     @FXML
-    public void initiateSimulation(){ //TODO: ex handling
+    public void initiateSimulation(){
         if(ActiveArmies.getActiveArmy1().hasUnits() && ActiveArmies.getActiveArmy2().hasUnits()) {
             try {
                 SceneManager.switchView("battleScreen");
@@ -238,7 +240,7 @@ public class HomeController {
             ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy2().getName() + ".csv");
             lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
             setStatsArmy2();
-        }catch (NullPointerException n){ //TODO. improve
+        }catch (NullPointerException n){
             exMsg.setText(n.getMessage());
         }
     }
@@ -270,7 +272,7 @@ public class HomeController {
      * @throws NullPointerException if the load event did not correctly retrieve an army from a file. Occurs on exit
      * of the FileChooser
      */
-    private File openFileExplorer(){ //TODO: Exception handling
+    private File openFileExplorer() throws NullPointerException{
         //Source: https://stackoverflow.com/questions/14256588/opening-a-javafx-filechooser-in-the-user-directory,
         // 05.05.2022
         currentFileChooser.getExtensionFilters().add(currentExtFilter);
@@ -280,7 +282,7 @@ public class HomeController {
         if(targetFile != null) {
             path = targetFile.getPath();
         } else {
-            throw new NullPointerException("No file was selected for the chosen army, please try again."); //TODO: test
+            throw new NullPointerException("No file was selected for the chosen army, please try again.");
         }
         return targetFile;
     }
@@ -291,9 +293,13 @@ public class HomeController {
      * Occurs at the click event of the button: {@link HomeController#btnResetArmy1}
      */
     @FXML
-    public void resetArmy1() throws FileNotFoundException { //TODO: handle
-        ActiveArmies.setActiveArmy1(FileManager.readArmyFromFullFilePath(ActiveArmies.getActiveArmy1Path())); //TODO: handle
-        setStatsArmy1();
+    public void resetArmy1(){
+        try {
+            ActiveArmies.setActiveArmy1(FileManager.readArmyFromFullFilePath(ActiveArmies.getActiveArmy1Path()));
+            setStatsArmy1();
+        }catch (FileNotFoundException f){
+            exMsg.setText(f.getMessage());
+        }
     }
 
     /**
@@ -302,13 +308,20 @@ public class HomeController {
      * Occurs at the click event of the button: {@link HomeController#btnResetArmy2}
      */
     @FXML
-    public void resetArmy2() throws FileNotFoundException { // TODO: hanlde
-        //TRY CATCH
-        ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(ActiveArmies.getActiveArmy2Path()));
-        setStatsArmy2();
+    public void resetArmy2(){
+        try{
+            ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(ActiveArmies.getActiveArmy2Path()));
+            setStatsArmy2();
+        }catch(FileNotFoundException f){
+            exMsg.setText(f.getMessage());
+        }
+
     }
 
-
+    /**
+     * Opens a JOptionPane with a scrollable pane showing the to-string of the second active army.
+     * Occurs on button click of: {@link HomeController#btnSeeArmy2}.
+     */
     @FXML
     public void seeArmy2() {
         //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
@@ -319,6 +332,10 @@ public class HomeController {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Opens a JOptionPane with a scrollable pane showing the to-string of the first active army. Occurs on button click of:
+     * {@link HomeController#btnSeeArmy1}.
+     */
     @FXML
     public void seeArmy1() {
         //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
@@ -329,13 +346,24 @@ public class HomeController {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
+
+    /**
+     * Switches to the editor.fxml scene using the {@link SceneManager#switchView(String)} method. If the horde army's
+     * file is not located in the csv directory, the default horde-army read from the csvBackup directory is used to
+     * write the horde army to the csv directory. This is a solution to counter any accidental deletion of the
+     * default horde army.
+     * This process utilizes methods of the {@link FileManager} to write and read.
+     */
     @FXML
     public void editArmy2() {
         if(!new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv").exists()) {
             try {
-                FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
+                FileManager.writeArmyToFileWFile(new File(
+                        "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"),
+                        FileManager.readArmyFromFullFilePath(
+                                "src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                exMsg.setText(e.getMessage());
             }
         }
         try {
@@ -345,20 +373,25 @@ public class HomeController {
         }
     }
 
+    /**
+     * Switches to the editor.fxml scene using the {@link SceneManager#switchView(String)} method. If the alliance
+     * army's file is not located in the csv directory, the default alliance-army read from the csvBackup directory is
+     * used to write the alliance army to the csv directory. This is a solution to counter any accidental deletion of the
+     * default alliance army. This process utilizes methods of the {@link FileManager} to write and read.
+     */
     @FXML
     public void editArmy1() {
         if(!new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv").exists()) {
             try {
                 FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv"));
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                exMsg.setText(e.getMessage());
             }
         }
         try {
             SceneManager.switchView("editor");
         } catch (IOException i) {
             exMsg.setText(i.getMessage());
-            System.out.println(i.getMessage());
         }
     }
 }

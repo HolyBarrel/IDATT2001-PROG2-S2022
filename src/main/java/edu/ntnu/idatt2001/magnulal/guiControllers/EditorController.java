@@ -66,8 +66,10 @@ public class EditorController {
     private void updateWArmies(Army army1, Army army2){
         ActiveArmies.setActiveArmy1(army1);
         ActiveArmies.setActiveArmy2(army2);
-        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy1().getName() + ".csv");
-        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy2().getName() + ".csv");
+        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
+                ActiveArmies.getActiveArmy1().getName() + ".csv");
+        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
+                ActiveArmies.getActiveArmy2().getName() + ".csv");
         setStatsArmy1();
         setStatsArmy2();
     }
@@ -100,7 +102,8 @@ public class EditorController {
     }
 
     /**
-     * Switches the currently viewed scene to the home screen
+     * Switches the currently viewed scene to the home screen. Utilizes the {@link SceneManager#switchView(String)}
+     * to target the main.fxml document
      */
     @FXML
     public void returnHome() {
