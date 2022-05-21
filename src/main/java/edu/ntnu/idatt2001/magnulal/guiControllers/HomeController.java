@@ -26,7 +26,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 /**
  * Home screen controller for the Wargames application
  * @author magnulal
- * @version 0.3 //TODO: update versions
+ * @version 1.0
  * @since 0.3
  */
 public class HomeController {
@@ -100,6 +100,18 @@ public class HomeController {
     public void initialize() throws FileNotFoundException { //TODO: handle
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
+        //TODO. reassess
+        try {
+            FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace(); //TODO. hande
+        }
+        try {
+            FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace(); //TODO. hande
+        }
+
 
         if(ActiveArmies.getActiveArmy1() == null && ActiveArmies.getActiveArmy2() == null){
             try {
@@ -131,7 +143,7 @@ public class HomeController {
         ActiveArmies.setActiveArmy1(FileManager.readArmyFromFullFilePath(pathArmy1));
         ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv");
         ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(pathArmy2));
-        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv2/Horde.csv");
+        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv");
         lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
         lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
         setStatsArmy1();

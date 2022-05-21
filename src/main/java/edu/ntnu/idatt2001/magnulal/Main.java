@@ -16,7 +16,7 @@ import java.util.Optional;
  * Main class that inherits from Application
  * The class has a start-method that shows the given stage
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.3
 */
 public class Main extends Application {

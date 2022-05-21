@@ -12,7 +12,7 @@ import java.util.List;
  * This class has a method to create a single unit, and also to create a list with
  * a given integer amount of duplicated units
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.3
  */
 public class UnitFactory {

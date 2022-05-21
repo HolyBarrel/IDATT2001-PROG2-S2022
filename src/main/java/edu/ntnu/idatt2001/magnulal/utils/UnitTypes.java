@@ -7,7 +7,7 @@ import java.util.Arrays;
  * the enum has attached string values corresponding to each unit subclass'
  * simpleName written as a string
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.2
  */
 public enum UnitTypes {

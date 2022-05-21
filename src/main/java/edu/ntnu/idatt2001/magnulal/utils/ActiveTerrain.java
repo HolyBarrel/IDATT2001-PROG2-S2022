@@ -6,7 +6,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
  * Singleton designed enum to assure the program that a single terrain type is considered
  * the 'ActiveTerrain' at any given point
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.3
  * TODO test
  */

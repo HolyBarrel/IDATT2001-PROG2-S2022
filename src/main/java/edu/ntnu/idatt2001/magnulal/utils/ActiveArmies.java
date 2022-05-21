@@ -7,6 +7,9 @@ import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
  * This class is essential to the graphical user interface because ActiveArmies is used to store information
  * about the two accessible armies with their corresponding paths at runtime. Functions as a temporary storage
  * class during runtime.
+ * @author magnulal
+ * @version 1.0
+ * @since 0.3
  */
 public class ActiveArmies {
     private static Army activeArmy1;

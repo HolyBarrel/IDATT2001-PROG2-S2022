@@ -18,6 +18,12 @@ import java.util.ArrayList;
 
 import static edu.ntnu.idatt2001.magnulal.utils.UnitTypes.*;
 
+/**
+ * Controller class to control the editor scene
+ * @author magnulal
+ * @version 1.0
+ * @since 0.3
+ */
 public class EditorController {
     @FXML
     private Label exMsg;
@@ -113,7 +119,6 @@ public class EditorController {
             e.printStackTrace();
         }
     }
-//TODO. ex.handling on huge armies
     @FXML
     public void saveAndReturn(ActionEvent actionEvent) {
         try{

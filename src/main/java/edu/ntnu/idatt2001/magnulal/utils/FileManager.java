@@ -16,7 +16,7 @@ import java.util.Scanner;
  * the FileManager
  * This is because this class is only used for its static methods
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.2
  */
 public class FileManager { //TODO: check charset also

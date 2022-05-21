@@ -8,7 +8,7 @@ import edu.ntnu.idatt2001.magnulal.model.units.Unit;
  * To further see the logic, see {@link edu.ntnu.idatt2001.magnulal.model.units.Unit} for methods calculating
  * these bonuses
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.3
  */
 public enum TerrainType {

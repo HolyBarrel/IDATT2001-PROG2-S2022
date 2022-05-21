@@ -9,7 +9,7 @@ import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
  * A CommanderUnit is a more capable version of the CavalryUnit, and does therefore
  * have a buffed attack and armor compared to its superclass
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.1
  */
 public class CommanderUnit extends CavalryUnit{

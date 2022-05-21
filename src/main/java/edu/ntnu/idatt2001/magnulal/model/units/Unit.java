@@ -14,7 +14,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
  * CavalryUnit --> which in turn is inherited by CommanderUnit
  * RangedUnit
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.1
  */
 public abstract class Unit {

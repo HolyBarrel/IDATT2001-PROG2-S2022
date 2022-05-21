@@ -9,7 +9,7 @@ import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
  * attackBonus = 2, specific value for objects of this subclass
  * resistBonus = 1, specific value for objects of this subclass
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.1
  */
 public class InfantryUnit extends Unit {

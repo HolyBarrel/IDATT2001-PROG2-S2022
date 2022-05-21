@@ -9,7 +9,7 @@ import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
  * resistBonus is either 7, 5 or 2, depending on how many times this unit-object of
  * class has been hit, this is a way to represent how far away the enemy is
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.1
  */
 public class RangedUnit extends Unit{

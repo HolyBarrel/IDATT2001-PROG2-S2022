@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Class to manage the flow of the scenes in the application
  * @author magnulal
- * @version 0.3 //TODO: update versions
+ * @version 1.0
  * @since 0.3
  */
 public class SceneManager {

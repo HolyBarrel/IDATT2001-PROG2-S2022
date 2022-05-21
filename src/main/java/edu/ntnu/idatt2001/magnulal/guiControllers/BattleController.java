@@ -13,7 +13,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
+import javafx.geometry.Pos; //TODO: remove unesssecary
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -30,6 +30,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Battle controller to control the battleScreen scene
+ * @author magnulal
+ * @version 1.0
+ * @since 0.3
+ * TODO. comment all
+ */
 public class BattleController {
     private boolean hasSkipBeenPressed = false;
     private Timeline simulationTimeline;
@@ -68,6 +75,73 @@ public class BattleController {
     private ScrollPane battleFeed;
     @FXML
     private Label terrainInfo;
+
+    //TODO. ex handling on all button in GUI
+
+    @FXML
+    public void initialize() throws FileNotFoundException { //TODO: throw IO
+        commanderImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png"));
+        cavalryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png"));
+        infantryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png"));
+        rangedImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png"));
+        HBox hb = new HBox();
+        Army army1 = ActiveArmies.getActiveArmy1();
+        Army army2 = ActiveArmies.getActiveArmy2();
+        nameArmy1.setText(army1.getName());
+        nameArmy2.setText(army2.getName());
+        numUnitsArmy1.setText(String.valueOf(army1.getAllUnits().size()));
+        numUnitsArmy2.setText(String.valueOf(army2.getAllUnits().size()));
+        VBox.setVgrow(visualArmy1, Priority.ALWAYS);
+
+        VBox vb1 = new VBox();
+        for (int i = 0; i < ActiveArmies.getActiveArmy1().getCommanderUnits().size(); i++) {
+            vb1.getChildren().add(new ImageView(commanderImg));
+        }
+        VBox vb2 = new VBox();
+        for (int i = 0; i < ActiveArmies.getActiveArmy1().getCavalryUnits().size(); i++) {
+            vb2.getChildren().add(new ImageView(cavalryImg));
+        }
+        VBox vb3 = new VBox();
+        for (int i = 0; i < ActiveArmies.getActiveArmy1().getInfantryUnits().size(); i++) {
+            vb3.getChildren().add(new ImageView(infantryImg));
+        }
+        VBox vb4 = new VBox();
+        for (int i = 0; i < ActiveArmies.getActiveArmy1().getRangedUnits().size(); i++) {
+            vb4.getChildren().add(new ImageView(rangedImg));
+        }
+        hb.getChildren().add(vb1);
+        hb.getChildren().add(vb2);
+        hb.getChildren().add(vb3);
+        hb.getChildren().add(vb4);
+
+        visualArmy1.setContent(hb);
+
+        HBox hb2 = new HBox();
+        vb1 = new VBox();
+        for (int i = 0; i < ActiveArmies.getActiveArmy2().getCommanderUnits().size(); i++) {
+            vb1.getChildren().add(new ImageView(commanderImg));
+        }
+        vb2 = new VBox();
+        for (int i = 0; i < ActiveArmies.getActiveArmy2().getCavalryUnits().size(); i++) {
+
+            vb2.getChildren().add(new ImageView(cavalryImg));
+        }
+        vb3 = new VBox();
+        for (int i = 0; i < ActiveArmies.getActiveArmy2().getInfantryUnits().size(); i++) {
+            vb3.getChildren().add(new ImageView(infantryImg));
+        }
+        vb4 = new VBox();
+        for (int i = 0; i < ActiveArmies.getActiveArmy2().getRangedUnits().size(); i++) {
+            vb4.getChildren().add(new ImageView(rangedImg));
+        }
+
+        hb2.getChildren().add(vb1);
+        hb2.getChildren().add(vb2);
+        hb2.getChildren().add(vb3);
+        hb2.getChildren().add(vb4);
+
+        visualArmy2.setContent(hb2);
+    }
 
     private void updateVisualArmy1() throws FileNotFoundException {
         HBox hb = new HBox();
@@ -127,71 +201,6 @@ public class BattleController {
     }
 
     @FXML
-    public void initialize() throws FileNotFoundException { //TODO: throw IO
-        commanderImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png"));
-        cavalryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png"));
-        infantryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png"));
-        rangedImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png"));
-        HBox hb = new HBox();
-        Army army1 = ActiveArmies.getActiveArmy1();
-        Army army2 = ActiveArmies.getActiveArmy2();
-        nameArmy1.setText(army1.getName());
-        nameArmy2.setText(army2.getName());
-        numUnitsArmy1.setText(String.valueOf(army1.getAllUnits().size()));
-        numUnitsArmy2.setText(String.valueOf(army2.getAllUnits().size()));
-        VBox.setVgrow(visualArmy1, Priority.ALWAYS);
-
-        VBox vb1 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getCommanderUnits().size(); i++) {
-            vb1.getChildren().add(new ImageView(commanderImg));
-        }
-        VBox vb2 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getCavalryUnits().size(); i++) {
-            vb2.getChildren().add(new ImageView(cavalryImg));
-        }
-        VBox vb3 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getInfantryUnits().size(); i++) {
-            vb3.getChildren().add(new ImageView(infantryImg));
-        }
-        VBox vb4 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getRangedUnits().size(); i++) {
-            vb4.getChildren().add(new ImageView(rangedImg));
-        }
-        hb.getChildren().add(vb1);
-        hb.getChildren().add(vb2);
-        hb.getChildren().add(vb3);
-        hb.getChildren().add(vb4);
-
-        visualArmy1.setContent(hb);
-
-        //TODO: define local variables
-        HBox hb2 = new HBox();
-        vb1 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getCommanderUnits().size(); i++) {
-            vb1.getChildren().add(new ImageView(commanderImg));
-        }
-        vb2 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getCavalryUnits().size(); i++) {
-
-            vb2.getChildren().add(new ImageView(cavalryImg));
-        }
-        vb3 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getInfantryUnits().size(); i++) {
-            vb3.getChildren().add(new ImageView(infantryImg));
-        }
-        vb4 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getRangedUnits().size(); i++) {
-            vb4.getChildren().add(new ImageView(rangedImg));
-        }
-
-        hb2.getChildren().add(vb1);
-        hb2.getChildren().add(vb2);
-        hb2.getChildren().add(vb3);
-        hb2.getChildren().add(vb4);
-
-        visualArmy2.setContent(hb2);
-    }
-    @FXML
     public void returnHome(ActionEvent actionEvent) {
 
         if(simulationTimeline != null) simulationTimeline.stop();
@@ -216,7 +225,6 @@ public class BattleController {
         VBox vb = new VBox();
         battleFeed.setContent(vb);
         simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.175), event -> { //TODO: improve to call less times -- use less memry
-//todo: should user be able to change speed????
             if(!hasSkipBeenPressed) {
                 //tenthSeconds++; TODO implement
                 ArrayList<Object> battleLogInfo = activeBattle.simulateTurnForGUI();
@@ -239,7 +247,6 @@ public class BattleController {
                 }
                 ActiveArmies.setActiveArmy1(activeBattle.getArmyOne());
                 ActiveArmies.setActiveArmy2(activeBattle.getArmyTwo());
-//TODO: exeption on inf battle
                 if (!ActiveArmies.getActiveArmy1().hasUnits() || !ActiveArmies.getActiveArmy2().hasUnits()) {
                     simulationTimeline.stop();
 

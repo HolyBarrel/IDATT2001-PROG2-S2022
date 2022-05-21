@@ -5,11 +5,6 @@ InfantryUnit,Grunt,100
 InfantryUnit,Grunt,100
 InfantryUnit,Grunt,100
 InfantryUnit,Grunt,100
-InfantryUnit,Grunt,100
-InfantryUnit,Grunt,100
-InfantryUnit,Grunt,100
-InfantryUnit,Grunt,100
-InfantryUnit,Grunt,100
 CavalryUnit,Raider,100
 CavalryUnit,Raider,100
 CavalryUnit,Raider,100
@@ -20,6 +15,11 @@ CavalryUnit,Raider,100
 CavalryUnit,Raider,100
 CavalryUnit,Raider,100
 CavalryUnit,Raider,100
+RangedUnit,SpearOrc,100
+RangedUnit,SpearOrc,100
+RangedUnit,SpearOrc,100
+RangedUnit,SpearOrc,100
+RangedUnit,SpearOrc,100
 RangedUnit,SpearOrc,100
 RangedUnit,SpearOrc,100
 RangedUnit,SpearOrc,100

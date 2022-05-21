@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * The army has a String value for its name, and a list of all
  * Unit-subclass units in this army
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.1
  */
 public class Army {
