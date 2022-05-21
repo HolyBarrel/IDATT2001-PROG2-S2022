@@ -4,6 +4,7 @@ import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.utils.*;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.TooLargeIntegerException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -143,11 +144,12 @@ public class EditorController {
             }
             ////
             SceneManager.switchView("main");
-        }catch (BlankStringException | NegativeIntegerException | NumberFormatException | IOException n){
+        }catch (BlankStringException | NegativeIntegerException | NumberFormatException | IOException |
+                TooLargeIntegerException n){
             if(n instanceof IOException){
                 exMsg.setText("Could not load the home screen, please reload the application.");
             }else{
-                exMsg.setText("The given input is wrong: " + n.getMessage() + " Cannot not save to file with " +
+                exMsg.setText("Wrong input: " + n.getMessage() + " Cannot not save to file with " +
                         "these values.");
             }
 
@@ -201,7 +203,7 @@ public class EditorController {
     }
 
     private void confirmInputValues() throws BlankStringException,
-            NegativeIntegerException, NumberFormatException {
+            NegativeIntegerException, NumberFormatException, TooLargeIntegerException {
         exMsg.setText("");
         ArrayList<Integer> numberOfDifferentUnits = new ArrayList<>();
         numberOfDifferentUnits.add(Integer.parseInt(comNrArmy1.getText()));
@@ -217,6 +219,10 @@ public class EditorController {
             throw new NegativeIntegerException("One input is negative, this is not accepted as a legal " +
                     "amount of units.");
         }
+        if(numberOfDifferentUnits.stream().anyMatch(integer -> integer > 10000)){
+            throw new TooLargeIntegerException("Please enter an integer less than 10000 for the amount of a " +
+                    "type of units.");
+        }
         if(nameArmy2.getText().isBlank() || nameArmy1.getText().isBlank()){
             throw new BlankStringException("Cannot create an army with a blank name.");
         }
@@ -227,7 +233,7 @@ public class EditorController {
     public void checkIntegerInput(Event event) {
         try{
             confirmInputValues();
-        }catch (BlankStringException | NegativeIntegerException | NumberFormatException n){
+        }catch (BlankStringException | NegativeIntegerException | NumberFormatException | TooLargeIntegerException n){
             exMsg.setText("The given input is wrong: " + n.getMessage() + " Cannot not save to file with " +
                     "these values.");
         }

@@ -1,19 +1,13 @@
 package edu.ntnu.idatt2001.magnulal.guiControllers;
 
-import edu.ntnu.idatt2001.magnulal.Main;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
-import edu.ntnu.idatt2001.magnulal.model.units.Unit;
-import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
-import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
-import edu.ntnu.idatt2001.magnulal.utils.SceneManager;
-import edu.ntnu.idatt2001.magnulal.utils.TerrainType;
+import edu.ntnu.idatt2001.magnulal.utils.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos; //TODO: remove unesssecary
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -78,12 +72,24 @@ public class BattleController {
 
     //TODO. ex handling on all button in GUI
 
+    /**
+     *
+     */
     @FXML
-    public void initialize() throws FileNotFoundException { //TODO: throw IO
-        commanderImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png"));
-        cavalryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png"));
-        infantryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png"));
-        rangedImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png"));
+    public void initialize() {
+        visualArmy1.setStyle("-fx-background-color:#F5F5F5;");
+        visualArmy2.setStyle("-fx-background-color:#F5F5F5;");
+        btnSkipToResults.setDisable(true);
+
+        try {
+            commanderImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png"));
+            cavalryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png"));
+            infantryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png"));
+            rangedImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png"));
+        } catch (FileNotFoundException f){
+            exMsg.setText(f.getMessage());
+        }
+
         HBox hb = new HBox();
         Army army1 = ActiveArmies.getActiveArmy1();
         Army army2 = ActiveArmies.getActiveArmy2();
@@ -93,57 +99,11 @@ public class BattleController {
         numUnitsArmy2.setText(String.valueOf(army2.getAllUnits().size()));
         VBox.setVgrow(visualArmy1, Priority.ALWAYS);
 
-        VBox vb1 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getCommanderUnits().size(); i++) {
-            vb1.getChildren().add(new ImageView(commanderImg));
-        }
-        VBox vb2 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getCavalryUnits().size(); i++) {
-            vb2.getChildren().add(new ImageView(cavalryImg));
-        }
-        VBox vb3 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getInfantryUnits().size(); i++) {
-            vb3.getChildren().add(new ImageView(infantryImg));
-        }
-        VBox vb4 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getRangedUnits().size(); i++) {
-            vb4.getChildren().add(new ImageView(rangedImg));
-        }
-        hb.getChildren().add(vb1);
-        hb.getChildren().add(vb2);
-        hb.getChildren().add(vb3);
-        hb.getChildren().add(vb4);
-
-        visualArmy1.setContent(hb);
-
-        HBox hb2 = new HBox();
-        vb1 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getCommanderUnits().size(); i++) {
-            vb1.getChildren().add(new ImageView(commanderImg));
-        }
-        vb2 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getCavalryUnits().size(); i++) {
-
-            vb2.getChildren().add(new ImageView(cavalryImg));
-        }
-        vb3 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getInfantryUnits().size(); i++) {
-            vb3.getChildren().add(new ImageView(infantryImg));
-        }
-        vb4 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getRangedUnits().size(); i++) {
-            vb4.getChildren().add(new ImageView(rangedImg));
-        }
-
-        hb2.getChildren().add(vb1);
-        hb2.getChildren().add(vb2);
-        hb2.getChildren().add(vb3);
-        hb2.getChildren().add(vb4);
-
-        visualArmy2.setContent(hb2);
+        updateVisualArmy1();
+        updateVisualArmy2();
     }
 
-    private void updateVisualArmy1() throws FileNotFoundException {
+    private void updateVisualArmy1(){
         HBox hb = new HBox();
         numUnitsArmy1.setText(String.valueOf(ActiveArmies.getActiveArmy1().getAllUnits().size()));
         VBox vb1 = new VBox();
@@ -171,7 +131,10 @@ public class BattleController {
     }
 
 
-    private void updateVisualArmy2() throws FileNotFoundException {
+    /**
+     *
+     */
+    private void updateVisualArmy2(){
         numUnitsArmy2.setText(String.valueOf(ActiveArmies.getActiveArmy2().getAllUnits().size()));
 
         HBox hb2 = new HBox();
@@ -200,9 +163,12 @@ public class BattleController {
         visualArmy2.setContent(hb2);
     }
 
+    /**
+     * Button click event to that switches the viewed scene to main being the home screen
+     * If the simulation is ongoing, it is stopped.
+     */
     @FXML
-    public void returnHome(ActionEvent actionEvent) {
-
+    public void returnHome() {
         if(simulationTimeline != null) simulationTimeline.stop();
         try {
             SceneManager.switchView("main");
@@ -211,15 +177,19 @@ public class BattleController {
         }
     }
 
+    /**
+     * Button click event to inform the BattleController that the skip button has been pressed by the user.
+     */
     @FXML
-    public void skipToResults(ActionEvent actionEvent) {
+    public void skipToResults() {
         hasSkipBeenPressed = true;
     }
 
     @FXML
-    public void simulateStart(ActionEvent actionEvent) {
+    public void simulateStart() {
         terrainInfo.setText("Terrain: " + ActiveTerrain.INSTANCE.getActiveTerrain().name());
         btnSimulate.setDisable(true);
+        btnSkipToResults.setDisable(false);
         battleFeed.setVvalue(1.0);
         activeBattle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(), ActiveTerrain.INSTANCE.getActiveTerrain());
         VBox vb = new VBox();
@@ -235,16 +205,9 @@ public class BattleController {
                 }else {
                     vb.getChildren().add(new Label(String.valueOf(battleLogInfo.get(2))));
                 }
-                try {
-                    updateVisualArmy1();
-                } catch (FileNotFoundException e) {
-                    exMsg.setText(e.getMessage());
-                }
-                try {
-                    updateVisualArmy2();
-                } catch (FileNotFoundException e) {
-                    exMsg.setText(e.getMessage());
-                }
+                updateVisualArmy1();
+                updateVisualArmy2();
+
                 ActiveArmies.setActiveArmy1(activeBattle.getArmyOne());
                 ActiveArmies.setActiveArmy2(activeBattle.getArmyTwo());
                 if (!ActiveArmies.getActiveArmy1().hasUnits() || !ActiveArmies.getActiveArmy2().hasUnits()) {
@@ -265,16 +228,8 @@ public class BattleController {
                 ActiveArmies.setActiveArmy1(activeBattle.getArmyOne());
                 ActiveArmies.setActiveArmy2(activeBattle.getArmyTwo());
                 battleFeed.setContent(new Label("Victorious army: \n" + victoriousArmy.toString()));
-                try {
-                    updateVisualArmy1();
-                } catch (FileNotFoundException e) {
-                    exMsg.setText(e.getMessage());
-                }
-                try {
-                    updateVisualArmy2();
-                } catch (FileNotFoundException e) {
-                    exMsg.setText(e.getMessage());
-                }
+                updateVisualArmy1();
+                updateVisualArmy2();
                 simulationTimeline.stop();
             }
             battleFeed.setVvalue(1.0);

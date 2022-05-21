@@ -3,7 +3,7 @@ package edu.ntnu.idatt2001.magnulal.utils.exceptions;
 /**
  * Custom subclass of RuntimeException with the name 'BlankStringException' describing the exceptional event
  * @author magnulal
- * @version 0.3
+ * @version 1.0
  * @since 0.3
  */
 public class BlankStringException extends RuntimeException{
