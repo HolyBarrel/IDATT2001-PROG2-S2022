@@ -29,12 +29,10 @@ import java.util.ArrayList;
  * @author magnulal
  * @version 1.0
  * @since 0.3
- * TODO. comment all
  */
 public class BattleController {
     private boolean hasSkipBeenPressed = false;
     private Timeline simulationTimeline;
-    private int tenthSeconds = 0; //TODO: undo
     private Battle activeBattle;
 
     private static Image commanderImg;
@@ -91,7 +89,6 @@ public class BattleController {
             exMsg.setText(f.getMessage());
         }
 
-        HBox hb = new HBox();
         Army army1 = ActiveArmies.getActiveArmy1();
         Army army2 = ActiveArmies.getActiveArmy2();
         nameArmy1.setText(army1.getName());
@@ -105,7 +102,8 @@ public class BattleController {
     }
 
     /**
-     * Updates the current visual status of the first active army
+     * Updates the current visual status of the first active army. Creates a visual representation of the army's units
+     * by utilizing the images found in: src/main/resources/edu.ntnu.idatt2001.magnulal/images
      */
     private void updateVisualArmy1(){
         HBox hb = new HBox();
@@ -134,9 +132,9 @@ public class BattleController {
         visualArmy1.setContent(hb);
     }
 
-
     /**
-     * Updates the current visual status of the second active army
+     * Updates the current visual status of the second active army.  Creates a visual representation of the army's units
+     * by utilizing the images found in: src/main/resources/edu.ntnu.idatt2001.magnulal/images
      */
     private void updateVisualArmy2(){
         numUnitsArmy2.setText(String.valueOf(ActiveArmies.getActiveArmy2().getAllUnits().size()));
@@ -168,7 +166,7 @@ public class BattleController {
     }
 
     /**
-     * Button click event to that switches the viewed scene to main being the home screen
+     * Button click event to that switches the viewed scene to main being the home screen.
      * If the simulation is ongoing, it is stopped.
      */
     @FXML
@@ -190,7 +188,14 @@ public class BattleController {
     }
 
     /**
-     * Starts the
+     * Starts the simulation of the two active armies. Updates the GUI to inform about pressable buttons and the current
+     * terrain of the battle. Initiates a timeline with an indefinite runtime. This stops on return home, skip to
+     * results press, or when the battle has finished. The timeline runs in iterations lasting 0.175 seconds.
+     * These iterations consist of updating the activeBattle and representing this visually. This happens by
+     * presenting each unit of the two armies as a unique image, an overview of the total number of units in the armies,
+     * by viewing a live battle feed. These informational graphics are updated with each 0.175 second iteration.
+     * The information if retrieved from an ArrayList of objects, to se how this information is sent, see the method:
+     * {@link Battle#simulateTurnForGUI()}
      */
     @FXML
     public void simulateStart() {
@@ -201,9 +206,8 @@ public class BattleController {
         activeBattle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(), ActiveTerrain.INSTANCE.getActiveTerrain());
         VBox vb = new VBox();
         battleFeed.setContent(vb);
-        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.175), event -> { //TODO: improve to call less times -- use less memry
+        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.175), event -> {
             if(!hasSkipBeenPressed) {
-                //tenthSeconds++; TODO implement
                 ArrayList<Object> battleLogInfo = activeBattle.simulateTurnForGUI();
                 //retrieve the last element, which is always the active battle
                 activeBattle = (Battle)battleLogInfo.get(battleLogInfo.size()-1);
@@ -217,16 +221,20 @@ public class BattleController {
 
                 ActiveArmies.setActiveArmy1(activeBattle.getArmyOne());
                 ActiveArmies.setActiveArmy2(activeBattle.getArmyTwo());
-                if (!ActiveArmies.getActiveArmy1().hasUnits() || !ActiveArmies.getActiveArmy2().hasUnits()) {
+                Army army1 = ActiveArmies.getActiveArmy1();
+                Army army2 = ActiveArmies.getActiveArmy2();
+                if (!army1.hasUnits() || !army2.hasUnits()) {
                     simulationTimeline.stop();
 
-                    if (ActiveArmies.getActiveArmy1().hasUnits()){
-                        vb.getChildren().add(new Label(ActiveArmies.getActiveArmy1().getName() + " was the victorious army with" + ActiveArmies.getActiveArmy1().getAllUnits().size() + " units left. \n This is the victorious army: \n" + ActiveArmies.getActiveArmy1().toString()));
+                    if (army1.hasUnits()){
+                        vb.getChildren().add(new Label(army1.getName() + " was the victorious army with" +
+                                army1.getAllUnits().size() + " units left. \n This is the victorious army: \n" +
+                                army1));
                         battleFeed.setVvalue(1.0);
-                    }
-                    //TODO: change to one call
-                    if (ActiveArmies.getActiveArmy2().hasUnits()){
-                        vb.getChildren().add(new Label(ActiveArmies.getActiveArmy2().getName() + " was the victorious army with" + ActiveArmies.getActiveArmy2().getAllUnits().size() + " units left. \n This is the victorious army: \n" + ActiveArmies.getActiveArmy2().toString()));
+                    }else{
+                        vb.getChildren().add(new Label(army2.getName() + " was the victorious army with"
+                                + army2.getAllUnits().size() + " units left. \n This is the victorious army: \n" +
+                                army2));
                         battleFeed.setVvalue(1.0);
                     }
                 }
