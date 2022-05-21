@@ -31,11 +31,11 @@ public enum UnitTypes {
      * Static method to make enum easily usable with enhanced switch
      * see {@link edu.ntnu.idatt2001.magnulal.utils.FileManager#readArmyFromFile(String)}
      * @param nameString is a string value which is matched with any of the enum's string-attached
-     *                     string returns the enum value// todo: rewrite
-     * @return enum value corresponding with searchString if found, and 'null' otherwise
+     *                     string which returns the enum type
+     * @return enum value corresponding with nameString if found, and 'null' otherwise
      */
     public static UnitTypes getValueMatching(String nameString){
-        for (UnitTypes type: values()) { //TODO: CHANGE TO WHILE
+        for (UnitTypes type: values()) {
             if(type.unitType.equals(nameString)){
                 return type;
             }

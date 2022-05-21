@@ -36,7 +36,7 @@ public class FileManager { //TODO: check charset also
      * filepath to the resources root's directory called 'csv'. By using this method throughout the
      * FileManager class this directory is the only manipulable directory for the FileManager
      */
-    public static String constructFilePath(String fileName){ //TODO: change back to private
+    public static String constructFilePath(String fileName){
         if(fileName.endsWith(".csv")){
             return String.format("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/%s", fileName);
         }else{
@@ -45,8 +45,8 @@ public class FileManager { //TODO: check charset also
     }
 
     /**
-     * TODO: comment
-     * @return or default
+     * Constructs the homepath of the users' system
+     * @return or default string path
      */
     public static String constructHomePath(){
         return System.getProperty("user.home").replace("\\", "/");
@@ -182,15 +182,14 @@ public class FileManager { //TODO: check charset also
                 readArmy.add(readUnit(lineValues));
             }
         } catch (IOException i) {
-            i.printStackTrace(); //Todo. IMPROVE
+            System.out.println(i.getMessage());
         }
         return readArmy;
     }
 
     /**
      * Reads a specific line of a string array, and constructs a unit type corresponding with the first string in
-     * the array. Utilizes the other indexes of the string array to create the unit. TODO update
-     * This method uses {@link UnitTypes} enum to form the logic behind the enhanced switch statement.
+     * the array. Utilizes the other indexes of the string array to create the unit.
      * @param readLineValues is a string array constructed from a line in a csv document
      * @return a unit created from the string values of the readLineValues parameter array
      * @throws NullPointerException if the line could not be matched with any unit type
@@ -204,8 +203,6 @@ public class FileManager { //TODO: check charset also
         }catch (NullPointerException n){
             throw new NullPointerException("The requested unit type could not be found.");
         }
-
-        //TODO: LAG EN SOM reader hele andre constructøren fra unit
     }
     /**
      * Deletes a given file at the file path constructed from the specified file name if a file of that name exists
@@ -214,12 +211,12 @@ public class FileManager { //TODO: check charset also
      *                 can only delete from that directory
      * @throws InvalidPathException if the constructed path contains forbidden characters
      */
-    public static void deleteAFile(String fileName) throws InvalidPathException{ //TODO: more exceptions?
+    public static void deleteAFile(String fileName) throws InvalidPathException{
         checkValidityOfPath(fileName);
         try{
             Files.deleteIfExists(Path.of(constructFilePath(fileName)));
         } catch (IOException e) {
-            e.printStackTrace(); //TODO: handle better
+            System.out.println(e.getMessage());
         }
     }
 }

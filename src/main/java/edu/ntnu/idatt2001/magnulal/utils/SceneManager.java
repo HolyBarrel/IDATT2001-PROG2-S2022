@@ -26,7 +26,7 @@ public class SceneManager {
     /**
      * Switches the active scene which is viewed by the user of the application
      * @param targetFxml is the file name of the target scene-fxml file located in project resources
-     * @throws IOException on problems with loading the FXMLLoader //TODO: handle
+     * @throws IOException on problems with loading the FXMLLoader
      */
     public static void switchView(String targetFxml) throws IOException {
         FXMLLoader loader = retrieveLoader(targetFxml);

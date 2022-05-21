@@ -16,7 +16,6 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileManagerTest { //TODO: test all methods of FileManager
-    //TODO: implement serializable
 
     private String fileName;
     private Army humanArmy = new Army("Alliance");
@@ -25,7 +24,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
     public void initiateAndSaveTestArmyToCSV(){
         this.humanArmy = new Army("AllianceTestArmy");
         this.orcArmy = new Army("Horde");
-        for (int i = 0; i < 20; i++) { //TODO. unitFactory
+        for (int i = 0; i < 20; i++) {
             humanArmy.add(new InfantryUnit("Footman", 100));
             orcArmy.add(new InfantryUnit("Grunt", 100));
         }
@@ -133,7 +132,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
     public class TestReadArmyFromFileMethod{
         @Nested
         @DisplayName("Positive tests for the 'readArmyFromFile' method")
-        public class PositiveTestsForReadArmyFromFileMethod { //TODO: fix
+        public class PositiveTestsForReadArmyFromFileMethod {
             @Test
             @DisplayName("readArmyFromFile method creates a correct Army without .csv ending in name")
             public void readArmyFromFile(){

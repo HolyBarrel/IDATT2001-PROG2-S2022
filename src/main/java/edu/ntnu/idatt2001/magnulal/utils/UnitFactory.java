@@ -26,7 +26,6 @@ public class UnitFactory {
      * @throws BlankStringException if the name argument is either an empty string or consists of only
      *          white spaces. Utilizes the .blank() method of the String-class
      * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
-     * TODO: test
      */
     public static Unit createUnit(UnitTypes unitType, String unitName, int unitHealth) throws NullPointerException,
             BlankStringException, NegativeIntegerException {
@@ -35,7 +34,6 @@ public class UnitFactory {
             case RANGED -> new RangedUnit(unitName, unitHealth);
             case CAVALRY -> new CavalryUnit(unitName, unitHealth);
             case COMMANDER -> new CommanderUnit(unitName, unitHealth);
-            //default -> throw new NullPointerException("The requested unit type could not be found."); //TODO.remove?
         };
     }
 
@@ -52,7 +50,7 @@ public class UnitFactory {
      * @throws BlankStringException if the name argument is either an empty string or consists of only
      *          white spaces. Utilizes the .blank() method of the String-class
      * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
-     * TODO: test
+     * TODO: test or comment in report
      */
     public static List<Unit> createListOfUnits(UnitTypes unitType, String unitName, int unitHealth, int numberOfUnits)
             throws NullPointerException, BlankStringException, NegativeIntegerException {
