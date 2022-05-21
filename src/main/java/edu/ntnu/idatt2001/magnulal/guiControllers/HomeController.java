@@ -1,14 +1,11 @@
 package edu.ntnu.idatt2001.magnulal.guiControllers;
 
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
-import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
 import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import edu.ntnu.idatt2001.magnulal.utils.SceneManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
@@ -32,7 +29,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 public class HomeController {
     //Source: https://stackoverflow.com/questions/14256588/opening-a-javafx-filechooser-in-the-user-directory,
     // 05.05.2022
-    private static FileChooser currentFileChooser = new FileChooser();
+    private static FileChooser currentFileChooser = new FileChooser(); //TODO: needs to be static?
     private static FileChooser.ExtensionFilter currentExtFilter =
             new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
 
@@ -152,7 +149,7 @@ public class HomeController {
 
     /**TODO
      *
-     * @param army1
+     * @param army1 is the first active army
      * @param army2
      */
     private void updateWArmies(Army army1, Army army2){
@@ -198,10 +195,9 @@ public class HomeController {
      * Rotates the currently chosen terrain for battle in the application when the right-arrow button is
      * clicked by the user.
      * Occurs at the click event of the button: {@link HomeController#btnTerrainRight}.
-     * @param actionEvent is the click-event summoned by the user of the program
      */
     @FXML
-    public void rotateTerrainRight(ActionEvent actionEvent){
+    public void rotateTerrainRight(){
         currentTerrain.setText(rotateActiveTerrain(1));
     }
 
@@ -209,10 +205,9 @@ public class HomeController {
      * Rotates the currently chosen terrain for battle in the application when the left-arrow button is
      * clicked by the user.
      * Occurs at the click event of the button: {@link HomeController#btnTerrainLeft}.
-     * @param actionEvent is the click-event summoned by the user of the program
      */
     @FXML
-    public void rotateTerrainLeft(ActionEvent actionEvent){
+    public void rotateTerrainLeft(){
         currentTerrain.setText(rotateActiveTerrain(-1));
     }
 
@@ -241,10 +236,9 @@ public class HomeController {
      * Updates the stats for the two armies displayed post battle.
      * Displays an exception if the two armies does not satisfy the requirements for initiation of a simulation.
      * This event is instantiated by the {@link HomeController#btnSimBattle} button.
-     * @param actionEvent is the click-event occurring when the btnSimBattle is initiated
      */
     @FXML
-    public void initiateSimulation(ActionEvent actionEvent){ //TODO: ex handling
+    public void initiateSimulation(){ //TODO: ex handling
         if(ActiveArmies.getActiveArmy1().hasUnits() && ActiveArmies.getActiveArmy2().hasUnits()) {
             try {
                 SceneManager.switchView("battleScreen");
@@ -258,19 +252,6 @@ public class HomeController {
                 exMsg.setText("The army called: " + ActiveArmies.getActiveArmy2().getName() + " did not contain any units, and could not participate in battle.");
             }
         }
-        /**
-        try {
-            Battle battle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(), ActiveTerrain.INSTANCE.getActiveTerrain());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Battle result");
-            alert.setHeaderText("The victorious army was: " + battle.simulate().getName());
-            setStatsArmy1();
-            setStatsArmy2();
-            alert.showAndWait();
-        }catch (IllegalArgumentException i){
-            exMsg.setText(i.getMessage());
-        }
-         */
     }
 
     /**
@@ -278,10 +259,9 @@ public class HomeController {
      * {@link HomeController#openFileExplorer()} and stores the read army-data in {@link ActiveArmies}.
      * Also updates the stats for the chosen army in visually in the graphical user interface.
      * Occurs at the click event of the button: {@link HomeController#btnLoadArmy2}
-     * @param actionEvent is the click event which is triggering this method
      */
     @FXML
-    public void loadArmy2(ActionEvent actionEvent) {
+    public void loadArmy2() {
         try{
             File file = openFileExplorer();
             ActiveArmies.setActiveArmy2(FileManager.readArmyFromExistingFile(file));
@@ -298,10 +278,9 @@ public class HomeController {
      * {@link HomeController#openFileExplorer()} and stores the read army-data in {@link ActiveArmies}.
      * Also updates the stats for the chosen army in visually in the graphical user interface.
      * Occurs by a click event of the button: {@link HomeController#btnLoadArmy1}
-     * @param actionEvent is the click event which is triggering this method
      */
     @FXML
-    public void loadArmy1(ActionEvent actionEvent) {
+    public void loadArmy1() {
         try{
             File file = openFileExplorer();
             ActiveArmies.setActiveArmy1(FileManager.readArmyFromExistingFile(file));
@@ -340,10 +319,9 @@ public class HomeController {
      * Resets the first army to its original state by reading the active path which is associated with that army.
      * The stats for the first army is visually displayed by the application.
      * Occurs at the click event of the button: {@link HomeController#btnResetArmy1}
-     * @param actionEvent is the button click-event //TODO: this is wrong
      */
     @FXML
-    public void resetArmy1(ActionEvent actionEvent) throws FileNotFoundException { //TODO: handle
+    public void resetArmy1() throws FileNotFoundException { //TODO: handle
         ActiveArmies.setActiveArmy1(FileManager.readArmyFromFullFilePath(ActiveArmies.getActiveArmy1Path())); //TODO: handle
         setStatsArmy1();
     }
@@ -352,10 +330,9 @@ public class HomeController {
      * Resets the second army to its original state by reading the active path which is associated with that army.
      * The stats for the second army is visually displayed by the application.
      * Occurs at the click event of the button: {@link HomeController#btnResetArmy2}
-     * @param actionEvent is the button click-event
      */
     @FXML
-    public void resetArmy2(ActionEvent actionEvent) throws FileNotFoundException { // TODO: hanlde
+    public void resetArmy2() throws FileNotFoundException { // TODO: hanlde
         //TRY CATCH
         ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(ActiveArmies.getActiveArmy2Path()));
         setStatsArmy2();
@@ -363,7 +340,7 @@ public class HomeController {
 
 
     @FXML
-    public void seeArmy2(ActionEvent actionEvent) {
+    public void seeArmy2() {
         //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
         JTextArea armyInformation = new JTextArea(ActiveArmies.getActiveArmy2().toString());
         JScrollPane scrollInfoPane = new JScrollPane(armyInformation);
@@ -373,7 +350,7 @@ public class HomeController {
     }
 
     @FXML
-    public void seeArmy1(ActionEvent actionEvent) {
+    public void seeArmy1() {
         //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
         JTextArea armyInformation = new JTextArea(ActiveArmies.getActiveArmy1().toString());
         JScrollPane scrollInfoPane = new JScrollPane(armyInformation);
@@ -383,7 +360,7 @@ public class HomeController {
     }
 
     @FXML
-    public void editArmy2(ActionEvent actionEvent) {
+    public void editArmy2() {
         if(!new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv").exists()) {
             try {
                 FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
@@ -399,7 +376,7 @@ public class HomeController {
     }
 
     @FXML
-    public void editArmy1(ActionEvent actionEvent) {
+    public void editArmy1() {
         if(!new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv").exists()) {
             try {
                 FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv"));

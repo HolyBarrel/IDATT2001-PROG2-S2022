@@ -73,7 +73,8 @@ public class BattleController {
     //TODO. ex handling on all button in GUI
 
     /**
-     *
+     * Initializes the BattleController by creating necessary images for the visual representation of the active armies.
+     * Also sets relevant data for the user.
      */
     @FXML
     public void initialize() {
@@ -103,6 +104,9 @@ public class BattleController {
         updateVisualArmy2();
     }
 
+    /**
+     * Updates the current visual status of the first active army
+     */
     private void updateVisualArmy1(){
         HBox hb = new HBox();
         numUnitsArmy1.setText(String.valueOf(ActiveArmies.getActiveArmy1().getAllUnits().size()));
@@ -132,7 +136,7 @@ public class BattleController {
 
 
     /**
-     *
+     * Updates the current visual status of the second active army
      */
     private void updateVisualArmy2(){
         numUnitsArmy2.setText(String.valueOf(ActiveArmies.getActiveArmy2().getAllUnits().size()));
@@ -185,6 +189,9 @@ public class BattleController {
         hasSkipBeenPressed = true;
     }
 
+    /**
+     * Starts the
+     */
     @FXML
     public void simulateStart() {
         terrainInfo.setText("Terrain: " + ActiveTerrain.INSTANCE.getActiveTerrain().name());

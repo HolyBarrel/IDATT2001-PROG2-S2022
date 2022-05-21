@@ -53,12 +53,16 @@ public class EditorController {
     @FXML
     private TextField comNrArmy2;
 
+    /**
+     * TODO comment
+     * @throws FileNotFoundException
+     */
     @FXML
-    public void initialize() throws FileNotFoundException { //TODO: handle
+    public void initialize() { //TODO: handle
         try {
             updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
                     "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv");
-        } catch (InvalidAttributesException e) {
+        } catch (InvalidAttributesException | FileNotFoundException e) {
             exMsg.setText(e.getMessage());
         }
     }
