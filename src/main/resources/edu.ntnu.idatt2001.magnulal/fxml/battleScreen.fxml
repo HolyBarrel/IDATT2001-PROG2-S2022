@@ -64,7 +64,7 @@
                   <Font name="System Italic" size="18.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="battleFeed" maxHeight="130.0" maxWidth="600.0" minHeight="130.0" minWidth="600.0" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane fx:id="battleFeed" maxHeight="130.0" maxWidth="650.0" minHeight="130.0" minWidth="650.0" prefHeight="200.0" prefWidth="200.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
               </content>

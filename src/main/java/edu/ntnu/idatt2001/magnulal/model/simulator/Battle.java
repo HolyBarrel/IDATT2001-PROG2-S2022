@@ -109,9 +109,10 @@ public class Battle {
         StringBuilder sb = new StringBuilder();
         if(battleIsActive()){
             Unit attackerUnit = attackingArmy.getRandom();
-            sb.append("\n").append(attackerUnit.getName()).append(" attacked: ");
+            sb.append("\n").append(attackerUnit.getName()).append(" [").append(
+                    attackingArmy.getName()).append("] attacked: ");
             Unit defenderUnit = defendingArmy.getRandom();
-            sb.append(defenderUnit.getName()).append(" (HP: ");
+            sb.append(defenderUnit.getName()).append(" [").append(defendingArmy.getName()).append("] (HP: ");
             int healthBeforeAttack = defenderUnit.getHealth();
             sb.append(healthBeforeAttack). append(") - (DEALT DMG: ");
             attackerUnit.attack(defenderUnit);
