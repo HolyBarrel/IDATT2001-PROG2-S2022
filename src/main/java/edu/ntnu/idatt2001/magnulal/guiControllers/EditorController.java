@@ -59,12 +59,7 @@ public class EditorController {
      */
     @FXML
     public void initialize() { //TODO: handle
-        try {
-            updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv",
-                    "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv");
-        } catch (InvalidAttributesException | FileNotFoundException e) {
-            exMsg.setText(e.getMessage());
-        }
+        updateWArmies(ActiveArmies.getActiveArmy1(),ActiveArmies.getActiveArmy2());
     }
     /**
      * Updates the armies displayed by the graphical user interface
@@ -85,6 +80,20 @@ public class EditorController {
         ActiveArmies.setActiveArmy1Path(pathArmy1);
         ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(pathArmy2));
         ActiveArmies.setActiveArmy2Path(pathArmy2);
+        setStatsArmy1();
+        setStatsArmy2();
+    }
+
+    /**
+     * TODO: comment
+     * @param army1
+     * @param army2
+     */
+    private void updateWArmies(Army army1, Army army2){
+        ActiveArmies.setActiveArmy1(army1);
+        ActiveArmies.setActiveArmy2(army2);
+        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy1().getName() + ".csv");
+        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy2().getName() + ".csv");
         setStatsArmy1();
         setStatsArmy2();
     }

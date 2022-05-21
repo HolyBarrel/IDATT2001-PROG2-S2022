@@ -29,6 +29,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 public class HomeController {
     //Source: https://stackoverflow.com/questions/14256588/opening-a-javafx-filechooser-in-the-user-directory,
     // 05.05.2022
+    private int timesInitialized = 0;
     private static FileChooser currentFileChooser = new FileChooser(); //TODO: needs to be static?
     private static FileChooser.ExtensionFilter currentExtFilter =
             new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
@@ -94,57 +95,26 @@ public class HomeController {
      * for the application.
      */
     @FXML
-    public void initialize() throws FileNotFoundException { //TODO: handle
+    public void initialize(){ //TODO: handle
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
         //TODO. reassess
-        try {
-            FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace(); //TODO. hande
-        }
-        try {
-            FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace(); //TODO. hande
-        }
 
-
-        if(ActiveArmies.getActiveArmy1() == null && ActiveArmies.getActiveArmy2() == null){
+        if(ActiveArmies.getActiveArmy1() == null && ActiveArmies.getActiveArmy2() == null) {
             try {
-                updateDisplayedArmies("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv",
-                        "src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv");
-            } catch (InvalidAttributesException e) {
+                FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001." +
+                        "magnulal/csv/Alliance.csv"), FileManager.readArmyFromFullFilePath("src/main/resources/" +
+                        "edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv"));
+                FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001." +
+                        "magnulal/csv/Horde.csv"), FileManager.readArmyFromFullFilePath("src/main/resources/" +
+                        "edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
+                ActiveArmies.setActiveArmy1(FileManager.readArmyFromFile("Alliance"));
+                ActiveArmies.setActiveArmy2(FileManager.readArmyFromFile("Horde"));
+            } catch (FileNotFoundException e) {
                 exMsg.setText(e.getMessage());
             }
-        }else{
-            updateWArmies(ActiveArmies.getActiveArmy1(),ActiveArmies.getActiveArmy2());
         }
-    }
-
-    /**
-     * Updates the armies displayed by the graphical user interface
-     * @param pathArmy1 is the file path to the army which is graphically represented as army one by the
-     *                  application
-     * @param pathArmy2 is the file path to the army which is graphically represented as army two by the
-     *                  application
-     * @throws InvalidPathException if the {@link FileManager#readArmyFromFullFilePath(String)}-method cannot utilize
-     * the given path because of illegal syntax
-     * @throws FileNotFoundException if the {@link FileManager#readArmyFromFullFilePath(String)}-method cannot locate
-     * a file at the specified path
-     * @throws InvalidAttributesException if the {@link FileManager#readArmyFromFullFilePath(String)}-method attempts to
-     * read an army without syntactically correct values. //todo double check
-     */
-    private void updateDisplayedArmies(String pathArmy1, String pathArmy2) throws FileNotFoundException,
-            InvalidPathException, InvalidAttributesException { //TODO: handle
-        ActiveArmies.setActiveArmy1(FileManager.readArmyFromFullFilePath(pathArmy1));
-        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv");
-        ActiveArmies.setActiveArmy2(FileManager.readArmyFromFullFilePath(pathArmy2));
-        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv");
-        lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
-        lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
-        setStatsArmy1();
-        setStatsArmy2();
+        updateWArmies(ActiveArmies.getActiveArmy1(),ActiveArmies.getActiveArmy2());
     }
 
     /**TODO
