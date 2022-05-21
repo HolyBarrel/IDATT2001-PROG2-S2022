@@ -1,4 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.model.simulator;
+import edu.ntnu.idatt2001.magnulal.guiControllers.BattleController;
 import edu.ntnu.idatt2001.magnulal.model.units.Unit;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
 import edu.ntnu.idatt2001.magnulal.utils.TerrainType;
@@ -24,7 +25,6 @@ public class Battle {
      * @param armyTwo, the second army of this battle, cannot be an empty army
      * @throws IllegalArgumentException if any of the inputted armies are armies without units
      * @throws NullPointerException if the terrainType parameter has 'null' as value
-     * TODO: implement exception handling for an infinite battle
      */
     public Battle(Army armyOne, Army armyTwo, TerrainType terrainType) throws IllegalArgumentException,
             NullPointerException{
@@ -100,10 +100,13 @@ public class Battle {
     }
 
     /**
-     * TODO: comment
-     * @param attackingArmy
-     * @param defendingArmy
-     * @return
+     * Simulates an attack from a random unit on a random unit from the opposing army in the exact same way as the
+     * method: {@link Battle#unitAttacks(Army, Army)} with additional information of the participants involved.
+     * This method is used to create a battle feed in the graphical user interface. See the method:
+     * {@link BattleController#simulateStart()}
+     * @param attackingArmy is the attacking army
+     * @param defendingArmy is the defending army
+     * @return StringBuilder with information on the attack
      */
     private StringBuilder unitAttacksGetInfo(Army attackingArmy, Army defendingArmy){
         StringBuilder sb = new StringBuilder();
@@ -148,8 +151,13 @@ public class Battle {
     }
 
     /**
-     * TODO: comment
-     * @return
+     * Utilizes the same logic as a single iteration of the while-loop in the method: {@link Battle#simulate()}.
+     * This method returns an Arraylist containing 'this' battle, and the information associated with the turn.
+     * If the turn has consisted of two attacks, as most turns do, the array will have a length of four the
+     * relevant battle info is located at index 2. Sometimes the last turn consists of only one attack, resulting in
+     * this method returning an array of length two. Then the index position of the relevant battle info is at index 0.
+     * In all cases, the relevant Battle, is the last element of the returned array.
+     * @return ArrayList of Objects
      */
     public ArrayList<Object> simulateTurnForGUI(){
         ArrayList<Object> returnInformation = new ArrayList<>();
@@ -174,20 +182,20 @@ public class Battle {
         return returnInformation;
     }
 
+    /**
+     * Returns the first army of the Battle object
+     * @return first Army
+     */
     public Army getArmyOne() {
         return armyOne;
     }
 
+    /**
+     * Returns the second army of the Battle object
+     * @return second Army
+     */
     public Army getArmyTwo() {
         return armyTwo;
-    }
-
-    public void setArmyOne(Army armyOne) {
-        this.armyOne = armyOne;
-    }
-
-    public void setArmyTwo(Army armyTwo) {
-        this.armyTwo = armyTwo;
     }
 
     @Override
