@@ -8,10 +8,9 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
  * @author magnulal
  * @version 1.0
  * @since 0.3
- * TODO test
  */
 public enum ActiveTerrain {
-    //Enum with commutable TerrainType enum value associated
+    //Enum INSTANCE with commutable TerrainType enum value associated
     INSTANCE;
     private TerrainType activeTerrain;
 
@@ -40,9 +39,11 @@ public enum ActiveTerrain {
     }
 
     /**
-     * TODO COMMENT
-     * @param direction
-     * @return
+     * Changes the TerrainType associated with the INSTANCE of ActiveTerrain based on an integer representing the
+     * direction for the switch. This method is utilized by the HomeController to use buttons to change the active
+     * terrain in the application
+     * @param direction integer 1 for rotation to the next terrain, any other for 'previous' (the other direction)
+     *                  terrain
      */
     public void rotateTerrain(int direction){
         if(direction == 1){
