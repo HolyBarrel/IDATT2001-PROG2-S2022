@@ -104,7 +104,6 @@ public class Army {
      * Adds multiple units to the list with units in this army
      * @param units, is a list with units
      * @throws IllegalArgumentException, if the list-type is not an arraylist nor a linked list
-     * TODO: test on a linked list?
      */
     public void addAll(List<Unit> units) throws IllegalArgumentException {
         checkTypeOfList(units);
@@ -175,7 +174,6 @@ public class Army {
      * {@link #getCavalryUnits()},
      * {@link #getRangedUnits()},
      * {@link #getCommanderUnits()}
-     * TODO: update when more unit types are implemented
      * The intent is to not result in exceptions if the result-list is used to instantiate a new Army
      * with the Army constructor. The Army constructor requires for the list to either be an instance
      * of ArrayList or LinkedList.

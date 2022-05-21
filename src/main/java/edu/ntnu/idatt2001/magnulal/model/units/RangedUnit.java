@@ -14,8 +14,6 @@ import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
  */
 public class RangedUnit extends Unit{
     //Represents proximity of the enemy army
-    //TODO: remember to reflect over this use, instead of including hitsReceived/hitsGiven in UNIT-CLASS
-    //and reflect over the use of the specified methods which increments this attribute for this unit
     private int hitsReceived = 0;
     /**
      * Constructs a RangedUnit using four given parameters.

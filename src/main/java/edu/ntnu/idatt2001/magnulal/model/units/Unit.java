@@ -49,7 +49,7 @@ public abstract class Unit {
     //TODo: correct for TDos in sticky notes!
 
     /*
-       Exception handling methods TODO redo structure
+       Exception handling methods
      */
 
     /**
@@ -83,6 +83,18 @@ public abstract class Unit {
         if(armor < 0) throw new NegativeIntegerException("A unit's armor must be a positive integer," +
                 " please try again.");
     }
+
+    /**
+     * Verifies that the ActiveTerrain has been associated with an enum of 'TerrainType' enums, since the
+     * terrain-calculated bonuses cannot be validated with this stat having a default 'null'-value
+     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
+     * 'null'-value
+     */
+    private void checkTerrainStatus() throws NullPointerException {
+        if(!ActiveTerrain.INSTANCE.isTerrainSet()) throw new NullPointerException("The terrain has not " +
+                "been set to a valid terrain type, please make sure this is done before starting any simulation.");
+    }
+
     /**
      * Attack method containing the formula given how the logic behind a unit's attack
      * The method gets the pre-given health of the opponent, subtracts this unit's attack and attackBonus,
@@ -202,17 +214,6 @@ public abstract class Unit {
             }
         }
         return 0;
-    }
-
-    /**
-     * Verifies that the ActiveTerrain has been associated with an enum of 'TerrainType' enums, since the
-     * terrain-calculated bonuses cannot be validated with this stat having a default 'null'-value
-     * @throws NullPointerException if the current active terrain of the program has not been set, meaning it is of
-     * 'null'-value
-     */ //TODO: rename all, move
-    private void checkTerrainStatus() throws NullPointerException {
-        if(!ActiveTerrain.INSTANCE.isTerrainSet()) throw new NullPointerException("The terrain has not " +
-                "been set to a valid terrain type, please make sure this is done before starting any simulation.");
     }
 
     @Override
