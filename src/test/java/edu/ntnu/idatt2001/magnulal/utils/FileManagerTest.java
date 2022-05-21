@@ -224,6 +224,7 @@ public class FileManagerTest { //TODO: test all methods of FileManager
                 }
             }
         }
-        //TODO. negative test corrupted armies
+        //TODO. negative test corrupted armies, implement corrupted data
+        //argument evt in reprort
     }
 }
