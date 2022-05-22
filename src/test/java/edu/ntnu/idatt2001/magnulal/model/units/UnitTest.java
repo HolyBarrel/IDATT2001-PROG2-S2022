@@ -189,9 +189,8 @@ public class UnitTest {
             }
         }
     }
-    //TODO: double check feedback in bb
     @Nested
-    @DisplayName("Testing the toString of Unit") //using anonymous classes
+    @DisplayName("Test for toString of Unit") //using anonymous classes
     public class TestsToStringOfUnit{
         @Test
         @DisplayName("Subclass of 'Unit' used to test Unit's toString, correct input")
@@ -204,7 +203,7 @@ public class UnitTest {
     @DisplayName("Testing the attack of Unit")
     public class TestsAttackMethod{
         @Test
-        @DisplayName("Testing attack-method for objects of subclasses of unit-class")
+        @DisplayName("Attack-method for objects of subclasses of unit-class")
         public void attackMethodForUnits() {
             assertEquals(20, testUnit.getHealth());
             testUnit2.attack(testUnit);
@@ -219,7 +218,7 @@ public class UnitTest {
             assertEquals(0, testUnit.getHealth());
         }
         @Test
-        @DisplayName("Testing attack-method when protection is more than damage")
+        @DisplayName("Attack-method when protection is more than damage")
         public void attackMethodProtectMoreThanDamageResultsInNoDamageDone() {
             assertEquals(20, testUnit.getHealth());
             testUnit3.attack(testUnit); //testing that the attack does not harm when protection is more than the damage

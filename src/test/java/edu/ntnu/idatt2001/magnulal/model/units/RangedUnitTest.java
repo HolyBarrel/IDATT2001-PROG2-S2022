@@ -22,14 +22,14 @@ public class RangedUnitTest {
     @DisplayName("Positive tests for the subclass 'RangedUnit'")
     public class MethodsReturnsAsExpected {
         @Test
-        @DisplayName("Checking that getHitsReceived returns expected output")
+        @DisplayName("getHitsReceived returns expected output")
         public void checkGetHitsReceivedReturn() {
             assertEquals(0, testRangedUnit.getHitsReceived());
             testRangedUnit.getResistBonus();
             assertEquals(1, testRangedUnit.getHitsReceived());
         }
         @Test
-        @DisplayName("Checking that getResistBonus returns expected output, at different ranges")
+        @DisplayName("getResistBonus returns expected output, at different ranges")
         public void checkGetResistBonusReturn() {
             //far away
             assertEquals(7, testRangedUnit.getResistBonus());
@@ -39,7 +39,7 @@ public class RangedUnitTest {
             assertEquals(2, testRangedUnit.getResistBonus());
         }
         @Test
-        @DisplayName("Checking that getAttackBonus returns expected output in FOREST")
+        @DisplayName("getAttackBonus returns expected output in FOREST")
         public void checkGetAttackBonusReturnInFOREST() {
             assertEquals(4, testRangedUnit.getAttackBonus());
             testRangedUnit.getResistBonus();
@@ -50,7 +50,7 @@ public class RangedUnitTest {
             assertEquals(1, testRangedUnit.getAttackBonus());
         }
         @Test
-        @DisplayName("Checking that getAttackBonus returns expected output in HILL")
+        @DisplayName("getAttackBonus returns expected output in HILL")
         public void checkGetAttackBonusReturnInHILL() {
             ActiveTerrain.INSTANCE.setActiveTerrain(HILL);
             assertEquals(9, testRangedUnit.getAttackBonus());
@@ -62,7 +62,7 @@ public class RangedUnitTest {
             assertEquals(6, testRangedUnit.getAttackBonus());
         }
         @Test
-        @DisplayName("Checking that getAttackBonus returns expected output on PLAINS")
+        @DisplayName("getAttackBonus returns expected output on PLAINS")
         public void checkGetAttackBonusReturnOnPlains() {
             ActiveTerrain.INSTANCE.setActiveTerrain(PLAINS);
             assertEquals(5, testRangedUnit.getAttackBonus());
@@ -78,7 +78,7 @@ public class RangedUnitTest {
     @DisplayName("Negative tests for the subclass 'RangedUnit'")
     public class MethodsThrowsExceptions {
         @Test
-        @DisplayName("Checking that getAttackBonus throws NullPointerException when active terrain is 'null'")
+        @DisplayName("getAttackBonus throws NullPointerException when active terrain is 'null'")
         public void checkGetAttackBonusThrowingException() {
             ActiveTerrain.INSTANCE.setActiveTerrain(null);
             try{

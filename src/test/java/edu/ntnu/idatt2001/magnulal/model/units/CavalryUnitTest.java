@@ -23,14 +23,14 @@ public class CavalryUnitTest {
     @DisplayName("Positive tests for the subclass 'CavalryUnit'")
     public class MethodsReturnsAsExpected {
         @Test
-        @DisplayName("Checking that isCharging returns expected output")
+        @DisplayName("isCharging returns expected output")
         public void checkIsChargingAttacksReturn() {
             assertTrue(testCavalryUnit.isCharging());
             testCavalryUnit.attack(testCavalryUnit2);
             assertFalse(testCavalryUnit.isCharging());
         }
         @Test
-        @DisplayName("Checking that getAttackBonus returns expected output on PLAINS")
+        @DisplayName("getAttackBonus returns expected output on PLAINS")
         public void checkGetAttackBonusReturnWhenChargingOnPLAINS() {
             //charging
             assertEquals(10, testCavalryUnit.getAttackBonus());
@@ -39,7 +39,7 @@ public class CavalryUnitTest {
             assertEquals(6, testCavalryUnit.getAttackBonus());
         }
         @Test
-        @DisplayName("Checking that getAttackBonus returns expected output in FOREST")
+        @DisplayName("getAttackBonus returns expected output in FOREST")
         public void checkGetAttackBonusReturnWhenChargingInFOREST() {
             ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
             //charging
@@ -49,7 +49,7 @@ public class CavalryUnitTest {
             assertEquals(2, testCavalryUnit.getAttackBonus());
         }
         @Test
-        @DisplayName("Checking that getAttackBonus returns expected output in HILL")
+        @DisplayName("getAttackBonus returns expected output in HILL")
         public void checkGetAttackBonusReturnWhenChargingInHILL() {
             ActiveTerrain.INSTANCE.setActiveTerrain(HILL);
             //charging
@@ -59,18 +59,18 @@ public class CavalryUnitTest {
             assertEquals(2, testCavalryUnit.getAttackBonus());
         }
         @Test
-        @DisplayName("Checking that getResistBonus returns expected output on PLAINS")
+        @DisplayName("getResistBonus returns expected output on PLAINS")
         public void checkGetResistBonusReturnOnPLAINS() {
             assertEquals(1, testCavalryUnit.getResistBonus());
         }
         @Test
-        @DisplayName("Checking that getResistBonus returns expected output in FOREST")
+        @DisplayName("getResistBonus returns expected output in FOREST")
         public void checkGetResistBonusReturnInFOREST() {
             ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
             assertEquals(0, testCavalryUnit.getResistBonus());
         }
         @Test
-        @DisplayName("Checking that getResistBonus returns expected output in HILL")
+        @DisplayName("getResistBonus returns expected output in HILL")
         public void checkGetResistBonusReturnInHILL() {
             ActiveTerrain.INSTANCE.setActiveTerrain(HILL);
             assertEquals(1, testCavalryUnit.getResistBonus());
@@ -80,7 +80,7 @@ public class CavalryUnitTest {
     @DisplayName("Negative tests for the subclass 'CavalryUnit'")
     public class MethodsThrowsExceptions {
         @Test
-        @DisplayName("Checking that getAttackBonus throws NullPointerException when active terrain is 'null'")
+        @DisplayName("getAttackBonus throws NullPointerException when active terrain is 'null'")
         public void checkGetAttackBonusThrowingException() {
             ActiveTerrain.INSTANCE.setActiveTerrain(null);
             try{
