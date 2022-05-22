@@ -20,8 +20,12 @@ import java.util.Optional;
  * @since 0.3
 */
 public class Main extends Application {
+    /**
+     * Starts the application which called Wargames
+     * @param stage is the active stage
+     */
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage){
         try{
             FXMLLoader fxmlLoader = SceneManager.retrieveLoader("main");
             SceneManager.setActiveScene(new Scene(fxmlLoader.load()));
@@ -38,13 +42,17 @@ public class Main extends Application {
             i.printStackTrace();
         }
     }
+
+    /**
+     * Closes the program by first displaying a confirmation alert to the user
+     */
     private void closeProgram(){
         Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        closeAlert.setTitle("Close?");
+        closeAlert.setTitle("EXITCONFIRMATION");
         closeAlert.setHeaderText("Exit?");
-        closeAlert.setContentText("Sure about closing?");
-        Optional<ButtonType> result = closeAlert.showAndWait();
-        if(result.get() == ButtonType.OK) Platform.exit();
+        closeAlert.setContentText("Sure about closing the ongoing instance of Wargames?");
+        Optional<ButtonType> feed = closeAlert.showAndWait();
+        if(feed.get() == ButtonType.OK) Platform.exit();
     }
     /**
      * Static void main-method to launch the Application
