@@ -107,6 +107,7 @@ public class Battle {
      * @param attackingArmy is the attacking army
      * @param defendingArmy is the defending army
      * @return StringBuilder with information on the attack
+     * TESTED THROUGH GUI
      */
     private StringBuilder unitAttacksGetInfo(Army attackingArmy, Army defendingArmy){
         StringBuilder sb = new StringBuilder();
@@ -158,6 +159,7 @@ public class Battle {
      * this method returning an array of length two. Then the index position of the relevant battle info is at index 0.
      * In all cases, the relevant Battle, is the last element of the returned array.
      * @return ArrayList of Objects
+     * TESTED THROUGH GUI
      */
     public ArrayList<Object> simulateTurnForGUI(){
         ArrayList<Object> returnInformation = new ArrayList<>();

@@ -45,7 +45,7 @@ public class BattleTest {
         @DisplayName("Negative tests for the constructor")
         public class negativeTestsForConstructor {
             @Test
-            @DisplayName("Checking that the constructor of Battle class throws with wrong input first")
+            @DisplayName("Constructor of Battle class throws with wrong input first")
             public void checkConstructorOfBattleClassWrongParameterFirst() {
                 try {
                     ArrayList<Unit> unitsTestArray = new ArrayList<>();
@@ -63,7 +63,7 @@ public class BattleTest {
             }
 
             @Test
-            @DisplayName("Checking that the constructor of Battle class throws with wrong input second")
+            @DisplayName("Constructor of Battle class throws with wrong input second")
             public void checkConstructorOfBattleClassWrongParameterSecond() {
                 try {
                     ArrayList<Unit> unitsTestArray = new ArrayList<>();
@@ -85,7 +85,7 @@ public class BattleTest {
     @DisplayName("Simulate-method test for the class 'Battle'")
     public class testingSimulate {
         @Test
-        @DisplayName("Checking that the simulate-method returns correctly")
+        @DisplayName("Simulate-method returns the winning army correctly")
         public void checkSimulateMethodOfBattleClass() {
             ArrayList<Unit> unitsTestArray = new ArrayList<>();
             unitsTestArray.add(new CavalryUnit("GrandLancer", 95, 12, 10));
