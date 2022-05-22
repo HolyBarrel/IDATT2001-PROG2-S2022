@@ -256,8 +256,9 @@ public class Army {
 
     @Override
     public String toString() {
-        String underLine = "\n|_______________________________________________________________\n";
-        StringBuilder sb = new StringBuilder("\n _______________________________________________________________\n")
+        String underLine = "\n|_________________________________________________________________________________\n";
+        StringBuilder sb =
+                new StringBuilder(" _________________________________________________________________________________\n")
                 .append("| Units of the army: '").append(getName()).append("'");
         for(Unit unit: getAllUnits()){
             sb.append(underLine);

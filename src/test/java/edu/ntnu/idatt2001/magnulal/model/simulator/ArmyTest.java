@@ -245,12 +245,15 @@ public class ArmyTest {
             unitsTestArray.add(new CavalryUnit("GrandLancer", 65, 10, 10));
             unitsTestArray.add(new RangedUnit("CrossbowMan", 40, 20, 2));
             Army testArmy = new Army("Alliance", unitsTestArray);
-            String underLine = "\n|_______________________________________________________________\n";
-            String testStr = "\n _______________________________________________________________\n" +
-                    "| Units of the army: 'Alliance'" + underLine +
-                    "| Name: 'GrandLancer'  Health: 75   Attack: 12   Armor: 10   " + underLine +
-                    "| Name: 'GrandLancer'  Health: 65   Attack: 10   Armor: 10   " + underLine +
-                    "| Name: 'CrossbowMan'  Health: 40   Attack: 20   Armor: 2    " + underLine +
+            String testStr = " _________________________________________________________________________________\n" +
+                    "| Units of the army: 'Alliance'\n" +
+                    "|_________________________________________________________________________________\n" +
+                    "| Name: 'GrandLancer'  Type: 'CavalryUnit'  Health: 75    Attack: 12   Armor: 10   \n" +
+                    "|_________________________________________________________________________________\n" +
+                    "| Name: 'GrandLancer'  Type: 'CavalryUnit'  Health: 65    Attack: 10   Armor: 10   \n" +
+                    "|_________________________________________________________________________________\n" +
+                    "| Name: 'CrossbowMan'  Type: 'RangedUnit'  Health: 40    Attack: 20   Armor: 2    \n" +
+                    "|_________________________________________________________________________________\n" +
                     "'Alliance' is an army with 3 total units";
             assertEquals(testStr, testArmy.toString());
         }

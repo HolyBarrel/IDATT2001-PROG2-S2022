@@ -334,7 +334,7 @@ public class HomeController {
         //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
         JTextArea armyInformation = new JTextArea(ActiveArmies.getActiveArmy2().toString());
         JScrollPane scrollInfoPane = new JScrollPane(armyInformation);
-        scrollInfoPane.setPreferredSize( new Dimension( 500, 611));
+        scrollInfoPane.setPreferredSize( new Dimension( 590, 611));
         JOptionPane.showMessageDialog(null, scrollInfoPane, "Selected army:",
                 JOptionPane.INFORMATION_MESSAGE);
     }
@@ -348,7 +348,7 @@ public class HomeController {
         //Source: https://stackoverflow.com/questions/8375022/joptionpane-and-scroll-function, 06.05.22
         JTextArea armyInformation = new JTextArea(ActiveArmies.getActiveArmy1().toString());
         JScrollPane scrollInfoPane = new JScrollPane(armyInformation);
-        scrollInfoPane.setPreferredSize( new Dimension( 500, 611));
+        scrollInfoPane.setPreferredSize( new Dimension( 590, 611));
         JOptionPane.showMessageDialog(null, scrollInfoPane, "Selected army:",
                 JOptionPane.INFORMATION_MESSAGE);
     }

@@ -215,9 +215,10 @@ public abstract class Unit {
 
     @Override
     public String toString() {
-        String format = "| %1$-20s %2$-12s %3$-12s %4$-12s";
+        String format = "| %1$-20s %2$-18s %3$-14s %4$-12s %5$-12s";
         return String.format(
-                format, "Name: '"   + name + "'", "Health: " + health, "Attack: " + attack, "Armor: "  + armor);
+                format, "Name: '"   + name + "'", "Type: '" + this.getClass().getSimpleName() + "'" , " Health: " + health,
+                "Attack: " + attack, "Armor: "  + armor);
     }
 
     /**

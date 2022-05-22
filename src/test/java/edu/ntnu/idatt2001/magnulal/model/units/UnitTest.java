@@ -194,7 +194,8 @@ public class UnitTest {
         @Test
         @DisplayName("Subclass of 'Unit' used to test Unit's toString, correct input")
         public void usingSubclassToTestCorrectInputOfUnitsToString() {
-            String expectedToString = "| Name: 'Archer'       Health: 20   Attack: 3    Armor: 2    ";
+            String expectedToString = "| Name: 'Archer'       Type: ''            " +
+                    "Health: 20    Attack: 3    Armor: 2    ";
             assertEquals(expectedToString, testUnit.toString());
         }
     }
