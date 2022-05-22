@@ -17,7 +17,7 @@
                   <Font name="System Bold Italic" size="64.0" />
                </font></Label>
             <Button fx:id="btnReturnHome" mnemonicParsing="false" onAction="#returnHome" text="Home" />
-            <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="884.0" textFill="#d30000" wrapText="true" />
+            <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" minHeight="45.0" prefHeight="25.0" prefWidth="884.0" textFill="#d30000" wrapText="true" />
          </children>
       </VBox>
    </top>

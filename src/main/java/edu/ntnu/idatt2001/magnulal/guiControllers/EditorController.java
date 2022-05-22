@@ -148,12 +148,11 @@ public class EditorController {
             }
             SceneManager.switchView("main");
         }catch (BlankStringException | NegativeIntegerException | NumberFormatException | IOException |
-                TooLargeIntegerException n){
+                TooLargeIntegerException | InvalidPathException n){
             if(n instanceof IOException){
                 exMsg.setText("Could not load the home screen, please reload the application.");
             }else{
-                exMsg.setText("Wrong input: " + n.getMessage() + " Cannot not save to file with " +
-                        "these values.");
+                exMsg.setText("Wrong input: " + n.getMessage() + " Cannot save.");
             }
         }
     }

@@ -155,7 +155,7 @@
                     </font>
                 </Label>
             <Button fx:id="btnHome" mnemonicParsing="false" onAction="#returnHome" text="Home" />
-                <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="884.0" textFill="#d30000" wrapText="true">
+                <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" minHeight="45.0" prefHeight="25.0" prefWidth="884.0" textAlignment="CENTER" textFill="#d30000" wrapText="true">
                     <font>
                         <Font name="System Bold Italic" size="12.0" />
                     </font></Label>
@@ -166,6 +166,9 @@
       <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveAndReturn" text="Save and return" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <Label text="NOTE: Editing the name of an army before saving, will result in creating a new file with that army." BorderPane.alignment="CENTER" />
+      <Label text="NOTE: Editing the name of an army before saving, will result in creating a new file with that army." BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
    </bottom>
 </BorderPane>

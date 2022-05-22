@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.guiControllers.HomeController">
+<BorderPane maxHeight="611.0" minHeight="611.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.magnulal.guiControllers.HomeController">
     <bottom>
         <HBox alignment="BOTTOM_CENTER" prefHeight="137.0" prefWidth="900.0" spacing="6.0" BorderPane.alignment="CENTER">
             <children>
@@ -317,7 +317,7 @@
                         <Font name="System Bold Italic" size="64.0" />
                     </font>
                 </Label>
-                <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="884.0" textFill="#d30000" wrapText="true">
+                <Label fx:id="exMsg" alignment="CENTER" contentDisplay="CENTER" minHeight="45.0" prefHeight="25.0" prefWidth="884.0" textFill="#d30000" wrapText="true">
                     <font>
                         <Font name="System Bold Italic" size="12.0" />
                     </font></Label>
