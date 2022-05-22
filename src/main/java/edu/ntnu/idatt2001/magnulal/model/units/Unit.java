@@ -45,9 +45,6 @@ public abstract class Unit {
         this.armor = armor;
     }
 
-//TODO: check if all exceptions are handled
-    //TODo: correct for TDos in sticky notes!
-
     /*
        Exception handling methods
      */

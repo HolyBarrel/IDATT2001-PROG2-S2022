@@ -1,6 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.model.simulator;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
-import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -8,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-//TODO: rewrite display names in accordance with bb
-//TODO: CHECK BB AND STICKY NOTE
+
 public class ArmyTest {
     @Nested
     @DisplayName("Tests for the Army Constructor")

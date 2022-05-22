@@ -52,7 +52,7 @@ public class Army {
         checkLegalityOfNameString(name);
         checkTypeOfList(units);
         this.name = name.trim();
-        this.units = units; //TODO: Deep copy???
+        this.units = units;
     }
     /*
       Exception handling private methods

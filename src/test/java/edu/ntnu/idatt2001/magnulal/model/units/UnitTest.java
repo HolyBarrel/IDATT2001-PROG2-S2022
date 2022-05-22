@@ -1,7 +1,6 @@
 package edu.ntnu.idatt2001.magnulal.model.units;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
-import edu.ntnu.idatt2001.magnulal.model.units.Unit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

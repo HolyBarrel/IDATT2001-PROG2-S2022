@@ -200,9 +200,10 @@ public class EditorController {
      * @param cavNum is the number of cavalry units generated
      * @param ranNum is the number of commander units generated
      * @return an Army the built army
-     * @throws FileNotFoundException TODO
-     * @throws InvalidPathException
-     * @throws NullPointerException
+     * @throws FileNotFoundException if the file is not located
+     * @throws InvalidPathException if the path is an invalid one
+     * @throws NullPointerException if the file could not be used to create an army or contained information about
+     * units that could not be used to create a unit
      */
     private Army buildArmy(int armyNumber, int comNum, int infNum,int cavNum, int ranNum) throws FileNotFoundException,
             InvalidPathException {

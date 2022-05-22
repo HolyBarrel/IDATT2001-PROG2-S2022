@@ -1,6 +1,4 @@
 package edu.ntnu.idatt2001.magnulal.model.simulator;
-import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
-import edu.ntnu.idatt2001.magnulal.model.simulator.Battle;
 import edu.ntnu.idatt2001.magnulal.model.units.CavalryUnit;
 import edu.ntnu.idatt2001.magnulal.model.units.InfantryUnit;
 import edu.ntnu.idatt2001.magnulal.model.units.RangedUnit;
