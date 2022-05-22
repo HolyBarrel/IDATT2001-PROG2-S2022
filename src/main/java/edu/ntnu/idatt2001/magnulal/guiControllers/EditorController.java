@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
 
 import static edu.ntnu.idatt2001.magnulal.utils.UnitTypes.*;
@@ -199,17 +200,22 @@ public class EditorController {
      * @param cavNum is the number of cavalry units generated
      * @param ranNum is the number of commander units generated
      * @return an Army the built army
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException TODO
+     * @throws InvalidPathException
+     * @throws NullPointerException
      */
-    private Army buildArmy(int armyNumber, int comNum, int infNum,int cavNum, int ranNum) throws FileNotFoundException {
+    private Army buildArmy(int armyNumber, int comNum, int infNum,int cavNum, int ranNum) throws FileNotFoundException,
+            InvalidPathException {
         Army newArmy;
         Army baseArmy;
         if(armyNumber == 1){
             newArmy = new Army(nameArmy1.getText());
-            baseArmy = FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv");
+            baseArmy = FileManager.
+                    readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv");
         }else{
             newArmy = new Army(nameArmy2.getText());
-            baseArmy = FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv");
+            baseArmy = FileManager.
+                    readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv");
         }
         newArmy.addAll(UnitFactory.createListOfUnits(COMMANDER, baseArmy.getCommanderUnits().get(0).getName(),
                 baseArmy.getCommanderUnits().get(0).getHealth(), comNum));

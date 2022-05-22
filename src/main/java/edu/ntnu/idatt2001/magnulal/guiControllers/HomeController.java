@@ -5,6 +5,9 @@ import edu.ntnu.idatt2001.magnulal.utils.ActiveArmies;
 import edu.ntnu.idatt2001.magnulal.utils.ActiveTerrain;
 import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import edu.ntnu.idatt2001.magnulal.utils.SceneManager;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.TooLargeIntegerException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -109,7 +112,7 @@ public class HomeController {
                         "edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
                 ActiveArmies.setActiveArmy1(FileManager.readArmyFromFile("Alliance"));
                 ActiveArmies.setActiveArmy2(FileManager.readArmyFromFile("Horde"));
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 exMsg.setText(e.getMessage());
             }
         }
@@ -219,9 +222,11 @@ public class HomeController {
             }
         }else{
             if(!ActiveArmies.getActiveArmy1().hasUnits()){
-                exMsg.setText("The army called: " + ActiveArmies.getActiveArmy1().getName() + " did not contain any units, and could not participate in battle.");
+                exMsg.setText("The army called: " + ActiveArmies.getActiveArmy1().getName() + " " +
+                        "did not contain any units, and could not participate in battle.");
             }else{
-                exMsg.setText("The army called: " + ActiveArmies.getActiveArmy2().getName() + " did not contain any units, and could not participate in battle.");
+                exMsg.setText("The army called: " + ActiveArmies.getActiveArmy2().getName() + " " +
+                        "did not contain any units, and could not participate in battle.");
             }
         }
     }
@@ -237,11 +242,12 @@ public class HomeController {
         try{
             File file = openFileExplorer();
             ActiveArmies.setActiveArmy2(FileManager.readArmyFromExistingFile(file));
-            ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy2().getName() + ".csv");
+            ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
+                    ActiveArmies.getActiveArmy2().getName() + ".csv");
             lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
             setStatsArmy2();
-        }catch (NullPointerException n){
-            exMsg.setText(n.getMessage());
+        }catch (NullPointerException | BlankStringException | NegativeIntegerException | NumberFormatException e){
+            exMsg.setText("Load-error:" + e.getMessage());
         }
     }
 
@@ -256,11 +262,12 @@ public class HomeController {
         try{
             File file = openFileExplorer();
             ActiveArmies.setActiveArmy1(FileManager.readArmyFromExistingFile(file));
-            ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" + ActiveArmies.getActiveArmy1().getName() + ".csv");
+            ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
+                    ActiveArmies.getActiveArmy1().getName() + ".csv");
             lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
             setStatsArmy1();
-        }catch (NullPointerException n){
-            exMsg.setText(n.getMessage());
+        }catch (NullPointerException | BlankStringException | NegativeIntegerException | NumberFormatException e){
+            exMsg.setText("Load-error:" + e.getMessage());
         }
     }
 
@@ -362,7 +369,7 @@ public class HomeController {
                         "src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv"),
                         FileManager.readArmyFromFullFilePath(
                                 "src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 exMsg.setText(e.getMessage());
             }
         }
@@ -383,8 +390,11 @@ public class HomeController {
     public void editArmy1() {
         if(!new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv").exists()) {
             try {
-                FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv"),FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup/Alliance.csv"));
-            } catch (FileNotFoundException e) {
+                FileManager.writeArmyToFileWFile(
+                        new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv"),
+                        FileManager.readArmyFromFullFilePath("src/main/resources/edu.ntnu.idatt2001.magnulal/" +
+                                "csvBackup/Alliance.csv"));
+            } catch (IOException e) {
                 exMsg.setText(e.getMessage());
             }
         }

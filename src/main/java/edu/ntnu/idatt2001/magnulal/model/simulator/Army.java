@@ -4,6 +4,7 @@ import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -236,8 +237,9 @@ public class Army {
      * @param fileName is a String for the name of the file
      * @throws InvalidPathException if the constructed file path is invalid. Is caused by special characters
      * like '?' in the fileName
+     * @throws IOException if the information cannot be written to file
      */
-    public void saveThisArmyToFile(String fileName) throws InvalidPathException{
+    public void saveThisArmyToFile(String fileName) throws InvalidPathException, IOException{
         FileManager.writeArmyToFileWFileName(fileName, this);
     }
 
@@ -246,8 +248,9 @@ public class Army {
      * If the file already has defined content, the previously saved information
      * is overwritten
      * @param file is an already created file
+     * @throws IOException if the information cannot be written to file
      */
-    public void saveThisArmyToFile(File file){
+    public void saveThisArmyToFile(File file) throws IOException {
         FileManager.writeArmyToFileWFile(file, this);
     }
 

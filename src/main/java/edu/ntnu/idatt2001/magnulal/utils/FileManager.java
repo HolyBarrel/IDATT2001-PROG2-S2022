@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.magnulal.utils;
 
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
 
 import java.io.*;
 import java.nio.file.*;
@@ -19,7 +20,7 @@ import java.util.Scanner;
  * @version 1.0
  * @since 0.2
  */
-public class FileManager { //TODO: check charset also
+public class FileManager {
 
     /**
      * Private empty constructor to specify to the compiler that objects of
@@ -57,7 +58,7 @@ public class FileManager { //TODO: check charset also
        Exception handling private methods
      */
 
-    /** TODO: test and update
+    /**
      * Checks that a file of the given fileName String parameter already exists.
      * This method utilizes the {@link File#exists()} method to check file existence.
      * If this file does not exist, a FileNotFoundException is thrown.
@@ -108,8 +109,9 @@ public class FileManager { //TODO: check charset also
      * @param army, is an army
      * @throws InvalidPathException if the constructed file path is invalid. Is caused by special characters
      * such as '?' in the fileName
+     * @throws IOException if the information cannot be written to file
      */
-    public static void writeArmyToFileWFileName(String fileName, Army army) throws InvalidPathException{
+    public static void writeArmyToFileWFileName(String fileName, Army army) throws InvalidPathException, IOException{
         checkValidityOfPath(fileName);
         writeArmyToFileWFile(new File(constructFilePath(fileName)), army);
     }
@@ -119,8 +121,9 @@ public class FileManager { //TODO: check charset also
      * write the specified parameter Army
      * @param file, is a File object that is already created
      * @param army, is an army
+     * @throws IOException if the information cannot be written to file
      */
-    public static void writeArmyToFileWFile(File file, Army army) {
+    public static void writeArmyToFileWFile(File file, Army army) throws IOException{
         try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
             printWriter.println(army.getName());
             army.getAllUnits()
@@ -128,7 +131,7 @@ public class FileManager { //TODO: check charset also
                     .map(u -> u.getClass().getSimpleName() + "," + u.getName() + "," + u.getHealth())
                     .forEach(printWriter::println);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException("Could not write to the file, due to: " + e.getMessage());
         }
     }
 
@@ -140,25 +143,29 @@ public class FileManager { //TODO: check charset also
      * @param fileName is a string for the targeted file name in the directory at the root:
                       'src/main/resources/edu.ntnu.idatt2001.magnulal/csv' of this project
      * @return an army from the information in the target file
-     * @throws InvalidPathException if the constructed file path is invalid or if no
-     * file with the path does exist
-     * @throws NullPointerException if the file at the target file path does not exist
-     * The method catches IOException and prints the stack trace of it, if this occurs during reading
-     */ //TODO: delete methods that are never used, but check task first
+     * @throws InvalidPathException if the path is invalid
+     * @throws NullPointerException if the file could not be used to create an army or contained information about
+     * units that could not be used to create a unit
+     * @throws FileNotFoundException if the file could not be located at the file path
+     * @throws BlankStringException if the read army or unit has a blank string name
+     * @throws NumberFormatException if the unit health could not be parsed
+     */
     public static Army readArmyFromFile(String fileName) throws InvalidPathException, NullPointerException,
-            FileNotFoundException {
+            FileNotFoundException, BlankStringException, NumberFormatException {
         checkValidityOfPath(fileName);
         checkIfFileExists(fileName);
         return readArmyFromExistingFile(new File(constructFilePath(fileName)));
     }
 
     /**
-     * TODO: COMMENT, revise CLASS, add ex handl
-     * @param filePath
-     * @return
-     * @throws InvalidPathException
-     * @throws NullPointerException
-     * @throws FileNotFoundException
+     * Reads a file from the full file path to access other directories than csv in resources. This method is
+     * utilized to read information on csv files in src/main/resources/edu.ntnu.idatt2001.magnulal/csvBackup
+     * @param filePath is the full file path
+     * @return the Army that has been read from the file
+     * @throws InvalidPathException if the path is invalid
+     * @throws NullPointerException if the file could not be used to create an army or contained information about
+     * units that could not be used to create a unit
+     * @throws FileNotFoundException if the file could not be located at the file path
      */
     public static Army readArmyFromFullFilePath(String filePath) throws InvalidPathException, NullPointerException,
             FileNotFoundException {
@@ -170,9 +177,12 @@ public class FileManager { //TODO: check charset also
      * interpret each line in the parameter file .csv document.
      * @param file is an existing file
      * @return an army created from the information in the file
+     * @throws NullPointerException if the army could not be read or if one of the units cannot be read correctly
+     * @throws BlankStringException if the read army or unit has a blank string name
+     * @throws NumberFormatException if the unit health could not be parsed
      */
-    public static Army readArmyFromExistingFile(File file) throws NullPointerException{
-        //TODO. test nullPointer
+    public static Army readArmyFromExistingFile(File file) throws NullPointerException, BlankStringException,
+            NumberFormatException{
         Army readArmy = null;
         try (Scanner scanner = new Scanner(file)){
             String line = scanner.nextLine();
@@ -182,7 +192,7 @@ public class FileManager { //TODO: check charset also
                 readArmy.add(readUnit(lineValues));
             }
         } catch (IOException i) {
-            System.out.println(i.getMessage());
+            throw new NullPointerException("The Army could not be read due to: " + i.getMessage());
         }
         return readArmy;
     }
@@ -193,15 +203,18 @@ public class FileManager { //TODO: check charset also
      * @param readLineValues is a string array constructed from a line in a csv document
      * @return a unit created from the string values of the readLineValues parameter array
      * @throws NullPointerException if the line could not be matched with any unit type
+     * @throws BlankStringException if the or unit has a blank string name
+     * @throws NumberFormatException if the unit health could not be parsed
      */
-    private static Unit readUnit(String[] readLineValues) throws NullPointerException{
+    private static Unit readUnit(String[] readLineValues) throws NullPointerException, BlankStringException,
+            NumberFormatException{
         try{
             return UnitFactory.createUnit(Objects.requireNonNull(UnitTypes.getValueMatching(
                             readLineValues[0].trim())),
                     readLineValues[1].trim(),
                     Integer.parseInt(readLineValues[2]));
         }catch (NullPointerException n){
-            throw new NullPointerException("The requested unit type could not be found.");
+            throw new NullPointerException("The requested unit type could not be read.");
         }
     }
     /**
