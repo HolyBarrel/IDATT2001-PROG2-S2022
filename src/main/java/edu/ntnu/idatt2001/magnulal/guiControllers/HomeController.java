@@ -104,7 +104,8 @@ public class HomeController implements Initializable {
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
 
-        if(ActiveArmies.getActiveArmy1() == null && ActiveArmies.getActiveArmy2() == null) {
+        if(!(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Alliance.csv")).exists()
+                || !(new File("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/Horde.csv")).exists()) {
             try {
                 FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001." +
                         "magnulal/csv/Alliance.csv"), FileManager.readArmyFromFullFilePath("src/main/resources/" +
@@ -112,13 +113,19 @@ public class HomeController implements Initializable {
                 FileManager.writeArmyToFileWFile(new File("src/main/resources/edu.ntnu.idatt2001." +
                         "magnulal/csv/Horde.csv"), FileManager.readArmyFromFullFilePath("src/main/resources/" +
                         "edu.ntnu.idatt2001.magnulal/csvBackup/Horde.csv"));
-                ActiveArmies.setActiveArmy1(FileManager.readArmyFromFile("Alliance"));
-                ActiveArmies.setActiveArmy2(FileManager.readArmyFromFile("Horde"));
             } catch (IOException e) {
                 exMsg.setText(e.getMessage());
             }
         }
-        updateWArmies(ActiveArmies.getActiveArmy1(),ActiveArmies.getActiveArmy2());
+        if(ActiveArmies.getActiveArmy1() == null || ActiveArmies.getActiveArmy2() == null) {
+            try {
+                ActiveArmies.setActiveArmy1(FileManager.readArmyFromFile("Alliance"));
+                ActiveArmies.setActiveArmy2(FileManager.readArmyFromFile("Horde"));
+            } catch (FileNotFoundException f) {
+                exMsg.setText(f.getMessage());
+            }
+        }
+        updateWArmies(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2());
     }
 
     /**
