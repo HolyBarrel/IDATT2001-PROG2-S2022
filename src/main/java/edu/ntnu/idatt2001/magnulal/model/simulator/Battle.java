@@ -13,8 +13,8 @@ import java.util.Random;
  * @since 0.1
  */
 public class Battle {
-    private Army armyOne;
-    private Army armyTwo;
+    private final Army armyOne;
+    private final Army armyTwo;
     private final boolean armyOneIsCommencingBattle; //if true --> armyOne attacks
     // first in each turn, if false, armyTwo attacks first
     /**

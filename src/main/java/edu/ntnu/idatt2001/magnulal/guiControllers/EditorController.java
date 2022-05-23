@@ -233,7 +233,7 @@ public class EditorController {
      * @throws BlankStringException if either of the armies' names are a blank string
      * @throws NegativeIntegerException if there has been inputted a negative integer in an input field
      * @throws NumberFormatException if there has been inputted a number that could not be parsed to an integer
-     * @throws TooLargeIntegerException if the number is of unwanted size, meaning an integer above 10000
+     * @throws TooLargeIntegerException if the number is of unwanted size, meaning an integer above 1000
      */
     private void confirmInputValues() throws BlankStringException,
             NegativeIntegerException, NumberFormatException, TooLargeIntegerException {
@@ -252,8 +252,8 @@ public class EditorController {
             throw new NegativeIntegerException("One input is negative, this is not accepted as a legal " +
                     "amount of units.");
         }
-        if(numberOfDifferentUnits.stream().anyMatch(integer -> integer > 10000)){
-            throw new TooLargeIntegerException("Please enter an integer less than 10000 for the amount of a " +
+        if(numberOfDifferentUnits.stream().anyMatch(integer -> integer > 1000)){
+            throw new TooLargeIntegerException("Please enter an integer less than 1000 for the amount of a " +
                     "type of units.");
         }
         if(nameArmy2.getText().isBlank() || nameArmy1.getText().isBlank()){

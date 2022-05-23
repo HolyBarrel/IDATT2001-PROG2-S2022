@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001.magnulal.utils;
 import edu.ntnu.idatt2001.magnulal.model.simulator.Army;
 import edu.ntnu.idatt2001.magnulal.model.units.*;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
+import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
 
 import java.io.*;
 import java.nio.file.*;
@@ -205,9 +206,10 @@ public class FileManager {
      * @throws NullPointerException if the line could not be matched with any unit type
      * @throws BlankStringException if the or unit has a blank string name
      * @throws NumberFormatException if the unit health could not be parsed
+     * @throws NegativeIntegerException if the integer value of health, attack or armor is less than zero
      */
     private static Unit readUnit(String[] readLineValues) throws NullPointerException, BlankStringException,
-            NumberFormatException{
+            NumberFormatException, NegativeIntegerException {
         try{
             return UnitFactory.createUnit(Objects.requireNonNull(UnitTypes.getValueMatching(
                             readLineValues[0].trim())),

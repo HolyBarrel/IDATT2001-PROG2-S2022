@@ -7,7 +7,6 @@ import edu.ntnu.idatt2001.magnulal.utils.FileManager;
 import edu.ntnu.idatt2001.magnulal.utils.SceneManager;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
-import edu.ntnu.idatt2001.magnulal.utils.exceptions.TooLargeIntegerException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,8 +29,8 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 public class HomeController {
     //Source: https://stackoverflow.com/questions/14256588/opening-a-javafx-filechooser-in-the-user-directory,
     // 05.05.2022
-    private static FileChooser currentFileChooser = new FileChooser();
-    private static FileChooser.ExtensionFilter currentExtFilter =
+    private static final FileChooser currentFileChooser = new FileChooser();
+    private static final FileChooser.ExtensionFilter currentExtFilter =
             new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
 
 

@@ -6,7 +6,6 @@ import edu.ntnu.idatt2001.magnulal.utils.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Battle controller to control the battleScreen scene
@@ -68,21 +68,26 @@ public class BattleController {
     @FXML
     private Label terrainInfo;
 
+
     /**
      * Initializes the BattleController by creating necessary images for the visual representation of the active armies.
      * Also sets relevant data for the user.
      */
     @FXML
     public void initialize() {
+
         visualArmy1.setStyle("-fx-background-color:#F5F5F5;");
         visualArmy2.setStyle("-fx-background-color:#F5F5F5;");
-        btnSkipToResults.setDisable(true);
 
         try {
-            commanderImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png"));
-            cavalryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png"));
-            infantryImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png"));
-            rangedImg = new Image(new FileInputStream("src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png"));
+            commanderImg = new Image(new FileInputStream(
+                    "src/main/resources/edu.ntnu.idatt2001.magnulal/images/commanderBlue.png"));
+            cavalryImg = new Image(new FileInputStream(
+                    "src/main/resources/edu.ntnu.idatt2001.magnulal/images/cavalryRed.png"));
+            infantryImg = new Image(new FileInputStream(
+                    "src/main/resources/edu.ntnu.idatt2001.magnulal/images/infantryPurple.png"));
+            rangedImg = new Image(new FileInputStream(
+                    "src/main/resources/edu.ntnu.idatt2001.magnulal/images/rangedYellow.png"));
         } catch (FileNotFoundException f){
             exMsg.setText(f.getMessage());
         }
@@ -182,7 +187,17 @@ public class BattleController {
      */
     @FXML
     public void skipToResults() {
+        if(!hasSkipBeenPressed){
+            activeBattle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(),
+                    ActiveTerrain.INSTANCE.getActiveTerrain());
+            activeBattle.simulate();
+            updateVisualArmy1();
+            updateVisualArmy2();
+            btnSkipToResults.setDisable(true);
+            btnSimulate.setDisable(true);
+        }
         hasSkipBeenPressed = true;
+        btnSkipToResults.setDisable(true);
     }
 
     /**
@@ -199,21 +214,23 @@ public class BattleController {
     public void simulateStart() {
         terrainInfo.setText("Terrain: " + ActiveTerrain.INSTANCE.getActiveTerrain().name());
         btnSimulate.setDisable(true);
-        btnSkipToResults.setDisable(false);
         battleFeed.setVvalue(1.0);
-        activeBattle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(), ActiveTerrain.INSTANCE.getActiveTerrain());
+        activeBattle = new Battle(ActiveArmies.getActiveArmy1(), ActiveArmies.getActiveArmy2(),
+                ActiveTerrain.INSTANCE.getActiveTerrain());
         VBox vb = new VBox();
         battleFeed.setContent(vb);
-        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.175), event -> {
+        AtomicInteger roundNr = new AtomicInteger(1);
+        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.15), event -> {
             if(!hasSkipBeenPressed) {
                 ArrayList<Object> battleLogInfo = activeBattle.simulateTurnForGUI();
                 //retrieve the last element, which is always the active battle
                 activeBattle = (Battle)battleLogInfo.get(battleLogInfo.size()-1);
                 if(battleLogInfo.size() == 2){
-                    vb.getChildren().add(new Label(String.valueOf(battleLogInfo.get(0))));
+                    vb.getChildren().add(new Label("Turn: " + roundNr +"\n"+ battleLogInfo.get(0)));
                 }else {
-                    vb.getChildren().add(new Label(String.valueOf(battleLogInfo.get(2))));
+                    vb.getChildren().add(new Label("Turn: " + roundNr +"\n"+ battleLogInfo.get(2)));
                 }
+                roundNr.getAndIncrement();
                 updateVisualArmy1();
                 updateVisualArmy2();
 
@@ -229,11 +246,13 @@ public class BattleController {
                                 army1.getAllUnits().size() + " units left. \n This is the victorious army: \n" +
                                 army1));
                         battleFeed.setVvalue(1.0);
+                        btnSkipToResults.setDisable(true);
                     }else{
                         vb.getChildren().add(new Label(army2.getName() + " was the victorious army with"
                                 + army2.getAllUnits().size() + " units left. \n This is the victorious army: \n" +
                                 army2));
                         battleFeed.setVvalue(1.0);
+                        btnSkipToResults.setDisable(true);
                     }
                 }
             }else{
@@ -244,6 +263,7 @@ public class BattleController {
                 updateVisualArmy1();
                 updateVisualArmy2();
                 simulationTimeline.stop();
+                btnSkipToResults.setDisable(true);
             }
             battleFeed.setVvalue(1.0);
 
