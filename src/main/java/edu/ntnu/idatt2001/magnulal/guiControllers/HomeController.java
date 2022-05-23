@@ -137,10 +137,8 @@ public class HomeController implements Initializable {
     private void updateWArmies(Army army1, Army army2){
         ActiveArmies.setActiveArmy1(army1);
         ActiveArmies.setActiveArmy2(army2);
-        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
-                ActiveArmies.getActiveArmy1().getName() + ".csv");
-        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
-                ActiveArmies.getActiveArmy2().getName() + ".csv");
+        ActiveArmies.setActiveArmy1Path(FileManager.constructFilePath(army1.getName()));
+        ActiveArmies.setActiveArmy2Path(FileManager.constructFilePath(army2.getName()));
         lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
         lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
         setStatsArmy1();
@@ -251,12 +249,11 @@ public class HomeController implements Initializable {
         try{
             File file = openFileExplorer();
             ActiveArmies.setActiveArmy2(FileManager.readArmyFromExistingFile(file));
-            ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
-                    ActiveArmies.getActiveArmy2().getName() + ".csv");
+            ActiveArmies.setActiveArmy2Path(FileManager.constructFilePath(ActiveArmies.getActiveArmy2().getName()));
             lblPathArmy2.setText("Path: " + ActiveArmies.getActiveArmy2Path());
             setStatsArmy2();
         }catch (NullPointerException | BlankStringException | NegativeIntegerException | NumberFormatException e){
-            exMsg.setText("Load-error:" + e.getMessage());
+            exMsg.setText("Load-exception:" + e.getMessage());
         }
     }
 
@@ -271,12 +268,11 @@ public class HomeController implements Initializable {
         try{
             File file = openFileExplorer();
             ActiveArmies.setActiveArmy1(FileManager.readArmyFromExistingFile(file));
-            ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
-                    ActiveArmies.getActiveArmy1().getName() + ".csv");
+            ActiveArmies.setActiveArmy1Path(FileManager.constructFilePath(ActiveArmies.getActiveArmy1().getName()));
             lblPathArmy1.setText("Path: " + ActiveArmies.getActiveArmy1Path());
             setStatsArmy1();
         }catch (NullPointerException | BlankStringException | NegativeIntegerException | NumberFormatException e){
-            exMsg.setText("Load-error:" + e.getMessage());
+            exMsg.setText("Load-exception:" + e.getMessage());
         }
     }
 

@@ -70,10 +70,8 @@ public class EditorController implements Initializable {
     private void updateWArmies(Army army1, Army army2){
         ActiveArmies.setActiveArmy1(army1);
         ActiveArmies.setActiveArmy2(army2);
-        ActiveArmies.setActiveArmy1Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
-                ActiveArmies.getActiveArmy1().getName() + ".csv");
-        ActiveArmies.setActiveArmy2Path("src/main/resources/edu.ntnu.idatt2001.magnulal/csv/" +
-                ActiveArmies.getActiveArmy2().getName() + ".csv");
+        ActiveArmies.setActiveArmy1Path(FileManager.constructFilePath(army1.getName()));
+        ActiveArmies.setActiveArmy2Path(FileManager.constructFilePath(army2.getName()));
         setStatsArmy1();
         setStatsArmy2();
     }
@@ -83,7 +81,6 @@ public class EditorController implements Initializable {
      * Resets the exception label text.
      */
     private void setStatsArmy1(){
-
         nameArmy1.setText(ActiveArmies.getActiveArmy1().getName());
         infNrArmy1.setText(String.valueOf(ActiveArmies.getActiveArmy1().getInfantryUnits().size()));
         cavNrArmy1.setText(String.valueOf(ActiveArmies.getActiveArmy1().getCavalryUnits().size()));
