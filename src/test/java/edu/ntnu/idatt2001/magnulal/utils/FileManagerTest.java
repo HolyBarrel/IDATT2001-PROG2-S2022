@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FileManagerTest { //TODO. double check
+public class FileManagerTest {
 
     private String fileName;
     private Army humanArmy = new Army("Alliance");

@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 import static edu.ntnu.idatt2001.magnulal.utils.UnitTypes.*;
 
 /**
- * Controller class to control the editor scene
+ * Controller class to control the editor scene. Implements the Initializable interface.
  * @author magnulal
  * @version 1.0
  * @since 0.3

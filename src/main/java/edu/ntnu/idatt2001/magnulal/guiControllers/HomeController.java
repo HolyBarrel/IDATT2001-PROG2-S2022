@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 
 /**
- * Home screen controller for the Wargames application
+ * Home screen controller for the Wargames application. Implements the Initializable interface.
  * @author magnulal
  * @version 1.0
  * @since 0.3

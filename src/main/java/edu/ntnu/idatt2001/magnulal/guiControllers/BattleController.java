@@ -26,9 +26,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 /**
- * Battle controller to control the battleScreen scene
+ * Battle controller to control the battleScreen scene. Implements the Initializable interface.
  * @author magnulal
  * @version 1.0
  * @since 0.3
@@ -110,24 +111,29 @@ public class BattleController implements Initializable {
      * by utilizing the images found in: src/main/resources/edu.ntnu.idatt2001.magnulal/images
      */
     private void updateVisualArmy1(){
+
+        Army army1 = ActiveArmies.getActiveArmy1();
+
+        numUnitsArmy1.setText(String.valueOf(army1.getAllUnits().size()));
+
         HBox hb = new HBox();
-        numUnitsArmy1.setText(String.valueOf(ActiveArmies.getActiveArmy1().getAllUnits().size()));
         VBox vb1 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getCommanderUnits().size(); i++) {
-            vb1.getChildren().add(new ImageView(commanderImg));
-        }
         VBox vb2 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getCavalryUnits().size(); i++) {
-            vb2.getChildren().add(new ImageView(cavalryImg));
-        }
         VBox vb3 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getInfantryUnits().size(); i++) {
-            vb3.getChildren().add(new ImageView(infantryImg));
-        }
         VBox vb4 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy1().getRangedUnits().size(); i++) {
-            vb4.getChildren().add(new ImageView(rangedImg));
-        }
+
+        army1.getCommanderUnits()
+                .forEach(e -> vb1.getChildren().add(new ImageView(commanderImg)));
+
+        army1.getCavalryUnits()
+                .forEach(e -> vb2.getChildren().add(new ImageView(cavalryImg)));
+
+        army1.getInfantryUnits()
+                .forEach(e -> vb3.getChildren().add(new ImageView(infantryImg)));
+
+        army1.getRangedUnits()
+                .forEach(e -> vb4.getChildren().add(new ImageView(rangedImg)));
+
         hb.getChildren().add(vb1);
         hb.getChildren().add(vb2);
         hb.getChildren().add(vb3);
@@ -141,31 +147,33 @@ public class BattleController implements Initializable {
      * by utilizing the images found in: src/main/resources/edu.ntnu.idatt2001.magnulal/images
      */
     private void updateVisualArmy2(){
-        numUnitsArmy2.setText(String.valueOf(ActiveArmies.getActiveArmy2().getAllUnits().size()));
+
+        Army army2 = ActiveArmies.getActiveArmy2();
+
+        numUnitsArmy2.setText(String.valueOf(army2.getAllUnits().size()));
 
         HBox hb2 = new HBox();
         VBox vb1 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getCommanderUnits().size(); i++) {
-            vb1.getChildren().add(new ImageView(commanderImg));
-        }
         VBox vb2 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getCavalryUnits().size(); i++) {
-
-            vb2.getChildren().add(new ImageView(cavalryImg));
-        }
         VBox vb3 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getInfantryUnits().size(); i++) {
-            vb3.getChildren().add(new ImageView(infantryImg));
-        }
         VBox vb4 = new VBox();
-        for (int i = 0; i < ActiveArmies.getActiveArmy2().getRangedUnits().size(); i++) {
-            vb4.getChildren().add(new ImageView(rangedImg));
-        }
+
+        army2.getCommanderUnits()
+                .forEach(e -> vb1.getChildren().add(new ImageView(commanderImg)));
+
+        army2.getCavalryUnits()
+                .forEach(e -> vb2.getChildren().add(new ImageView(cavalryImg)));
+
+        army2.getInfantryUnits()
+                .forEach(e -> vb3.getChildren().add(new ImageView(infantryImg)));
+
+        army2.getRangedUnits()
+                .forEach(e -> vb4.getChildren().add(new ImageView(rangedImg)));
+
         hb2.getChildren().add(vb1);
         hb2.getChildren().add(vb2);
         hb2.getChildren().add(vb3);
         hb2.getChildren().add(vb4);
-
         visualArmy2.setContent(hb2);
     }
 
@@ -221,7 +229,7 @@ public class BattleController implements Initializable {
         VBox vb = new VBox();
         battleFeed.setContent(vb);
         AtomicInteger roundNr = new AtomicInteger(1);
-        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.15), event -> {
+        simulationTimeline = new Timeline(new KeyFrame(Duration.seconds(0.125), event -> {
             if(!hasSkipBeenPressed) {
                 ArrayList<Object> battleLogInfo = activeBattle.simulateTurnForGUI();
                 //retrieve the last element, which is always the active battle
