@@ -7,6 +7,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -21,7 +22,9 @@ import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -30,7 +33,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version 1.0
  * @since 0.3
  */
-public class BattleController {
+public class BattleController implements Initializable {
     private boolean hasSkipBeenPressed = false;
     private Timeline simulationTimeline;
     private Battle activeBattle;
@@ -68,14 +71,12 @@ public class BattleController {
     @FXML
     private Label terrainInfo;
 
-
     /**
      * Initializes the BattleController by creating necessary images for the visual representation of the active armies.
      * Also sets relevant data for the user.
-     */
-    @FXML
-    public void initialize() {
-
+    */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         visualArmy1.setStyle("-fx-background-color:#F5F5F5;");
         visualArmy2.setStyle("-fx-background-color:#F5F5F5;");
 

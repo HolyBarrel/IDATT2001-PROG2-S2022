@@ -7,13 +7,16 @@ import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.TooLargeIntegerException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import static edu.ntnu.idatt2001.magnulal.utils.UnitTypes.*;
 
@@ -23,7 +26,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.UnitTypes.*;
  * @version 1.0
  * @since 0.3
  */
-public class EditorController {
+public class EditorController implements Initializable {
     @FXML
     private Label exMsg;
     @FXML
@@ -54,8 +57,8 @@ public class EditorController {
     /**
      * Updates the information that is displayed in the GUI based on the active armies.
      */
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         updateWArmies(ActiveArmies.getActiveArmy1(),ActiveArmies.getActiveArmy2());
     }
 

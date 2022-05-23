@@ -8,6 +8,7 @@ import edu.ntnu.idatt2001.magnulal.utils.SceneManager;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.BlankStringException;
 import edu.ntnu.idatt2001.magnulal.utils.exceptions.NegativeIntegerException;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
@@ -17,6 +18,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
 
@@ -26,7 +29,7 @@ import static edu.ntnu.idatt2001.magnulal.utils.TerrainType.*;
  * @version 1.0
  * @since 0.3
  */
-public class HomeController {
+public class HomeController implements Initializable {
     //Source: https://stackoverflow.com/questions/14256588/opening-a-javafx-filechooser-in-the-user-directory,
     // 05.05.2022
     private static final FileChooser currentFileChooser = new FileChooser();
@@ -77,7 +80,7 @@ public class HomeController {
     @FXML
     private Button btnSeeArmy2;
     @FXML
-    private Button btnLoadArmy1;
+    private Button btnLoadArmy1; //TODO:remove
     @FXML
     private Button btnLoadArmy2;
     @FXML
@@ -96,8 +99,8 @@ public class HomeController {
      * src/main/resources/edu.ntnu.idatt2001.magnulal/csv directory.
      * The graphical representation of the active armies are also updated.
      */
-    @FXML
-    public void initialize(){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         ActiveTerrain.INSTANCE.setActiveTerrain(FOREST);
         currentTerrain.setText(fetchActiveTerrain());
 
