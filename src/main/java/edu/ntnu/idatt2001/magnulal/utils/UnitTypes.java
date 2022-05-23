@@ -1,7 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.utils;
 
-import java.util.Arrays;
-
 /**
  * Enum to represent all the types of units in this project
  * the enum has attached string values corresponding to each unit subclass'

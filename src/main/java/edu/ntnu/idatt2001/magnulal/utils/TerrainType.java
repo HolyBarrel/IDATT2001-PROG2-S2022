@@ -1,7 +1,5 @@
 package edu.ntnu.idatt2001.magnulal.utils;
 
-import edu.ntnu.idatt2001.magnulal.model.units.Unit;
-
 /**
  * Enum containing all allowed TerrainTypes in Wargames
  * These different TerrainTypes aid in creating variation in buffing units with terrain bonuses
