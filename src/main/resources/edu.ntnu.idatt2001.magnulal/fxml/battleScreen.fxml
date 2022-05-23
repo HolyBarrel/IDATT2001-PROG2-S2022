@@ -25,7 +25,7 @@
       <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="nameArmy1" text="Army 1:" />
-            <ScrollPane fx:id="visualArmy1" maxWidth="110.0" prefHeight="200.0">
+            <ScrollPane fx:id="visualArmy1" maxWidth="80.0" prefHeight="200.0">
               <content>
                 <AnchorPane fx:id="visualPaneArmy1" prefHeight="100.0">
                      <children>
@@ -42,7 +42,7 @@
       <VBox alignment="CENTER" minWidth="250.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="nameArmy2" text="Army 2:" />
-            <ScrollPane fx:id="visualArmy2" maxWidth="110.0" prefHeight="200.0">
+            <ScrollPane fx:id="visualArmy2" maxWidth="80.0" prefHeight="200.0">
                <content>
                   <AnchorPane fx:id="visualPaneArmy11" prefHeight="100.0">
                      <children>
@@ -64,7 +64,7 @@
                   <Font name="System Italic" size="18.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="battleFeed" maxHeight="130.0" maxWidth="650.0" minHeight="130.0" minWidth="650.0" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane fx:id="battleFeed" maxHeight="130.0" maxWidth="690.0" minHeight="130.0" minWidth="690.0" prefHeight="200.0" prefWidth="200.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
               </content>

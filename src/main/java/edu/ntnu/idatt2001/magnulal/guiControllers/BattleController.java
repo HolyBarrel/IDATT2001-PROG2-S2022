@@ -100,7 +100,6 @@ public class BattleController implements Initializable {
         nameArmy2.setText(army2.getName());
         numUnitsArmy1.setText(String.valueOf(army1.getAllUnits().size()));
         numUnitsArmy2.setText(String.valueOf(army2.getAllUnits().size()));
-        VBox.setVgrow(visualArmy1, Priority.ALWAYS);
 
         updateVisualArmy1();
         updateVisualArmy2();
@@ -114,32 +113,7 @@ public class BattleController implements Initializable {
 
         Army army1 = ActiveArmies.getActiveArmy1();
 
-        numUnitsArmy1.setText(String.valueOf(army1.getAllUnits().size()));
-
-        HBox hb = new HBox();
-        VBox vb1 = new VBox();
-        VBox vb2 = new VBox();
-        VBox vb3 = new VBox();
-        VBox vb4 = new VBox();
-
-        army1.getCommanderUnits()
-                .forEach(e -> vb1.getChildren().add(new ImageView(commanderImg)));
-
-        army1.getCavalryUnits()
-                .forEach(e -> vb2.getChildren().add(new ImageView(cavalryImg)));
-
-        army1.getInfantryUnits()
-                .forEach(e -> vb3.getChildren().add(new ImageView(infantryImg)));
-
-        army1.getRangedUnits()
-                .forEach(e -> vb4.getChildren().add(new ImageView(rangedImg)));
-
-        hb.getChildren().add(vb1);
-        hb.getChildren().add(vb2);
-        hb.getChildren().add(vb3);
-        hb.getChildren().add(vb4);
-
-        visualArmy1.setContent(hb);
+        displayArmyInformation(army1, numUnitsArmy1, visualArmy1);
     }
 
     /**
@@ -150,7 +124,17 @@ public class BattleController implements Initializable {
 
         Army army2 = ActiveArmies.getActiveArmy2();
 
-        numUnitsArmy2.setText(String.valueOf(army2.getAllUnits().size()));
+        displayArmyInformation(army2, numUnitsArmy2, visualArmy2);
+    }
+
+    /**
+     * Retrieves all the current information about the parameter army and displays this in the GUI
+     * @param army is the army to be displayed
+     * @param numUnitsArmy is the Label that should display how many units the army contains
+     * @param visualOfArmies is the ScrollPane that should display all unit types of the army parameter
+     */
+    private void displayArmyInformation(Army army, Label numUnitsArmy, ScrollPane visualOfArmies) {
+        numUnitsArmy.setText(String.valueOf(army.getAllUnits().size()));
 
         HBox hb2 = new HBox();
         VBox vb1 = new VBox();
@@ -158,23 +142,23 @@ public class BattleController implements Initializable {
         VBox vb3 = new VBox();
         VBox vb4 = new VBox();
 
-        army2.getCommanderUnits()
+        army.getCommanderUnits()
                 .forEach(e -> vb1.getChildren().add(new ImageView(commanderImg)));
 
-        army2.getCavalryUnits()
+        army.getCavalryUnits()
                 .forEach(e -> vb2.getChildren().add(new ImageView(cavalryImg)));
 
-        army2.getInfantryUnits()
+        army.getInfantryUnits()
                 .forEach(e -> vb3.getChildren().add(new ImageView(infantryImg)));
 
-        army2.getRangedUnits()
+        army.getRangedUnits()
                 .forEach(e -> vb4.getChildren().add(new ImageView(rangedImg)));
 
         hb2.getChildren().add(vb1);
         hb2.getChildren().add(vb2);
         hb2.getChildren().add(vb3);
         hb2.getChildren().add(vb4);
-        visualArmy2.setContent(hb2);
+        visualOfArmies.setContent(hb2);
     }
 
     /**
@@ -235,9 +219,9 @@ public class BattleController implements Initializable {
                 //retrieve the last element, which is always the active battle
                 activeBattle = (Battle)battleLogInfo.get(battleLogInfo.size()-1);
                 if(battleLogInfo.size() == 2){
-                    vb.getChildren().add(new Label("Turn: " + roundNr +"\n"+ battleLogInfo.get(0)));
+                    vb.getChildren().add(new Label("\nTurn: " + roundNr + battleLogInfo.get(0)));
                 }else {
-                    vb.getChildren().add(new Label("Turn: " + roundNr +"\n"+ battleLogInfo.get(2)));
+                    vb.getChildren().add(new Label("\nTurn: " + roundNr + battleLogInfo.get(2)));
                 }
                 roundNr.getAndIncrement();
                 updateVisualArmy1();
@@ -251,14 +235,14 @@ public class BattleController implements Initializable {
                     simulationTimeline.stop();
 
                     if (army1.hasUnits()){
-                        vb.getChildren().add(new Label(army1.getName() + " was the victorious army with" +
-                                army1.getAllUnits().size() + " units left. \n This is the victorious army: \n" +
+                        vb.getChildren().add(new Label(army1.getName() + " was the victorious army with " +
+                                army1.getAllUnits().size() + " unit(s) left. \n This is the victorious army: \n" +
                                 army1));
                         battleFeed.setVvalue(1.0);
                         btnSkipToResults.setDisable(true);
                     }else{
-                        vb.getChildren().add(new Label(army2.getName() + " was the victorious army with"
-                                + army2.getAllUnits().size() + " units left. \n This is the victorious army: \n" +
+                        vb.getChildren().add(new Label(army2.getName() + " was the victorious army with "
+                                + army2.getAllUnits().size() + " unit(s) left. \n This is the victorious army: \n" +
                                 army2));
                         battleFeed.setVvalue(1.0);
                         btnSkipToResults.setDisable(true);
