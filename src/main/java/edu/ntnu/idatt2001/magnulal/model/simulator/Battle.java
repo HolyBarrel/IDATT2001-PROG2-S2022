@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 /**
  * Battle class to simulate a battle between to armies
- * @author Magnus Lutro Allison
+ * @author magnulal
  * @version 1.0
  * @since 0.1
  */

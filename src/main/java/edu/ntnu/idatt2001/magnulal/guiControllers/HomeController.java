@@ -36,7 +36,6 @@ public class HomeController implements Initializable {
     private static final FileChooser.ExtensionFilter currentExtFilter =
             new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
 
-
     @FXML
     private Label labelArmy2;
     @FXML
@@ -80,7 +79,7 @@ public class HomeController implements Initializable {
     @FXML
     private Button btnSeeArmy2;
     @FXML
-    private Button btnLoadArmy1; //TODO:remove
+    private Button btnLoadArmy1;
     @FXML
     private Button btnLoadArmy2;
     @FXML
