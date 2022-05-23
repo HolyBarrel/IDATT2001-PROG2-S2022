@@ -53,6 +53,8 @@ public class UnitFactory {
      */
     public static List<Unit> createListOfUnits(UnitTypes unitType, String unitName, int unitHealth, int numberOfUnits)
             throws NullPointerException, BlankStringException, NegativeIntegerException {
+        if(numberOfUnits < 0) throw new NegativeIntegerException("Cannot create a list of a negative amount of units. " +
+                "For input: " + numberOfUnits);
         int counter = 0;
         List<Unit> listOfUnits = new ArrayList<>();
         while(counter < numberOfUnits){
