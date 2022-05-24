@@ -44,6 +44,9 @@
             </plugin>
 
             <!-- The plugin beneath can be used to create a runnable jar, with warnings (therefore it is commented out)-->
+            <!-- The runnable jar-copy is found at 'src/main/resources/edu.ntnu.idatt2001.magnulal/runnableJar'
+                this file can be run with the included jar-run-configuration
+            -->
             <!-- <plugin>  Source: https://maven.apache.org/plugins/maven-assembly-plugin/usage.html, 24.05.2022
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
