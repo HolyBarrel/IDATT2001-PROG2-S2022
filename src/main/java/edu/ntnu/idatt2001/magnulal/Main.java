@@ -48,7 +48,7 @@ public class Main extends Application {
      */
     private void closeProgram(){
         Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        closeAlert.setTitle("EXITCONFIRMATION");
+        closeAlert.setTitle("EXIT_CONFIRMATION_ALERT");
         closeAlert.setHeaderText("Exit?");
         closeAlert.setContentText("Sure about closing the ongoing instance of Wargames?");
         Optional<ButtonType> feed = closeAlert.showAndWait();
